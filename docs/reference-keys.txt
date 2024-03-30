@@ -1,3 +1,7 @@
 preparation
 the-pool-of-tears
 a-caucus-race-and-a-long-tale
+tab:tc12b
+tab:cb12b
+tab:cb12c
+introduction-to-r
