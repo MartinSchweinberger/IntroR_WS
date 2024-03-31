@@ -7,3 +7,94 @@ site: bookdown::bookdown_site
 
 # Preparation
 
+
+In this AcqVA Aurora workshop, we will focus on advanced dimension reduction methods (UMAP and t-SNE) and creating interactive notebooks. Both of these issues are very applicable - the first when it comes to finding and displaying structure in complex numerical data and the second in rendering your work more transparent and reproducible which can be used, for example, to provide reviewers with a better understanding of your analyses.
+
+### What to do before the workshop
+
+To get the most out of this workshop, you will need to have some (basic) R skills and (basic) knowledge of how to work with R, RStudio, R Projects, and R Notebooks. If you have no or little experience with this or if you need to refresh your skills, please carefully read (or optimally go through) these tutorials:
+
+* [Getting started with R](https://slcladal.github.io/intror.html)
+
+* [Handling tables in R](https://slcladal.github.io/table.html)
+
+Before attending the workshop, you need to install the following packages in RStudio:
+
+* `here` (for easy pathing)
+* `ggplot2`  (for general data visualization)
+* `dplyr` (for data processing)
+* `stringr` (also for data processing)
+* `umap` (for UMAP)
+* `tsne` (for t-SNE)
+* `knitr` (for knitting R Notebooks)
+* `markdown` (for rendering Rmd files)
+* `rmarkdown`  (for R Markdown formatting)
+* `installr` (for updating R)
+
+
+You can update R and install these packages by clicking on `packages` on the top of the lower right pane in RStudio or you can execute the following code in the lower left, `Console` pane of RStudio. 
+
+```{r install, eval = F, message=F, warning=F}
+# update R
+#install.packages("installr")
+#library(installr)
+#updateR()
+# install required packages
+install.packages(c("here", "readxl", "dplyr", "stringr", "umap", "tsne", "ggplot2", "knitr", "markdown", "rmarkdown", "devtools"), dependencies = T)
+```
+
+
+**It is really important that you have knowledge of R and RStudio and that you have installed the packages before the workshop so that we do not have to deal with technical issues too much.**
+
+You can follow this workshop in different ways - you can sit back and watch it like a lecture or take a more active role - that said, the intention for this workshop is clearly to be practical so that I show something and then you do it on you computer and we have exercises where you can try out what you have just learned. Choose which option suits you best and then go with it. 
+
+## Timeline
+
+Here is what we have planned to cover in this workshop:
+
+Tuesday, January 16, 10-12am
+
+* Introduction
+
+* Session preparation
+
+* Basics of UMAP and t-SNE 
+
+* Practice
+
+Tuesday, January 16, 1-3pm
+
+* Why interactive notebooks are useful
+
+* Limitations
+
+* Creating an interactive notebook
+
+* Wrap-up
+
+
+
+## Getting started
+
+For everything to work, please do the following:
+
+**GitHub**
+
+* Check your GitHub log in details or create a new GitHub account
+
+**Folder set up**
+
+* Create a folder for this workshop somewhere on your computer, e.g. called *AcqVA_UMAP_WS*
+
+* In that folder, create two subfolders called *data* and *images*
+
+* Open RStudio, go to File > New Project > Existing Directory (Browse to project folder) > Create (and hit Enter)
+
+This will then create an R Project in the project folder.
+
+**Data and files**
+
+* Save the data set that I sent round  (SPR_trimmed_Martin.xlsx) in the subfolder called *data* and save the rmd2jupyter.Rmd file on the main level.
+
+
+
