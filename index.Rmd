@@ -8,11 +8,11 @@ site: bookdown::bookdown_site
 # Preparation
 
 
-In this AcqVA Aurora workshop, we will focus on advanced dimension reduction methods (UMAP and t-SNE) and creating interactive notebooks. Both of these issues are very applicable - the first when it comes to finding and displaying structure in complex numerical data and the second in rendering your work more transparent and reproducible which can be used, for example, to provide reviewers with a better understanding of your analyses.
+In this *Introduction to R* workshop, we will introduce participants to R and basic text analytics. 
 
-### What to do before the workshop
+## What to do before the workshop
 
-To get the most out of this workshop, you will need to have some (basic) R skills and (basic) knowledge of how to work with R, RStudio, R Projects, and R Notebooks. If you have no or little experience with this or if you need to refresh your skills, please carefully read (or optimally go through) these tutorials:
+In this workshop you will learn  (basic) R skills and (basic) knowledge of how to work with R, RStudio, R Projects, and R Notebooks. If you have no or little experience with this, you can prepare and refresh what we have done in these tutorials:
 
 * [Getting started with R](https://slcladal.github.io/intror.html)
 
@@ -52,23 +52,31 @@ You can follow this workshop in different ways - you can sit back and watch it l
 
 Here is what we have planned to cover in this workshop:
 
-Tuesday, January 16, 10-12am
+Tuesday, 26 June, 9am - 5pm
 
 * Introduction
 
 * Session preparation
 
-* Basics of UMAP and t-SNE 
+* Getting started with R 
 
-* Practice
+* Basics of data processing with R (regular expressions, working with tables and text)
 
-Tuesday, January 16, 1-3pm
+Wednesday, 27 June, 9am - 5pm
 
-* Why interactive notebooks are useful
+* Introduction to Text Analytics with R
 
-* Limitations
+* Concordancing
 
-* Creating an interactive notebook
+* Collocation Analysis
+
+* Keyword Analysis
+
+* Network Analysis
+
+* Text Classification
+
+* Annotation (pos-tagging, NER, parsing)
 
 * Wrap-up
 
@@ -84,7 +92,7 @@ For everything to work, please do the following:
 
 **Folder set up**
 
-* Create a folder for this workshop somewhere on your computer, e.g. called *AcqVA_UMAP_WS*
+* Create a folder for this workshop somewhere on your computer, e.g. called *IntroR_WS*
 
 * In that folder, create two subfolders called *data* and *images*
 

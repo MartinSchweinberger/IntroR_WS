@@ -20,7 +20,7 @@ The entire R Notebook for the tutorial can be downloaded [**here**](https://slcl
 
 [Here](https://www.rstudio.com/resources/cheatsheets/) is an overview of cheat sheets for popular and frequently used packages providde by RStudio (cheat sheets are short overviews with explanations and examples of useful functions). If you already have experience with R, both @wickham2016r (see [here](https://r4ds.had.co.nz/)) and  @gillespie2016efficient (see [here](https://bookdown.org/csgillespie/efficientR/)) are highly recommendable and excellent resources for improving your coding abilities and workflows in R.
 
-### Goals of this tutorial
+## Goals of this tutorial
 
 The goals of this tutorial are:
 
@@ -32,13 +32,13 @@ The goals of this tutorial are:
 - Learn some best practices for using R scripts, using data, and projects 
 - Understand the basics of objects, functions, and indexing
 
-### Audience
+## Audience
 
 The intended audience for this tutorial is beginner-level, with no previous experience using R. Thus, no prior knowledge of R is required.
 
 If you want to know more, would like to get some more practice, or would like to have another approach to R, please check out the workshops and resources on R provided by the [UQ library](https://web.library.uq.edu.au/library-services/training). In addition, there are various online resources available to learn R (you can check out a very recommendable introduction [here](https://uvastatlab.github.io/phdplus/intror.html)). 
 
-### Installing R and RStudio
+## Installing R and RStudio
 
 * You have NOT yet installed **R** on your computer? 
 
