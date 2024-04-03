@@ -52,7 +52,7 @@ You can follow this workshop in different ways - you can sit back and watch it l
 
 Here is what we have planned to cover in this workshop:
 
-Wednesday, 12 June, 9am - 5pm
+Wednesday, 12 June, 10 am - 4 pm (lunch: 11:45am - 12:30 pm, coffee: 2 - 2:30pm)
 
 * Introduction
 
@@ -62,7 +62,7 @@ Wednesday, 12 June, 9am - 5pm
 
 * Basics of data processing with R (regular expressions, working with tables and text)
 
-Thursday, 13 June, 9am - 5pm
+Thursday, 13 June, 10 am - 4 pm (lunch: 11:45am - 12:30 pm, coffee: 2 - 2:30pm)
 
 * Introduction to Text Analytics with R
 
