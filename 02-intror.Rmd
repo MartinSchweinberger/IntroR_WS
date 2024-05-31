@@ -1535,36 +1535,3 @@ Here are also some additional resources that you may find helpful:
     + Explore #rstats, #rstudioconf
 
 
-
-## Citation & Session Info 
-
-Schweinberger, Martin. 2022. *Getting started with R*. Brisbane: The University of Queensland. url: https://ladal.edu.au/intror.html  (Version 2022.11.15).
-
-
-```
-@manual{schweinberger2022intror,
-  author = {Schweinberger, Martin},
-  title = {Getting started with R},
-  note = {https://ladal.edu.au/intror.html},
-  year = {2022},
-  organization = "The University of Queensland, School of Languages and Cultures},
-  address = {Brisbane},
-  edition = {2022.11.15}
-}
-```
-
-```{r fin}
-sessionInfo()
-```
-
-***
-
-[Back to top](#introduction)
-
-[Back to LADAL home](https://ladal.edu.au)
-
-***
-
-## References 
-
-
