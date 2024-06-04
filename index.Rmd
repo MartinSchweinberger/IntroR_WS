@@ -1,5 +1,5 @@
 --- 
-title: "Introduction to R for social science"
+title: "Introduction to R for Social Science"
 author: "Martin Schweinberger"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -8,23 +8,77 @@ site: bookdown::bookdown_site
 # Preparation
 
 
-In this *Introduction to R* workshop, we will introduce participants to R and basic text analytics. 
+This beginner-friendly workshop, *Introduction to R for Social Science*, is designed to equip participants with the foundational skills necessary to use R and RStudio effectively for text-based social science research. Through hands-on exercises and guided instruction, attendees will learn how to navigate the RStudio environment, load, manage, manipulate, and visualize data, and perform basic text analytics. Key topics covered include the use of regular expressions for pattern matching, concordancing for textual analysis, and essential techniques in network analysis, sentiment and keyword analysis, and topic modeling. By the end of this workshop, participants will have a solid understanding of how to use R for text-based social science research, opening up new possibilities for data-driven insights in their field. No prior experience with R or programming is required. 
+
+## Timeline
+
+Here is what we have planned to cover in this workshop (2 days, 10am to 4pm):
+
+**Tuesday, 11 June** 
+
+* 10:00 - 10:15 Introduction to the workshop
+
+* 10:15 - 10:45 Why R and preparation
+
+* 10:45 - 11:30 R and RStudio basics 
+
+* **11:30 - 12:30 Lunch break**
+
+* 12:30 - 13:15 Working with tables
+
+* 13:15 - 14:00 Loading data and working with texts
+
+* **14:00 - 14:30 Coffee break**
+
+* 14:30 - 15:15 Regular expressions and string processing
+
+* 15:15 - 16:00 Basics of data visualization
+
+**Wednesday, 12 June** 
+
+* 10:00 - 10:30 Recap and Introduction to Text Analytics
+
+* 10:30 - 11:00 Concordancing (Keywords-in-Context)
+
+* 11:00 - 11:30 Exercise: Sentiment Analysis and Keyword Analysis
+
+* **11:30 - 12:30 Lunch break**
+
+* 12:30 - 13:15 Sentiment Analysis and Keyword Analysis in R
+
+* 13:15 - 14:00 Network Analysis
+
+* **14:00 - 14:30 Coffee break**
+
+* 14:30 - 15:00 Exercise: Topic modelling
+
+* 15:00 - 15:50 Topic modelling in R
+
+* 15:50 - 16:00 Going further and wrap-up
+
+
+
+## Audience
+
+The intended audience for this workshop is beginner-level, with no previous experience using R. However, the workshop will also be useful for intermediate and advanced users of R if they do not have substantive experience in analyzing text data with R. Thus, no prior knowledge of R is required.
+
+If you want to know more, would like to get some more practice, or would like to have another approach to R, please feel free to check out on eof the various online resources available to learn R (you can check out a very recommendable introduction [here](https://uvastatlab.github.io/phdplus/intror.html)). 
+
+
 
 ## What to do before the workshop
 
-In this workshop you will learn  (basic) R skills and (basic) knowledge of how to work with R, RStudio, R Projects, and R Notebooks. If you have no or little experience with this, you can prepare and refresh what we have done in these tutorials:
+In this workshop you will learn  (basic) R skills and (basic) knowledge of how to work with R and RStudio to perform basic text analytics. If you have no or little experience with this, you *can* (but *do not need or have to*) prepare or refresh your R skills by having a look at these tutorials:
 
 * [Getting started with R](https://slcladal.github.io/intror.html)
 
 * [Handling tables in R](https://slcladal.github.io/table.html)
 
-Before attending the workshop, you need to install the following packages in RStudio:
+Before attending the workshop, you could also install the following packages in RStudio:
 
 * `here` (for easy pathing)
 * `ggplot2`  (for general data visualization)
 * `dplyr` (for data processing)
-* `stringr` (also for data processing)
-* `umap` (for UMAP)
 * `tsne` (for t-SNE)
 * `knitr` (for knitting R Notebooks)
 * `markdown` (for rendering Rmd files)
@@ -40,51 +94,16 @@ You can update R and install these packages by clicking on `packages` on the top
 #library(installr)
 #updateR()
 # install required packages
-install.packages(c("here", "readxl", "dplyr", "stringr", "umap", "tsne", "ggplot2", "knitr", "markdown", "rmarkdown", "devtools"), dependencies = T)
+install.packages(c("here", "readxl", "dplyr", "stringr", "ggplot2", "knitr", "markdown", "rmarkdown", "devtools"), dependencies = T)
 ```
 
 
-**It is really important that you have knowledge of R and RStudio and that you have installed the packages before the workshop so that we do not have to deal with technical issues too much.**
-
 You can follow this workshop in different ways - you can sit back and watch it like a lecture or take a more active role - that said, the intention for this workshop is clearly to be practical so that I show something and then you do it on you computer and we have exercises where you can try out what you have just learned. Choose which option suits you best and then go with it. 
-
-## Timeline
-
-Here is what we have planned to cover in this workshop:
-
-**Tuesday, 11 June, 10 am - 4 pm** (lunch: 11:30am - 12:30 pm, coffee: 2 - 2:30pm)
-
-* Introduction
-
-* Session preparation
-
-* Getting started with R 
-
-* Basics of data processing with R (regular expressions, working with tables and text)
-
-**Wednesday, 12 June, 10 am - 4 pm** (lunch: 11:30am - 12:30 pm, coffee: 2 - 2:30pm)
-
-* Introduction to Text Analytics with R
-
-* Concordancing
-
-* Collocation Analysis
-
-* Sentiment and Keyword Analysis
-
-* Network Analysis
-
-* Topic Modeling
-
-* Annotation (pos-tagging, NER, parsing)
-
-* Wrap-up
-
 
 
 ## Getting started
 
-For everything to work, please do the following:
+For everything to work, please do the following either before the workshop or at the beginning of the workshop (I will guide you if you want to do this at the begiining of the workshop):
 
 **GitHub**
 
@@ -102,7 +121,6 @@ This will then create an R Project in the project folder.
 
 **Data and files**
 
-* Save the data set that I sent round  (SPR_trimmed_Martin.xlsx) in the subfolder called *data* and save the rmd2jupyter.Rmd file on the main level.
-
+* I will send round some data sets - please store/save them in the subfolder called *data*.
 
 

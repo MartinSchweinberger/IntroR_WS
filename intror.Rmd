@@ -1,10 +1,6 @@
 # Introduction to R
 
-```{r diff, echo=FALSE, out.width= "15%", out.extra='style="float:right; padding:10px"'}
-knitr::include_graphics("https://slcladal.github.io/images/g_chili.jpg")
-```
-
-This tutorial shows how to get started with R and it specifically focuses on R for analyzing language data but it offers valuable information for anyone who wants to get started with R. As such, this tutorial is aimed at fresh users or beginners with the aim of showcasing how to set up a R session in RStudio, how to set up R projects, and how to do basic operations using R. The aim is not to provide a fully-fledged from beginner-to-expert, all-you-need-to-know tutorial but rather to show how to properly and tidily set up a project before you start coding and exemplify common operations such as loading and manipulation tabular data and generating basic visualization using R. 
+Here I want to show you how to get started with R. As such, this section is aimed at fresh users or beginners with the aim of showcasing how to set up a R session in RStudio, how to set up R projects, and how to do basic operations using R. The aim is not to provide a fully-fledged from beginner-to-expert, all-you-need-to-know tutorial but rather to show how to properly and tidily set up a project before you start coding and exemplify common operations such as loading and manipulation tabular data and generating basic visualization using R. 
 
 <br>
 <div class="warning" style='padding:0.1em; background-color:#f2f2f2; color:#51247a'>
@@ -20,23 +16,6 @@ The entire R Notebook for the tutorial can be downloaded [**here**](https://slcl
 
 [Here](https://www.rstudio.com/resources/cheatsheets/) is an overview of cheat sheets for popular and frequently used packages providde by RStudio (cheat sheets are short overviews with explanations and examples of useful functions). If you already have experience with R, both @wickham2016r (see [here](https://r4ds.had.co.nz/)) and  @gillespie2016efficient (see [here](https://bookdown.org/csgillespie/efficientR/)) are highly recommendable and excellent resources for improving your coding abilities and workflows in R.
 
-## Goals of this tutorial
-
-The goals of this tutorial are:
-
-- How to get started with R 
-- How to orient yourself to R and RStudio
-- How to create and work in R projects
-- How to know where to look for help and to learn more about R
-- Understand the basics of working with data: load data, save data, working with tables, create a simple plot
-- Learn some best practices for using R scripts, using data, and projects 
-- Understand the basics of objects, functions, and indexing
-
-## Audience
-
-The intended audience for this tutorial is beginner-level, with no previous experience using R. Thus, no prior knowledge of R is required.
-
-If you want to know more, would like to get some more practice, or would like to have another approach to R, please check out the workshops and resources on R provided by the [UQ library](https://web.library.uq.edu.au/library-services/training). In addition, there are various online resources available to learn R (you can check out a very recommendable introduction [here](https://uvastatlab.github.io/phdplus/intror.html)). 
 
 ## Installing R and RStudio
 
@@ -61,7 +40,7 @@ Before you actually open R or RStudio, there things to consider that make workin
 
 Imagine it like this: when you want to write a book, you could simply take pen and paper and start writing *or* you could think about what you want to write about, what different chapters your book would consist of, which chapters to write first, what these chapters will deal with, etc. The same is true for R: you could simply open R and start writing code *or* you can prepare you session and structure what you will be doing.
 
-### Folder Structure and R projects
+### Before you start working with R/RStudio (Folder Structure and R projects)
 
 Before actually starting with writing code, you should prepare the session by going through the following steps:
 
@@ -73,9 +52,6 @@ In that folder, create the following sub-folders (you can, of course, adapt this
   - images
   - tables
   - docs
-
-
-
 
 The folder for your project could look like the the one shown below.
 
