@@ -1,20 +1,9 @@
 # Introduction to Text Analysis with R
 
-```{r diff, echo=FALSE, out.width= "15%", out.extra='style="float:right; padding:10px"'}
-knitr::include_graphics("https://slcladal.github.io/images/gy_chili.jpg")
-```
+> **UNFINISHED! WORK IN PROGRESS! I'M STILL WORKING ON THE CONTENT**
 
 This tutorial introduces Text Analysis [see @bernard1998text; @kabanoff1997introduction; @popping2000computer], i.e. computer-based analysis of language data or the (semi-)automated extraction of information from text. 
 
-
-<div class="warning" style='padding:0.5em; background-color:rgba(215,209,204,.3); color:#51247a'>
-<span>
-<p style='margin-top:1em; text-align:center'>
-Please cite as: <br>Schweinberger, Martin. 2023. *Practical Overview of Selected Text Analytics Methods*. Brisbane: The Language Technology and Data Analysis Laboratory (LADAL). url: https://ladal.edu.au/textanalysis.html (Version 2023.09.24).<br>
-</p>
-</span>
-</div>
-<br>
 
 Most of the applications of Text Analysis are based upon a relatively limited number of key procedures or concepts (e.g. concordancing, word frequencies, annotation or tagging, collocation, text classification, Sentiment Analysis, Entity Extraction, Topic Modeling, etc.). In the following, we will explore these procedures and introduce some basic tools that help you perform the introduced tasks. 
 
@@ -1591,17 +1580,17 @@ Dependency parsing proves invaluable for a range of applications, including anal
 
 ## Citation & Session Info 
 
-Schweinberger, Martin. 2023. *Practical Overview of Selected Text Analytics Methods*. Brisbane: The Language Technology and Data Analysis Laboratory (LADAL). url: https://ladal.edu.au/textanalysis.html (Version 2023.05.31).
+Schweinberger, Martin. 2024. *Introduction to R for Social Science*. University of Eastern Finland, Joensuu. url: https://martinschweinberger.github.io/IntroR_WS (Version 2024.06.11).
 
 ```
-@manual{schweinberger2023ta,
+@manual{schweinberger2024introrss,
   author = {Schweinberger, Martin},
-  title = {Practical Overview of Selected Text Analytics Methods},
-  note = {https://ladal.edu.au/textanalysis.html},
-  year = {2023},
-  organization = {The Language Technology and Data Analysis Laboratory (LADAL)},
-  address = {Brisbane},
-  edition = {2023.05.31}
+  title = {Introduction to R for Social Science},
+  note = {https://martinschweinberger.github.io/IntroR_WS},
+  year = {2024},
+  organization = {University of Eastern Finland},
+  address = {Joensuu},
+  edition = {2024.06.11}
 }
 ```
 
@@ -1610,10 +1599,6 @@ Schweinberger, Martin. 2023. *Practical Overview of Selected Text Analytics Meth
 ```{r fin}
 sessionInfo()
 ```
-
-[Back to top](#introduction)
-
-[Back to HOME](https://ladal.edu.au)
 
 
 ## References

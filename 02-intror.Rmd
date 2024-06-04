@@ -1,17 +1,8 @@
 # Introduction to R
 
+> **UNFINISHED! WORK IN PROGRESS! I'M STILL WORKING ON THE CONTENT**
+
 Here I want to show you how to get started with R. As such, this section is aimed at fresh users or beginners with the aim of showcasing how to set up a R session in RStudio, how to set up R projects, and how to do basic operations using R. The aim is not to provide a fully-fledged from beginner-to-expert, all-you-need-to-know tutorial but rather to show how to properly and tidily set up a project before you start coding and exemplify common operations such as loading and manipulation tabular data and generating basic visualization using R. 
-
-<br>
-<div class="warning" style='padding:0.1em; background-color:#f2f2f2; color:#51247a'>
-<span>
-<p style='margin-top:1em; text-align:center'>
-The entire R Notebook for the tutorial can be downloaded [**here**](https://slcladal.github.io/content/intror.Rmd).  If you want to render the R Notebook on your machine, i.e. knitting the document to html or a pdf, you need to make sure that you have R and RStudio installed and you also need to download the [**bibliography file**](https://slcladal.github.io/content/bibliography.bib) and store it in the same folder where you store the Rmd or the Rproj file. <br></p>
-<p style='margin-left:1em;'>
-</p></span>
-</div>
-
-<br>
 
 
 [Here](https://www.rstudio.com/resources/cheatsheets/) is an overview of cheat sheets for popular and frequently used packages providde by RStudio (cheat sheets are short overviews with explanations and examples of useful functions). If you already have experience with R, both @wickham2016r (see [here](https://r4ds.had.co.nz/)) and  @gillespie2016efficient (see [here](https://bookdown.org/csgillespie/efficientR/)) are highly recommendable and excellent resources for improving your coding abilities and workflows in R.
