@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Section 4 Working with graphics | Introduction to R for Social Science</title>
+  <meta name="description" content="Section 4 Working with graphics | Introduction to R for Social Science" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Section 4 Working with graphics | Introduction to R for Social Science" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Section 4 Working with graphics | Introduction to R for Social Science" />
+  
+  
+  
+
+<meta name="author" content="Martin Schweinberger" />
+
+
+<meta name="date" content="2024-06-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="working-with-text.html"/>
+<link rel="next" href="going-further.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/clipboard-1.7.1/clipboard.min.js"></script>
+<link href="libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+<link href="libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+<script src="libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> General Information</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#abstract"><i class="fa fa-check"></i><b>1.1</b> Abstract</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#timeline"><i class="fa fa-check"></i><b>1.2</b> Timeline</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#resources"><i class="fa fa-check"></i><b>1.3</b> Resources</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#audience"><i class="fa fa-check"></i><b>1.4</b> Audience</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#what-to-do-before-the-workshop"><i class="fa fa-check"></i><b>1.5</b> What to do before the workshop</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#getting-started"><i class="fa fa-check"></i><b>1.6</b> Getting started</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>2</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>2.1</b> Installing R and RStudio</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#preparation"><i class="fa fa-check"></i><b>2.2</b> Preparation</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#before-you-start-working-with-rrstudio-folder-structure-and-r-projects"><i class="fa fa-check"></i><b>2.2.1</b> Before you start working with R/RStudio (Folder Structure and R projects)</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-and-rstudio-basics"><i class="fa fa-check"></i><b>2.3</b> R and RStudio Basics</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#rstudio-panes"><i class="fa fa-check"></i><b>2.3.1</b> RStudio: Panes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-started-with-r"><i class="fa fa-check"></i><b>2.4</b> Getting started with R</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#setting-up-an-r-session"><i class="fa fa-check"></i><b>2.4.1</b> Setting up an R session</a></li>
+<li class="chapter" data-level="2.4.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#packages"><i class="fa fa-check"></i><b>2.4.2</b> Packages</a></li>
+<li class="chapter" data-level="2.4.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-help"><i class="fa fa-check"></i><b>2.4.3</b> Getting help</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="working-with-text.html"><a href="working-with-text.html"><i class="fa fa-check"></i><b>3</b> Working with text</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="working-with-text.html"><a href="working-with-text.html#functions-and-objects"><i class="fa fa-check"></i><b>3.1</b> Functions and Objects</a></li>
+<li class="chapter" data-level="3.2" data-path="working-with-text.html"><a href="working-with-text.html#inspecting-data"><i class="fa fa-check"></i><b>3.2</b> Inspecting data</a></li>
+<li class="chapter" data-level="3.3" data-path="working-with-text.html"><a href="working-with-text.html#loading-text-data"><i class="fa fa-check"></i><b>3.3</b> Loading text data</a></li>
+<li class="chapter" data-level="3.4" data-path="working-with-text.html"><a href="working-with-text.html#saving-text-data"><i class="fa fa-check"></i><b>3.4</b> Saving text data</a></li>
+<li class="chapter" data-level="3.5" data-path="working-with-text.html"><a href="working-with-text.html#piping"><i class="fa fa-check"></i><b>3.5</b> Piping</a></li>
+<li class="chapter" data-level="3.6" data-path="working-with-text.html"><a href="working-with-text.html#extracting-frequency-information-from-text"><i class="fa fa-check"></i><b>3.6</b> Extracting frequency information from text</a></li>
+<li class="chapter" data-level="3.7" data-path="working-with-text.html"><a href="working-with-text.html#regular-expressions"><i class="fa fa-check"></i><b>3.7</b> Regular Expressions</a></li>
+<li class="chapter" data-level="3.8" data-path="working-with-text.html"><a href="working-with-text.html#splitting-up-texts"><i class="fa fa-check"></i><b>3.8</b> Splitting-up texts</a></li>
+<li class="chapter" data-level="3.9" data-path="working-with-text.html"><a href="working-with-text.html#basic-string-processing"><i class="fa fa-check"></i><b>3.9</b> Basic String Processing</a></li>
+<li class="chapter" data-level="" data-path="working-with-text.html"><a href="working-with-text.html#advanced-string-processing"><i class="fa fa-check"></i>Advanced String Processing</a></li>
+<li class="chapter" data-level="3.10" data-path="working-with-text.html"><a href="working-with-text.html#cleaning-texts"><i class="fa fa-check"></i><b>3.10</b> Cleaning texts</a></li>
+<li class="chapter" data-level="3.11" data-path="working-with-text.html"><a href="working-with-text.html#concordancing-and-kwics"><i class="fa fa-check"></i><b>3.11</b> Concordancing and KWICs</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="working-with-graphics.html"><a href="working-with-graphics.html"><i class="fa fa-check"></i><b>4</b> Working with graphics</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="working-with-graphics.html"><a href="working-with-graphics.html#basics-of-ggplot2-syntax"><i class="fa fa-check"></i><b>4.1</b> Basics of ggplot2 syntax</a></li>
+<li class="chapter" data-level="4.2" data-path="working-with-graphics.html"><a href="working-with-graphics.html#practical-examples"><i class="fa fa-check"></i><b>4.2</b> Practical examples</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="going-further.html"><a href="going-further.html"><i class="fa fa-check"></i><b>5</b> Going further</a></li>
+<li class="chapter" data-level="6" data-path="ending-r-sessions.html"><a href="ending-r-sessions.html"><i class="fa fa-check"></i><b>6</b> Ending R sessions</a></li>
+<li class="chapter" data-level="7" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html"><i class="fa fa-check"></i><b>7</b> Introduction to Text Analysis with R</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#concordancing"><i class="fa fa-check"></i><b>7.1</b> Concordancing</a></li>
+<li class="chapter" data-level="7.2" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#word-frequency"><i class="fa fa-check"></i><b>7.2</b> Word Frequency</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#wordclouds"><i class="fa fa-check"></i><b>7.2.1</b> Wordclouds</a></li>
+<li class="chapter" data-level="7.2.2" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#frequency-changes"><i class="fa fa-check"></i><b>7.2.2</b> Frequency changes</a></li>
+<li class="chapter" data-level="7.2.3" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#dispersion-plots"><i class="fa fa-check"></i><b>7.2.3</b> Dispersion plots</a></li>
+<li class="chapter" data-level="7.2.4" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#over--and-underuse"><i class="fa fa-check"></i><b>7.2.4</b> Over- and underuse</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#collocations"><i class="fa fa-check"></i><b>7.3</b> Collocations</a></li>
+<li class="chapter" data-level="7.4" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#keywords"><i class="fa fa-check"></i><b>7.4</b> Keywords</a></li>
+<li class="chapter" data-level="7.5" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#text-classification"><i class="fa fa-check"></i><b>7.5</b> Text Classification</a></li>
+<li class="chapter" data-level="7.6" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#part-of-speech-tagging"><i class="fa fa-check"></i><b>7.6</b> Part-of-Speech tagging</a></li>
+<li class="chapter" data-level="7.7" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#names-entity-recognition"><i class="fa fa-check"></i><b>7.7</b> Names Entity Recognition</a></li>
+<li class="chapter" data-level="7.8" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#dependency-parsing-using-udpipe"><i class="fa fa-check"></i><b>7.8</b> Dependency Parsing Using UDPipe</a></li>
+<li class="chapter" data-level="7.9" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#citation-session-info"><i class="fa fa-check"></i><b>7.9</b> Citation &amp; Session Info</a></li>
+<li class="chapter" data-level="7.10" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#references"><i class="fa fa-check"></i><b>7.10</b> References</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to R for Social Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="working-with-graphics" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Section 4</span> Working with graphics<a href="working-with-graphics.html#working-with-graphics" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>There are numerous function in R that we can use to visualize data. We will use the <code>ggplot</code> function from the <code>ggplot2</code> package here to visualize the data.</p>
+<p>The <code>ggplot2</code> package was developed by Hadley Wickham in 2005 and it implements the graphics scheme described in the book <em>The Grammar of Graphics</em> by Leland Wilkinson.</p>
+<p>The idea behind the <em>Grammar of Graphics</em> can be boiled down to 5 bullet points (see Wickham 2016: 4):</p>
+<ul>
+<li><p>a statistical graphic is a mapping from data to <strong>aes</strong>thetic attributes (location, color, shape, size) of <strong>geom</strong>etric objects (points, lines, bars).</p></li>
+<li><p>the geometric objects are drawn in a specific <strong>coord</strong>inate system.</p></li>
+<li><p><strong>scale</strong>s control the mapping from data to aesthetics and provide tools to read the plot (i.e., axes and legends).</p></li>
+<li><p>the plot may also contain <strong>stat</strong>istical transformations of the data (means, medians, bins of data, trend lines).</p></li>
+<li><p><strong>facet</strong>ing can be used to generate the same plot for different subsets of the data.</p></li>
+</ul>
+<div id="basics-of-ggplot2-syntax" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Basics of ggplot2 syntax<a href="working-with-graphics.html#basics-of-ggplot2-syntax" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Specify data, aesthetics and geometric shapes</strong></p>
+<p><code>ggplot(data, aes(x=, y=, color=, shape=, size=)) +</code><br />
+<code>geom_point()</code>, or <code>geom_histogram()</code>, or <code>geom_boxplot()</code>, etc.</p>
+<ul>
+<li><p>This combination is very effective for exploratory graphs.</p></li>
+<li><p>The data must be a data frame.</p></li>
+<li><p>The <code>aes()</code> function maps columns of the data frame to aesthetic properties of geometric shapes to be plotted.</p></li>
+<li><p><code>ggplot()</code> defines the plot; the <code>geoms</code> show the data; each component is added with <code>+</code></p></li>
+<li><p>Some examples should make this clear</p></li>
+</ul>
+</div>
+<div id="practical-examples" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Practical examples<a href="working-with-graphics.html#practical-examples" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We will now create some basic visualizations or plots.</p>
+<p>Before we start plotting, we will load tabular data (information about the speakers in the dinner conversations) and the prepare the data that we want to visualize. From this table, we create two versions:</p>
+<ul>
+<li><p>a basic cleaned version</p></li>
+<li><p>a summary table with the mean word counts by gender and age.</p></li>
+</ul>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="working-with-graphics.html#cb161-1" tabindex="-1"></a><span class="co"># create clean basic table </span></span>
+<span id="cb161-2"><a href="working-with-graphics.html#cb161-2" tabindex="-1"></a>readxl<span class="sc">::</span><span class="fu">read_excel</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;ICEdata.xlsx&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb161-3"><a href="working-with-graphics.html#cb161-3" tabindex="-1"></a>  <span class="co"># only private dialogue</span></span>
+<span id="cb161-4"><a href="working-with-graphics.html#cb161-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(stringr<span class="sc">::</span><span class="fu">str_detect</span>(text.id, <span class="st">&quot;S1A&quot;</span>),</span>
+<span id="cb161-5"><a href="working-with-graphics.html#cb161-5" tabindex="-1"></a>                <span class="co"># without speaker younger than 19</span></span>
+<span id="cb161-6"><a href="working-with-graphics.html#cb161-6" tabindex="-1"></a>                age <span class="sc">!=</span> <span class="st">&quot;0-18&quot;</span>,</span>
+<span id="cb161-7"><a href="working-with-graphics.html#cb161-7" tabindex="-1"></a>                age <span class="sc">!=</span> <span class="st">&quot;NA&quot;</span>,</span>
+<span id="cb161-8"><a href="working-with-graphics.html#cb161-8" tabindex="-1"></a>                sex <span class="sc">!=</span> <span class="st">&quot;NA&quot;</span>,</span>
+<span id="cb161-9"><a href="working-with-graphics.html#cb161-9" tabindex="-1"></a>                word.count <span class="sc">&gt;</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb161-10"><a href="working-with-graphics.html#cb161-10" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">factor</span>(age),</span>
+<span id="cb161-11"><a href="working-with-graphics.html#cb161-11" tabindex="-1"></a>                <span class="at">sex =</span> <span class="fu">factor</span>(sex),</span>
+<span id="cb161-12"><a href="working-with-graphics.html#cb161-12" tabindex="-1"></a>                <span class="at">date =</span> <span class="fu">factor</span>(date)) <span class="ot">-&gt;</span> pdat</span>
+<span id="cb161-13"><a href="working-with-graphics.html#cb161-13" tabindex="-1"></a></span>
+<span id="cb161-14"><a href="working-with-graphics.html#cb161-14" tabindex="-1"></a><span class="co"># create summary table</span></span>
+<span id="cb161-15"><a href="working-with-graphics.html#cb161-15" tabindex="-1"></a>readxl<span class="sc">::</span><span class="fu">read_excel</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;ICEdata.xlsx&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb161-16"><a href="working-with-graphics.html#cb161-16" tabindex="-1"></a>  <span class="co"># only private dialogue</span></span>
+<span id="cb161-17"><a href="working-with-graphics.html#cb161-17" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(stringr<span class="sc">::</span><span class="fu">str_detect</span>(text.id, <span class="st">&quot;S1A&quot;</span>),</span>
+<span id="cb161-18"><a href="working-with-graphics.html#cb161-18" tabindex="-1"></a>                <span class="co"># without speaker younger than 19</span></span>
+<span id="cb161-19"><a href="working-with-graphics.html#cb161-19" tabindex="-1"></a>                age <span class="sc">!=</span> <span class="st">&quot;0-18&quot;</span>,</span>
+<span id="cb161-20"><a href="working-with-graphics.html#cb161-20" tabindex="-1"></a>                age <span class="sc">!=</span> <span class="st">&quot;NA&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb161-21"><a href="working-with-graphics.html#cb161-21" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(sex, age) <span class="sc">%&gt;%</span></span>
+<span id="cb161-22"><a href="working-with-graphics.html#cb161-22" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">words =</span> <span class="fu">mean</span>(word.count)) <span class="ot">-&gt;</span> psum</span>
+<span id="cb161-23"><a href="working-with-graphics.html#cb161-23" tabindex="-1"></a><span class="co"># inspect</span></span>
+<span id="cb161-24"><a href="working-with-graphics.html#cb161-24" tabindex="-1"></a><span class="fu">head</span>(pdat); <span class="fu">head</span>(psum)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 9
+##      id file.speaker.id text.id spk.ref zone        date  sex   age   word.count
+##   &lt;dbl&gt; &lt;chr&gt;           &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;       &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;      &lt;dbl&gt;
+## 1     1 &lt;S1A-001$A&gt;     S1A-001 A       northern i… 1990… male  34-41        765
+## 2     2 &lt;S1A-001$B&gt;     S1A-001 B       northern i… 1990… fema… 34-41       1298
+## 3     4 &lt;S1A-002$A&gt;     S1A-002 A       northern i… 2002… fema… 26-33        391
+## 4     5 &lt;S1A-002$B&gt;     S1A-002 B       northern i… 2002… fema… 19-25         47
+## 5     6 &lt;S1A-002$C&gt;     S1A-002 C       northern i… 2002… male  50+          200
+## 6     7 &lt;S1A-002$D&gt;     S1A-002 D       northern i… 2002… fema… 50+          464</code></pre>
+<pre><code>## # A tibble: 6 × 3
+## # Groups:   sex [2]
+##   sex    age   words
+##   &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt;
+## 1 female 19-25  562.
+## 2 female 26-33  531.
+## 3 female 34-41  543.
+## 4 female 42-49  501.
+## 5 female 50+    632.
+## 6 male   19-25  570.</code></pre>
+<p>In the example below, we specify that we want to visualize the <code>plotdata</code> and that the x-axis should represent <code>Age</code> and the y-axis <code>Words</code>(the mean frequency of words). We also tell R that we want to group the data by <code>Sex</code> (i.e. that we want to distinguish between men and women). Then, we add <code>geom_line</code> which tells R that we want a line graph. The result of this is shown below.</p>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="working-with-graphics.html#cb164-1" tabindex="-1"></a><span class="fu">ggplot</span>(psum, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> words, <span class="at">group =</span> sex, <span class="at">color =</span> sex)) <span class="sc">+</span></span>
+<span id="cb164-2"><a href="working-with-graphics.html#cb164-2" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p>Once you have a basic plot like the one above, you can prettify the plot. For example, you can</p>
+<ul>
+<li><p>change the width of the lines (<code>size = 1.25</code>)</p></li>
+<li><p>change the y-axis limits (<code>coord_cartesian(ylim = c(0, 1000))</code>)</p></li>
+<li><p>use a different theme (<code>theme_bw()</code> means black and white theme)</p></li>
+<li><p>move the legend to the top</p></li>
+<li><p>change the default colors to colors you like (*scale_color_manual …`)</p></li>
+<li><p>change the linetype (<code>scale_linetype_manual ...</code>)</p></li>
+</ul>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="working-with-graphics.html#cb165-1" tabindex="-1"></a>psum <span class="sc">%&gt;%</span></span>
+<span id="cb165-2"><a href="working-with-graphics.html#cb165-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> words, <span class="at">color =</span> sex,  <span class="at">group =</span> sex, <span class="at">linetype =</span> sex)) <span class="sc">+</span></span>
+<span id="cb165-3"><a href="working-with-graphics.html#cb165-3" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">1.25</span>) <span class="sc">+</span></span>
+<span id="cb165-4"><a href="working-with-graphics.html#cb165-4" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1500</span>)) <span class="sc">+</span></span>
+<span id="cb165-5"><a href="working-with-graphics.html#cb165-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb165-6"><a href="working-with-graphics.html#cb165-6" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;top&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb165-7"><a href="working-with-graphics.html#cb165-7" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="st">&quot;female&quot;</span>, <span class="st">&quot;male&quot;</span>),</span>
+<span id="cb165-8"><a href="working-with-graphics.html#cb165-8" tabindex="-1"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;gray20&quot;</span>, <span class="st">&quot;gray50&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb165-9"><a href="working-with-graphics.html#cb165-9" tabindex="-1"></a>  <span class="fu">scale_linetype_manual</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="st">&quot;female&quot;</span>, <span class="st">&quot;male&quot;</span>),</span>
+<span id="cb165-10"><a href="working-with-graphics.html#cb165-10" tabindex="-1"></a>                        <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;solid&quot;</span>, <span class="st">&quot;dotted&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb165-11"><a href="working-with-graphics.html#cb165-11" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Age groups&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Average word count</span><span class="sc">\n</span><span class="st">(per 1,000 words)&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p>An additional and very handy feature of this way of producing graphs is that you</p>
+<ul>
+<li><p>can integrate them into pipes</p></li>
+<li><p>can easily combine plots.</p></li>
+</ul>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="working-with-graphics.html#cb166-1" tabindex="-1"></a>pdat <span class="sc">%&gt;%</span></span>
+<span id="cb166-2"><a href="working-with-graphics.html#cb166-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, </span>
+<span id="cb166-3"><a href="working-with-graphics.html#cb166-3" tabindex="-1"></a>             <span class="at">y =</span> word.count,</span>
+<span id="cb166-4"><a href="working-with-graphics.html#cb166-4" tabindex="-1"></a>             <span class="at">color =</span> sex,</span>
+<span id="cb166-5"><a href="working-with-graphics.html#cb166-5" tabindex="-1"></a>             <span class="at">linetype =</span> sex)) <span class="sc">+</span></span>
+<span id="cb166-6"><a href="working-with-graphics.html#cb166-6" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> .<span class="dv">5</span>, <span class="at">width =</span> .<span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb166-7"><a href="working-with-graphics.html#cb166-7" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span>mean, <span class="at">geom=</span><span class="st">&quot;line&quot;</span>, <span class="fu">aes</span>(<span class="at">group=</span>sex)) <span class="sc">+</span></span>
+<span id="cb166-8"><a href="working-with-graphics.html#cb166-8" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">2500</span>)) <span class="sc">+</span></span>
+<span id="cb166-9"><a href="working-with-graphics.html#cb166-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb166-10"><a href="working-with-graphics.html#cb166-10" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;top&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb166-11"><a href="working-with-graphics.html#cb166-11" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="st">&quot;female&quot;</span>, <span class="st">&quot;male&quot;</span>),</span>
+<span id="cb166-12"><a href="working-with-graphics.html#cb166-12" tabindex="-1"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;indianred&quot;</span>, <span class="st">&quot;darkblue&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb166-13"><a href="working-with-graphics.html#cb166-13" tabindex="-1"></a>  <span class="fu">scale_linetype_manual</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="st">&quot;female&quot;</span>, <span class="st">&quot;male&quot;</span>),</span>
+<span id="cb166-14"><a href="working-with-graphics.html#cb166-14" tabindex="-1"></a>                        <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;solid&quot;</span>, <span class="st">&quot;dotted&quot;</span>))</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p>You can also create different types of graphs very easily and split them into different facets.</p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="working-with-graphics.html#cb167-1" tabindex="-1"></a>pdat <span class="sc">%&gt;%</span></span>
+<span id="cb167-2"><a href="working-with-graphics.html#cb167-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, </span>
+<span id="cb167-3"><a href="working-with-graphics.html#cb167-3" tabindex="-1"></a>             <span class="at">y =</span> word.count, </span>
+<span id="cb167-4"><a href="working-with-graphics.html#cb167-4" tabindex="-1"></a>             <span class="at">fill =</span> sex)) <span class="sc">+</span></span>
+<span id="cb167-5"><a href="working-with-graphics.html#cb167-5" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="fu">vars</span>(date)) <span class="sc">+</span></span>
+<span id="cb167-6"><a href="working-with-graphics.html#cb167-6" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb167-7"><a href="working-with-graphics.html#cb167-7" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">2000</span>)) <span class="sc">+</span></span>
+<span id="cb167-8"><a href="working-with-graphics.html#cb167-8" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb167-9"><a href="working-with-graphics.html#cb167-9" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;top&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb167-10"><a href="working-with-graphics.html#cb167-10" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="st">&quot;female&quot;</span>, <span class="st">&quot;male&quot;</span>),</span>
+<span id="cb167-11"><a href="working-with-graphics.html#cb167-11" tabindex="-1"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#E69F00&quot;</span>, <span class="st">&quot;#56B4E9&quot;</span>))</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p>Create a bar plot showing the number of men and women by <code>Date</code>.</p>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="working-with-graphics.html#cb168-1" tabindex="-1"></a>pdat <span class="sc">%&gt;%</span></span>
+<span id="cb168-2"><a href="working-with-graphics.html#cb168-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(date, sex, text.id) <span class="sc">%&gt;%</span></span>
+<span id="cb168-3"><a href="working-with-graphics.html#cb168-3" tabindex="-1"></a>  <span class="fu">unique</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb168-4"><a href="working-with-graphics.html#cb168-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(date, sex) <span class="sc">%&gt;%</span></span>
+<span id="cb168-5"><a href="working-with-graphics.html#cb168-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">speakers =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb168-6"><a href="working-with-graphics.html#cb168-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> speakers, <span class="at">fill =</span> date, <span class="at">label =</span> speakers)) <span class="sc">+</span></span>
+<span id="cb168-7"><a href="working-with-graphics.html#cb168-7" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(sex), <span class="at">ncol =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb168-8"><a href="working-with-graphics.html#cb168-8" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb168-9"><a href="working-with-graphics.html#cb168-9" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">vjust=</span><span class="sc">-</span><span class="fl">1.6</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb168-10"><a href="working-with-graphics.html#cb168-10" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">100</span>)) <span class="sc">+</span></span>
+<span id="cb168-11"><a href="working-with-graphics.html#cb168-11" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb168-12"><a href="working-with-graphics.html#cb168-12" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="st">&quot;1990-1994&quot;</span>, <span class="st">&quot;1995-2001&quot;</span>, <span class="st">&quot;2002-2005&quot;</span>),</span>
+<span id="cb168-13"><a href="working-with-graphics.html#cb168-13" tabindex="-1"></a>                     <span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#E69F00&quot;</span>, <span class="st">&quot;lightgray&quot;</span>, <span class="st">&quot;#56B4E9&quot;</span>))</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="working-with-text.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="going-further.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/MartinSchweinberger/IntroR_WS/edit/main/02-intror.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/MartinSchweinberger/IntroR_WS/blob/main/02-intror.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
