@@ -1,0 +1,1 @@
+aggregate receipts sources year derived follows

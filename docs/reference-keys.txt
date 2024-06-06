@@ -105,3 +105,13 @@ citation-session-info-1
 references-1
 audience-1
 before-you-start-working-with-rrstudio-folder-structure-and-r-projects
+resources
+saving-text-data
+abstract
+general-information
+working-with-text
+regular-expressions
+basic-string-processing
+working-with-graphics
+piping
+extracting-frequency-information-from-text

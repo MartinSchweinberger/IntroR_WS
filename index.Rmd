@@ -5,7 +5,9 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
 
-# Preparation
+# General Information
+
+## Abstract
 
 
 This beginner-friendly workshop, *Introduction to R for Social Science*, is designed to equip participants with the foundational skills necessary to use R and RStudio effectively for text-based social science research. Through hands-on exercises and guided instruction, attendees will learn how to navigate the RStudio environment, load, manage, manipulate, and visualize data, and perform basic text analytics. Key topics covered include the use of regular expressions for pattern matching, concordancing for textual analysis, and essential techniques in network analysis, sentiment and keyword analysis, and topic modeling. By the end of this workshop, participants will have a solid understanding of how to use R for text-based social science research, opening up new possibilities for data-driven insights in their field. No prior experience with R or programming is required. 
@@ -56,15 +58,15 @@ Here is what we have planned to cover in this workshop (2 days, 10am to 4pm):
 
 * 15:50 - 16:00 Going further and wrap-up
 
+## Resources
 
+All resources (including the data we will use and analyse, the link to the script for this workshop, and  links to more in-depth resources for further study) are available via this [GitHub repository](https://github.com/MartinSchweinberger/IntroR_WS).
 
 ## Audience
 
 The intended audience for this workshop is beginner-level, with no previous experience using R. However, the workshop will also be useful for intermediate and advanced users of R if they do not have substantive experience in analyzing text data with R. Thus, no prior knowledge of R is required.
 
 If you want to know more, would like to get some more practice, or would like to have another approach to R, please feel free to check out on eof the various online resources available to learn R (you can check out a very recommendable introduction [here](https://uvastatlab.github.io/phdplus/intror.html)). 
-
-
 
 ## What to do before the workshop
 
