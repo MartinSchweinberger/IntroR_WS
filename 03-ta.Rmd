@@ -926,7 +926,7 @@ To tailor our approach to the SOTU speeches, we've chosen to model at the paragr
 
 ## Human-in-the-loop Topic Modelling 
 
-In this human-in-the-loop approach to topic modelling which mainly uses and combines the `quanteda` package [@benoit2018quanteda], the `topicmodels` package [@topicmodels2024package; @topicmodels2011pub], and the `seededlda` package [@seededlda2024]. Now that we have cleaned the data, we can perform the topic modelling. This consists of two steps:
+In this human-in-the-loop approach to topic modelling which mainly uses and combines the `quanteda` package [@benoit2018quanteda], the `topicmodels` package [@topicmodels; @Gruen2011topicmodels], and the `seededlda` package [@seededlda]. Now that we have cleaned the data, we can perform the topic modelling. This consists of two steps:
 
 1. First, we perform an unsupervised LDA. We do this to check what topics are in our corpus. 
 
