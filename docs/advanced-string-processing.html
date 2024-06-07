@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Section 5 Advanced String Processing | Introduction to R for Social Science</title>
+  <meta name="description" content="Section 5 Advanced String Processing | Introduction to R for Social Science" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Section 5 Advanced String Processing | Introduction to R for Social Science" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Section 5 Advanced String Processing | Introduction to R for Social Science" />
+  
+  
+  
+
+<meta name="author" content="Martin Schweinberger" />
+
+
+<meta name="date" content="2024-06-07" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="basic-string-processing.html"/>
+<link rel="next" href="basics-of-data-visualization.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/clipboard-1.7.1/clipboard.min.js"></script>
+<link href="libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+<link href="libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+<script src="libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> General Information</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#abstract"><i class="fa fa-check"></i><b>1.1</b> Abstract</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#timeline"><i class="fa fa-check"></i><b>1.2</b> Timeline</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#resources"><i class="fa fa-check"></i><b>1.3</b> Resources</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#audience"><i class="fa fa-check"></i><b>1.4</b> Audience</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#what-to-do-before-the-workshop"><i class="fa fa-check"></i><b>1.5</b> What to do before the workshop</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#getting-started"><i class="fa fa-check"></i><b>1.6</b> Getting started</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>2</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>2.1</b> Installing R and RStudio</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#preparation"><i class="fa fa-check"></i><b>2.2</b> Preparation</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#before-you-start-working-with-rrstudio-folder-structure-and-r-projects"><i class="fa fa-check"></i><b>2.2.1</b> Before you start working with R/RStudio (Folder Structure and R projects)</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-and-rstudio-basics"><i class="fa fa-check"></i><b>2.3</b> R and RStudio Basics</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#rstudio-panes"><i class="fa fa-check"></i><b>2.3.1</b> RStudio: Panes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-started-with-r"><i class="fa fa-check"></i><b>2.4</b> Getting started with R</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#setting-up-an-r-session"><i class="fa fa-check"></i><b>2.4.1</b> Setting up an R session</a></li>
+<li class="chapter" data-level="2.4.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#packages"><i class="fa fa-check"></i><b>2.4.2</b> Packages</a></li>
+<li class="chapter" data-level="2.4.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-help"><i class="fa fa-check"></i><b>2.4.3</b> Getting help</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="working-with-text.html"><a href="working-with-text.html"><i class="fa fa-check"></i><b>3</b> Working with Text</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="working-with-text.html"><a href="working-with-text.html#functions-and-objects"><i class="fa fa-check"></i><b>3.1</b> Functions and Objects</a></li>
+<li class="chapter" data-level="3.2" data-path="working-with-text.html"><a href="working-with-text.html#inspecting-data"><i class="fa fa-check"></i><b>3.2</b> Inspecting data</a></li>
+<li class="chapter" data-level="3.3" data-path="working-with-text.html"><a href="working-with-text.html#loading-text-data"><i class="fa fa-check"></i><b>3.3</b> Loading text data</a></li>
+<li class="chapter" data-level="3.4" data-path="working-with-text.html"><a href="working-with-text.html#saving-text-data"><i class="fa fa-check"></i><b>3.4</b> Saving text data</a></li>
+<li class="chapter" data-level="3.5" data-path="working-with-text.html"><a href="working-with-text.html#piping"><i class="fa fa-check"></i><b>3.5</b> Piping</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="basic-string-processing.html"><a href="basic-string-processing.html"><i class="fa fa-check"></i><b>4</b> Basic String Processing</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="basic-string-processing.html"><a href="basic-string-processing.html#extracting-frequency-information-from-text"><i class="fa fa-check"></i><b>4.1</b> Extracting frequency information from text</a></li>
+<li class="chapter" data-level="4.2" data-path="basic-string-processing.html"><a href="basic-string-processing.html#regular-expressions"><i class="fa fa-check"></i><b>4.2</b> Regular Expressions</a></li>
+<li class="chapter" data-level="4.3" data-path="basic-string-processing.html"><a href="basic-string-processing.html#practice-regular-expressions"><i class="fa fa-check"></i><b>4.3</b> Practice: regular expressions</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="advanced-string-processing.html"><a href="advanced-string-processing.html"><i class="fa fa-check"></i><b>5</b> Advanced String Processing</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="advanced-string-processing.html"><a href="advanced-string-processing.html#stemming"><i class="fa fa-check"></i><b>5.1</b> Stemming</a></li>
+<li class="chapter" data-level="5.2" data-path="advanced-string-processing.html"><a href="advanced-string-processing.html#part-of-speech-tagging-and-dependency-parsing"><i class="fa fa-check"></i><b>5.2</b> Part-of-speech tagging and dependency parsing</a></li>
+<li class="chapter" data-level="5.3" data-path="advanced-string-processing.html"><a href="advanced-string-processing.html#example-data-processing-chain"><i class="fa fa-check"></i><b>5.3</b> Example: Data processing chain</a></li>
+<li class="chapter" data-level="5.4" data-path="advanced-string-processing.html"><a href="advanced-string-processing.html#concordancing-and-kwics"><i class="fa fa-check"></i><b>5.4</b> Concordancing and KWICs</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="basics-of-data-visualization.html"><a href="basics-of-data-visualization.html"><i class="fa fa-check"></i><b>6</b> Basics of Data Visualization</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="basics-of-data-visualization.html"><a href="basics-of-data-visualization.html#basics-of-ggplot2-syntax"><i class="fa fa-check"></i><b>6.1</b> Basics of ggplot2 syntax</a></li>
+<li class="chapter" data-level="6.2" data-path="basics-of-data-visualization.html"><a href="basics-of-data-visualization.html#line-plot"><i class="fa fa-check"></i><b>6.2</b> Line plot</a></li>
+<li class="chapter" data-level="6.3" data-path="basics-of-data-visualization.html"><a href="basics-of-data-visualization.html#prettifying-plots"><i class="fa fa-check"></i><b>6.3</b> Prettifying plots</a></li>
+<li class="chapter" data-level="6.4" data-path="basics-of-data-visualization.html"><a href="basics-of-data-visualization.html#combining-plots"><i class="fa fa-check"></i><b>6.4</b> Combining plots</a></li>
+<li class="chapter" data-level="6.5" data-path="basics-of-data-visualization.html"><a href="basics-of-data-visualization.html#boxplots"><i class="fa fa-check"></i><b>6.5</b> Boxplots</a></li>
+<li class="chapter" data-level="6.6" data-path="basics-of-data-visualization.html"><a href="basics-of-data-visualization.html#barplots"><i class="fa fa-check"></i><b>6.6</b> Barplots</a></li>
+<li class="chapter" data-level="6.7" data-path="basics-of-data-visualization.html"><a href="basics-of-data-visualization.html#going-further"><i class="fa fa-check"></i><b>6.7</b> Going further</a></li>
+<li class="chapter" data-level="6.8" data-path="basics-of-data-visualization.html"><a href="basics-of-data-visualization.html#ending-r-sessions"><i class="fa fa-check"></i><b>6.8</b> Ending R sessions</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html"><i class="fa fa-check"></i><b>7</b> Introduction to Text Analysis with R</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#concordancing"><i class="fa fa-check"></i><b>7.1</b> Concordancing</a></li>
+<li class="chapter" data-level="7.2" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#word-frequency"><i class="fa fa-check"></i><b>7.2</b> Word Frequency</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#wordclouds"><i class="fa fa-check"></i><b>7.2.1</b> Wordclouds</a></li>
+<li class="chapter" data-level="7.2.2" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#frequency-changes"><i class="fa fa-check"></i><b>7.2.2</b> Frequency changes</a></li>
+<li class="chapter" data-level="7.2.3" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#dispersion-plots"><i class="fa fa-check"></i><b>7.2.3</b> Dispersion plots</a></li>
+<li class="chapter" data-level="7.2.4" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#over--and-underuse"><i class="fa fa-check"></i><b>7.2.4</b> Over- and underuse</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#collocations"><i class="fa fa-check"></i><b>7.3</b> Collocations</a></li>
+<li class="chapter" data-level="7.4" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#keywords"><i class="fa fa-check"></i><b>7.4</b> Keywords</a></li>
+<li class="chapter" data-level="7.5" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#text-classification"><i class="fa fa-check"></i><b>7.5</b> Text Classification</a></li>
+<li class="chapter" data-level="7.6" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#part-of-speech-tagging"><i class="fa fa-check"></i><b>7.6</b> Part-of-Speech tagging</a></li>
+<li class="chapter" data-level="7.7" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#names-entity-recognition"><i class="fa fa-check"></i><b>7.7</b> Names Entity Recognition</a></li>
+<li class="chapter" data-level="7.8" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#dependency-parsing-using-udpipe"><i class="fa fa-check"></i><b>7.8</b> Dependency Parsing Using UDPipe</a></li>
+<li class="chapter" data-level="7.9" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#citation-session-info"><i class="fa fa-check"></i><b>7.9</b> Citation &amp; Session Info</a></li>
+<li class="chapter" data-level="7.10" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#references"><i class="fa fa-check"></i><b>7.10</b> References</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to R for Social Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="advanced-string-processing" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Section 5</span> Advanced String Processing<a href="advanced-string-processing.html#advanced-string-processing" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Above, we have used functions and regular expressions to extract and find patters in textual data. Here, we will focus on common methods for cleaning text data that are applied before implementing certain methods.</p>
+<p>We start by installing and then loading some additional packages, e.g., the <code>quanteda</code> (see <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/quanteda.pdf">here</a> for a cheat sheet for the <code>quanteda</code> package), the <code>tm</code>, and the <code>udpipe</code> package, which are extremely useful when dealing with more advanced text processing.</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="advanced-string-processing.html#cb122-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;quanteda&quot;</span>)</span>
+<span id="cb122-2"><a href="advanced-string-processing.html#cb122-2" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;tm&quot;</span>)</span>
+<span id="cb122-3"><a href="advanced-string-processing.html#cb122-3" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;udpipe&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="advanced-string-processing.html#cb123-1" tabindex="-1"></a><span class="fu">library</span>(quanteda)</span>
+<span id="cb123-2"><a href="advanced-string-processing.html#cb123-2" tabindex="-1"></a><span class="fu">library</span>(tm)</span>
+<span id="cb123-3"><a href="advanced-string-processing.html#cb123-3" tabindex="-1"></a><span class="fu">library</span>(udpipe) </span></code></pre></div>
+<p>One common procedure is to split texts into sentences which we can do by using, e.g., the <code>tokenize_sentence</code> function from the <code>quanteda</code> package. I also unlist the data to have a vector wot work with (rather than a list).</p>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="advanced-string-processing.html#cb124-1" tabindex="-1"></a>et_sent <span class="ot">&lt;-</span> quanteda<span class="sc">::</span><span class="fu">tokenize_sentence</span>(review) <span class="sc">%&gt;%</span></span>
+<span id="cb124-2"><a href="advanced-string-processing.html#cb124-2" tabindex="-1"></a>  <span class="fu">unlist</span>()</span>
+<span id="cb124-3"><a href="advanced-string-processing.html#cb124-3" tabindex="-1"></a><span class="co"># inspect</span></span>
+<span id="cb124-4"><a href="advanced-string-processing.html#cb124-4" tabindex="-1"></a>et_sent</span></code></pre></div>
+<pre><code>##                                                                                textpos10001 
+##                                           &quot;Gary Busey is superb in this musical biography.&quot; 
+##                                                                                textpos10002 
+##                                                   &quot;Great singing and excellent soundtrack.&quot; 
+##                                                                                textpos10003 
+##                               &quot;The Buddy Holly Story is a much better movie than La Bamba.&quot; 
+##                                                                                textpos10004 
+##                   &quot;From reading other comments, there may be some historical inaccuracies.&quot; 
+##                                                                                textpos10005 
+## &quot;Regardless, it is a fun toe-tapping film, and a good introduction to Buddy Holly&#39;s music.&quot; 
+##                                                                                textpos10006 
+##                                                                                          &quot;&quot;</code></pre>
+<p>Another common procedure is to remove stop words, i.e., words that do not have semantic or referential meaning (like nouns such as <em>tree</em> or <em>cat</em>, or verbs like <em>sit</em> or <em>speak</em> or adjectives such as <em>green</em> or <em>loud</em>) but that indicate syntactic relations, roles, or features.(e.g., articles and pronouns). We can remove stopwords using, e.g., the <code>removeWords</code> function from the <code>tm</code> package</p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="advanced-string-processing.html#cb126-1" tabindex="-1"></a>et_wostop <span class="ot">&lt;-</span>  tm<span class="sc">::</span><span class="fu">removeWords</span>(review, tm<span class="sc">::</span><span class="fu">stopwords</span>(<span class="st">&quot;english&quot;</span>))</span>
+<span id="cb126-2"><a href="advanced-string-processing.html#cb126-2" tabindex="-1"></a><span class="co"># inspect</span></span>
+<span id="cb126-3"><a href="advanced-string-processing.html#cb126-3" tabindex="-1"></a>et_wostop</span></code></pre></div>
+<pre><code>##                                                                                                                                                                                                                                                                    textpos1000 
+## &quot;Gary Busey  superb   musical biography. Great singing  excellent soundtrack. The Buddy Holly Story   much better movie  La Bamba. From reading  comments,  may   historical inaccuracies. Regardless,    fun toe-tapping film,   good introduction  Buddy Holly&#39;s music.\r\n&quot;</code></pre>
+<p>To remove the superfluous white spaces, we can use, e.g., the <code>stripWhitespace</code> function from the <code>tm</code> package.</p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="advanced-string-processing.html#cb128-1" tabindex="-1"></a>et_wows <span class="ot">&lt;-</span>  tm<span class="sc">::</span><span class="fu">stripWhitespace</span>(et_wostop)</span>
+<span id="cb128-2"><a href="advanced-string-processing.html#cb128-2" tabindex="-1"></a><span class="co"># inspect</span></span>
+<span id="cb128-3"><a href="advanced-string-processing.html#cb128-3" tabindex="-1"></a>et_wows</span></code></pre></div>
+<pre><code>##                                                                                                                                                                                                                                                textpos1000 
+## &quot;Gary Busey superb musical biography. Great singing excellent soundtrack. The Buddy Holly Story much better movie La Bamba. From reading comments, may historical inaccuracies. Regardless, fun toe-tapping film, good introduction Buddy Holly&#39;s music. &quot;</code></pre>
+<p>It can also be useful to remove numbers. We can do this using, e.g., the <code>removeNumbers</code> function from the <code>tm</code> package.</p>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="advanced-string-processing.html#cb130-1" tabindex="-1"></a>et_wonum <span class="ot">&lt;-</span>  tm<span class="sc">::</span><span class="fu">removeNumbers</span>(<span class="st">&quot;This is the 1 and only sentence I will write in 2022.&quot;</span>)</span>
+<span id="cb130-2"><a href="advanced-string-processing.html#cb130-2" tabindex="-1"></a><span class="co"># inspect</span></span>
+<span id="cb130-3"><a href="advanced-string-processing.html#cb130-3" tabindex="-1"></a>et_wonum</span></code></pre></div>
+<pre><code>## [1] &quot;This is the  and only sentence I will write in .&quot;</code></pre>
+<p>We may also want to remove any type of punctuation using, e.g., the <code>removePunctuation</code> function from the <code>tm</code> package.</p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="advanced-string-processing.html#cb132-1" tabindex="-1"></a>et_wopunct <span class="ot">&lt;-</span>  tm<span class="sc">::</span><span class="fu">removePunctuation</span>(review)</span>
+<span id="cb132-2"><a href="advanced-string-processing.html#cb132-2" tabindex="-1"></a><span class="co"># inspect</span></span>
+<span id="cb132-3"><a href="advanced-string-processing.html#cb132-3" tabindex="-1"></a>et_wopunct</span></code></pre></div>
+<pre><code>##                                                                                                                                                                                                                                                                                                       textpos1000 
+## &quot;Gary Busey is superb in this musical biography Great singing and excellent soundtrack The Buddy Holly Story is a much better movie than La Bamba From reading other comments there may be some historical inaccuracies Regardless it is a fun toetapping film and a good introduction to Buddy Hollys music\r\n&quot;</code></pre>
+<div id="stemming" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Stemming<a href="advanced-string-processing.html#stemming" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Stemming is the process of reducing a word to its base or root form, typically by removing suffixes. For example, <em>running</em> becomes <em>run</em> and <em>jumps</em> becomes <em>jump</em>. This helps in normalizing words to their core meaning for text analysis and natural language processing tasks. We can stem a text using, e.g., the <code>stemDocument</code> function from the <code>tm</code> package</p>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="advanced-string-processing.html#cb134-1" tabindex="-1"></a>et_stem <span class="ot">&lt;-</span>  tm<span class="sc">::</span><span class="fu">stemDocument</span>(review, <span class="at">language =</span> <span class="st">&quot;en&quot;</span>)</span>
+<span id="cb134-2"><a href="advanced-string-processing.html#cb134-2" tabindex="-1"></a><span class="co"># inspect</span></span>
+<span id="cb134-3"><a href="advanced-string-processing.html#cb134-3" tabindex="-1"></a>et_stem</span></code></pre></div>
+<pre><code>##                                                                                                                                                                                                                                                                                   textpos1000 
+## &quot;Gari Busey is superb in this music biography. Great sing and excel soundtrack. The Buddi Holli Stori is a much better movi than La Bamba. From read other comments, there may be some histor inaccuracies. Regardless, it is a fun toe-tap film, and a good introduct to Buddi Holli music.&quot;</code></pre>
+</div>
+<div id="part-of-speech-tagging-and-dependency-parsing" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Part-of-speech tagging and dependency parsing<a href="advanced-string-processing.html#part-of-speech-tagging-and-dependency-parsing" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A far better option than stemming is lemmatization as lemmatization is based on proper morphological information and vocabularies. For lemmatization, we can use the <code>udpipe</code> package which also tokenizes texts, adds part-of-speech tags, and provides information about dependency relations.</p>
+<p>Before we can tokenize, lemmatize, pos-tag and parse though, we need to download a pre-trained language model.</p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="advanced-string-processing.html#cb136-1" tabindex="-1"></a><span class="co"># download language model</span></span>
+<span id="cb136-2"><a href="advanced-string-processing.html#cb136-2" tabindex="-1"></a>m_eng   <span class="ot">&lt;-</span> udpipe<span class="sc">::</span><span class="fu">udpipe_download_model</span>(<span class="at">language =</span> <span class="st">&quot;english-ewt&quot;</span>)</span></code></pre></div>
+<p>If you have downloaded a model once, you can also load the model directly from the place where you stored it on your computer. In my case, I have stored the model in a folder called udpipemodels</p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="advanced-string-processing.html#cb137-1" tabindex="-1"></a><span class="co"># load language model from your computer after you have downloaded it once</span></span>
+<span id="cb137-2"><a href="advanced-string-processing.html#cb137-2" tabindex="-1"></a>m_eng <span class="ot">&lt;-</span> udpipe<span class="sc">::</span><span class="fu">udpipe_load_model</span>(<span class="at">file =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;english-ewt-ud-2.5-191206.udpipe&quot;</span>))</span></code></pre></div>
+<p>We can now use the model to annotate out text.</p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="advanced-string-processing.html#cb138-1" tabindex="-1"></a><span class="co"># tokenise, tag, dependency parsing</span></span>
+<span id="cb138-2"><a href="advanced-string-processing.html#cb138-2" tabindex="-1"></a>text_anndf <span class="ot">&lt;-</span> udpipe<span class="sc">::</span><span class="fu">udpipe_annotate</span>(m_eng, <span class="at">x =</span> review) <span class="sc">%&gt;%</span></span>
+<span id="cb138-3"><a href="advanced-string-processing.html#cb138-3" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb138-4"><a href="advanced-string-processing.html#cb138-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>sentence)</span>
+<span id="cb138-5"><a href="advanced-string-processing.html#cb138-5" tabindex="-1"></a><span class="co"># inspect</span></span>
+<span id="cb138-6"><a href="advanced-string-processing.html#cb138-6" tabindex="-1"></a><span class="fu">head</span>(text_anndf, <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##   doc_id paragraph_id sentence_id token_id   token   lemma  upos xpos
+## 1   doc1            1           1        1    Gary    Gary PROPN  NNP
+## 2   doc1            1           1        2   Busey   Busey PROPN  NNP
+## 3   doc1            1           1        3      is      be   AUX  VBZ
+## 4   doc1            1           1        4  superb  superb   ADJ   JJ
+## 5   doc1            1           1        5      in      in   ADP   IN
+## 6   doc1            1           1        6    this    this   DET   DT
+## 7   doc1            1           1        7 musical musical   ADJ   JJ
+##                                                   feats head_token_id dep_rel
+## 1                                           Number=Sing             4   nsubj
+## 2                                           Number=Sing             1    flat
+## 3 Mood=Ind|Number=Sing|Person=3|Tense=Pres|VerbForm=Fin             4     cop
+## 4                                            Degree=Pos             0    root
+## 5                                                  &lt;NA&gt;             8    case
+## 6                              Number=Sing|PronType=Dem             8     det
+## 7                                            Degree=Pos             8    amod
+##   deps misc
+## 1 &lt;NA&gt; &lt;NA&gt;
+## 2 &lt;NA&gt; &lt;NA&gt;
+## 3 &lt;NA&gt; &lt;NA&gt;
+## 4 &lt;NA&gt; &lt;NA&gt;
+## 5 &lt;NA&gt; &lt;NA&gt;
+## 6 &lt;NA&gt; &lt;NA&gt;
+## 7 &lt;NA&gt; &lt;NA&gt;
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 3 rows ]</code></pre>
+<p>We could, of course, perform many more manipulations of textual data but this should suffice to get you started.</p>
+</div>
+<div id="example-data-processing-chain" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Example: Data processing chain<a href="advanced-string-processing.html#example-data-processing-chain" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>When working with texts, we usually need to clean the data. Below, we do some basic cleaning using a pipeline or data processing chain. In a data processing chain, we combine commands to achieve an end result (in our case, a clean text).</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="advanced-string-processing.html#cb140-1" tabindex="-1"></a>reviews_pos_split_clean <span class="ot">&lt;-</span> reviews_pos_split <span class="sc">%&gt;%</span></span>
+<span id="cb140-2"><a href="advanced-string-processing.html#cb140-2" tabindex="-1"></a>  <span class="co"># replace elements</span></span>
+<span id="cb140-3"><a href="advanced-string-processing.html#cb140-3" tabindex="-1"></a>  stringr<span class="sc">::</span><span class="fu">str_replace_all</span>(<span class="st">&quot;&lt;.*?&gt;&quot;</span>, <span class="st">&quot; &quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb140-4"><a href="advanced-string-processing.html#cb140-4" tabindex="-1"></a>  <span class="co"># convert to lower case</span></span>
+<span id="cb140-5"><a href="advanced-string-processing.html#cb140-5" tabindex="-1"></a>  <span class="fu">tolower</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb140-6"><a href="advanced-string-processing.html#cb140-6" tabindex="-1"></a>  <span class="co"># remove strange symbols</span></span>
+<span id="cb140-7"><a href="advanced-string-processing.html#cb140-7" tabindex="-1"></a>  stringr<span class="sc">::</span><span class="fu">str_replace_all</span>(<span class="st">&quot;[^[:alnum:][:punct:]]+&quot;</span>, <span class="st">&quot; &quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb140-8"><a href="advanced-string-processing.html#cb140-8" tabindex="-1"></a>  <span class="co"># remove \&quot;</span></span>
+<span id="cb140-9"><a href="advanced-string-processing.html#cb140-9" tabindex="-1"></a>  stringr<span class="sc">::</span><span class="fu">str_remove_all</span>(<span class="st">&quot;</span><span class="sc">\&quot;</span><span class="st">&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb140-10"><a href="advanced-string-processing.html#cb140-10" tabindex="-1"></a>  <span class="co"># remove superfluous white spaces</span></span>
+<span id="cb140-11"><a href="advanced-string-processing.html#cb140-11" tabindex="-1"></a>  stringr<span class="sc">::</span><span class="fu">str_squish</span>()</span>
+<span id="cb140-12"><a href="advanced-string-processing.html#cb140-12" tabindex="-1"></a><span class="co"># remove very short elements</span></span>
+<span id="cb140-13"><a href="advanced-string-processing.html#cb140-13" tabindex="-1"></a>reviews_pos_split_clean <span class="ot">&lt;-</span> reviews_pos_split_clean[<span class="fu">nchar</span>(reviews_pos_split_clean) <span class="sc">&gt;</span> <span class="dv">10</span>]</span>
+<span id="cb140-14"><a href="advanced-string-processing.html#cb140-14" tabindex="-1"></a><span class="co"># inspect data</span></span>
+<span id="cb140-15"><a href="advanced-string-processing.html#cb140-15" tabindex="-1"></a><span class="fu">nchar</span>(reviews_pos_split_clean)</span></code></pre></div>
+<pre><code>##   [1] 1728  639  581  456  126  182 3833  151  683   29  104   91   42   25  714
+##  [16]  461  405  250   95   57  719  368 1502  121 1636  709   44  681   78  222
+##  [31]  904  247  516 1935 2671 1148 2548  815  705   27  108  209   30  553  287
+##  [46]  896  424   64  546   61  195   32   43   39  199  120  615   81  133  290
+##  [61]   45  278   20  231   77   98  340 1957  377   41   35   41  303  716   32
+##  [76]   52  218 1117 1764  220   98  212  576   70   26  780  242  130  241   87
+##  [91]  249  109   63   81  464  101  369   34  464   19
+##  [ reached getOption(&quot;max.print&quot;) -- omitted 2656 entries ]</code></pre>
+<p>Inspect text</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="advanced-string-processing.html#cb142-1" tabindex="-1"></a>reviews_pos_split_clean[<span class="dv">1</span>]</span></code></pre></div>
+</div>
+<div id="concordancing-and-kwics" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> Concordancing and KWICs<a href="advanced-string-processing.html#concordancing-and-kwics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Creating concordances or key-word-in-context displays is one of the most common practices when dealing with text data. Fortunately, there exist ready-made functions that make this a very easy task in R. We will use the <code>kwic</code> function from the <code>quanteda</code> package to create kwics here.</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="advanced-string-processing.html#cb143-1" tabindex="-1"></a>kwic_multiple <span class="ot">&lt;-</span> quanteda<span class="sc">::</span><span class="fu">kwic</span>(reviews_pos_split_clean, </span>
+<span id="cb143-2"><a href="advanced-string-processing.html#cb143-2" tabindex="-1"></a>       <span class="at">pattern =</span> <span class="fu">phrase</span>(<span class="st">&quot;audience&quot;</span>),</span>
+<span id="cb143-3"><a href="advanced-string-processing.html#cb143-3" tabindex="-1"></a>       <span class="at">window =</span> <span class="dv">3</span>, </span>
+<span id="cb143-4"><a href="advanced-string-processing.html#cb143-4" tabindex="-1"></a>       <span class="at">valuetype =</span> <span class="st">&quot;regex&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb143-5"><a href="advanced-string-processing.html#cb143-5" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()</span>
+<span id="cb143-6"><a href="advanced-string-processing.html#cb143-6" tabindex="-1"></a><span class="co"># inspect data</span></span>
+<span id="cb143-7"><a href="advanced-string-processing.html#cb143-7" tabindex="-1"></a><span class="fu">head</span>(kwic_multiple)</span></code></pre></div>
+<pre><code>##   docname from  to                    pre    keyword                post
+## 1   text1  222 222 painted for mainstream  audiences      , forget charm
+## 2   text9   90  90        community . the   audience          at the end
+## 3  text35   36  36         often find big  audiences       . people seem
+## 4  text37  188 188         this keeps the   audience         on the edge
+## 5  text37  376 376       krabbé holds the audience&#39;s attention and looks
+## 6  text76    8   8         message to the   audience               . his
+##    pattern
+## 1 audience
+## 2 audience
+## 3 audience
+## 4 audience
+## 5 audience
+## 6 audience</code></pre>
+<p>We can now also select concordances based on specific features. For example, we only want those instances of “great again” if the preceding word was “America”.</p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="advanced-string-processing.html#cb145-1" tabindex="-1"></a>kwic_multiple_select <span class="ot">&lt;-</span> kwic_multiple <span class="sc">%&gt;%</span></span>
+<span id="cb145-2"><a href="advanced-string-processing.html#cb145-2" tabindex="-1"></a>  <span class="co"># last element before search term is &quot;the&quot;</span></span>
+<span id="cb145-3"><a href="advanced-string-processing.html#cb145-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="fu">str_detect</span>(pre, <span class="st">&quot;the$&quot;</span>))</span>
+<span id="cb145-4"><a href="advanced-string-processing.html#cb145-4" tabindex="-1"></a><span class="co"># inspect data</span></span>
+<span id="cb145-5"><a href="advanced-string-processing.html#cb145-5" tabindex="-1"></a><span class="fu">head</span>(kwic_multiple_select)</span></code></pre></div>
+<pre><code>##   docname from  to              pre    keyword                post  pattern
+## 1   text9   90  90  community . the   audience          at the end audience
+## 2  text37  188 188   this keeps the   audience         on the edge audience
+## 3  text37  376 376 krabbé holds the audience&#39;s attention and looks audience
+## 4  text76    8   8   message to the   audience               . his audience
+## 5  text77   32  32  message for the   audience          . they are audience
+## 6 text169  123 123   home gives the   audience  enough sympathy to audience</code></pre>
+<p>Again, we can use the <code>write.table</code> function to save our kwics to disc.</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="advanced-string-processing.html#cb147-1" tabindex="-1"></a><span class="fu">write.table</span>(kwic_multiple_select, here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;kwic_multiple_select.txt&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span>)</span></code></pre></div>
+<p>As most of the data that we use is on out computers (rather than being somewhere on the web), we now load files with text from your computer.</p>
+<p>We now turn to data visualization basics.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="basic-string-processing.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="basics-of-data-visualization.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/MartinSchweinberger/IntroR_WS/edit/main/02-intror.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/MartinSchweinberger/IntroR_WS/blob/main/02-intror.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

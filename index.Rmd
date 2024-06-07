@@ -3,6 +3,7 @@ title: "Introduction to R for Social Science"
 author: "Martin Schweinberger"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
+bibliography: bibtex.bib
 ---
 
 # General Information
@@ -20,27 +21,29 @@ Here is what we have planned to cover in this workshop (2 days, 10am to 4pm):
 
 * 10:00 - 10:15 Introduction to the workshop
 
-* 10:15 - 10:45 Why R and preparation
+* 10:15 - 10:45 Preparation and getting started
 
 * 10:45 - 11:30 R and RStudio basics 
 
 * **11:30 - 12:30 Lunch break**
 
-* 12:30 - 13:15 Working with tables
+* 12:30 - 13:15 Working with text
 
-* 13:15 - 14:00 Loading data and working with texts
+* 13:15 - 14:00 Basic string processing 1
 
 * **14:00 - 14:30 Coffee break**
 
-* 14:30 - 15:15 Regular expressions and string processing
+* 14:30 - 15:15 Basic string processing 2
 
-* 15:15 - 16:00 Basics of data visualization
+* 15:15 - 16:00 Advanced string processing
 
 **Wednesday, 12 June** 
 
-* 10:00 - 10:30 Recap and Introduction to Text Analytics
+* 10:00 - 10:10 Recap
 
-* 10:30 - 11:00 Concordancing (Keywords-in-Context)
+* 10:10 - 10:45 Basics of data visualization
+
+* 10:45 - 11:00  Introduction to Text Analytics
 
 * 11:00 - 11:30 Exercise: Sentiment Analysis and Keyword Analysis
 

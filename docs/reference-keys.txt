@@ -115,3 +115,15 @@ basic-string-processing
 working-with-graphics
 piping
 extracting-frequency-information-from-text
+example-cleaning-text-data
+practice-regular-expressions
+advanced-string-processing
+basics-of-data-visualization
+stemming
+part-of-speech-tagging-and-dependency-parsing
+example-data-processing-chain
+line-plot
+prettifying-plots
+combining-plots
+boxplots
+barplots

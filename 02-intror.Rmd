@@ -349,7 +349,7 @@ One great thing about R is that you can very often find an answer to your questi
 
 * Google your error! See <http://r4ds.had.co.nz/introduction.html#getting-help-and-learning-more> for excellent suggestions on how to find help for a specific question online.
 
-# Working with text
+# Working with Text
 
 In this section, we will learn how to work with textual data in R and we use positive IMDB reviews as our example texts. Before we start, it is important to understand the general logic of R code which is why we start with a very brief explanation of functions and objects.
 
@@ -411,6 +411,13 @@ reviews_pos[1]
 
 ## Saving text data
 
+To save a single text file, we can use `writeLines` function which only needs the text and the location where the text should be saved as its arguments.
+
+
+```{r eval=F, message=F, warning=F}
+writeLines(reviews_pos[1], here::here("data", "review_pos_text1.txt"))
+```
+
 
 To save many text files on your computer, you need to first define the locations where you want to save the texts and then, in a second step, you save the files (as shown below).
 
@@ -445,6 +452,289 @@ text %>%
 # inspect data
 text2
 ```
+
+
+# Basic String Processing
+
+Before turning to more advanced string processing (in the context of computation, texts are referred to as strings) using the `stringr` package, let us just  focus on some basic functions that are extremely useful when working with texts.
+
+To practice working with texts, we will rename a shirt positive IMDB review and also generate a tokenized version of this review.
+
+**Tokenizsation**: Tokenization is the process of breaking down text into smaller units called tokens. These tokens can be symbols, words, phrases, sentences, or other meaningful elements (e.g. paragraphs). Tokenization is a fundamental step in natural language processing (NLP) and text analysis, as it allows for the text to be analysed and processed systematically..
+
+```{r}
+review <- reviews_pos[4]
+review_tok <- quanteda::tokens(review) %>% unlist() %>% as.vector()
+# inspect
+review; str(review_tok)
+```
+
+We can now start to check out functions that are useful and frequently applied to text data. We start by splitting text data.
+
+To split texts, we can use the `str_split` function. However, there are two issues when using this (very useful) function:
+
+  + the pattern that we want to split on disappears 
+
+  + the output is a list (a special type of data format)
+
+To remedy these issues, we 
+
+  + combine the `str_split` function with the `unlist` function 
+
+  + add something right at the beginning of the pattern that we use to split the text. 
+To add something to the beginning of the pattern that we want to split the text by, we use the `str_replace_all` function. The `str_replace_all` function takes three arguments, 1. the **text**, 2. the **pattern** that should be replaced, 3. the **replacement**. In the example below, we add `~~~` to the sequence `movie` and then split on the `~~~` rather than on the sequence "movie" (in other words, we replace `movie` with `~~~movie` and then split on `~~~`).
+
+```{r, message=FALSE, warning=FALSE}
+# split text
+str_split(
+  # attach ~~~ right before where we want to split (we want to split before the token "movie")
+    stringr::str_replace_all(reviews_pos, "movie", "~~~movie"),
+    # define that we want to split by ~~~
+    pattern = "~~~") %>%
+  # unlist results
+  unlist() -> reviews_pos_split
+# inspect data
+nchar(reviews_pos_split); str(reviews_pos_split)
+```
+
+
+A very useful function is, e.g. `tolower` which converts everything to lower case. 
+
+```{r lwr, message=FALSE, warning=FALSE}
+tolower(review)
+```
+
+Conversely, `toupper` converts everything to upper case. 
+
+```{r upr, message=FALSE, warning=FALSE}
+toupper(review)
+```
+
+
+The `stringr` package (see [here](https://raw.githubusercontent.com/rstudio/cheatsheets/main/strings.pdf) is part of the so-called *tidyverse* - a collection of packages that allows to write R code in a readable manner - and it is the most widely used package for string processing in . The advantage of using `stringr` is that it makes string processing very easy. All `stringr` functions share a common structure:
+
+`str_function(string, pattern)`
+
+The two arguments in the structure of `stringr` functions are:  *string* which is the character string to be processed and a pattern which is either a simple sequence of characters, a regular expression, or a combination of both. Because the *string* comes first, the `stringr` functions are ideal for piping and thus use in tidyverse style R. 
+
+All function names of `stringr` begin with str, then an underscore and then the name of the action to be performed.  For example, to replace the first occurrence of a pattern in a string, we should use `str_replace()`. In the following, we will use `stringr` functions to perform various operations on the example text. As we have already loaded the `tidyverse` package, we can start right away with using `stringr` functions as shown below.
+
+Like `nchar` in `base`, `str_count` provides the number of characters of a text.
+
+```{r stringr2, message=FALSE, warning=FALSE}
+str_count(reviews_pos[1:5])
+```
+
+The function `str_detect` informs about whether a pattern is present in a text and outputs a logical vector with *TRUE* if the pattern occurs and *FALSE* if it does not.
+
+```{r stringr3, message=FALSE, warning=FALSE}
+str_detect(review, "and")
+```	
+
+The function `str_extract_all` extracts all occurrences of a pattern, if that pattern is present in a text.
+
+```{r stringr5, message=FALSE, warning=FALSE}
+str_extract_all(review, "and")
+```	
+
+The function `str_locate_all` provides the start and end positions of the match of the pattern in a text and displays the result in matrix-form.
+
+```{r stringr7, message=FALSE, warning=FALSE}
+str_locate_all(review, "and")
+```
+
+The function `str_match` extracts the first occurrence of the pattern in a text.
+
+
+```{r stringr8, message=FALSE, warning=FALSE}
+str_match(review, "and") 
+
+```
+
+The function `str_match_all` extracts the all occurrences of the pattern from a text.
+
+```{r stringr9, message=FALSE, warning=FALSE}
+str_match_all(review, "and")
+```
+
+The function `str_remove` removes the first occurrence of a pattern in a text.
+
+```{r stringr10, message=FALSE, warning=FALSE}
+str_remove(review, "and") 
+```
+
+The function `str_remove_all` removes all occurrences of a pattern from a text.
+
+```{r stringr11, message=FALSE, warning=FALSE}
+str_remove_all(review, "and")
+```
+
+
+The function `str_replace_all` replaces all occurrences of a pattern with something else in a text.
+
+```{r stringr13, message=FALSE, warning=FALSE}
+str_replace_all(review, "and", "AND")
+```
+
+The function `str_starts` tests whether a given text begins with a certain pattern and outputs a logical vector.
+
+```{r stringr14, message=FALSE, warning=FALSE}
+str_starts(review, "and") 
+```
+
+The function `str_ends` tests whether a text ends with a certain pattern and outputs a logical vector.
+
+```{r stringr15, message=FALSE, warning=FALSE}
+str_ends(review, "and")
+```
+
+Like `strsplit`, the function `str_split` splits a text when a given pattern occurs. If no pattern is provided, then the text is split into individual symbols.
+
+```{r stringr16, message=FALSE, warning=FALSE}
+str_split(review, "and") 
+```
+
+The function `str_split_fixed` splits a text when a given pattern occurs but only so often as is indicated by the argument `n`. So, even if the patter occur more often than `n`, `str_split_fixed` will only split the text `n` times.
+
+```{r stringr17, message=FALSE, warning=FALSE}
+str_split_fixed(review, "and", n = 3)
+```
+
+
+
+The function `str_subset` extracts those subsets of a text that contain a certain pattern.  
+
+```{r stringr18, message=FALSE, warning=FALSE}
+str_subset(review_tok, "and") 
+```
+
+The function `str_which` provides a vector with the indices of the texts that contain a certain pattern. 
+
+```{r stringr19, message=FALSE, warning=FALSE}
+str_which(review_tok, "and")
+```
+
+The function `str_view_all` shows the locations of all instances of a pattern in a text or vector of texts.
+
+```{r stringr21, message=FALSE, warning=FALSE}
+str_view_all(review, "and")
+```
+
+The function `str_pad` adds white spaces to a text or vector of texts so that they reach a given number of symbols.
+
+```{r stringr22, message=FALSE, warning=FALSE}
+# create text with white spaces
+text <- " this    is a    text   "
+str_pad(text, width = 30)
+```
+
+The function `str_trim` removes white spaces from the beginning(s) and end(s) of a text or vector of texts.
+
+```{r stringr23, message=FALSE, warning=FALSE}
+str_trim(text) 
+```
+
+The function `str_squish` removes white spaces that occur within a text or vector of texts.
+
+```{r stringr24, message=FALSE, warning=FALSE}
+str_squish(text)
+```
+
+The function `str_wrap` removes white spaces  from the beginning(s) and end(s) of a text or vector of texts and also those white spaces that occur within a text or vector of texts.
+
+```{r stringr25, message=FALSE, warning=FALSE}
+str_wrap(text)
+```
+
+The function `str_order` provides a vector that represents the order of a vector of texts according to the lengths of texts in that vector.
+
+```{r stringr26, message=FALSE, warning=FALSE}
+str_order(reviews_pos_split)
+```
+
+The function `str_sort` orders of a vector of texts according to the lengths of texts in that vector.
+
+```{r stringr27, message=FALSE, warning=FALSE}
+str_sort(reviews_pos_split) %>%
+  head()
+```
+
+
+The function `str_c` combines texts into one text
+
+```{r stringr30, message=FALSE, warning=FALSE}
+str_c(review, reviews_pos[7])
+```
+
+The function `str_conv` converts a text into a certain type of encoding, e.g. into `UTF-8` or `Latin1`.
+
+```{r stringr31, message=FALSE, warning=FALSE}
+str_conv(review, encoding = "UTF-8")
+```
+
+The function `str_dup` reduplicates a text or a vector of texts n times.
+
+```{r stringr32, message=FALSE, warning=FALSE}
+str_dup(review, times=2)
+```
+
+The function `str_flatten` combines a vector of texts into one text. The argument `collapse` defines the symbol that occurs between the combined texts. If the argument `collapse` is left out, the texts will be combined without any symbol between the combined texts.
+
+
+```{r stringr33, message=FALSE, warning=FALSE}
+str_flatten(c(review, reviews_pos[7]), collapse = " ")
+```
+
+
+The function `str_length` provides the length of texts in characters.
+
+```{r stringr35, message=FALSE, warning=FALSE}
+str_length(review)
+```
+
+The function `str_replace_na` replaces NA in texts. It is important to note that NA, if it occurs within a string, is considered to be the literal string `NA`.
+
+```{r stringr36, message=FALSE, warning=FALSE}
+# create sentences with NA
+sentencesna <- c("Some text", NA, "Some more text", "Some NA text")
+# apply str_replace_na function
+str_replace_na(sentencesna, replacement = "Something new")
+```
+
+The function `str_trunc` ends strings with ... after a certain number of characters.
+
+```{r stringr37, message=FALSE, warning=FALSE}
+str_trunc(review, width = 20)
+```
+
+The function `str_sub` extracts a string from a text from a start location to an end position (expressed as character positions).
+
+```{r stringr38, message=FALSE, warning=FALSE}
+str_sub(review, 5, 25)
+```
+
+The function `word` extracts words from a text (expressed as word positions).
+
+
+```{r stringr39, message=FALSE, warning=FALSE}
+word(review, 2:7)
+```
+
+
+The function `str_glue` combines strings and allows to input variables.
+
+```{r stringr40, message=FALSE, warning=FALSE}
+name <- "Fred"
+age <- 50
+anniversary <- as.Date("1991-10-12")
+str_glue(
+  "My name is {name}, ",
+  "my age next year is {age + 1}, ",
+  "and my anniversary is {format(anniversary, '%A, %B %d, %Y')}."
+)
+```
+
+
 
 ## Extracting frequency information from text
 
@@ -512,14 +802,7 @@ Types can be expanded to include structural properties as shown below.
 knitr::include_graphics("https://slcladal.github.io/images/regex_tb3.png")
 ``` 
 
-To practice working with regular expressions, we will focus on only the very first positive IMDB movie review and also create a tokenised version of this review:
-
-```{r}
-review <- reviews_pos[4]
-review_tok <- quanteda::tokens(review) %>% unlist() %>% as.vector()
-# inspect
-review; str(review_tok)
-```
+## Practice: regular expressions
 
 We now want to show all words in the tokenized review that contain `y`.
 
@@ -582,316 +865,8 @@ str_remove_all(review, " ")
 ```
 
 
-## Splitting-up texts
 
-We can use the `str_split` function to split texts. However, there are two issues when using this (very useful) function:
-
-  + the pattern that we want to split on disappears 
-
-  + the output is a list (a special type of data format)
-
-To remedy these issues, we 
-
-  + combine the `str_split` function with the `unlist` function 
-
-  + add something right at the beginning of the pattern that we use to split the text. 
-To add something to the beginning of the pattern that we want to split the text by, we use the `str_replace_all` function. The `str_replace_all` function takes three arguments, 1. the **text**, 2. the **pattern** that should be replaced, 3. the **replacement**. In the example below, we add `~~~` to the sequence `movie` and then split on the `~~~` rather than on the sequence "movie" (in other words, we replace `movie` with `~~~movie` and then split on `~~~`).
-
-```{r, message=FALSE, warning=FALSE}
-# split text
-str_split(
-  # attach ~~~ right before where we want to split (we want to split before the token "movie")
-    stringr::str_replace_all(reviews_pos, "movie", "~~~movie"),
-    # define that we want to split by ~~~
-    pattern = "~~~") %>%
-  # unlist results
-  unlist() -> reviews_pos_split
-# inspect data
-nchar(reviews_pos_split); str(reviews_pos_split)
-```
-
-
-## Basic String Processing
-
-Before turning to more advanced string processing (in the context of computation, texts are referred to as strings) using the `stringr` package, let us just  focus on some basic functions that are extremely useful when working with texts.
-
-A very useful function is, e.g. `tolower` which converts everything to lower case. 
-
-```{r lwr, message=FALSE, warning=FALSE}
-tolower(reviews_pos[4])
-```
-
-Conversely, `toupper` converts everything to upper case. 
-
-```{r upr, message=FALSE, warning=FALSE}
-toupper(reviews_pos[4])
-```
-
-
-The `stringr` package (see [here](https://raw.githubusercontent.com/rstudio/cheatsheets/main/strings.pdf) is part of the so-called *tidyverse* - a collection of packages that allows to write R code in a readable manner - and it is the most widely used package for string processing in . The advantage of using `stringr` is that it makes string processing very easy. All `stringr` functions share a common structure:
-
-`str_function(string, pattern)`
-
-The two arguments in the structure of `stringr` functions are:  *string* which is the character string to be processed and a pattern which is either a simple sequence of characters, a regular expression, or a combination of both. Because the *string* comes first, the `stringr` functions are ideal for piping and thus use in tidyverse style R. 
-
-All function names of `stringr` begin with str, then an underscore and then the name of the action to be performed.  For example, to replace the first occurrence of a pattern in a string, we should use `str_replace()`. In the following, we will use `stringr` functions to perform various operations on the example text. As we have already loaded the `tidyverse` package, we can start right away with using `stringr` functions as shown below.
-
-Like `nchar` in `base`, `str_count` provides the number of characters of a text.
-
-```{r stringr2, message=FALSE, warning=FALSE}
-str_count(reviews_pos[1:5])
-```
-
-The function `str_detect` informs about whether a pattern is present in a text and outputs a logical vector with *TRUE* if the pattern occurs and *FALSE* if it does not.
-
-```{r stringr3, message=FALSE, warning=FALSE}
-str_detect(reviews_pos[4], "and")
-```	
-
-The function `str_extract` extracts the first occurrence of a pattern, if that pattern is present in a text.
-
-```{r stringr4, message=FALSE, warning=FALSE}
-str_extract(reviews_pos[4], "and")
-```	
-
-The function `str_extract_all` extracts all occurrences of a pattern, if that pattern is present in a text.
-
-```{r stringr5, message=FALSE, warning=FALSE}
-str_extract_all(reviews_pos[4], "and")
-```	
-
-The function `str_locate` provides the start and end position of the match of the pattern in a text.
-
-```{r stringr6, message=FALSE, warning=FALSE}
-
-str_locate(reviews_pos[4], "and") 
-```
-
-The function `str_locate_all` provides the start and end positions of the match of the pattern in a text and displays the result in matrix-form.
-
-```{r stringr7, message=FALSE, warning=FALSE}
-str_locate_all(reviews_pos[4], "and")
-```
-
-The function `str_match` extracts the first occurrence of the pattern in a text.
-
-
-```{r stringr8, message=FALSE, warning=FALSE}
-str_match(reviews_pos[4], "and") 
-
-```
-
-The function `str_match_all` extracts the all occurrences of the pattern from a text.
-
-```{r stringr9, message=FALSE, warning=FALSE}
-str_match_all(reviews_pos[4], "and")
-```
-
-The function `str_remove` removes the first occurrence of a pattern in a text.
-
-```{r stringr10, message=FALSE, warning=FALSE}
-str_remove(reviews_pos[4], "and") 
-```
-
-The function `str_remove_all` removes all occurrences of a pattern from a text.
-
-```{r stringr11, message=FALSE, warning=FALSE}
-str_remove_all(reviews_pos[4], "and")
-```
-
-The function `str_replace` replaces the first occurrence of a pattern with something else in a text.
-
-```{r stringr12, message=FALSE, warning=FALSE}
-str_replace(reviews_pos[4], "and", "AND")
-```
-
-The function `str_replace_all` replaces all occurrences of a pattern with something else in a text.
-
-```{r stringr13, message=FALSE, warning=FALSE}
-str_replace_all(reviews_pos[4], "and", "AND")
-```
-
-The function `str_starts` tests whether a given text begins with a certain pattern and outputs a logical vector.
-
-```{r stringr14, message=FALSE, warning=FALSE}
-str_starts(reviews_pos[4], "and") 
-```
-
-The function `str_ends` tests whether a text ends with a certain pattern and outputs a logical vector.
-
-```{r stringr15, message=FALSE, warning=FALSE}
-str_ends(reviews_pos[4], "and")
-```
-
-Like `strsplit`, the function `str_split` splits a text when a given pattern occurs. If no pattern is provided, then the text is split into individual symbols.
-
-```{r stringr16, message=FALSE, warning=FALSE}
-str_split(reviews_pos[4], "and") 
-```
-
-The function `str_split_fixed` splits a text when a given pattern occurs but only so often as is indicated by the argument `n`. So, even if the patter occur more often than `n`, `str_split_fixed` will only split the text `n` times.
-
-```{r stringr17, message=FALSE, warning=FALSE}
-str_split_fixed(reviews_pos[4], "and", n = 3)
-```
-
-The function `str_subset` extracts those subsets of a text that contain a certain pattern.  
-
-```{r stringr18, message=FALSE, warning=FALSE}
-str_subset(review_tok, "and") 
-```
-
-The function `str_which` provides a vector with the indices of the texts that contain a certain pattern. 
-
-```{r stringr19, message=FALSE, warning=FALSE}
-str_which(review_tok, "and")
-```
-
-The function `str_view` shows the locations of the first instances of a pattern in a text or vector of texts.
-
-
-```{r stringr20, message=FALSE, warning=FALSE}
-str_view(reviews_pos[4], "and")
-```
-
-The function `str_view_all` shows the locations of all instances of a pattern in a text or vector of texts.
-
-```{r stringr21, message=FALSE, warning=FALSE}
-str_view_all(reviews_pos[4], "and")
-```
-
-The function `str_pad` adds white spaces to a text or vector of texts so that they reach a given number of symbols.
-
-```{r stringr22, message=FALSE, warning=FALSE}
-# create text with white spaces
-text <- " this    is a    text   "
-str_pad(text, width = 30)
-```
-
-The function `str_trim` removes white spaces from the beginning(s) and end(s) of a text or vector of texts.
-
-```{r stringr23, message=FALSE, warning=FALSE}
-str_trim(text) 
-```
-
-The function `str_squish` removes white spaces that occur within a text or vector of texts.
-
-```{r stringr24, message=FALSE, warning=FALSE}
-str_squish(text)
-```
-
-The function `str_wrap` removes white spaces  from the beginning(s) and end(s) of a text or vector of texts and also those white spaces that occur within a text or vector of texts.
-
-```{r stringr25, message=FALSE, warning=FALSE}
-str_wrap(text)
-```
-
-The function `str_order` provides a vector that represents the order of a vector of texts according to the lengths of texts in that vector.
-
-```{r stringr26, message=FALSE, warning=FALSE}
-str_order(reviews_pos_split)
-```
-
-The function `str_sort` orders of a vector of texts according to the lengths of texts in that vector.
-
-```{r stringr27, message=FALSE, warning=FALSE}
-str_sort(reviews_pos_split) %>%
-  head()
-```
-
-The function `str_to_upper` converts all symbols in a text or vector of texts to upper case.
-
-```{r stringr28, message=FALSE, warning=FALSE}
-str_to_upper(reviews_pos[4]) 
-```
-
-The function `str_to_lower` converts all symbols in a text or vector of texts to lower case.
-
-```{r stringr29, message=FALSE, warning=FALSE}
-str_to_lower(reviews_pos[4]) 
-```
-
-The function `str_c` combines texts into one text
-
-```{r stringr30, message=FALSE, warning=FALSE}
-str_c(reviews_pos[4], reviews_pos[7])
-```
-
-The function `str_conv` converts a text into a certain type of encoding, e.g. into `UTF-8` or `Latin1`.
-
-```{r stringr31, message=FALSE, warning=FALSE}
-str_conv(reviews_pos[4], encoding = "UTF-8")
-```
-
-The function `str_dup` reduplicates a text or a vector of texts n times.
-
-```{r stringr32, message=FALSE, warning=FALSE}
-str_dup(reviews_pos[4], times=2)
-```
-
-The function `str_flatten` combines a vector of texts into one text. The argument `collapse` defines the symbol that occurs between the combined texts. If the argument `collapse` is left out, the texts will be combined without any symbol between the combined texts.
-
-
-```{r stringr33, message=FALSE, warning=FALSE}
-str_flatten(c(reviews_pos[4], reviews_pos[7]), collapse = " ")
-```
-
- If the argument `collapse` is left out, the texts will be combined without any symbol between the combined texts.
-
-```{r stringr34, message=FALSE, warning=FALSE}
-str_flatten(c(reviews_pos[4], reviews_pos[7]))
-```
-
-The function `str_length` provides the length of texts in characters.
-
-```{r stringr35, message=FALSE, warning=FALSE}
-str_length(reviews_pos[4])
-```
-
-The function `str_replace_na` replaces NA in texts. It is important to note that NA, if it occurs within a string, is considered to be the literal string `NA`.
-
-```{r stringr36, message=FALSE, warning=FALSE}
-# create sentences with NA
-sentencesna <- c("Some text", NA, "Some more text", "Some NA text")
-# apply str_replace_na function
-str_replace_na(sentencesna, replacement = "Something new")
-```
-
-The function `str_trunc` ends strings with ... after a certain number of characters.
-
-```{r stringr37, message=FALSE, warning=FALSE}
-str_trunc(reviews_pos[4], width = 20)
-```
-
-The function `str_sub` extracts a string from a text from a start location to an end position (expressed as character positions).
-
-```{r stringr38, message=FALSE, warning=FALSE}
-str_sub(reviews_pos[4], 5, 25)
-```
-
-The function `word` extracts words from a text (expressed as word positions).
-
-
-```{r stringr39, message=FALSE, warning=FALSE}
-word(reviews_pos[4], 2:7)
-```
-
-
-The function `str_glue` combines strings and allows to input variables.
-
-```{r stringr40, message=FALSE, warning=FALSE}
-name <- "Fred"
-age <- 50
-anniversary <- as.Date("1991-10-12")
-str_glue(
-  "My name is {name}, ",
-  "my age next year is {age + 1}, ",
-  "and my anniversary is {format(anniversary, '%A, %B %d, %Y')}."
-)
-```
-
-
-## Advanced String Processing {-}
+# Advanced String Processing
 
 Above, we have used functions and regular expressions to extract and find patters in textual data. Here, we will focus on common methods for cleaning text data that are applied before implementing certain methods.
 
@@ -915,7 +890,7 @@ One common procedure is to split texts into sentences which we can do by using, 
 
 
 ```{r atp3, message=F, warning=F}
-et_sent <- quanteda::tokenize_sentence(reviews_pos[4]) %>%
+et_sent <- quanteda::tokenize_sentence(review) %>%
   unlist()
 # inspect
 et_sent
@@ -925,12 +900,12 @@ Another common procedure is to remove stop words, i.e., words that do not have s
 
 
 ```{r atp5, message=F, warning=F}
-et_wostop <-  tm::removeWords(reviews_pos[4], tm::stopwords("english"))
+et_wostop <-  tm::removeWords(review, tm::stopwords("english"))
 # inspect
 et_wostop
 ```
 
-To remove the superfluous whote spaces, we can use, e.g., the  `stripWhitespace` function from the `tm` package.
+To remove the superfluous white spaces, we can use, e.g., the  `stripWhitespace` function from the `tm` package.
 
 ```{r atp6, message=F, warning=F}
 et_wows <-  tm::stripWhitespace(et_wostop)
@@ -952,21 +927,23 @@ We may also want to remove any type of punctuation using, e.g., the  `removePunc
 
 
 ```{r atp9, message=F, warning=F}
-et_wopunct <-  tm::removePunctuation(reviews_pos[4])
+et_wopunct <-  tm::removePunctuation(review)
 # inspect
 et_wopunct
 ```
 
-We may also want to stem the words in a  document, i.e. removing the ends of words to be able to group together semantically related words such as *walk*, *walks*, *walking*, *walked* which would all be stemmed into *walk*. We can stem a text using, e.g., the  `stemDocument` function from the `tm` package.
+## Stemming
+
+Stemming is the process of reducing a word to its base or root form, typically by removing suffixes. For example, *running* becomes *run* and *jumps* becomes *jump*. This helps in normalizing words to their core meaning for text analysis and natural language processing tasks. We can stem a text using, e.g., the  `stemDocument` function from the `tm` package
 
 
 ```{r atp11, message=F, warning=F}
-et_stem <-  tm::stemDocument(reviews_pos[4], language = "en")
+et_stem <-  tm::stemDocument(review, language = "en")
 # inspect
 et_stem
 ```
 
-**Tokenization, lemmatization, pos-tagging, and dependency parsing**
+## Part-of-speech tagging and dependency parsing
 
 A far better option than stemming is lemmatization as lemmatization is based on proper morphological information and vocabularies. For lemmatization, we can use the `udpipe` package which also tokenizes texts, adds part-of-speech tags, and provides information about dependency relations. 
 
@@ -989,7 +966,7 @@ We can now use the model to annotate out text.
 
 ```{r atp17, message=F, warning=F}
 # tokenise, tag, dependency parsing
-text_anndf <- udpipe::udpipe_annotate(m_eng, x = reviews_pos[4]) %>%
+text_anndf <- udpipe::udpipe_annotate(m_eng, x = review) %>%
   as.data.frame() %>%
   dplyr::select(-sentence)
 # inspect
@@ -998,9 +975,9 @@ head(text_anndf, 10)
 
 We could, of course, perform many more manipulations of textual data but this should suffice to get you started.
 
-## Cleaning texts
+## Example: Data processing chain
 
-When working with texts, we usually need to clean the data. Below, we do some very basic cleaning using a pipeline.
+When working with texts, we usually need to clean the data. Below, we do some  basic cleaning using a pipeline or data processing chain. In a data processing chain, we combine commands to achieve an end result (in our case, a clean text).
 
 ```{r, message=FALSE, warning=FALSE}
 reviews_pos_split_clean <- reviews_pos_split %>%
@@ -1052,18 +1029,15 @@ head(kwic_multiple_select)
 
 Again, we can use the `write.table` function to save our kwics to disc.
 
-```{r, echo = T, eval = F, message=FALSE, warning=FALSE}
+```{r, eval = F, message=FALSE, warning=FALSE}
 write.table(kwic_multiple_select, here::here("data", "kwic_multiple_select.txt"), sep = "\t")
 ```
 
 As most of the data that we use is on out computers (rather than being somewhere on the web), we now load files with text from your computer. 
 
-
-
-
 We now turn to data visualization basics.
 
-# Working with graphics
+# Basics of Data Visualization
 
 There are numerous function in R that we can use to visualize data. We will use the `ggplot` function from the `ggplot2` package here to visualize the data. 
 
@@ -1099,12 +1073,6 @@ The idea behind the  *Grammar of Graphics* can be boiled down to 5 bullet points
 
 - Some examples should make this clear
 
-## Practical examples  
-
-We will now create some basic visualizations or plots.
-
-
-
 Before we start plotting, we will load tabular data (information about the speakers in the dinner conversations) and the prepare the data that we want to visualize. From this table, we create two versions:
 
 * a basic cleaned version 
@@ -1139,12 +1107,18 @@ head(pdat); head(psum)
 ```
 
 
+We will now create some basic visualizations or plots.
+
+## Line plot
+
 In the example below, we specify that we want to visualize the `plotdata` and that the x-axis should represent `Age` and the y-axis `Words`(the mean frequency of words). We also tell R that we want to group the data by `Sex` (i.e. that we want to distinguish between men and women). Then, we add `geom_line` which tells R that we want a line graph. The result of this is shown below. 
 
 ```{r, message=FALSE, warning=FALSE}
 ggplot(psum, aes(x = age, y = words, group = sex, color = sex)) +
   geom_line()
 ```
+
+## Prettifying plots 
 
 Once you have a basic plot like the one above, you can prettify the plot. For example, you can 
 
@@ -1174,12 +1148,16 @@ psum %>%
   labs(x = "Age groups", y = "Average word count\n(per 1,000 words)")
 ```
 
+## Combining plots
 
 An additional and very handy feature of this way of producing graphs is that you 
 
 + can integrate them into pipes 
 
 + can easily combine plots.
+
+
+Below, we first generate a scatter plot with `geom_jitter` and then add a line plot by summarising the data.
 
 ```{r, message=FALSE, warning=FALSE}
 pdat %>%
@@ -1198,7 +1176,9 @@ pdat %>%
                         values = c("solid", "dotted"))
 ```
 
-You can also create different types of graphs very easily and split them into different facets.
+## Boxplots
+
+ Below, we generate a boxplot using `geom_box` and break it up into different facets. 
 
 ```{r, message=FALSE, warning=FALSE}
 pdat %>%
@@ -1214,8 +1194,9 @@ pdat %>%
                      values = c("#E69F00", "#56B4E9"))
 ```
 
+## Barplots
 
-Create a bar plot showing the number of men and women by `Date`.
+To exemplify a bar plot, we generate a plot with `geom_bar` which shows the number of men and women by `Date`.
 
 ```{r, message=FALSE, warning=FALSE}
 pdat %>%
@@ -1233,7 +1214,100 @@ pdat %>%
                      values = c("#E69F00", "lightgray", "#56B4E9"))
 ```
 
-# Going further
+
+## Wordclouds
+
+Word clouds are visual representations where words appear larger based on their frequency, offering a quick visual summary of word importance in a dataset.
+
+```{r wc1, message=FALSE, warning=FALSE}
+# create a word cloud visualization
+reviews_pos %>%
+  # Convert text data to a quanteda corpus
+  quanteda::corpus() %>%
+  # tokenize the corpus, removing punctuation
+  quanteda::tokens(remove_punct = TRUE) %>%
+  # remove English stopwords
+  quanteda::tokens_remove(stopwords("english")) %>%
+  # create a document-feature matrix (DFM)
+  quanteda::dfm() %>%
+  # generate a word cloud using textplot_wordcloud
+  quanteda.textplots::textplot_wordcloud(
+    # maximum words to display in the word cloud
+    max_words = 150,
+    # determine the maximum size of words
+    max_size = 10,
+    # determine the minimum size of words
+    min_size = 1.5,
+    # Define a color palette for the word cloud
+    color = scales::viridis_pal(option = "A")(10))  
+
+```
+
+
+<br>
+
+<div class="warning" style='padding:0.5em; background-color:rgba(215,209,204,.3); color:#51247a'>
+<span>
+<p style='margin-top:1em; text-align:center'>
+The `textplot_wordcloud` function creates a word cloud visualization of text data in R. Its main arguments are `x` (a Document-Feature Matrix or DFM), `max_words` (maximum words to display), and `color` (color palette for the word cloud).<br>
+</p>
+<p style='margin-left:1em;'>
+</p></span>
+</div>
+
+<br>
+
+
+Another form of word clouds, known as *comparison clouds*, is helpful in discerning disparities between texts. For instance, we can load various texts and assess how they vary in terms of word frequencies. To illustrate this, we'll reload the positive reviews but also load negative reviews. We also combine the two types of reviews into single documents (one document for the positive reviews and another document for the negative reviews).
+
+
+```{r load_texts_wc,  message=F, warning=F}
+# load reviews
+posreviews <- list.files(here::here("data/reviews_pos"), full.names = T, pattern = ".*txt") %>%
+  purrr::map_chr(~ readr::read_file(.)) %>% str_c(collapse = " ") %>% str_remove_all("<.*?>")
+negreviews <- list.files(here::here("data/reviews_neg"), full.names = T, pattern = ".*txt") %>%
+  purrr::map_chr(~ readr::read_file(.))%>% str_c(collapse = " ") %>% str_remove_all("<.*?>")
+# inspect
+str(posreviews); str(negreviews)
+```
+
+Now, we generate a corpus object from these texts and create a variable with the author name.
+
+```{r wc3, message=FALSE, warning=FALSE}
+corp_dom <- quanteda::corpus(c(posreviews, negreviews)) 
+attr(corp_dom, "docvars")$Author = c("Positive Reviews", "Negative Reviews")
+```
+
+Now, we can remove so-called *stopwords* (non-lexical function words) and punctuation and generate the comparison cloud.
+
+```{r wc4, message=FALSE, warning=FALSE}
+# create a comparison word cloud for a corpus
+corp_dom %>%
+  # tokenize the corpus, removing punctuation, symbols, and numbers
+  quanteda::tokens(remove_punct = TRUE,
+                   remove_symbols = TRUE,
+                   remove_numbers = TRUE) %>%
+  # remove English stopwords
+  quanteda::tokens_remove(stopwords("english")) %>%
+  # create a Document-Feature Matrix (DFM)
+  quanteda::dfm() %>%
+  # group the DFM by the 'Author' column from 'corp_dom'
+  quanteda::dfm_group(groups = corp_dom$Author) %>%
+  # trim the DFM, keeping terms that occur at least 10 times
+  quanteda::dfm_trim(min_termfreq = 10, verbose = FALSE) %>%
+  # generate a comparison word cloud
+  quanteda.textplots::textplot_wordcloud(
+    # create a comparison word cloud
+    comparison = TRUE,  
+    # set colors for different groups
+    color = c("darkgray", "orange"),  
+    # define the maximum number of words to display in the word cloud
+    max_words = 150)  
+```
+
+
+
+## Going further
 
 If you want to know more, there are various online resources available to learn R (you can check out a very recommendable introduction [here](https://uvastatlab.github.io/phdplus/intror.html)). 
 
@@ -1249,7 +1323,7 @@ Here are also some additional resources that you may find helpful:
     + Explore RStudio Tips https://twitter.com/rstudiotips 
     + Explore #rstats, #rstudioconf
 
-# Ending R sessions
+## Ending R sessions
 
 At the end of each session, you can extract information about the session itself (e.g. which R version you used and which versions of packages). This can help others (or even your future self) to reproduce the analysis that you have done.
 
