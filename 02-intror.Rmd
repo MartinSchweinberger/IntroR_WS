@@ -35,7 +35,7 @@ Imagine it like this: when you want to write a book, you could simply take pen a
 
 Before actually starting with writing code, you should prepare the session by going through the following steps:
 
-#### Create a folder for your project
+### Create a folder for your project
 
 In that folder, create the following sub-folders (you can, of course, adapt this folder template to match your needs)
 
@@ -52,7 +52,7 @@ knitr::include_graphics("https://slcladal.github.io/images/RStudio_newfolder.png
 
 Once you have created your project folder, you can go ahead with RStudio.
 
-#### Open RStudio
+### Open RStudio
 
 This is what RStudio looks like when you first open it: 
 
@@ -68,7 +68,7 @@ knitr::include_graphics("https://slcladal.github.io/images/RStudio_file.png")
 
 You can use the drop-down menu to create a `R project`
 
-#### R Projects
+### R Projects
 
 In RStudio, click on `New Project`
   
@@ -86,7 +86,7 @@ knitr::include_graphics("https://slcladal.github.io/images/RStudio_existingdirec
   
 Once you click on `Open`, you have created a new `R project` 
   
-#### R Notebooks
+### R Notebooks
   
 In this project, click on `File`
   
@@ -104,7 +104,7 @@ This `R Notebook` will be the file in which you do all your work.
 
 
 
-#### Updating R
+### Updating R
 
 In case you encounter issues when opening the R Notebook (e.g., if you receive an error message saying that you need to update packages which then do not install properly), you may have to *update your R version*.
 
@@ -119,14 +119,14 @@ library(installr)
 updateR()
 ```
 
-#### Optimizing R project options
+### Optimizing R project options
 
 When you work with projects, it is recommendable to control the so-called *environment*. This means that you make your R Project self-contained by storing all packages that are used in project in a library *in the R Project* (instead of in the general R library on your computer). Having a library in your R Project means that you can share your project folder wit other people and they will automatically have the same package versions that you have sued which makes your code more robust and reproducible.
 
 So, how to create such an environment? You simply click on `Tools` (at the very top right of RStudio), then click on`Project Options` then click on `Environments` and then check `Use renv with this project`. Now, when you install packages, they will be installed in the package library (rather than the general R library on your computer).
 
 
-#### Getting started with R Notebooks
+### Getting started with R Notebooks
 
 You can now start writing in this R Notebook. For instance, you could start by changing the title of the R Notebook and describe what you are doing (what this Notebook contains).
 
@@ -139,7 +139,7 @@ knitr::include_graphics("https://slcladal.github.io/images/RStudio_editMD.png")
 When you write in the R Notebook, you use what is called `R Markdown` which is explained below.
 
 
-#### R Markdown
+### R Markdown
 
 The Notebook is an [R Markdown document](http://rmarkdown.rstudio.com/): a Rmd (R Markdown) file is more than a flat text document: it's a program that you can run in R and which allows you to combine prose and code, so readers can see the technical aspects of your work while reading about their interpretive significance. 
 
@@ -543,20 +543,6 @@ The function `str_locate_all` provides the start and end positions of the match 
 str_locate_all(review, "and")
 ```
 
-The function `str_match` extracts the first occurrence of the pattern in a text.
-
-
-```{r stringr8, message=FALSE, warning=FALSE}
-str_match(review, "and") 
-
-```
-
-The function `str_match_all` extracts the all occurrences of the pattern from a text.
-
-```{r stringr9, message=FALSE, warning=FALSE}
-str_match_all(review, "and")
-```
-
 The function `str_remove` removes the first occurrence of a pattern in a text.
 
 ```{r stringr10, message=FALSE, warning=FALSE}
@@ -576,17 +562,6 @@ The function `str_replace_all` replaces all occurrences of a pattern with someth
 str_replace_all(review, "and", "AND")
 ```
 
-The function `str_starts` tests whether a given text begins with a certain pattern and outputs a logical vector.
-
-```{r stringr14, message=FALSE, warning=FALSE}
-str_starts(review, "and") 
-```
-
-The function `str_ends` tests whether a text ends with a certain pattern and outputs a logical vector.
-
-```{r stringr15, message=FALSE, warning=FALSE}
-str_ends(review, "and")
-```
 
 Like `strsplit`, the function `str_split` splits a text when a given pattern occurs. If no pattern is provided, then the text is split into individual symbols.
 
@@ -640,12 +615,6 @@ The function `str_squish` removes white spaces that occur within a text or vecto
 str_squish(text)
 ```
 
-The function `str_wrap` removes white spaces  from the beginning(s) and end(s) of a text or vector of texts and also those white spaces that occur within a text or vector of texts.
-
-```{r stringr25, message=FALSE, warning=FALSE}
-str_wrap(text)
-```
-
 The function `str_order` provides a vector that represents the order of a vector of texts according to the lengths of texts in that vector.
 
 ```{r stringr26, message=FALSE, warning=FALSE}
@@ -672,11 +641,7 @@ The function `str_conv` converts a text into a certain type of encoding, e.g. in
 str_conv(review, encoding = "UTF-8")
 ```
 
-The function `str_dup` reduplicates a text or a vector of texts n times.
 
-```{r stringr32, message=FALSE, warning=FALSE}
-str_dup(review, times=2)
-```
 
 The function `str_flatten` combines a vector of texts into one text. The argument `collapse` defines the symbol that occurs between the combined texts. If the argument `collapse` is left out, the texts will be combined without any symbol between the combined texts.
 
@@ -692,20 +657,6 @@ The function `str_length` provides the length of texts in characters.
 str_length(review)
 ```
 
-The function `str_replace_na` replaces NA in texts. It is important to note that NA, if it occurs within a string, is considered to be the literal string `NA`.
-
-```{r stringr36, message=FALSE, warning=FALSE}
-# create sentences with NA
-sentencesna <- c("Some text", NA, "Some more text", "Some NA text")
-# apply str_replace_na function
-str_replace_na(sentencesna, replacement = "Something new")
-```
-
-The function `str_trunc` ends strings with ... after a certain number of characters.
-
-```{r stringr37, message=FALSE, warning=FALSE}
-str_trunc(review, width = 20)
-```
 
 The function `str_sub` extracts a string from a text from a start location to an end position (expressed as character positions).
 
@@ -966,14 +917,39 @@ We can now use the model to annotate out text.
 
 ```{r atp17, message=F, warning=F}
 # tokenise, tag, dependency parsing
-text_anndf <- udpipe::udpipe_annotate(m_eng, x = review) %>%
+review_annotated <- udpipe::udpipe_annotate(m_eng, x = review) %>%
   as.data.frame() %>%
   dplyr::select(-sentence)
 # inspect
-head(text_anndf, 10)
+head(review_annotated, 10)
 ```
 
 We could, of course, perform many more manipulations of textual data but this should suffice to get you started.
+
+Now, we combine the pos-tagged text back into a text.
+
+```{r}
+review_annotated %>%
+   as.data.frame() %>%
+  dplyr::summarise(postxt = paste(token, "/", xpos, collapse = " ", sep = "")) %>%
+  dplyr::pull(unique(postxt)) -> review_postagged
+# inspect
+review_postagged
+```
+
+
+Visualising the dependencies (syntactic )
+
+```{r}
+sent <- udpipe::udpipe_annotate(m_eng, x = "John gave the bear an apple") %>%
+  as.data.frame()
+# generate dependency plot
+dplot <- textplot::textplot_dependencyparser(sent, size = 3) 
+# show plot
+dplot
+```
+
+
 
 ## Example: Data processing chain
 

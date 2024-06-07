@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Section 7 Topic Modelling | Introduction to R for Social Science</title>
+  <meta name="description" content="Section 7 Topic Modelling | Introduction to R for Social Science" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Section 7 Topic Modelling | Introduction to R for Social Science" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Section 7 Topic Modelling | Introduction to R for Social Science" />
+  
+  
+  
+
+<meta name="author" content="Martin Schweinberger" />
+
+
+<meta name="date" content="2024-06-08" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="network-analysis.html"/>
+<link rel="next" href="citation-session-info.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/clipboard-1.7.1/clipboard.min.js"></script>
+<link href="libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+<link href="libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+<script src="libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
+<link href="libs/tabwid-1.1.3/tabwid.css" rel="stylesheet" />
+<script src="libs/tabwid-1.1.3/tabwid.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> General Information</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#abstract"><i class="fa fa-check"></i><b>1.1</b> Abstract</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#timeline"><i class="fa fa-check"></i><b>1.2</b> Timeline</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#resources"><i class="fa fa-check"></i><b>1.3</b> Resources</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#audience"><i class="fa fa-check"></i><b>1.4</b> Audience</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#what-to-do-before-the-workshop"><i class="fa fa-check"></i><b>1.5</b> What to do before the workshop</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#getting-started"><i class="fa fa-check"></i><b>1.6</b> Getting started</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>2</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>2.1</b> Installing R and RStudio</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#preparation"><i class="fa fa-check"></i><b>2.2</b> Preparation</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#before-you-start-working-with-rrstudio-folder-structure-and-r-projects"><i class="fa fa-check"></i><b>2.2.1</b> Before you start working with R/RStudio (Folder Structure and R projects)</a></li>
+<li class="chapter" data-level="2.2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#create-a-folder-for-your-project"><i class="fa fa-check"></i><b>2.2.2</b> Create a folder for your project</a></li>
+<li class="chapter" data-level="2.2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#open-rstudio"><i class="fa fa-check"></i><b>2.2.3</b> Open RStudio</a></li>
+<li class="chapter" data-level="2.2.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-projects"><i class="fa fa-check"></i><b>2.2.4</b> R Projects</a></li>
+<li class="chapter" data-level="2.2.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-notebooks"><i class="fa fa-check"></i><b>2.2.5</b> R Notebooks</a></li>
+<li class="chapter" data-level="2.2.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#updating-r"><i class="fa fa-check"></i><b>2.2.6</b> Updating R</a></li>
+<li class="chapter" data-level="2.2.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#optimizing-r-project-options"><i class="fa fa-check"></i><b>2.2.7</b> Optimizing R project options</a></li>
+<li class="chapter" data-level="2.2.8" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-started-with-r-notebooks"><i class="fa fa-check"></i><b>2.2.8</b> Getting started with R Notebooks</a></li>
+<li class="chapter" data-level="2.2.9" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-markdown"><i class="fa fa-check"></i><b>2.2.9</b> R Markdown</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-and-rstudio-basics"><i class="fa fa-check"></i><b>2.3</b> R and RStudio Basics</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#rstudio-panes"><i class="fa fa-check"></i><b>2.3.1</b> RStudio: Panes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-started-with-r"><i class="fa fa-check"></i><b>2.4</b> Getting started with R</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#setting-up-an-r-session"><i class="fa fa-check"></i><b>2.4.1</b> Setting up an R session</a></li>
+<li class="chapter" data-level="2.4.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#packages"><i class="fa fa-check"></i><b>2.4.2</b> Packages</a></li>
+<li class="chapter" data-level="2.4.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-help"><i class="fa fa-check"></i><b>2.4.3</b> Getting help</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#functions-and-objects"><i class="fa fa-check"></i><b>2.5</b> Functions and Objects</a></li>
+<li class="chapter" data-level="2.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#inspecting-data"><i class="fa fa-check"></i><b>2.6</b> Inspecting data</a></li>
+<li class="chapter" data-level="2.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#loading-text-data"><i class="fa fa-check"></i><b>2.7</b> Loading text data</a></li>
+<li class="chapter" data-level="2.8" data-path="introduction-to-r.html"><a href="introduction-to-r.html#saving-text-data"><i class="fa fa-check"></i><b>2.8</b> Saving text data</a></li>
+<li class="chapter" data-level="2.9" data-path="introduction-to-r.html"><a href="introduction-to-r.html#piping"><i class="fa fa-check"></i><b>2.9</b> Piping</a></li>
+<li class="chapter" data-level="2.10" data-path="introduction-to-r.html"><a href="introduction-to-r.html#extracting-frequency-information-from-text"><i class="fa fa-check"></i><b>2.10</b> Extracting frequency information from text</a></li>
+<li class="chapter" data-level="2.11" data-path="introduction-to-r.html"><a href="introduction-to-r.html#regular-expressions"><i class="fa fa-check"></i><b>2.11</b> Regular Expressions</a></li>
+<li class="chapter" data-level="2.12" data-path="introduction-to-r.html"><a href="introduction-to-r.html#practice-regular-expressions"><i class="fa fa-check"></i><b>2.12</b> Practice: regular expressions</a></li>
+<li class="chapter" data-level="2.13" data-path="introduction-to-r.html"><a href="introduction-to-r.html#stemming"><i class="fa fa-check"></i><b>2.13</b> Stemming</a></li>
+<li class="chapter" data-level="2.14" data-path="introduction-to-r.html"><a href="introduction-to-r.html#part-of-speech-tagging-and-dependency-parsing"><i class="fa fa-check"></i><b>2.14</b> Part-of-speech tagging and dependency parsing</a></li>
+<li class="chapter" data-level="2.15" data-path="introduction-to-r.html"><a href="introduction-to-r.html#example-data-processing-chain"><i class="fa fa-check"></i><b>2.15</b> Example: Data processing chain</a></li>
+<li class="chapter" data-level="2.16" data-path="introduction-to-r.html"><a href="introduction-to-r.html#concordancing-and-kwics"><i class="fa fa-check"></i><b>2.16</b> Concordancing and KWICs</a></li>
+<li class="chapter" data-level="2.17" data-path="introduction-to-r.html"><a href="introduction-to-r.html#basics-of-ggplot2-syntax"><i class="fa fa-check"></i><b>2.17</b> Basics of ggplot2 syntax</a></li>
+<li class="chapter" data-level="2.18" data-path="introduction-to-r.html"><a href="introduction-to-r.html#line-plot"><i class="fa fa-check"></i><b>2.18</b> Line plot</a></li>
+<li class="chapter" data-level="2.19" data-path="introduction-to-r.html"><a href="introduction-to-r.html#prettifying-plots"><i class="fa fa-check"></i><b>2.19</b> Prettifying plots</a></li>
+<li class="chapter" data-level="2.20" data-path="introduction-to-r.html"><a href="introduction-to-r.html#combining-plots"><i class="fa fa-check"></i><b>2.20</b> Combining plots</a></li>
+<li class="chapter" data-level="2.21" data-path="introduction-to-r.html"><a href="introduction-to-r.html#boxplots"><i class="fa fa-check"></i><b>2.21</b> Boxplots</a></li>
+<li class="chapter" data-level="2.22" data-path="introduction-to-r.html"><a href="introduction-to-r.html#barplots"><i class="fa fa-check"></i><b>2.22</b> Barplots</a></li>
+<li class="chapter" data-level="2.23" data-path="introduction-to-r.html"><a href="introduction-to-r.html#wordclouds"><i class="fa fa-check"></i><b>2.23</b> Wordclouds</a></li>
+<li class="chapter" data-level="2.24" data-path="introduction-to-r.html"><a href="introduction-to-r.html#going-further"><i class="fa fa-check"></i><b>2.24</b> Going further</a></li>
+<li class="chapter" data-level="2.25" data-path="introduction-to-r.html"><a href="introduction-to-r.html#ending-r-sessions"><i class="fa fa-check"></i><b>2.25</b> Ending R sessions</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html"><i class="fa fa-check"></i><b>3</b> Introduction to Text Analysis with R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#what-is-text-analysis"><i class="fa fa-check"></i><b>3.1</b> What is Text Analysis?</a></li>
+<li class="chapter" data-level="3.2" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#preparation-and-session-set-up"><i class="fa fa-check"></i><b>3.2</b> Preparation and session set up</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html"><i class="fa fa-check"></i><b>4</b> Sentiment Analysis</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#what-is-sentiment-analysis"><i class="fa fa-check"></i><b>4.1</b> What is Sentiment Analysis?</a></li>
+<li class="chapter" data-level="4.2" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#exporting-the-results"><i class="fa fa-check"></i><b>4.2</b> Exporting the results</a></li>
+<li class="chapter" data-level="4.3" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#summarizing-results"><i class="fa fa-check"></i><b>4.3</b> Summarizing results</a></li>
+<li class="chapter" data-level="4.4" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#visualizing-results"><i class="fa fa-check"></i><b>4.4</b> Visualizing results</a></li>
+<li class="chapter" data-level="4.5" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#identifying-important-emotives"><i class="fa fa-check"></i><b>4.5</b> Identifying important emotives</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="keyword-detection.html"><a href="keyword-detection.html"><i class="fa fa-check"></i><b>5</b> Keyword Detection</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="keyword-detection.html"><a href="keyword-detection.html#dimensions-of-keyness"><i class="fa fa-check"></i><b>5.1</b> Dimensions of keyness</a></li>
+<li class="chapter" data-level="5.2" data-path="keyword-detection.html"><a href="keyword-detection.html#identifying-keywords"><i class="fa fa-check"></i><b>5.2</b> Identifying keywords</a></li>
+<li class="chapter" data-level="5.3" data-path="keyword-detection.html"><a href="keyword-detection.html#visualising-keywords"><i class="fa fa-check"></i><b>5.3</b> Visualising keywords</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="network-analysis.html"><a href="network-analysis.html"><i class="fa fa-check"></i><b>6</b> Network Analysis</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="network-analysis.html"><a href="network-analysis.html#data-preparation"><i class="fa fa-check"></i><b>6.1</b> Data preparation</a></li>
+<li class="chapter" data-level="6.2" data-path="network-analysis.html"><a href="network-analysis.html#creating-a-matrix"><i class="fa fa-check"></i><b>6.2</b> Creating a matrix</a></li>
+<li class="chapter" data-level="6.3" data-path="network-analysis.html"><a href="network-analysis.html#visualizing-networks"><i class="fa fa-check"></i><b>6.3</b> Visualizing Networks</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="network-analysis.html"><a href="network-analysis.html#quanteda-networks"><i class="fa fa-check"></i><b>6.3.1</b> Quanteda Networks</a></li>
+<li class="chapter" data-level="6.3.2" data-path="network-analysis.html"><a href="network-analysis.html#tidy-networks"><i class="fa fa-check"></i><b>6.3.2</b> Tidy Networks</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="network-analysis.html"><a href="network-analysis.html#network-statistics"><i class="fa fa-check"></i><b>6.4</b> Network Statistics</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="network-analysis.html"><a href="network-analysis.html#degree-centrality"><i class="fa fa-check"></i><b>6.4.1</b> Degree centrality</a></li>
+<li class="chapter" data-level="6.4.2" data-path="network-analysis.html"><a href="network-analysis.html#central-node"><i class="fa fa-check"></i><b>6.4.2</b> Central node</a></li>
+<li class="chapter" data-level="6.4.3" data-path="network-analysis.html"><a href="network-analysis.html#betweenness-centrality"><i class="fa fa-check"></i><b>6.4.3</b> Betweenness centrality</a></li>
+<li class="chapter" data-level="6.4.4" data-path="network-analysis.html"><a href="network-analysis.html#closeness"><i class="fa fa-check"></i><b>6.4.4</b> Closeness</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="topic-modelling.html"><a href="topic-modelling.html"><i class="fa fa-check"></i><b>7</b> Topic Modelling</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="topic-modelling.html"><a href="topic-modelling.html#getting-started-with-topic-modelling"><i class="fa fa-check"></i><b>7.1</b> Getting started with Topic Modelling</a></li>
+<li class="chapter" data-level="7.2" data-path="topic-modelling.html"><a href="topic-modelling.html#human-in-the-loop-topic-modelling"><i class="fa fa-check"></i><b>7.2</b> Human-in-the-loop Topic Modelling</a></li>
+<li class="chapter" data-level="7.3" data-path="topic-modelling.html"><a href="topic-modelling.html#loading-and-preparing-data"><i class="fa fa-check"></i><b>7.3</b> Loading and preparing data</a></li>
+<li class="chapter" data-level="7.4" data-path="topic-modelling.html"><a href="topic-modelling.html#initial-unsupervised-topic-model"><i class="fa fa-check"></i><b>7.4</b> Initial unsupervised topic model</a></li>
+<li class="chapter" data-level="7.5" data-path="topic-modelling.html"><a href="topic-modelling.html#supervised-seeded-topic-model"><i class="fa fa-check"></i><b>7.5</b> Supervised, seeded topic model</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="citation-session-info.html"><a href="citation-session-info.html"><i class="fa fa-check"></i><b>8</b> Citation &amp; Session Info</a></li>
+<li class="chapter" data-level="9" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>9</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to R for Social Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="topic-modelling" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Section 7</span> Topic Modelling<a href="topic-modelling.html#topic-modelling" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Topic models refers to a suit of methods employed to uncover latent structures within a corpus of text. These models operate on the premise of identifying abstract <em>topics</em> that recur across documents. In essence, topic models sift through the textual data to discern recurring patterns of word co-occurrence, revealing underlying semantic themes <span class="citation">(Busso et al. 2022; Blei, Ng, and Jordan 2003)</span>. This technique is particularly prevalent in text mining, where it serves to unveil hidden semantic structures in large volumes of textual data.</p>
+<p>Conceptually, topics can be understood as clusters of co-occurring terms, indicative of shared semantic domains within the text. The underlying assumption is that if a document pertains to a specific topic, words related to that topic will exhibit higher frequency compared to documents addressing other subjects. For example, in documents discussing dogs, terms like <em>dog</em> and <em>bone</em> are likely to feature prominently, while in documents focusing on cats, <em>cat</em> and <em>meow</em> would be more prevalent. Meanwhile, ubiquitous terms such as <em>the</em> and <em>is</em> are expected to occur with similar frequency across diverse topics, serving as noise rather than indicative signals of topic specificity.</p>
+<p>Various methods exist for determining topics within topic models. For instance, <span class="citation">Gerlach, Peixoto, and Altmann (2018)</span> and <span class="citation">Hyland et al. (2021)</span> advocate for an approach grounded in stochastic block models. However, most applications of topic models use Latent Dirichlet Allocation (LDA) <span class="citation">(Blei, Ng, and Jordan 2003)</span> or Structural Topic Modeling <span class="citation">(Roberts, Stewart, and Tingley 2016)</span>.</p>
+<p>LDA, in particular, emerges as a widely embraced technique for fitting topic models. It operates by treating each document as a blend of topics and each topic as a blend of words. Consequently, documents can exhibit content overlaps, akin to the fluidity observed in natural language usage, rather than being strictly segregated into distinct groups.</p>
+<p><span class="citation">Gillings and Hardie (2022)</span> state that topic modelling is based on the following key assumptions:</p>
+<ul>
+<li>The corpus comprises a substantial number of documents.<br />
+</li>
+<li>A topic is delineated as a set of words with varying probabilities of occurrence across the documents.<br />
+</li>
+<li>Each document exhibits diverse degrees of association with multiple topics.<br />
+</li>
+<li>The collection is structured by underlying topics, which are finite in number, organizing the corpus.</li>
+</ul>
+<p>Given the availability of vast amounts of textual data, topic models can help to organize and offer insights and assist in understanding large collections of unstructured text and they are widely used in natural language processing and computational text analytics. However, the use of topic modelling in discourse studies has received criticism <span class="citation">(Brookes and McEnery 2019)</span> due to the following issues:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Thematic Coherence</strong>: While topic modeling can group texts into <em>topics</em>, the degree of thematic coherence varies. Some topics may be thematically coherent, but others may lack cohesion or accuracy in capturing the underlying themes present in the texts.</p></li>
+<li><p><strong>Nuanced Perspective</strong>: Compared to more traditional approaches to discourse analysis, topic modeling often provides a less nuanced perspective on the data. The automatically generated topics may overlook subtle nuances and intricacies present in the texts, leading to a less accurate representation of the discourse.</p></li>
+<li><p><strong>Distance from Reality</strong>: <span class="citation">Brookes and McEnery (2019)</span> suggest that the insights derived from topic modeling may not fully capture the “reality” of the texts. The topics generated by the model may not accurately reflect the complex nature of the discourse, leading to potential misinterpretations or oversimplifications of the data.</p></li>
+<li><p><strong>Utility for Discourse Analysts</strong>: While topic modeling may offer a method for organizing and studying sizable data sets, <span class="citation">Brookes and McEnery (2019)</span> questions the utility for discourse analysts and suggests that traditional discourse analysis methods consistently provide a more nuanced and accurate perspective on the data compared to topic modeling approaches.</p></li>
+</ol>
+<p>This criticism is certainly valid if topic modeling is solely reliant on a purely data-driven approach without human intervention. In this tutorial, we will demonstrate how to combine data-driven topic modeling with human-supervised seeded methods to arrive at more reliable and accurate topics.</p>
+<div id="getting-started-with-topic-modelling" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Getting started with Topic Modelling<a href="topic-modelling.html#getting-started-with-topic-modelling" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this tutorial, we’ll explore a two-step approach to topic modeling. Initially, we’ll employ an unsupervised method to generate a preliminary topic model, uncovering inherent topics within the data. Subsequently, we’ll introduce a human-supervised, seeded model, informed by the outcomes of the initial data-driven approach. Following this (recommended) procedure, we’ll then delve into an alternative purely data-driven approach.</p>
+<p>Our tutorial begins by gathering the necessary corpus data. We’ll be focusing on analyzing the <em>State of the Union Addresses</em> (SOTU) delivered by US presidents, with the aim of understanding how the addressed topics have evolved over time. Given the length of these addresses (amounting to 231 in total), it’s important to acknowledge that document length can influence topic modeling outcomes. In cases where texts are exceptionally short (like Twitter posts) or long (such as books), adjusting the document units for modeling purposes can be beneficial—either by combining or splitting them accordingly.</p>
+<p>To tailor our approach to the SOTU speeches, we’ve chosen to model at the paragraph level instead of analyzing entire speeches at once. This allows for a more detailed analysis, potentially leading to clearer and more interpretable topics. We’ve provided a data set named <code>sotu_paragraphs.rda</code>, which contains the speeches segmented into paragraphs for easier analysis.</p>
+</div>
+<div id="human-in-the-loop-topic-modelling" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Human-in-the-loop Topic Modelling<a href="topic-modelling.html#human-in-the-loop-topic-modelling" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this human-in-the-loop approach to topic modelling which mainly uses and combines the <code>quanteda</code> package <span class="citation">(Benoit et al. 2018)</span>, the <code>topicmodels</code> package <span class="citation">(<strong>topicmodels2024package?</strong>; <strong>topicmodels2011pub?</strong>)</span>, and the <code>seededlda</code> package <span class="citation">(<strong>seededlda2024?</strong>)</span>. Now that we have cleaned the data, we can perform the topic modelling. This consists of two steps:</p>
+<ol style="list-style-type: decimal">
+<li><p>First, we perform an unsupervised LDA. We do this to check what topics are in our corpus.</p></li>
+<li><p>Then, we perform a supervised LDA (based on the results of the unsupervised LDA) to identify meaningful topics in our data. For the supervised LDA, we define so-called <em>seed terms</em> that help in generating coherent topics.</p></li>
+</ol>
+</div>
+<div id="loading-and-preparing-data" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Loading and preparing data<a href="topic-modelling.html#loading-and-preparing-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>When preparing the data for analysis, we employ several preprocessing steps to ensure its cleanliness and readiness for analysis. Initially, we load the data and then remove punctuation, symbols, and numerical characters. Additionally, we eliminate common stop words, such as <em>the</em> and <em>and</em>, which can introduce noise and hinder the topic modeling process. To standardize the text, we convert it to lowercase and, lastly, we apply stemming to reduce words to their base form.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="topic-modelling.html#cb60-1" tabindex="-1"></a>txts <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">readRDS</span>(<span class="fu">url</span>(<span class="st">&quot;https://slcladal.github.io/data/sotu_paragraphs.rda&quot;</span>, <span class="st">&quot;rb&quot;</span>)) </span>
+<span id="cb60-2"><a href="topic-modelling.html#cb60-2" tabindex="-1"></a><span class="co"># inspect</span></span>
+<span id="cb60-3"><a href="topic-modelling.html#cb60-3" tabindex="-1"></a><span class="fu">str</span>(txts)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    8833 obs. of  6 variables:
+##  $ doc_id       : int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ speech_doc_id: int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ speech_type  : Factor w/ 1 level &quot;State of the Union Address&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ president    : Factor w/ 23 levels &quot;Abraham Lincoln&quot;,..: 7 7 7 7 7 7 7 7 7 7 ...
+##  $ date         : chr  &quot;1790-01-08&quot; &quot;1790-01-08&quot; &quot;1790-01-08&quot; &quot;1790-01-08&quot; ...
+##  $ text         : chr  &quot;Fellow-Citizens of the Senate and House of Representatives:&quot; &quot;I embrace with great satisfaction the opportunity which now presents itself\nof congratulating you on the prese&quot;| __truncated__ &quot;In resuming your consultations for the general good you can not but derive\nencouragement from the reflection t&quot;| __truncated__ &quot;Among the many interesting objects which will engage your attention that of\nproviding for the common defense w&quot;| __truncated__ ...</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="topic-modelling.html#cb62-1" tabindex="-1"></a><span class="co"># load data</span></span>
+<span id="cb62-2"><a href="topic-modelling.html#cb62-2" tabindex="-1"></a>txts <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">readRDS</span>(<span class="fu">url</span>(<span class="st">&quot;https://slcladal.github.io/data/sotu_paragraphs.rda&quot;</span>, <span class="st">&quot;rb&quot;</span>)) </span>
+<span id="cb62-3"><a href="topic-modelling.html#cb62-3" tabindex="-1"></a>txts<span class="sc">$</span>text <span class="sc">%&gt;%</span></span>
+<span id="cb62-4"><a href="topic-modelling.html#cb62-4" tabindex="-1"></a>  <span class="co"># tokenize</span></span>
+<span id="cb62-5"><a href="topic-modelling.html#cb62-5" tabindex="-1"></a>  quanteda<span class="sc">::</span><span class="fu">tokens</span>(<span class="at">remove_punct =</span> <span class="cn">TRUE</span>,       <span class="co"># remove punctuation </span></span>
+<span id="cb62-6"><a href="topic-modelling.html#cb62-6" tabindex="-1"></a>                   <span class="at">remove_symbols =</span> <span class="cn">TRUE</span>,     <span class="co"># remove symbols </span></span>
+<span id="cb62-7"><a href="topic-modelling.html#cb62-7" tabindex="-1"></a>                   <span class="at">remove_number =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span>  <span class="co"># remove numbers</span></span>
+<span id="cb62-8"><a href="topic-modelling.html#cb62-8" tabindex="-1"></a>  <span class="co"># remove stop words</span></span>
+<span id="cb62-9"><a href="topic-modelling.html#cb62-9" tabindex="-1"></a>  quanteda<span class="sc">::</span><span class="fu">tokens_select</span>(<span class="at">pattern =</span> <span class="fu">stopwords</span>(<span class="st">&quot;en&quot;</span>), <span class="at">selection =</span> <span class="st">&quot;remove&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb62-10"><a href="topic-modelling.html#cb62-10" tabindex="-1"></a>  <span class="co"># stemming</span></span>
+<span id="cb62-11"><a href="topic-modelling.html#cb62-11" tabindex="-1"></a>  quanteda<span class="sc">::</span><span class="fu">tokens_wordstem</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb62-12"><a href="topic-modelling.html#cb62-12" tabindex="-1"></a>  <span class="co"># convert to document-frequency matrix</span></span>
+<span id="cb62-13"><a href="topic-modelling.html#cb62-13" tabindex="-1"></a>  quanteda<span class="sc">::</span><span class="fu">dfm</span>(<span class="at">tolower =</span> T) <span class="ot">-&gt;</span> ctxts</span>
+<span id="cb62-14"><a href="topic-modelling.html#cb62-14" tabindex="-1"></a><span class="co"># add docvars</span></span>
+<span id="cb62-15"><a href="topic-modelling.html#cb62-15" tabindex="-1"></a><span class="fu">docvars</span>(ctxts, <span class="st">&quot;president&quot;</span>) <span class="ot">&lt;-</span> txts<span class="sc">$</span>president</span>
+<span id="cb62-16"><a href="topic-modelling.html#cb62-16" tabindex="-1"></a><span class="fu">docvars</span>(ctxts, <span class="st">&quot;date&quot;</span>) <span class="ot">&lt;-</span> txts<span class="sc">$</span>date</span>
+<span id="cb62-17"><a href="topic-modelling.html#cb62-17" tabindex="-1"></a><span class="fu">docvars</span>(ctxts, <span class="st">&quot;speechid&quot;</span>) <span class="ot">&lt;-</span> txts<span class="sc">$</span>speech_doc_id</span>
+<span id="cb62-18"><a href="topic-modelling.html#cb62-18" tabindex="-1"></a><span class="fu">docvars</span>(ctxts, <span class="st">&quot;docid&quot;</span>) <span class="ot">&lt;-</span> txts<span class="sc">$</span>doc_id</span>
+<span id="cb62-19"><a href="topic-modelling.html#cb62-19" tabindex="-1"></a><span class="co"># clean data</span></span>
+<span id="cb62-20"><a href="topic-modelling.html#cb62-20" tabindex="-1"></a>ctxts <span class="ot">&lt;-</span> <span class="fu">dfm_subset</span>(ctxts, <span class="fu">ntoken</span>(ctxts) <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb62-21"><a href="topic-modelling.html#cb62-21" tabindex="-1"></a><span class="co"># inspect data</span></span>
+<span id="cb62-22"><a href="topic-modelling.html#cb62-22" tabindex="-1"></a>ctxts[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
+<pre><code>## Document-feature matrix of: 5 documents, 5 features (80.00% sparse) and 4 docvars.
+##        features
+## docs    fellow-citizen senat hous repres embrac
+##   text1              1     1    1      1      0
+##   text2              0     0    0      0      1
+##   text3              0     0    0      0      0
+##   text4              0     0    0      0      0
+##   text5              0     0    0      0      0</code></pre>
+</div>
+<div id="initial-unsupervised-topic-model" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Initial unsupervised topic model<a href="topic-modelling.html#initial-unsupervised-topic-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Now that we have loaded and prepared the data for analysis, we will follow a two-step approach.</p>
+<ol style="list-style-type: decimal">
+<li><p>First, we perform an unsupervised topic model using Latent Dirichlet Allocation (LDA) to identify the topics present in our data. This initial step helps us understand the broad themes and structure within the data set.</p></li>
+<li><p>Then, based on the results of the unsupervised topic model, we conduct a supervised topic model using LDA to refine and identify more meaningful topics in our data.</p></li>
+</ol>
+<p>This combined approach allows us to leverage both data-driven insights and expert supervision to enhance the accuracy and interpretability of the topics.</p>
+<p>In the initial step that implements a unsupervised, data-driven topic model, we vary the number of topics the LDA algorithm looks for until we identify coherent topics in the data. We use the <code>LDA</code> function from the <code>topicmodels</code> package instead of the <code>textmodel_lda</code> function from the <code>seededlda</code> package because the former allows us to include a seed. Including a seed ensures that the results of this unsupervised topic model are reproducible, which is not the case if we do not seed the model, as each model will produce different results without setting a seed.</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="topic-modelling.html#cb64-1" tabindex="-1"></a><span class="co"># generate model: change k to different numbers, e.g. 10 or 20 and look for consistencies in the keywords for the topics below.</span></span>
+<span id="cb64-2"><a href="topic-modelling.html#cb64-2" tabindex="-1"></a>topicmodels<span class="sc">::</span><span class="fu">LDA</span>(ctxts, <span class="at">k =</span> <span class="dv">15</span>, <span class="at">control =</span> <span class="fu">list</span>(<span class="at">seed =</span> <span class="dv">1234</span>)) <span class="ot">-&gt;</span> ddlda</span></code></pre></div>
+<p>Now that we have generated an initial data-driven model, the next step is to inspect it to evaluate its performance and understand the topics it has identified. To do this, we need to examine the terms associated with each detected topic. By analyzing these terms, we can gain insights into the themes represented by each topic and assess the coherence and relevance of the model’s output.</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="topic-modelling.html#cb65-1" tabindex="-1"></a><span class="co"># define number of topics</span></span>
+<span id="cb65-2"><a href="topic-modelling.html#cb65-2" tabindex="-1"></a>ntopics <span class="ot">=</span> <span class="dv">15</span></span>
+<span id="cb65-3"><a href="topic-modelling.html#cb65-3" tabindex="-1"></a><span class="co"># define number of terms</span></span>
+<span id="cb65-4"><a href="topic-modelling.html#cb65-4" tabindex="-1"></a>nterms <span class="ot">=</span> <span class="dv">10</span></span>
+<span id="cb65-5"><a href="topic-modelling.html#cb65-5" tabindex="-1"></a><span class="co"># generate table</span></span>
+<span id="cb65-6"><a href="topic-modelling.html#cb65-6" tabindex="-1"></a>tidytext<span class="sc">::</span><span class="fu">tidy</span>(ddlda, <span class="at">matrix =</span> <span class="st">&quot;beta&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb65-7"><a href="topic-modelling.html#cb65-7" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(topic) <span class="sc">%&gt;%</span></span>
+<span id="cb65-8"><a href="topic-modelling.html#cb65-8" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">slice_max</span>(beta, <span class="at">n =</span> nterms) <span class="sc">%&gt;%</span> </span>
+<span id="cb65-9"><a href="topic-modelling.html#cb65-9" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb65-10"><a href="topic-modelling.html#cb65-10" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(topic, <span class="sc">-</span>beta) <span class="sc">%&gt;%</span></span>
+<span id="cb65-11"><a href="topic-modelling.html#cb65-11" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">term =</span> <span class="fu">paste</span>(term, <span class="st">&quot; (&quot;</span>, <span class="fu">round</span>(beta, <span class="dv">3</span>), <span class="st">&quot;)&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>),</span>
+<span id="cb65-12"><a href="topic-modelling.html#cb65-12" tabindex="-1"></a>                <span class="at">topic =</span> <span class="fu">paste</span>(<span class="st">&quot;topic&quot;</span>, topic),</span>
+<span id="cb65-13"><a href="topic-modelling.html#cb65-13" tabindex="-1"></a>                <span class="at">topic =</span> <span class="fu">factor</span>(topic, <span class="at">levels =</span> <span class="fu">c</span>(<span class="fu">paste</span>(<span class="st">&quot;topic&quot;</span>, <span class="dv">1</span><span class="sc">:</span>ntopics))),</span>
+<span id="cb65-14"><a href="topic-modelling.html#cb65-14" tabindex="-1"></a>                <span class="at">top =</span> <span class="fu">rep</span>(<span class="fu">paste</span>(<span class="st">&quot;top&quot;</span>, <span class="dv">1</span><span class="sc">:</span>nterms), <span class="fu">nrow</span>(.)<span class="sc">/</span>nterms),</span>
+<span id="cb65-15"><a href="topic-modelling.html#cb65-15" tabindex="-1"></a>                <span class="at">top =</span> <span class="fu">factor</span>(top, <span class="at">levels =</span> <span class="fu">c</span>(<span class="fu">paste</span>(<span class="st">&quot;top&quot;</span>, <span class="dv">1</span><span class="sc">:</span>nterms)))) <span class="sc">%&gt;%</span></span>
+<span id="cb65-16"><a href="topic-modelling.html#cb65-16" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>beta) <span class="sc">%&gt;%</span></span>
+<span id="cb65-17"><a href="topic-modelling.html#cb65-17" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">spread</span>(topic, term) <span class="ot">-&gt;</span> ddlda_top_terms</span>
+<span id="cb65-18"><a href="topic-modelling.html#cb65-18" tabindex="-1"></a>ddlda_top_terms</span></code></pre></div>
+<pre><code>## # A tibble: 10 × 16
+##    top    `topic 1`  `topic 2` `topic 3` `topic 4` `topic 5` `topic 6` `topic 7`
+##    &lt;fct&gt;  &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;    
+##  1 top 1  state (0.… countri … state (0… govern (… state (0… state (0… state (0…
+##  2 top 2  countri (… upon (0.… unite (0… will (0.… countri … will (0.… upon (0.…
+##  3 top 3  will (0.0… present … congress… year (0.… will (0.… unite (0… will (0.…
+##  4 top 4  congress … war (0.0… may (0.0… unite (0… congress… govern (… congress…
+##  5 top 5  nation (0… can (0.0… treati (… law (0.0… public (… power (0… may (0.0…
+##  6 top 6  can (0.00… unite (0… citizen … may (0.0… year (0.… law (0.0… govern (…
+##  7 top 7  subject (… nation (… nation (… upon (0.… nation (… peopl (0… citizen …
+##  8 top 8  govern (0… author (… great (0… act (0.0… can (0.0… last (0.… nation (…
+##  9 top 9  land (0.0… may (0.0… territor… public (… law (0.0… duti (0.… import (…
+## 10 top 10 made (0.0… subject … made (0.… last (0.… import (… part (0.… great (0…
+## # ℹ 8 more variables: `topic 8` &lt;chr&gt;, `topic 9` &lt;chr&gt;, `topic 10` &lt;chr&gt;,
+## #   `topic 11` &lt;chr&gt;, `topic 12` &lt;chr&gt;, `topic 13` &lt;chr&gt;, `topic 14` &lt;chr&gt;,
+## #   `topic 15` &lt;chr&gt;</code></pre>
+<p>In a real analysis, we would re-run the unsupervised model multiple times, adjusting the number of topics that the Latent Dirichlet Allocation (LDA) algorithm “looks for.” For each iteration, we would inspect the key terms associated with the identified topics to check their thematic consistency. This evaluation helps us determine whether the results of the topic model make sense and accurately reflect the themes present in the data. By varying the number of topics and examining the corresponding key terms, we can identify the optimal number of topics that best represent the underlying themes in our data set. However, we will skip re-running the model here, as this is just a tutorial intended to showcase the process rather than a comprehensive analysis.</p>
+<p>To obtain a comprehensive table of terms and their association strengths with topics (the beta values), follow the steps outlined below. This table can help verify if the data contains thematically distinct topics. Additionally, visualizations and statistical modeling can be employed to compare the distinctness of topics and determine the ideal number of topics. However, I strongly recommend not solely relying on statistical measures when identifying the optimal number of topics. In my experience, human intuition is still essential for evaluating topic coherence and consistency.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="topic-modelling.html#cb67-1" tabindex="-1"></a><span class="co"># extract topics</span></span>
+<span id="cb67-2"><a href="topic-modelling.html#cb67-2" tabindex="-1"></a>ddlda_topics <span class="ot">&lt;-</span> <span class="fu">tidy</span>(ddlda, <span class="at">matrix =</span> <span class="st">&quot;beta&quot;</span>)</span>
+<span id="cb67-3"><a href="topic-modelling.html#cb67-3" tabindex="-1"></a><span class="co"># inspect</span></span>
+<span id="cb67-4"><a href="topic-modelling.html#cb67-4" tabindex="-1"></a><span class="fu">head</span>(ddlda_topics, <span class="dv">20</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 20 × 3
+##    topic term                beta
+##    &lt;int&gt; &lt;chr&gt;              &lt;dbl&gt;
+##  1     1 fellow-citizen 0.000249 
+##  2     2 fellow-citizen 0.000351 
+##  3     3 fellow-citizen 0.000416 
+##  4     4 fellow-citizen 0.0000333
+##  5     5 fellow-citizen 0.0000797
+##  6     6 fellow-citizen 0.000183 
+##  7     7 fellow-citizen 0.000445 
+##  8     8 fellow-citizen 0.000306 
+##  9     9 fellow-citizen 0.000381 
+## 10    10 fellow-citizen 0.000332 
+## 11    11 fellow-citizen 0.000187 
+## 12    12 fellow-citizen 0.000147 
+## 13    13 fellow-citizen 0.000278 
+## 14    14 fellow-citizen 0.000336 
+## 15    15 fellow-citizen 0.000205 
+## 16     1 senat          0.000708 
+## 17     2 senat          0.000477 
+## 18     3 senat          0.00263  
+## 19     4 senat          0.00118  
+## 20     5 senat          0.000436</code></pre>
+<p>The purpose of this initial step, in which we generate data-driven unsupervised topic models, is to identify the number of coherent topics present in the data and to determine the key terms associated with these topics. These key terms will then be used as seed terms in the next step: the supervised, seeded topic model. This approach ensures that the supervised model is grounded in the actual thematic structure of the data set, enhancing the accuracy and relevance of the identified topics.</p>
+</div>
+<div id="supervised-seeded-topic-model" class="section level2 hasAnchor" number="7.5">
+<h2><span class="header-section-number">7.5</span> Supervised, seeded topic model<a href="topic-modelling.html#supervised-seeded-topic-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>To implement the supervised, seeded topic model, we start by creating a dictionary containing the seed terms we have identified in the first step.</p>
+<p>To check terms (to see if ), you can use the following code chunk:</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="topic-modelling.html#cb69-1" tabindex="-1"></a>ddlda_topics <span class="sc">%&gt;%</span>  <span class="fu">select</span>(term) <span class="sc">%&gt;%</span> <span class="fu">unique</span>() <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">str_detect</span>(term, <span class="st">&quot;agri&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 1
+##   term               
+##   &lt;chr&gt;              
+## 1 agricultur         
+## 2 agriculturist      
+## 3 agricultural-colleg</code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="topic-modelling.html#cb71-1" tabindex="-1"></a><span class="co"># semisupervised LDA</span></span>
+<span id="cb71-2"><a href="topic-modelling.html#cb71-2" tabindex="-1"></a>dict <span class="ot">&lt;-</span> <span class="fu">dictionary</span>(<span class="fu">list</span>(<span class="at">military =</span> <span class="fu">c</span>(<span class="st">&quot;armi&quot;</span>, <span class="st">&quot;war&quot;</span>, <span class="st">&quot;militari&quot;</span>, <span class="st">&quot;conflict&quot;</span>),</span>
+<span id="cb71-3"><a href="topic-modelling.html#cb71-3" tabindex="-1"></a>                        <span class="at">liberty =</span> <span class="fu">c</span>(<span class="st">&quot;freedom&quot;</span>, <span class="st">&quot;liberti&quot;</span>, <span class="st">&quot;free&quot;</span>),</span>
+<span id="cb71-4"><a href="topic-modelling.html#cb71-4" tabindex="-1"></a>                        <span class="at">nation =</span> <span class="fu">c</span>(<span class="st">&quot;nation&quot;</span>, <span class="st">&quot;countri&quot;</span>, <span class="st">&quot;citizen&quot;</span>),</span>
+<span id="cb71-5"><a href="topic-modelling.html#cb71-5" tabindex="-1"></a>                        <span class="at">law =</span> <span class="fu">c</span>(<span class="st">&quot;law&quot;</span>, <span class="st">&quot;court&quot;</span>, <span class="st">&quot;prison&quot;</span>),</span>
+<span id="cb71-6"><a href="topic-modelling.html#cb71-6" tabindex="-1"></a>                        <span class="at">treaty =</span> <span class="fu">c</span>(<span class="st">&quot;claim&quot;</span>, <span class="st">&quot;treati&quot;</span>, <span class="st">&quot;negoti&quot;</span>),</span>
+<span id="cb71-7"><a href="topic-modelling.html#cb71-7" tabindex="-1"></a>                        <span class="at">indian =</span> <span class="fu">c</span>(<span class="st">&quot;indian&quot;</span>, <span class="st">&quot;tribe&quot;</span>, <span class="st">&quot;territori&quot;</span>),</span>
+<span id="cb71-8"><a href="topic-modelling.html#cb71-8" tabindex="-1"></a>                        <span class="at">labor =</span> <span class="fu">c</span>(<span class="st">&quot;labor&quot;</span>, <span class="st">&quot;work&quot;</span>, <span class="st">&quot;condit&quot;</span>),</span>
+<span id="cb71-9"><a href="topic-modelling.html#cb71-9" tabindex="-1"></a>                        <span class="at">money =</span> <span class="fu">c</span>(<span class="st">&quot;bank&quot;</span>, <span class="st">&quot;silver&quot;</span>, <span class="st">&quot;gold&quot;</span>, <span class="st">&quot;currenc&quot;</span>, <span class="st">&quot;money&quot;</span>),</span>
+<span id="cb71-10"><a href="topic-modelling.html#cb71-10" tabindex="-1"></a>                        <span class="at">finance =</span> <span class="fu">c</span>(<span class="st">&quot;debt&quot;</span>, <span class="st">&quot;invest&quot;</span>, <span class="st">&quot;financ&quot;</span>),</span>
+<span id="cb71-11"><a href="topic-modelling.html#cb71-11" tabindex="-1"></a>                        <span class="at">wealth =</span> <span class="fu">c</span>(<span class="st">&quot;prosper&quot;</span>, <span class="st">&quot;peac&quot;</span>, <span class="st">&quot;wealth&quot;</span>),</span>
+<span id="cb71-12"><a href="topic-modelling.html#cb71-12" tabindex="-1"></a>                        <span class="at">industry =</span> <span class="fu">c</span>(<span class="st">&quot;produc&quot;</span>, <span class="st">&quot;industri&quot;</span>, <span class="st">&quot;manufactur&quot;</span>),</span>
+<span id="cb71-13"><a href="topic-modelling.html#cb71-13" tabindex="-1"></a>                        <span class="at">navy =</span> <span class="fu">c</span>(<span class="st">&quot;navi&quot;</span>, <span class="st">&quot;ship&quot;</span>, <span class="st">&quot;vessel&quot;</span>, <span class="st">&quot;naval&quot;</span>),</span>
+<span id="cb71-14"><a href="topic-modelling.html#cb71-14" tabindex="-1"></a>                        <span class="at">consitution =</span> <span class="fu">c</span>(<span class="st">&quot;constitut&quot;</span>, <span class="st">&quot;power&quot;</span>, <span class="st">&quot;state&quot;</span>),</span>
+<span id="cb71-15"><a href="topic-modelling.html#cb71-15" tabindex="-1"></a>                        <span class="at">agriculture =</span> <span class="fu">c</span>(<span class="st">&quot;agricultur&quot;</span>, <span class="st">&quot;grow&quot;</span>, <span class="st">&quot;land&quot;</span>),</span>
+<span id="cb71-16"><a href="topic-modelling.html#cb71-16" tabindex="-1"></a>                        <span class="at">office =</span> <span class="fu">c</span>(<span class="st">&quot;office&quot;</span>, <span class="st">&quot;serv&quot;</span>, <span class="st">&quot;duti&quot;</span>)))</span>
+<span id="cb71-17"><a href="topic-modelling.html#cb71-17" tabindex="-1"></a>tmod_slda <span class="ot">&lt;-</span> seededlda<span class="sc">::</span><span class="fu">textmodel_seededlda</span>(ctxts, </span>
+<span id="cb71-18"><a href="topic-modelling.html#cb71-18" tabindex="-1"></a>                                            dict, </span>
+<span id="cb71-19"><a href="topic-modelling.html#cb71-19" tabindex="-1"></a>                                            <span class="at">residual =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb71-20"><a href="topic-modelling.html#cb71-20" tabindex="-1"></a>                                            <span class="at">min_termfreq =</span> <span class="dv">2</span>)</span>
+<span id="cb71-21"><a href="topic-modelling.html#cb71-21" tabindex="-1"></a><span class="co"># inspect</span></span>
+<span id="cb71-22"><a href="topic-modelling.html#cb71-22" tabindex="-1"></a>seededlda<span class="sc">::</span><span class="fu">terms</span>(tmod_slda)</span></code></pre></div>
+<pre><code>##       military   liberty   nation     law      treaty    indian     
+##  [1,] &quot;war&quot;      &quot;free&quot;    &quot;countri&quot;  &quot;law&quot;    &quot;treati&quot;  &quot;territori&quot;
+##  [2,] &quot;militari&quot; &quot;peopl&quot;   &quot;nation&quot;   &quot;court&quot;  &quot;claim&quot;   &quot;indian&quot;   
+##  [3,] &quot;armi&quot;     &quot;can&quot;     &quot;citizen&quot;  &quot;case&quot;   &quot;govern&quot;  &quot;tribe&quot;    
+##  [4,] &quot;forc&quot;     &quot;must&quot;    &quot;govern&quot;   &quot;person&quot; &quot;negoti&quot;  &quot;mexico&quot;   
+##  [5,] &quot;offic&quot;    &quot;govern&quot;  &quot;foreign&quot;  &quot;upon&quot;   &quot;unite&quot;   &quot;part&quot;     
+##  [6,] &quot;servic&quot;   &quot;upon&quot;    &quot;american&quot; &quot;offic&quot;  &quot;minist&quot;  &quot;will&quot;     
+##  [7,] &quot;men&quot;      &quot;liberti&quot; &quot;right&quot;    &quot;provis&quot; &quot;two&quot;     &quot;texa&quot;     
+##  [8,] &quot;command&quot;  &quot;everi&quot;   &quot;time&quot;     &quot;may&quot;    &quot;relat&quot;   &quot;new&quot;      
+##  [9,] &quot;conflict&quot; &quot;public&quot;  &quot;upon&quot;     &quot;execut&quot; &quot;british&quot; &quot;line&quot;     
+## [10,] &quot;order&quot;    &quot;will&quot;    &quot;properti&quot; &quot;author&quot; &quot;britain&quot; &quot;within&quot;   
+##       labor       money      finance      wealth     industry     navy       
+##  [1,] &quot;condit&quot;    &quot;bank&quot;     &quot;year&quot;       &quot;peac&quot;     &quot;produc&quot;     &quot;vessel&quot;   
+##  [2,] &quot;work&quot;      &quot;money&quot;    &quot;debt&quot;       &quot;prosper&quot;  &quot;industri&quot;   &quot;navi&quot;     
+##  [3,] &quot;labor&quot;     &quot;gold&quot;     &quot;amount&quot;     &quot;will&quot;     &quot;manufactur&quot; &quot;ship&quot;     
+##  [4,] &quot;report&quot;    &quot;currenc&quot;  &quot;expenditur&quot; &quot;us&quot;       &quot;import&quot;     &quot;naval&quot;    
+##  [5,] &quot;depart&quot;    &quot;silver&quot;   &quot;treasuri&quot;   &quot;peopl&quot;    &quot;product&quot;    &quot;coast&quot;    
+##  [6,] &quot;congress&quot;  &quot;govern&quot;   &quot;increas&quot;    &quot;great&quot;    &quot;foreign&quot;    &quot;construct&quot;
+##  [7,] &quot;secretari&quot; &quot;treasuri&quot; &quot;last&quot;       &quot;interest&quot; &quot;trade&quot;      &quot;port&quot;     
+##  [8,] &quot;servic&quot;    &quot;note&quot;     &quot;fiscal&quot;     &quot;everi&quot;    &quot;increas&quot;    &quot;sea&quot;      
+##  [9,] &quot;recommend&quot; &quot;issu&quot;     &quot;estim&quot;      &quot;may&quot;      &quot;articl&quot;     &quot;commerc&quot;  
+## [10,] &quot;attent&quot;    &quot;public&quot;   &quot;revenu&quot;     &quot;happi&quot;    &quot;upon&quot;       &quot;great&quot;    
+##       consitution agriculture  office     other     
+##  [1,] &quot;state&quot;     &quot;land&quot;       &quot;duti&quot;     &quot;congress&quot;
+##  [2,] &quot;power&quot;     &quot;agricultur&quot; &quot;will&quot;     &quot;act&quot;     
+##  [3,] &quot;constitut&quot; &quot;public&quot;     &quot;may&quot;      &quot;last&quot;    
+##  [4,] &quot;unite&quot;     &quot;grow&quot;       &quot;subject&quot;  &quot;session&quot; 
+##  [5,] &quot;govern&quot;    &quot;larg&quot;       &quot;can&quot;      &quot;repres&quot;  
+##  [6,] &quot;right&quot;     &quot;improv&quot;     &quot;congress&quot; &quot;presid&quot;  
+##  [7,] &quot;union&quot;     &quot;year&quot;       &quot;consider&quot; &quot;senat&quot;   
+##  [8,] &quot;shall&quot;     &quot;now&quot;        &quot;object&quot;   &quot;hous&quot;    
+##  [9,] &quot;act&quot;       &quot;acr&quot;        &quot;measur&quot;   &quot;day&quot;     
+## [10,] &quot;one&quot;       &quot;time&quot;       &quot;shall&quot;    &quot;author&quot;</code></pre>
+<p>Now, we extract files and create a data frame of topics and documents. This shows what topic is dominant in which file in tabular form.</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="topic-modelling.html#cb73-1" tabindex="-1"></a><span class="co"># generate data frame</span></span>
+<span id="cb73-2"><a href="topic-modelling.html#cb73-2" tabindex="-1"></a><span class="fu">data.frame</span>(tmod_slda<span class="sc">$</span>data<span class="sc">$</span>date, tmod_slda<span class="sc">$</span>data<span class="sc">$</span>president, seededlda<span class="sc">::</span><span class="fu">topics</span>(tmod_slda)) <span class="sc">%&gt;%</span></span>
+<span id="cb73-3"><a href="topic-modelling.html#cb73-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">Date =</span> <span class="dv">1</span>,</span>
+<span id="cb73-4"><a href="topic-modelling.html#cb73-4" tabindex="-1"></a>                <span class="at">President =</span> <span class="dv">2</span>,</span>
+<span id="cb73-5"><a href="topic-modelling.html#cb73-5" tabindex="-1"></a>                <span class="at">Topic =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb73-6"><a href="topic-modelling.html#cb73-6" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">Date =</span> stringr<span class="sc">::</span><span class="fu">str_remove_all</span>(Date, <span class="st">&quot;-.*&quot;</span>),</span>
+<span id="cb73-7"><a href="topic-modelling.html#cb73-7" tabindex="-1"></a>                <span class="at">Date =</span> stringr<span class="sc">::</span><span class="fu">str_replace_all</span>(Date, <span class="st">&quot;.$&quot;</span>, <span class="st">&quot;0&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb73-8"><a href="topic-modelling.html#cb73-8" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate_if</span>(is.character, factor) <span class="ot">-&gt;</span> topic_df</span>
+<span id="cb73-9"><a href="topic-modelling.html#cb73-9" tabindex="-1"></a><span class="co"># inspect</span></span>
+<span id="cb73-10"><a href="topic-modelling.html#cb73-10" tabindex="-1"></a><span class="fu">head</span>(topic_df)</span></code></pre></div>
+<pre><code>##       Date         President  Topic
+## text1 1790 George Washington  other
+## text2 1790 George Washington wealth
+## text3 1790 George Washington office
+## text4 1790 George Washington  labor
+## text5 1790 George Washington wealth
+## text6 1790 George Washington office</code></pre>
+<p>Using the table (or data frame) we have just created, we can visualize the use of topics over time.</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="topic-modelling.html#cb75-1" tabindex="-1"></a>topic_df <span class="sc">%&gt;%</span></span>
+<span id="cb75-2"><a href="topic-modelling.html#cb75-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(Date, Topic) <span class="sc">%&gt;%</span></span>
+<span id="cb75-3"><a href="topic-modelling.html#cb75-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">freq =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb75-4"><a href="topic-modelling.html#cb75-4" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> freq, <span class="at">fill =</span> Topic)) <span class="sc">+</span></span>
+<span id="cb75-5"><a href="topic-modelling.html#cb75-5" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="at">position=</span><span class="st">&quot;fill&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb75-6"><a href="topic-modelling.html#cb75-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb75-7"><a href="topic-modelling.html#cb75-7" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Decade&quot;</span>) <span class="sc">+</span></span>
+<span id="cb75-8"><a href="topic-modelling.html#cb75-8" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">rev</span>(<span class="fu">colorRampPalette</span>(<span class="fu">brewer.pal</span>(<span class="dv">8</span>, <span class="st">&quot;RdBu&quot;</span>))(ntopics<span class="sc">+</span><span class="dv">1</span>))) <span class="sc">+</span></span>
+<span id="cb75-9"><a href="topic-modelling.html#cb75-9" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span><span class="st">&quot;Percent of paragraphs&quot;</span>, <span class="at">labels =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">25</span>))</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;Date&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<p><img src="bookdownproj_files/figure-html/vis-1.png" width="672" /></p>
+<p>The figure illustrates the relative frequency of topics over time in the State of the Union (SOTU) texts. Notably, paragraphs discussing the topic of “office,” characterized by key terms such as <em>office</em>, <em>serv</em>, and <em>duti</em>, have become less prominent over time. This trend suggests a decreasing emphasis on this particular theme, as evidenced by the diminishing number of paragraphs dedicated to it.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="network-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="citation-session-info.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/MartinSchweinberger/IntroR_WS/edit/main/03-ta.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/MartinSchweinberger/IntroR_WS/blob/main/03-ta.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

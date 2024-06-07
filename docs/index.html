@@ -23,7 +23,7 @@
 <meta name="author" content="Martin Schweinberger" />
 
 
-<meta name="date" content="2024-06-07" />
+<meta name="date" content="2024-06-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -155,6 +155,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#preparation"><i class="fa fa-check"></i><b>2.2</b> Preparation</a>
 <ul>
 <li class="chapter" data-level="2.2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#before-you-start-working-with-rrstudio-folder-structure-and-r-projects"><i class="fa fa-check"></i><b>2.2.1</b> Before you start working with R/RStudio (Folder Structure and R projects)</a></li>
+<li class="chapter" data-level="2.2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#create-a-folder-for-your-project"><i class="fa fa-check"></i><b>2.2.2</b> Create a folder for your project</a></li>
+<li class="chapter" data-level="2.2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#open-rstudio"><i class="fa fa-check"></i><b>2.2.3</b> Open RStudio</a></li>
+<li class="chapter" data-level="2.2.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-projects"><i class="fa fa-check"></i><b>2.2.4</b> R Projects</a></li>
+<li class="chapter" data-level="2.2.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-notebooks"><i class="fa fa-check"></i><b>2.2.5</b> R Notebooks</a></li>
+<li class="chapter" data-level="2.2.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#updating-r"><i class="fa fa-check"></i><b>2.2.6</b> Updating R</a></li>
+<li class="chapter" data-level="2.2.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#optimizing-r-project-options"><i class="fa fa-check"></i><b>2.2.7</b> Optimizing R project options</a></li>
+<li class="chapter" data-level="2.2.8" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-started-with-r-notebooks"><i class="fa fa-check"></i><b>2.2.8</b> Getting started with R Notebooks</a></li>
+<li class="chapter" data-level="2.2.9" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-markdown"><i class="fa fa-check"></i><b>2.2.9</b> R Markdown</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-and-rstudio-basics"><i class="fa fa-check"></i><b>2.3</b> R and RStudio Basics</a>
 <ul>
@@ -174,29 +182,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.10" data-path="introduction-to-r.html"><a href="introduction-to-r.html#extracting-frequency-information-from-text"><i class="fa fa-check"></i><b>2.10</b> Extracting frequency information from text</a></li>
 <li class="chapter" data-level="2.11" data-path="introduction-to-r.html"><a href="introduction-to-r.html#regular-expressions"><i class="fa fa-check"></i><b>2.11</b> Regular Expressions</a></li>
 <li class="chapter" data-level="2.12" data-path="introduction-to-r.html"><a href="introduction-to-r.html#practice-regular-expressions"><i class="fa fa-check"></i><b>2.12</b> Practice: regular expressions</a></li>
-<li class="chapter" data-level="2.13" data-path="introduction-to-r.html"><a href="introduction-to-r.html#example-cleaning-text-data"><i class="fa fa-check"></i><b>2.13</b> Example: Cleaning text data</a></li>
-<li class="chapter" data-level="2.14" data-path="introduction-to-r.html"><a href="introduction-to-r.html#concordancing-and-kwics"><i class="fa fa-check"></i><b>2.14</b> Concordancing and KWICs</a></li>
-<li class="chapter" data-level="2.15" data-path="introduction-to-r.html"><a href="introduction-to-r.html#basics-of-ggplot2-syntax"><i class="fa fa-check"></i><b>2.15</b> Basics of ggplot2 syntax</a></li>
-<li class="chapter" data-level="2.16" data-path="introduction-to-r.html"><a href="introduction-to-r.html#practical-examples"><i class="fa fa-check"></i><b>2.16</b> Practical examples</a></li>
+<li class="chapter" data-level="2.13" data-path="introduction-to-r.html"><a href="introduction-to-r.html#stemming"><i class="fa fa-check"></i><b>2.13</b> Stemming</a></li>
+<li class="chapter" data-level="2.14" data-path="introduction-to-r.html"><a href="introduction-to-r.html#part-of-speech-tagging-and-dependency-parsing"><i class="fa fa-check"></i><b>2.14</b> Part-of-speech tagging and dependency parsing</a></li>
+<li class="chapter" data-level="2.15" data-path="introduction-to-r.html"><a href="introduction-to-r.html#example-data-processing-chain"><i class="fa fa-check"></i><b>2.15</b> Example: Data processing chain</a></li>
+<li class="chapter" data-level="2.16" data-path="introduction-to-r.html"><a href="introduction-to-r.html#concordancing-and-kwics"><i class="fa fa-check"></i><b>2.16</b> Concordancing and KWICs</a></li>
+<li class="chapter" data-level="2.17" data-path="introduction-to-r.html"><a href="introduction-to-r.html#basics-of-ggplot2-syntax"><i class="fa fa-check"></i><b>2.17</b> Basics of ggplot2 syntax</a></li>
+<li class="chapter" data-level="2.18" data-path="introduction-to-r.html"><a href="introduction-to-r.html#line-plot"><i class="fa fa-check"></i><b>2.18</b> Line plot</a></li>
+<li class="chapter" data-level="2.19" data-path="introduction-to-r.html"><a href="introduction-to-r.html#prettifying-plots"><i class="fa fa-check"></i><b>2.19</b> Prettifying plots</a></li>
+<li class="chapter" data-level="2.20" data-path="introduction-to-r.html"><a href="introduction-to-r.html#combining-plots"><i class="fa fa-check"></i><b>2.20</b> Combining plots</a></li>
+<li class="chapter" data-level="2.21" data-path="introduction-to-r.html"><a href="introduction-to-r.html#boxplots"><i class="fa fa-check"></i><b>2.21</b> Boxplots</a></li>
+<li class="chapter" data-level="2.22" data-path="introduction-to-r.html"><a href="introduction-to-r.html#barplots"><i class="fa fa-check"></i><b>2.22</b> Barplots</a></li>
+<li class="chapter" data-level="2.23" data-path="introduction-to-r.html"><a href="introduction-to-r.html#wordclouds"><i class="fa fa-check"></i><b>2.23</b> Wordclouds</a></li>
+<li class="chapter" data-level="2.24" data-path="introduction-to-r.html"><a href="introduction-to-r.html#going-further"><i class="fa fa-check"></i><b>2.24</b> Going further</a></li>
+<li class="chapter" data-level="2.25" data-path="introduction-to-r.html"><a href="introduction-to-r.html#ending-r-sessions"><i class="fa fa-check"></i><b>2.25</b> Ending R sessions</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html"><i class="fa fa-check"></i><b>3</b> Introduction to Text Analysis with R</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#concordancing"><i class="fa fa-check"></i><b>3.1</b> Concordancing</a></li>
-<li class="chapter" data-level="3.2" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#word-frequency"><i class="fa fa-check"></i><b>3.2</b> Word Frequency</a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#wordclouds"><i class="fa fa-check"></i><b>3.2.1</b> Wordclouds</a></li>
-<li class="chapter" data-level="3.2.2" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#frequency-changes"><i class="fa fa-check"></i><b>3.2.2</b> Frequency changes</a></li>
-<li class="chapter" data-level="3.2.3" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#dispersion-plots"><i class="fa fa-check"></i><b>3.2.3</b> Dispersion plots</a></li>
-<li class="chapter" data-level="3.2.4" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#over--and-underuse"><i class="fa fa-check"></i><b>3.2.4</b> Over- and underuse</a></li>
-</ul></li>
-<li class="chapter" data-level="3.3" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#collocations"><i class="fa fa-check"></i><b>3.3</b> Collocations</a></li>
-<li class="chapter" data-level="3.4" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#keywords"><i class="fa fa-check"></i><b>3.4</b> Keywords</a></li>
-<li class="chapter" data-level="3.5" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#text-classification"><i class="fa fa-check"></i><b>3.5</b> Text Classification</a></li>
-<li class="chapter" data-level="3.6" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#part-of-speech-tagging"><i class="fa fa-check"></i><b>3.6</b> Part-of-Speech tagging</a></li>
-<li class="chapter" data-level="3.7" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#names-entity-recognition"><i class="fa fa-check"></i><b>3.7</b> Names Entity Recognition</a></li>
-<li class="chapter" data-level="3.8" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#dependency-parsing-using-udpipe"><i class="fa fa-check"></i><b>3.8</b> Dependency Parsing Using UDPipe</a></li>
-<li class="chapter" data-level="3.9" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#citation-session-info"><i class="fa fa-check"></i><b>3.9</b> Citation &amp; Session Info</a></li>
-<li class="chapter" data-level="3.10" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#references"><i class="fa fa-check"></i><b>3.10</b> References</a></li>
+<li class="chapter" data-level="3.0.1" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#frequency-changes"><i class="fa fa-check"></i><b>3.0.1</b> Frequency changes</a></li>
+<li class="chapter" data-level="3.0.2" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#dispersion-plots"><i class="fa fa-check"></i><b>3.0.2</b> Dispersion plots</a></li>
+<li class="chapter" data-level="3.0.3" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#over--and-underuse"><i class="fa fa-check"></i><b>3.0.3</b> Over- and underuse</a></li>
+<li class="chapter" data-level="3.1" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#collocations"><i class="fa fa-check"></i><b>3.1</b> Collocations</a></li>
+<li class="chapter" data-level="3.2" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#keywords"><i class="fa fa-check"></i><b>3.2</b> Keywords</a></li>
+<li class="chapter" data-level="3.3" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#text-classification"><i class="fa fa-check"></i><b>3.3</b> Text Classification</a></li>
+<li class="chapter" data-level="3.4" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#part-of-speech-tagging"><i class="fa fa-check"></i><b>3.4</b> Part-of-Speech tagging</a></li>
+<li class="chapter" data-level="3.5" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#names-entity-recognition"><i class="fa fa-check"></i><b>3.5</b> Names Entity Recognition</a></li>
+<li class="chapter" data-level="3.6" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#dependency-parsing-using-udpipe"><i class="fa fa-check"></i><b>3.6</b> Dependency Parsing Using UDPipe</a></li>
+<li class="chapter" data-level="3.7" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#citation-session-info"><i class="fa fa-check"></i><b>3.7</b> Citation &amp; Session Info</a></li>
+<li class="chapter" data-level="3.8" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#references"><i class="fa fa-check"></i><b>3.8</b> References</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -220,7 +232,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Introduction to R for Social Science</h1>
 <p class="author"><em>Martin Schweinberger</em></p>
-<p class="date"><em>2024-06-07</em></p>
+<p class="date"><em>2024-06-08</em></p>
 </div>
 <div id="general-information" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Section 1</span> General Information<a href="index.html#general-information" class="anchor-section" aria-label="Anchor link to header"></a></h1>
@@ -296,7 +308,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="getting-started" class="section level2 hasAnchor" number="1.6">
 <h2><span class="header-section-number">1.6</span> Getting started<a href="index.html#getting-started" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>For everything to work, please do the following either before the workshop or at the beginning of the workshop (I will guide you if you want to do this at the begiining of the workshop):</p>
+<p>For everything to work, please do the following either before the workshop or at the beginning of the workshop (I will guide you if you want to do this at the begining of the workshop):</p>
 <p><strong>GitHub</strong></p>
 <ul>
 <li>Check your GitHub log in details or create a new GitHub account</li>
@@ -310,7 +322,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>This will then create an R Project in the project folder.</p>
 <p><strong>Data and files</strong></p>
 <ul>
-<li>I will send round some data sets - please store/save them in the subfolder called <em>data</em>.</li>
+<li>The data is ready for download in the data folder of the <a href="https://github.com/MartinSchweinberger/IntroR_WS">GitHub repository for this workshop</a> but I will bring a USB stick with the required data sets - please store/save them in the folder called <em>data</em> in the folder called <em>IntroR_WS</em>.</li>
 </ul>
 
 </div>

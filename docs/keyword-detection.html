@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Section 5 Keyword Detection | Introduction to R for Social Science</title>
+  <meta name="description" content="Section 5 Keyword Detection | Introduction to R for Social Science" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Section 5 Keyword Detection | Introduction to R for Social Science" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Section 5 Keyword Detection | Introduction to R for Social Science" />
+  
+  
+  
+
+<meta name="author" content="Martin Schweinberger" />
+
+
+<meta name="date" content="2024-06-08" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="sentiment-analysis.html"/>
+<link rel="next" href="network-analysis.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/clipboard-1.7.1/clipboard.min.js"></script>
+<link href="libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+<link href="libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+<script src="libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
+<link href="libs/tabwid-1.1.3/tabwid.css" rel="stylesheet" />
+<script src="libs/tabwid-1.1.3/tabwid.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Introduction to R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> General Information</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#abstract"><i class="fa fa-check"></i><b>1.1</b> Abstract</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#timeline"><i class="fa fa-check"></i><b>1.2</b> Timeline</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#resources"><i class="fa fa-check"></i><b>1.3</b> Resources</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#audience"><i class="fa fa-check"></i><b>1.4</b> Audience</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#what-to-do-before-the-workshop"><i class="fa fa-check"></i><b>1.5</b> What to do before the workshop</a></li>
+<li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#getting-started"><i class="fa fa-check"></i><b>1.6</b> Getting started</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>2</b> Introduction to R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#installing-r-and-rstudio"><i class="fa fa-check"></i><b>2.1</b> Installing R and RStudio</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#preparation"><i class="fa fa-check"></i><b>2.2</b> Preparation</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#before-you-start-working-with-rrstudio-folder-structure-and-r-projects"><i class="fa fa-check"></i><b>2.2.1</b> Before you start working with R/RStudio (Folder Structure and R projects)</a></li>
+<li class="chapter" data-level="2.2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#create-a-folder-for-your-project"><i class="fa fa-check"></i><b>2.2.2</b> Create a folder for your project</a></li>
+<li class="chapter" data-level="2.2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#open-rstudio"><i class="fa fa-check"></i><b>2.2.3</b> Open RStudio</a></li>
+<li class="chapter" data-level="2.2.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-projects"><i class="fa fa-check"></i><b>2.2.4</b> R Projects</a></li>
+<li class="chapter" data-level="2.2.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-notebooks"><i class="fa fa-check"></i><b>2.2.5</b> R Notebooks</a></li>
+<li class="chapter" data-level="2.2.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#updating-r"><i class="fa fa-check"></i><b>2.2.6</b> Updating R</a></li>
+<li class="chapter" data-level="2.2.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#optimizing-r-project-options"><i class="fa fa-check"></i><b>2.2.7</b> Optimizing R project options</a></li>
+<li class="chapter" data-level="2.2.8" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-started-with-r-notebooks"><i class="fa fa-check"></i><b>2.2.8</b> Getting started with R Notebooks</a></li>
+<li class="chapter" data-level="2.2.9" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-markdown"><i class="fa fa-check"></i><b>2.2.9</b> R Markdown</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-and-rstudio-basics"><i class="fa fa-check"></i><b>2.3</b> R and RStudio Basics</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#rstudio-panes"><i class="fa fa-check"></i><b>2.3.1</b> RStudio: Panes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-started-with-r"><i class="fa fa-check"></i><b>2.4</b> Getting started with R</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#setting-up-an-r-session"><i class="fa fa-check"></i><b>2.4.1</b> Setting up an R session</a></li>
+<li class="chapter" data-level="2.4.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#packages"><i class="fa fa-check"></i><b>2.4.2</b> Packages</a></li>
+<li class="chapter" data-level="2.4.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-help"><i class="fa fa-check"></i><b>2.4.3</b> Getting help</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#functions-and-objects"><i class="fa fa-check"></i><b>2.5</b> Functions and Objects</a></li>
+<li class="chapter" data-level="2.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#inspecting-data"><i class="fa fa-check"></i><b>2.6</b> Inspecting data</a></li>
+<li class="chapter" data-level="2.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#loading-text-data"><i class="fa fa-check"></i><b>2.7</b> Loading text data</a></li>
+<li class="chapter" data-level="2.8" data-path="introduction-to-r.html"><a href="introduction-to-r.html#saving-text-data"><i class="fa fa-check"></i><b>2.8</b> Saving text data</a></li>
+<li class="chapter" data-level="2.9" data-path="introduction-to-r.html"><a href="introduction-to-r.html#piping"><i class="fa fa-check"></i><b>2.9</b> Piping</a></li>
+<li class="chapter" data-level="2.10" data-path="introduction-to-r.html"><a href="introduction-to-r.html#extracting-frequency-information-from-text"><i class="fa fa-check"></i><b>2.10</b> Extracting frequency information from text</a></li>
+<li class="chapter" data-level="2.11" data-path="introduction-to-r.html"><a href="introduction-to-r.html#regular-expressions"><i class="fa fa-check"></i><b>2.11</b> Regular Expressions</a></li>
+<li class="chapter" data-level="2.12" data-path="introduction-to-r.html"><a href="introduction-to-r.html#practice-regular-expressions"><i class="fa fa-check"></i><b>2.12</b> Practice: regular expressions</a></li>
+<li class="chapter" data-level="2.13" data-path="introduction-to-r.html"><a href="introduction-to-r.html#stemming"><i class="fa fa-check"></i><b>2.13</b> Stemming</a></li>
+<li class="chapter" data-level="2.14" data-path="introduction-to-r.html"><a href="introduction-to-r.html#part-of-speech-tagging-and-dependency-parsing"><i class="fa fa-check"></i><b>2.14</b> Part-of-speech tagging and dependency parsing</a></li>
+<li class="chapter" data-level="2.15" data-path="introduction-to-r.html"><a href="introduction-to-r.html#example-data-processing-chain"><i class="fa fa-check"></i><b>2.15</b> Example: Data processing chain</a></li>
+<li class="chapter" data-level="2.16" data-path="introduction-to-r.html"><a href="introduction-to-r.html#concordancing-and-kwics"><i class="fa fa-check"></i><b>2.16</b> Concordancing and KWICs</a></li>
+<li class="chapter" data-level="2.17" data-path="introduction-to-r.html"><a href="introduction-to-r.html#basics-of-ggplot2-syntax"><i class="fa fa-check"></i><b>2.17</b> Basics of ggplot2 syntax</a></li>
+<li class="chapter" data-level="2.18" data-path="introduction-to-r.html"><a href="introduction-to-r.html#line-plot"><i class="fa fa-check"></i><b>2.18</b> Line plot</a></li>
+<li class="chapter" data-level="2.19" data-path="introduction-to-r.html"><a href="introduction-to-r.html#prettifying-plots"><i class="fa fa-check"></i><b>2.19</b> Prettifying plots</a></li>
+<li class="chapter" data-level="2.20" data-path="introduction-to-r.html"><a href="introduction-to-r.html#combining-plots"><i class="fa fa-check"></i><b>2.20</b> Combining plots</a></li>
+<li class="chapter" data-level="2.21" data-path="introduction-to-r.html"><a href="introduction-to-r.html#boxplots"><i class="fa fa-check"></i><b>2.21</b> Boxplots</a></li>
+<li class="chapter" data-level="2.22" data-path="introduction-to-r.html"><a href="introduction-to-r.html#barplots"><i class="fa fa-check"></i><b>2.22</b> Barplots</a></li>
+<li class="chapter" data-level="2.23" data-path="introduction-to-r.html"><a href="introduction-to-r.html#wordclouds"><i class="fa fa-check"></i><b>2.23</b> Wordclouds</a></li>
+<li class="chapter" data-level="2.24" data-path="introduction-to-r.html"><a href="introduction-to-r.html#going-further"><i class="fa fa-check"></i><b>2.24</b> Going further</a></li>
+<li class="chapter" data-level="2.25" data-path="introduction-to-r.html"><a href="introduction-to-r.html#ending-r-sessions"><i class="fa fa-check"></i><b>2.25</b> Ending R sessions</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html"><i class="fa fa-check"></i><b>3</b> Introduction to Text Analysis with R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#what-is-text-analysis"><i class="fa fa-check"></i><b>3.1</b> What is Text Analysis?</a></li>
+<li class="chapter" data-level="3.2" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#preparation-and-session-set-up"><i class="fa fa-check"></i><b>3.2</b> Preparation and session set up</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html"><i class="fa fa-check"></i><b>4</b> Sentiment Analysis</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#what-is-sentiment-analysis"><i class="fa fa-check"></i><b>4.1</b> What is Sentiment Analysis?</a></li>
+<li class="chapter" data-level="4.2" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#exporting-the-results"><i class="fa fa-check"></i><b>4.2</b> Exporting the results</a></li>
+<li class="chapter" data-level="4.3" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#summarizing-results"><i class="fa fa-check"></i><b>4.3</b> Summarizing results</a></li>
+<li class="chapter" data-level="4.4" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#visualizing-results"><i class="fa fa-check"></i><b>4.4</b> Visualizing results</a></li>
+<li class="chapter" data-level="4.5" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#identifying-important-emotives"><i class="fa fa-check"></i><b>4.5</b> Identifying important emotives</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="keyword-detection.html"><a href="keyword-detection.html"><i class="fa fa-check"></i><b>5</b> Keyword Detection</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="keyword-detection.html"><a href="keyword-detection.html#dimensions-of-keyness"><i class="fa fa-check"></i><b>5.1</b> Dimensions of keyness</a></li>
+<li class="chapter" data-level="5.2" data-path="keyword-detection.html"><a href="keyword-detection.html#identifying-keywords"><i class="fa fa-check"></i><b>5.2</b> Identifying keywords</a></li>
+<li class="chapter" data-level="5.3" data-path="keyword-detection.html"><a href="keyword-detection.html#visualising-keywords"><i class="fa fa-check"></i><b>5.3</b> Visualising keywords</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="network-analysis.html"><a href="network-analysis.html"><i class="fa fa-check"></i><b>6</b> Network Analysis</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="network-analysis.html"><a href="network-analysis.html#data-preparation"><i class="fa fa-check"></i><b>6.1</b> Data preparation</a></li>
+<li class="chapter" data-level="6.2" data-path="network-analysis.html"><a href="network-analysis.html#creating-a-matrix"><i class="fa fa-check"></i><b>6.2</b> Creating a matrix</a></li>
+<li class="chapter" data-level="6.3" data-path="network-analysis.html"><a href="network-analysis.html#visualizing-networks"><i class="fa fa-check"></i><b>6.3</b> Visualizing Networks</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="network-analysis.html"><a href="network-analysis.html#quanteda-networks"><i class="fa fa-check"></i><b>6.3.1</b> Quanteda Networks</a></li>
+<li class="chapter" data-level="6.3.2" data-path="network-analysis.html"><a href="network-analysis.html#tidy-networks"><i class="fa fa-check"></i><b>6.3.2</b> Tidy Networks</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="network-analysis.html"><a href="network-analysis.html#network-statistics"><i class="fa fa-check"></i><b>6.4</b> Network Statistics</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="network-analysis.html"><a href="network-analysis.html#degree-centrality"><i class="fa fa-check"></i><b>6.4.1</b> Degree centrality</a></li>
+<li class="chapter" data-level="6.4.2" data-path="network-analysis.html"><a href="network-analysis.html#central-node"><i class="fa fa-check"></i><b>6.4.2</b> Central node</a></li>
+<li class="chapter" data-level="6.4.3" data-path="network-analysis.html"><a href="network-analysis.html#betweenness-centrality"><i class="fa fa-check"></i><b>6.4.3</b> Betweenness centrality</a></li>
+<li class="chapter" data-level="6.4.4" data-path="network-analysis.html"><a href="network-analysis.html#closeness"><i class="fa fa-check"></i><b>6.4.4</b> Closeness</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="topic-modelling.html"><a href="topic-modelling.html"><i class="fa fa-check"></i><b>7</b> Topic Modelling</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="topic-modelling.html"><a href="topic-modelling.html#getting-started-with-topic-modelling"><i class="fa fa-check"></i><b>7.1</b> Getting started with Topic Modelling</a></li>
+<li class="chapter" data-level="7.2" data-path="topic-modelling.html"><a href="topic-modelling.html#human-in-the-loop-topic-modelling"><i class="fa fa-check"></i><b>7.2</b> Human-in-the-loop Topic Modelling</a></li>
+<li class="chapter" data-level="7.3" data-path="topic-modelling.html"><a href="topic-modelling.html#loading-and-preparing-data"><i class="fa fa-check"></i><b>7.3</b> Loading and preparing data</a></li>
+<li class="chapter" data-level="7.4" data-path="topic-modelling.html"><a href="topic-modelling.html#initial-unsupervised-topic-model"><i class="fa fa-check"></i><b>7.4</b> Initial unsupervised topic model</a></li>
+<li class="chapter" data-level="7.5" data-path="topic-modelling.html"><a href="topic-modelling.html#supervised-seeded-topic-model"><i class="fa fa-check"></i><b>7.5</b> Supervised, seeded topic model</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="citation-session-info.html"><a href="citation-session-info.html"><i class="fa fa-check"></i><b>8</b> Citation &amp; Session Info</a></li>
+<li class="chapter" data-level="9" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>9</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to R for Social Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="keyword-detection" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Section 5</span> Keyword Detection<a href="keyword-detection.html#keyword-detection" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Keywords play a crucial role in text analysis, serving as distinctive terms that hold particular significance within a given text, context, or collection. These words stand out due to their heightened frequency in a specific text or context, setting them apart from their occurrence in another. In essence, keywords are linguistic markers that encapsulate the essence or topical focus of a document or data set. The process of identifying keywords involves a methodology akin to the one employed for detecting collocations using kwics. This entails comparing the use of a particular word in corpus A, against its use in corpus B. By discerning the frequency disparities, we gain valuable insights into the salient terms that contribute significantly to the unique character and thematic emphasis of a given text or context.</p>
+<div id="dimensions-of-keyness" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Dimensions of keyness<a href="keyword-detection.html#dimensions-of-keyness" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Before we start with the practical part of this tutorial, it is important to talk about the different dimensions of keyness <span class="citation">(see Sönning 2023)</span>.</p>
+<p>Keyness analysis identifies typical items in a discourse domain, where typicalness traditionally relates to frequency of occurrence. The emphasis is on items used more frequently in the target corpus compared to a reference corpus. <span class="citation">Egbert and Biber (2019)</span> expanded this notion, highlighting two criteria for typicalness: <em>content-distinctiveness</em> and <em>content-generalizability</em>.</p>
+<ul>
+<li><p>Content-distinctiveness refers to an item’s association with the domain and its topical relevance.</p></li>
+<li><p>Content-generalizability pertains to an item’s widespread usage across various texts within the domain.</p></li>
+</ul>
+<p>These criteria bridge traditional keyness approaches with broader linguistic perspectives, emphasizing both the distinctiveness and generalizability of key items within a corpus.</p>
+<p>Following <span class="citation">Sönning (2023)</span>, we adopt <span class="citation">Egbert and Biber (2019)</span> keyness criteria, distinguishing between frequency-oriented and dispersion-oriented approaches to assess keyness. These perspectives capture distinct, linguistically meaningful attributes of typicalness. We also differentiate between keyness features inherent to the target variety and those that emerge from comparing it to a reference variety. This four-way classification, detailed in the table below, links methodological choices to the linguistic meaning conveyed by quantitative measures. Typical items exhibit a sufficiently high occurrence rate to be discernible in the target variety, with discernibility measured solely within the target corpus. Key items are also distinct, being used more frequently than in reference domains of language use. While discernibility and distinctiveness both rely on frequency, they measure different aspects of typicalness.</p>
+<div class="tabwid"><style>.cl-15a3641c{table-layout:auto;width:75%;}.cl-15976252{font-family:'Arial';font-size:12pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-15976266{font-family:'Arial';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-159c8c32{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-159caaa0{background-color:rgba(207, 207, 207, 1.00);vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 1pt solid rgba(102, 102, 102, 1.00);border-left: 1pt solid rgba(102, 102, 102, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-159caaaa{background-color:rgba(207, 207, 207, 1.00);vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 1pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-159caaab{background-color:rgba(207, 207, 207, 1.00);vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 1pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 1pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-159caab4{background-color:rgba(239, 239, 239, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 1pt solid rgba(102, 102, 102, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-159caabe{background-color:rgba(239, 239, 239, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-159caac8{background-color:rgba(239, 239, 239, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 1pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-159caac9{background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 1pt solid rgba(102, 102, 102, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-159caad2{background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-159caad3{background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 1pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-15a3641c'>
+
+<caption style="display:table-caption;margin:0pt;text-align:center;border-bottom: 0.00pt solid transparent;border-top: 0.00pt solid transparent;border-left: 0.00pt solid transparent;border-right: 0.00pt solid transparent;padding-top:3pt;padding-bottom:3pt;padding-left:3pt;padding-right:3pt;line-height: 1;background-color:transparent;">
+<span id="tab:ds17">Table 5.1: </span><span>Dimensions of keyness (see Soenning, 2023: 3)</span>
+</caption>
+
+<thead><tr style="overflow-wrap:break-word;"><th class="cl-159caaa0"><p class="cl-159c8c32"><span class="cl-15976252">Analysis</span></p></th><th class="cl-159caaaa"><p class="cl-159c8c32"><span class="cl-15976252">Frequency.oriented</span></p></th><th class="cl-159caaab"><p class="cl-159c8c32"><span class="cl-15976252">Dispersion.oriented</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-159caab4"><p class="cl-159c8c32"><span class="cl-15976266">Target variety in isolation</span></p></td><td class="cl-159caabe"><p class="cl-159c8c32"><span class="cl-15976266">Discernibility of item in the target variety</span></p></td><td class="cl-159caac8"><p class="cl-159c8c32"><span class="cl-15976266">Generality across texts in the target variety</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-159caac9"><p class="cl-159c8c32"><span class="cl-15976266">Comparison to reference variety</span></p></td><td class="cl-159caad2"><p class="cl-159c8c32"><span class="cl-15976266">Distinctiveness relative to the reference variety</span></p></td><td class="cl-159caad3"><p class="cl-159c8c32"><span class="cl-15976266">Comparative generality relative to the reference variety</span></p></td></tr></tbody></table></div>
+<p>The second aspect of keyness involves an item’s dispersion across texts in the target domain, indicating its widespread use. A typical item should appear evenly across various texts within the target domain, reflecting its generality. This breadth of usage can be compared to its occurrence in the reference domain, termed as comparative generality. Therefore, a key item should exhibit greater prevalence across target texts compared to those in the reference domain.</p>
+</div>
+<div id="identifying-keywords" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Identifying keywords<a href="keyword-detection.html#identifying-keywords" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Here, we focus on a frequency-based approach that assesses distinctiveness relative to the reference variety. To identify these keywords, we can follow the procedure we have used to identify collocations using kwics - the idea is essentially identical: we compare the use of a word in a <em>target</em> corpus A to its use in a <em>reference</em> corpus.</p>
+<p>To determine if a token is a keyword and if it occurs significantly more frequently in a target corpus compared to a reference corpus, we use the following information (that is provided by the table above):</p>
+<ul>
+<li><p>O11 = Number of times word<sub>x</sub> occurs in <code>target corpus</code></p></li>
+<li><p>O12 = Number of times word<sub>x</sub> occurs in <code>reference corpus</code> (without <code>target corpus</code>)</p></li>
+<li><p>O21 = Number of times other words occur in <code>target corpus</code></p></li>
+<li><p>O22 = Number of times other words occur in <code>reference corpus</code></p></li>
+</ul>
+<p>Example:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="center">target corpus</th>
+<th align="right">reference corpus</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>token</strong></td>
+<td align="center">O<sub>11</sub></td>
+<td align="right">O<sub>12</sub></td>
+<td>= R<sub>1</sub></td>
+</tr>
+<tr class="even">
+<td align="left"><strong>other tokens</strong></td>
+<td align="center">O<sub>21</sub></td>
+<td align="right">O<sub>22</sub></td>
+<td>= R<sub>2</sub></td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="center">= C<sub>1</sub></td>
+<td align="right">= C<sub>2</sub></td>
+<td>= N</td>
+</tr>
+</tbody>
+</table>
+<p>We begin with loading two texts (posreviews is our <em>target</em> and negreviews is our <em>reference</em>).</p>
+<p>As a first step, we create a frequency table of first text.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="keyword-detection.html#cb21-1" tabindex="-1"></a>positive_words <span class="ot">&lt;-</span> posreviews <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="keyword-detection.html#cb21-2" tabindex="-1"></a>  <span class="co"># remove non-word characters</span></span>
+<span id="cb21-3"><a href="keyword-detection.html#cb21-3" tabindex="-1"></a>  stringr<span class="sc">::</span><span class="fu">str_remove_all</span>(<span class="st">&quot;[^[:alpha:] ]&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-4"><a href="keyword-detection.html#cb21-4" tabindex="-1"></a>  <span class="co"># convert to lower</span></span>
+<span id="cb21-5"><a href="keyword-detection.html#cb21-5" tabindex="-1"></a>  <span class="fu">tolower</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb21-6"><a href="keyword-detection.html#cb21-6" tabindex="-1"></a>  <span class="co"># tokenize the corpus files</span></span>
+<span id="cb21-7"><a href="keyword-detection.html#cb21-7" tabindex="-1"></a>  quanteda<span class="sc">::</span><span class="fu">tokens</span>(<span class="at">remove_punct =</span> T, </span>
+<span id="cb21-8"><a href="keyword-detection.html#cb21-8" tabindex="-1"></a>                   <span class="at">remove_symbols =</span> T,</span>
+<span id="cb21-9"><a href="keyword-detection.html#cb21-9" tabindex="-1"></a>                   <span class="at">remove_numbers =</span> T) <span class="sc">%&gt;%</span></span>
+<span id="cb21-10"><a href="keyword-detection.html#cb21-10" tabindex="-1"></a>  <span class="co"># unlist the tokens to create a data frame</span></span>
+<span id="cb21-11"><a href="keyword-detection.html#cb21-11" tabindex="-1"></a>  <span class="fu">unlist</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb21-12"><a href="keyword-detection.html#cb21-12" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb21-13"><a href="keyword-detection.html#cb21-13" tabindex="-1"></a>  <span class="co"># rename the column to &#39;token&#39;</span></span>
+<span id="cb21-14"><a href="keyword-detection.html#cb21-14" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">token =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-15"><a href="keyword-detection.html#cb21-15" tabindex="-1"></a>  <span class="co"># group by &#39;token&#39; and count the occurrences</span></span>
+<span id="cb21-16"><a href="keyword-detection.html#cb21-16" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(token) <span class="sc">%&gt;%</span></span>
+<span id="cb21-17"><a href="keyword-detection.html#cb21-17" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb21-18"><a href="keyword-detection.html#cb21-18" tabindex="-1"></a>  <span class="co"># add column stating where the frequency list is &#39;from&#39;</span></span>
+<span id="cb21-19"><a href="keyword-detection.html#cb21-19" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">type =</span> <span class="st">&quot;positive&quot;</span>)</span>
+<span id="cb21-20"><a href="keyword-detection.html#cb21-20" tabindex="-1"></a><span class="co"># inspect</span></span>
+<span id="cb21-21"><a href="keyword-detection.html#cb21-21" tabindex="-1"></a><span class="fu">head</span>(positive_words)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 3
+##   token       n type    
+##   &lt;chr&gt;   &lt;int&gt; &lt;chr&gt;   
+## 1 a        6434 positive
+## 2 aaliyah     1 positive
+## 3 aames       1 positive
+## 4 aamir       1 positive
+## 5 aardman     2 positive
+## 6 aaron       2 positive</code></pre>
+<p>Now, we create a frequency table of second text.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="keyword-detection.html#cb23-1" tabindex="-1"></a>negative_words <span class="ot">&lt;-</span> negreviews <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="keyword-detection.html#cb23-2" tabindex="-1"></a>  <span class="co"># remove non-word characters</span></span>
+<span id="cb23-3"><a href="keyword-detection.html#cb23-3" tabindex="-1"></a>  stringr<span class="sc">::</span><span class="fu">str_remove_all</span>(<span class="st">&quot;[^[:alpha:] ]&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-4"><a href="keyword-detection.html#cb23-4" tabindex="-1"></a>  <span class="co"># convert to lower</span></span>
+<span id="cb23-5"><a href="keyword-detection.html#cb23-5" tabindex="-1"></a>  <span class="fu">tolower</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb23-6"><a href="keyword-detection.html#cb23-6" tabindex="-1"></a>  <span class="co"># tokenize the corpus files</span></span>
+<span id="cb23-7"><a href="keyword-detection.html#cb23-7" tabindex="-1"></a>  quanteda<span class="sc">::</span><span class="fu">tokens</span>(<span class="at">remove_punct =</span> T, </span>
+<span id="cb23-8"><a href="keyword-detection.html#cb23-8" tabindex="-1"></a>                   <span class="at">remove_symbols =</span> T,</span>
+<span id="cb23-9"><a href="keyword-detection.html#cb23-9" tabindex="-1"></a>                   <span class="at">remove_numbers =</span> T) <span class="sc">%&gt;%</span></span>
+<span id="cb23-10"><a href="keyword-detection.html#cb23-10" tabindex="-1"></a>  <span class="co"># unlist the tokens to create a data frame</span></span>
+<span id="cb23-11"><a href="keyword-detection.html#cb23-11" tabindex="-1"></a>  <span class="fu">unlist</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb23-12"><a href="keyword-detection.html#cb23-12" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb23-13"><a href="keyword-detection.html#cb23-13" tabindex="-1"></a>  <span class="co"># rename the column to &#39;token&#39;</span></span>
+<span id="cb23-14"><a href="keyword-detection.html#cb23-14" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">token =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-15"><a href="keyword-detection.html#cb23-15" tabindex="-1"></a>  <span class="co"># group by &#39;token&#39; and count the occurrences</span></span>
+<span id="cb23-16"><a href="keyword-detection.html#cb23-16" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(token) <span class="sc">%&gt;%</span></span>
+<span id="cb23-17"><a href="keyword-detection.html#cb23-17" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb23-18"><a href="keyword-detection.html#cb23-18" tabindex="-1"></a>  <span class="co"># add column stating where the frequency list is &#39;from&#39;</span></span>
+<span id="cb23-19"><a href="keyword-detection.html#cb23-19" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">type =</span> <span class="st">&quot;negative&quot;</span>)</span>
+<span id="cb23-20"><a href="keyword-detection.html#cb23-20" tabindex="-1"></a><span class="co"># inspect</span></span>
+<span id="cb23-21"><a href="keyword-detection.html#cb23-21" tabindex="-1"></a><span class="fu">head</span>(negative_words)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 3
+##   token          n type    
+##   &lt;chr&gt;      &lt;int&gt; &lt;chr&gt;   
+## 1 a           6102 negative
+## 2 aaargh         1 negative
+## 3 aap            1 negative
+## 4 aaron          2 negative
+## 5 abandoned      8 negative
+## 6 abandoning     1 negative</code></pre>
+<p>In a next step, we combine the tables.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="keyword-detection.html#cb25-1" tabindex="-1"></a>texts_df <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">left_join</span>(positive_words, negative_words, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;token&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="keyword-detection.html#cb25-2" tabindex="-1"></a>  <span class="co"># rename columns and select relevant columns</span></span>
+<span id="cb25-3"><a href="keyword-detection.html#cb25-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">positive =</span> n.x,</span>
+<span id="cb25-4"><a href="keyword-detection.html#cb25-4" tabindex="-1"></a>                <span class="at">negative =</span> n.y) <span class="sc">%&gt;%</span></span>
+<span id="cb25-5"><a href="keyword-detection.html#cb25-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>type.x, <span class="sc">-</span>type.y) <span class="sc">%&gt;%</span></span>
+<span id="cb25-6"><a href="keyword-detection.html#cb25-6" tabindex="-1"></a>  <span class="co"># replace NA values with 0 in &#39;corpus&#39; and &#39;kwic&#39; columns</span></span>
+<span id="cb25-7"><a href="keyword-detection.html#cb25-7" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">replace_na</span>(<span class="fu">list</span>(<span class="at">positive =</span> <span class="dv">0</span>, <span class="at">negative =</span> <span class="dv">0</span>))</span>
+<span id="cb25-8"><a href="keyword-detection.html#cb25-8" tabindex="-1"></a><span class="co"># inspect</span></span>
+<span id="cb25-9"><a href="keyword-detection.html#cb25-9" tabindex="-1"></a>texts_df <span class="sc">%&gt;%</span></span>
+<span id="cb25-10"><a href="keyword-detection.html#cb25-10" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb25-11"><a href="keyword-detection.html#cb25-11" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##        token positive negative
+## 1          a     6434     6102
+## 2    aaliyah        1        0
+## 3      aames        1        0
+## 4      aamir        1        0
+## 5    aardman        2        0
+## 6      aaron        2        2
+## 7      aawip        1        0
+## 8         ab        2        0
+## 9    abandon        2        0
+## 10 abandoned        4        8</code></pre>
+<p>We now calculate the frequencies of the observed and expected frequencies as well as the row and column totals.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="keyword-detection.html#cb27-1" tabindex="-1"></a>texts_df <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="keyword-detection.html#cb27-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">positive =</span> <span class="fu">as.numeric</span>(positive),</span>
+<span id="cb27-3"><a href="keyword-detection.html#cb27-3" tabindex="-1"></a>                <span class="at">negative =</span> <span class="fu">as.numeric</span>(negative)) <span class="sc">%&gt;%</span></span>
+<span id="cb27-4"><a href="keyword-detection.html#cb27-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">C1 =</span> <span class="fu">sum</span>(positive),</span>
+<span id="cb27-5"><a href="keyword-detection.html#cb27-5" tabindex="-1"></a>                <span class="at">C2 =</span> <span class="fu">sum</span>(negative),</span>
+<span id="cb27-6"><a href="keyword-detection.html#cb27-6" tabindex="-1"></a>                <span class="at">N =</span> C1 <span class="sc">+</span> C2) <span class="sc">%&gt;%</span></span>
+<span id="cb27-7"><a href="keyword-detection.html#cb27-7" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb27-8"><a href="keyword-detection.html#cb27-8" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">R1 =</span> positive<span class="sc">+</span>negative,</span>
+<span id="cb27-9"><a href="keyword-detection.html#cb27-9" tabindex="-1"></a>                <span class="at">R2 =</span> N <span class="sc">-</span> R1,</span>
+<span id="cb27-10"><a href="keyword-detection.html#cb27-10" tabindex="-1"></a>                <span class="at">O11 =</span> positive,</span>
+<span id="cb27-11"><a href="keyword-detection.html#cb27-11" tabindex="-1"></a>                <span class="at">O12 =</span> R1<span class="sc">-</span>O11,</span>
+<span id="cb27-12"><a href="keyword-detection.html#cb27-12" tabindex="-1"></a>                <span class="at">O21 =</span> C1<span class="sc">-</span>O11,</span>
+<span id="cb27-13"><a href="keyword-detection.html#cb27-13" tabindex="-1"></a>                <span class="at">O22 =</span> C2<span class="sc">-</span>O12) <span class="sc">%&gt;%</span></span>
+<span id="cb27-14"><a href="keyword-detection.html#cb27-14" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">E11 =</span> (R1 <span class="sc">*</span> C1) <span class="sc">/</span> N,</span>
+<span id="cb27-15"><a href="keyword-detection.html#cb27-15" tabindex="-1"></a>                <span class="at">E12 =</span> (R1 <span class="sc">*</span> C2) <span class="sc">/</span> N,</span>
+<span id="cb27-16"><a href="keyword-detection.html#cb27-16" tabindex="-1"></a>                <span class="at">E21 =</span> (R2 <span class="sc">*</span> C1) <span class="sc">/</span> N,</span>
+<span id="cb27-17"><a href="keyword-detection.html#cb27-17" tabindex="-1"></a>                <span class="at">E22 =</span> (R2 <span class="sc">*</span> C2) <span class="sc">/</span> N) <span class="sc">%&gt;%</span></span>
+<span id="cb27-18"><a href="keyword-detection.html#cb27-18" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>positive, <span class="sc">-</span>negative) <span class="ot">-&gt;</span> stats_raw</span>
+<span id="cb27-19"><a href="keyword-detection.html#cb27-19" tabindex="-1"></a><span class="co"># inspect</span></span>
+<span id="cb27-20"><a href="keyword-detection.html#cb27-20" tabindex="-1"></a>stats_raw <span class="sc">%&gt;%</span></span>
+<span id="cb27-21"><a href="keyword-detection.html#cb27-21" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb27-22"><a href="keyword-detection.html#cb27-22" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>) </span></code></pre></div>
+<pre><code>##        token     C1     C2      N    R1     R2  O11  O12    O21    O22
+## 1          a 224093 203391 427484 12536 414948 6434 6102 217659 197289
+## 2    aaliyah 224093 203391 427484     1 427483    1    0 224092 203391
+## 3      aames 224093 203391 427484     1 427483    1    0 224092 203391
+## 4      aamir 224093 203391 427484     1 427483    1    0 224092 203391
+## 5    aardman 224093 203391 427484     2 427482    2    0 224091 203391
+## 6      aaron 224093 203391 427484     4 427480    2    2 224091 203389
+## 7      aawip 224093 203391 427484     1 427483    1    0 224092 203391
+## 8         ab 224093 203391 427484     2 427482    2    0 224091 203391
+## 9    abandon 224093 203391 427484     2 427482    2    0 224091 203391
+## 10 abandoned 224093 203391 427484    12 427472    4    8 224089 203383
+##             E11          E12      E21      E22
+## 1  6571.5438426 5964.4561574 217521.5 197426.5
+## 2     0.5242138    0.4757862 224092.5 203390.5
+## 3     0.5242138    0.4757862 224092.5 203390.5
+## 4     0.5242138    0.4757862 224092.5 203390.5
+## 5     1.0484275    0.9515725 224092.0 203390.0
+## 6     2.0968551    1.9031449 224090.9 203389.1
+## 7     0.5242138    0.4757862 224092.5 203390.5
+## 8     1.0484275    0.9515725 224092.0 203390.0
+## 9     1.0484275    0.9515725 224092.0 203390.0
+## 10    6.2905653    5.7094347 224086.7 203385.3</code></pre>
+<p>We could now calculate the keyness statistics for ll words in the reviews. However, this takes a few minutes an do we will exclude tokens that occur less than 10 times.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="keyword-detection.html#cb29-1" tabindex="-1"></a>stats_redux <span class="ot">&lt;-</span> stats_raw <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a href="keyword-detection.html#cb29-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(R1 <span class="sc">&gt;</span> <span class="dv">10</span>)</span></code></pre></div>
+<p>We can now calculate the keyness measures.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="keyword-detection.html#cb30-1" tabindex="-1"></a>stats_redux <span class="sc">%&gt;%</span></span>
+<span id="cb30-2"><a href="keyword-detection.html#cb30-2" tabindex="-1"></a>  <span class="co"># determine number of rows</span></span>
+<span id="cb30-3"><a href="keyword-detection.html#cb30-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">Rws =</span> <span class="fu">nrow</span>(.)) <span class="sc">%&gt;%</span>   </span>
+<span id="cb30-4"><a href="keyword-detection.html#cb30-4" tabindex="-1"></a>  <span class="co"># work row-wise</span></span>
+<span id="cb30-5"><a href="keyword-detection.html#cb30-5" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb30-6"><a href="keyword-detection.html#cb30-6" tabindex="-1"></a>    <span class="co"># calculate fishers&#39; exact test</span></span>
+<span id="cb30-7"><a href="keyword-detection.html#cb30-7" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">p =</span> <span class="fu">as.vector</span>(<span class="fu">unlist</span>(<span class="fu">fisher.test</span>(<span class="fu">matrix</span>(<span class="fu">c</span>(O11, O12, O21, O22), </span>
+<span id="cb30-8"><a href="keyword-detection.html#cb30-8" tabindex="-1"></a>                                                        <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">byrow =</span> T))[<span class="dv">1</span>]))) <span class="sc">%&gt;%</span></span>
+<span id="cb30-9"><a href="keyword-detection.html#cb30-9" tabindex="-1"></a></span>
+<span id="cb30-10"><a href="keyword-detection.html#cb30-10" tabindex="-1"></a><span class="co"># extract descriptives</span></span>
+<span id="cb30-11"><a href="keyword-detection.html#cb30-11" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">ptw_target =</span> O11<span class="sc">/</span>C1<span class="sc">*</span><span class="dv">1000</span>,</span>
+<span id="cb30-12"><a href="keyword-detection.html#cb30-12" tabindex="-1"></a>                  <span class="at">ptw_ref =</span> O12<span class="sc">/</span>C2<span class="sc">*</span><span class="dv">1000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb30-13"><a href="keyword-detection.html#cb30-13" tabindex="-1"></a>    </span>
+<span id="cb30-14"><a href="keyword-detection.html#cb30-14" tabindex="-1"></a>    <span class="co"># extract x2 statistics</span></span>
+<span id="cb30-15"><a href="keyword-detection.html#cb30-15" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">X2 =</span> (O11<span class="sc">-</span>E11)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>E11 <span class="sc">+</span> (O12<span class="sc">-</span>E12)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>E12 <span class="sc">+</span> (O21<span class="sc">-</span>E21)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>E21 <span class="sc">+</span> (O22<span class="sc">-</span>E22)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>E22) <span class="sc">%&gt;%</span></span>
+<span id="cb30-16"><a href="keyword-detection.html#cb30-16" tabindex="-1"></a>    </span>
+<span id="cb30-17"><a href="keyword-detection.html#cb30-17" tabindex="-1"></a>    <span class="co"># extract keyness measures</span></span>
+<span id="cb30-18"><a href="keyword-detection.html#cb30-18" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">phi =</span> <span class="fu">sqrt</span>((X2 <span class="sc">/</span> N)),</span>
+<span id="cb30-19"><a href="keyword-detection.html#cb30-19" tabindex="-1"></a>                  <span class="at">MI =</span> <span class="fu">log2</span>(O11 <span class="sc">/</span> E11),</span>
+<span id="cb30-20"><a href="keyword-detection.html#cb30-20" tabindex="-1"></a>                  <span class="at">t.score =</span> (O11 <span class="sc">-</span> E11) <span class="sc">/</span> <span class="fu">sqrt</span>(O11),</span>
+<span id="cb30-21"><a href="keyword-detection.html#cb30-21" tabindex="-1"></a>                  <span class="at">PMI =</span> <span class="fu">log2</span>( (O11 <span class="sc">/</span> N) <span class="sc">/</span> ((O11<span class="sc">+</span>O12) <span class="sc">/</span> N) <span class="sc">*</span> </span>
+<span id="cb30-22"><a href="keyword-detection.html#cb30-22" tabindex="-1"></a>                                ((O11<span class="sc">+</span>O21) <span class="sc">/</span> N) ),</span>
+<span id="cb30-23"><a href="keyword-detection.html#cb30-23" tabindex="-1"></a>                  <span class="at">DeltaP =</span> (O11 <span class="sc">/</span> R1) <span class="sc">-</span> (O21 <span class="sc">/</span> R2),</span>
+<span id="cb30-24"><a href="keyword-detection.html#cb30-24" tabindex="-1"></a>                  <span class="at">LogOddsRatio =</span> <span class="fu">log</span>(((O11 <span class="sc">+</span> <span class="fl">0.5</span>) <span class="sc">*</span> (O22 <span class="sc">+</span> <span class="fl">0.5</span>))  <span class="sc">/</span> ( (O12 <span class="sc">+</span> <span class="fl">0.5</span>) <span class="sc">*</span> (O21 <span class="sc">+</span> <span class="fl">0.5</span>) )),</span>
+<span id="cb30-25"><a href="keyword-detection.html#cb30-25" tabindex="-1"></a>                  <span class="at">G2 =</span> <span class="dv">2</span> <span class="sc">*</span> ((O11<span class="sc">+</span> <span class="fl">0.001</span>) <span class="sc">*</span> <span class="fu">log</span>((O11<span class="sc">+</span> <span class="fl">0.001</span>) <span class="sc">/</span> E11) <span class="sc">+</span> (O12<span class="sc">+</span> <span class="fl">0.001</span>) <span class="sc">*</span> <span class="fu">log</span>((O12<span class="sc">+</span> <span class="fl">0.001</span>) <span class="sc">/</span> E12) <span class="sc">+</span> O21 <span class="sc">*</span> <span class="fu">log</span>(O21 <span class="sc">/</span> E21) <span class="sc">+</span> O22 <span class="sc">*</span> <span class="fu">log</span>(O22 <span class="sc">/</span> E22)),</span>
+<span id="cb30-26"><a href="keyword-detection.html#cb30-26" tabindex="-1"></a>                  </span>
+<span id="cb30-27"><a href="keyword-detection.html#cb30-27" tabindex="-1"></a>                  <span class="co"># traditional keyness measures</span></span>
+<span id="cb30-28"><a href="keyword-detection.html#cb30-28" tabindex="-1"></a>                  <span class="at">RateRatio =</span> ((O11<span class="sc">+</span> <span class="fl">0.001</span>)<span class="sc">/</span>(C1<span class="sc">*</span><span class="dv">1000</span>)) <span class="sc">/</span> ((O12<span class="sc">+</span> <span class="fl">0.001</span>)<span class="sc">/</span>(C2<span class="sc">*</span><span class="dv">1000</span>)),</span>
+<span id="cb30-29"><a href="keyword-detection.html#cb30-29" tabindex="-1"></a>                  <span class="at">RateDifference =</span> (O11<span class="sc">/</span>(C1<span class="sc">*</span><span class="dv">1000</span>)) <span class="sc">-</span> (O12<span class="sc">/</span>(C2<span class="sc">*</span><span class="dv">1000</span>)),</span>
+<span id="cb30-30"><a href="keyword-detection.html#cb30-30" tabindex="-1"></a>                  <span class="at">DifferenceCoefficient =</span> RateDifference <span class="sc">/</span> <span class="fu">sum</span>((O11<span class="sc">/</span>(C1<span class="sc">*</span><span class="dv">1000</span>)), (O12<span class="sc">/</span>(C2<span class="sc">*</span><span class="dv">1000</span>))),</span>
+<span id="cb30-31"><a href="keyword-detection.html#cb30-31" tabindex="-1"></a>                  <span class="at">OddsRatio =</span> ((O11 <span class="sc">+</span> <span class="fl">0.5</span>) <span class="sc">*</span> (O22 <span class="sc">+</span> <span class="fl">0.5</span>))  <span class="sc">/</span> ( (O12 <span class="sc">+</span> <span class="fl">0.5</span>) <span class="sc">*</span> (O21 <span class="sc">+</span> <span class="fl">0.5</span>) ),</span>
+<span id="cb30-32"><a href="keyword-detection.html#cb30-32" tabindex="-1"></a>                  <span class="at">LLR =</span> <span class="dv">2</span> <span class="sc">*</span> (O11 <span class="sc">*</span> (<span class="fu">log</span>((O11 <span class="sc">/</span> E11)))),</span>
+<span id="cb30-33"><a href="keyword-detection.html#cb30-33" tabindex="-1"></a>                  <span class="at">RDF =</span> <span class="fu">abs</span>((O11 <span class="sc">/</span> C1) <span class="sc">-</span> (O12 <span class="sc">/</span> C2)),</span>
+<span id="cb30-34"><a href="keyword-detection.html#cb30-34" tabindex="-1"></a>                  <span class="at">PDiff =</span> <span class="fu">abs</span>(ptw_target <span class="sc">-</span> ptw_ref) <span class="sc">/</span> ((ptw_target <span class="sc">+</span> ptw_ref) <span class="sc">/</span> <span class="dv">2</span>) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb30-35"><a href="keyword-detection.html#cb30-35" tabindex="-1"></a>                  <span class="at">SignedDKL =</span> <span class="fu">sum</span>(<span class="fu">ifelse</span>(O11 <span class="sc">&gt;</span> <span class="dv">0</span>, O11 <span class="sc">*</span> <span class="fu">log</span>(O11 <span class="sc">/</span> ((O11 <span class="sc">+</span> O12) <span class="sc">/</span> <span class="dv">2</span>)), <span class="dv">0</span>) <span class="sc">-</span> <span class="fu">ifelse</span>(O12 <span class="sc">&gt;</span> <span class="dv">0</span>, O12 <span class="sc">*</span> <span class="fu">log</span>(O12 <span class="sc">/</span> ((O11 <span class="sc">+</span> O12) <span class="sc">/</span> <span class="dv">2</span>)), <span class="dv">0</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb30-36"><a href="keyword-detection.html#cb30-36" tabindex="-1"></a>    </span>
+<span id="cb30-37"><a href="keyword-detection.html#cb30-37" tabindex="-1"></a>    <span class="co"># determine Bonferroni corrected significance</span></span>
+<span id="cb30-38"><a href="keyword-detection.html#cb30-38" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">Sig_corrected =</span> dplyr<span class="sc">::</span><span class="fu">case_when</span>(p <span class="sc">/</span> Rws <span class="sc">&gt;</span> .<span class="dv">05</span> <span class="sc">~</span> <span class="st">&quot;n.s.&quot;</span>,</span>
+<span id="cb30-39"><a href="keyword-detection.html#cb30-39" tabindex="-1"></a>                                                   p <span class="sc">/</span> Rws <span class="sc">&gt;</span> .<span class="dv">01</span> <span class="sc">~</span> <span class="st">&quot;p &lt; .05*&quot;</span>,</span>
+<span id="cb30-40"><a href="keyword-detection.html#cb30-40" tabindex="-1"></a>                                                   p <span class="sc">/</span> Rws <span class="sc">&gt;</span> .<span class="dv">001</span> <span class="sc">~</span> <span class="st">&quot;p &lt; .01**&quot;</span>,</span>
+<span id="cb30-41"><a href="keyword-detection.html#cb30-41" tabindex="-1"></a>                                                   p <span class="sc">/</span> Rws <span class="sc">&lt;=</span> .<span class="dv">001</span> <span class="sc">~</span> <span class="st">&quot;p &lt; .001***&quot;</span>,</span>
+<span id="cb30-42"><a href="keyword-detection.html#cb30-42" tabindex="-1"></a>                                                   T <span class="sc">~</span> <span class="st">&quot;N.A.&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-43"><a href="keyword-detection.html#cb30-43" tabindex="-1"></a>    <span class="co"># round p-value</span></span>
+<span id="cb30-44"><a href="keyword-detection.html#cb30-44" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">p =</span> <span class="fu">round</span>(p, <span class="dv">5</span>),</span>
+<span id="cb30-45"><a href="keyword-detection.html#cb30-45" tabindex="-1"></a>                  <span class="at">type =</span> <span class="fu">ifelse</span>(E11 <span class="sc">&gt;</span> O11, <span class="st">&quot;antitype&quot;</span>, <span class="st">&quot;type&quot;</span>),</span>
+<span id="cb30-46"><a href="keyword-detection.html#cb30-46" tabindex="-1"></a>                  <span class="at">phi =</span> <span class="fu">ifelse</span>(E11 <span class="sc">&gt;</span> O11, <span class="sc">-</span>phi, phi),</span>
+<span id="cb30-47"><a href="keyword-detection.html#cb30-47" tabindex="-1"></a>                  <span class="at">G2 =</span> <span class="fu">ifelse</span>(E11 <span class="sc">&gt;</span> O11, <span class="sc">-</span>G2, G2)) <span class="sc">%&gt;%</span></span>
+<span id="cb30-48"><a href="keyword-detection.html#cb30-48" tabindex="-1"></a>    <span class="co"># filter out non significant results</span></span>
+<span id="cb30-49"><a href="keyword-detection.html#cb30-49" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(Sig_corrected <span class="sc">!=</span> <span class="st">&quot;n.s.&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb30-50"><a href="keyword-detection.html#cb30-50" tabindex="-1"></a>    <span class="co"># arrange by G2</span></span>
+<span id="cb30-51"><a href="keyword-detection.html#cb30-51" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="sc">-</span>G2) <span class="sc">%&gt;%</span></span>
+<span id="cb30-52"><a href="keyword-detection.html#cb30-52" tabindex="-1"></a>    <span class="co"># remove superfluous columns</span></span>
+<span id="cb30-53"><a href="keyword-detection.html#cb30-53" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="fu">any_of</span>(<span class="fu">c</span>(<span class="st">&quot;TermCoocFreq&quot;</span>, <span class="st">&quot;AllFreq&quot;</span>, <span class="st">&quot;NRows&quot;</span>, </span>
+<span id="cb30-54"><a href="keyword-detection.html#cb30-54" tabindex="-1"></a>                            <span class="st">&quot;R1&quot;</span>, <span class="st">&quot;R2&quot;</span>, <span class="st">&quot;C1&quot;</span>, <span class="st">&quot;C2&quot;</span>, <span class="st">&quot;E12&quot;</span>, <span class="st">&quot;E21&quot;</span>,</span>
+<span id="cb30-55"><a href="keyword-detection.html#cb30-55" tabindex="-1"></a>                            <span class="st">&quot;E22&quot;</span>, <span class="st">&quot;upp&quot;</span>, <span class="st">&quot;low&quot;</span>, <span class="st">&quot;op&quot;</span>, <span class="st">&quot;t.score&quot;</span>, <span class="st">&quot;z.score&quot;</span>, <span class="st">&quot;Rws&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb30-56"><a href="keyword-detection.html#cb30-56" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">relocate</span>(<span class="fu">any_of</span>(<span class="fu">c</span>(<span class="st">&quot;token&quot;</span>, <span class="st">&quot;type&quot;</span>, <span class="st">&quot;Sig_corrected&quot;</span>, <span class="st">&quot;O11&quot;</span>, <span class="st">&quot;O12&quot;</span>,</span>
+<span id="cb30-57"><a href="keyword-detection.html#cb30-57" tabindex="-1"></a>                             <span class="st">&quot;ptw_target&quot;</span>, <span class="st">&quot;ptw_ref&quot;</span>, <span class="st">&quot;G2&quot;</span>,  <span class="st">&quot;RDF&quot;</span>, <span class="st">&quot;RateRatio&quot;</span>, </span>
+<span id="cb30-58"><a href="keyword-detection.html#cb30-58" tabindex="-1"></a>                             <span class="st">&quot;RateDifference&quot;</span>, <span class="st">&quot;DifferenceCoefficient&quot;</span>, <span class="st">&quot;LLR&quot;</span>, <span class="st">&quot;SignedDKL&quot;</span>,</span>
+<span id="cb30-59"><a href="keyword-detection.html#cb30-59" tabindex="-1"></a>                             <span class="st">&quot;PDiff&quot;</span>, <span class="st">&quot;LogOddsRatio&quot;</span>, <span class="st">&quot;MI&quot;</span>, <span class="st">&quot;PMI&quot;</span>, <span class="st">&quot;phi&quot;</span>, <span class="st">&quot;X2&quot;</span>,  </span>
+<span id="cb30-60"><a href="keyword-detection.html#cb30-60" tabindex="-1"></a>                             <span class="st">&quot;OddsRatio&quot;</span>, <span class="st">&quot;DeltaP&quot;</span>, <span class="st">&quot;p&quot;</span>, <span class="st">&quot;E11&quot;</span>, <span class="st">&quot;O21&quot;</span>, <span class="st">&quot;O22&quot;</span>))) <span class="ot">-&gt;</span> keys</span>
+<span id="cb30-61"><a href="keyword-detection.html#cb30-61" tabindex="-1"></a>keys <span class="sc">%&gt;%</span></span>
+<span id="cb30-62"><a href="keyword-detection.html#cb30-62" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb30-63"><a href="keyword-detection.html#cb30-63" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##        token type Sig_corrected  O11 O12 ptw_target   ptw_ref        G2
+## 1      great type   p &lt; .001***  472 187  2.1062684 0.9194114 101.49317
+## 2  excellent type   p &lt; .001***  145  21  0.6470528 0.1032494  92.47189
+## 3       love type   p &lt; .001***  323 128  1.4413659 0.6293297  69.38975
+## 4  wonderful type   p &lt; .001***  120  27  0.5354920 0.1327492  54.92216
+## 5      loved type   p &lt; .001***  102  21  0.4551682 0.1032494  50.53473
+## 6       best type   p &lt; .001***  326 156  1.4547532 0.7669956  45.97562
+## 7      still type   p &lt; .001***  271 129  1.2093193 0.6342464  38.74014
+## 8      world type   p &lt; .001***  207  88  0.9237236 0.4326642  38.58549
+## 9    perfect type   p &lt; .001***   94  25  0.4194687 0.1229160  36.22459
+## 10       his type   p &lt; .001*** 1262 882  5.6315905 4.3364751  36.09188
+##             RDF RateRatio RateDifference DifferenceCoefficient       LLR
+## 1  0.0011868570  2.290880   1.186857e-06             0.3922613 294.63294
+## 2  0.0005438034  6.266636   5.438034e-07             0.7247791 148.07448
+## 3  0.0008120361  2.290308   8.120361e-07             0.3921562 201.57829
+## 4  0.0004027427  4.033745   4.027427e-07             0.6026907 106.29957
+## 5  0.0003519188  4.408267   3.519188e-07             0.6302072  93.56341
+## 6  0.0006877576  1.896684   6.877576e-07             0.3095569 166.13546
+## 7  0.0005750730  1.906695   5.750730e-07             0.3119352 139.02841
+## 8  0.0004910595  2.134953   4.910595e-07             0.3620347 120.72205
+## 9  0.0002965527  3.412546   2.965527e-07             0.5467572  77.08508
+## 10 0.0012951154  1.298656   1.295115e-06             0.1299265 292.48172
+##    SignedDKL     PDiff LogOddsRatio        MI       PMI         phi       X2
+## 1  275.56751  78.45225    0.8285169 0.4502812 -1.413264 0.015108132 97.57564
+## 2  109.75519 144.95583    1.8157365 0.7366425 -1.126903 0.013784540 81.22775
+## 3  188.54940  78.43124    0.8271524 0.4501796 -1.413366 0.012492127 66.71026
+## 4   85.86387 120.53813    1.3809359 0.6389911 -1.224555 0.010848353 50.30921
+## 5   74.17024 126.04143    1.4652312 0.6616837 -1.201862 0.010362688 45.90550
+## 6  166.33553  61.91137    0.6391318 0.3676117 -1.495934 0.010234742 44.77893
+## 7  138.89733  62.38704    0.6439262 0.3700657 -1.493480 0.009393260 37.71834
+## 8  115.60160  72.40694    0.7556895 0.4206887 -1.442857 0.009338842 37.28258
+## 9   64.66545 109.35145    1.2132873 0.5915439 -1.272002 0.008877874 33.69286
+## 10 377.99144  25.98529    0.2624613 0.1671798 -1.696366 0.009156046 35.83734
+##    OddsRatio     DeltaP p        E11    O21    O22      N
+## 1   2.289920 0.19231943 0  345.45688 223621 203204 427484
+## 2   6.145601 0.34941589 0   87.01949 223948 203370 427484
+## 3   2.286798 0.19217523 0  236.42041 223770 203263 427484
+## 4   3.978624 0.29221324 0   77.05942 223973 203364 427484
+## 5   4.328544 0.30514232 0   64.47829 223991 203370 427484
+## 6   1.894835 0.15230651 0  252.67104 223767 203235 427484
+## 7   1.903941 0.15342979 0  209.68551 223822 203262 427484
+## 8   2.129079 0.17760371 0  154.64306 223886 203303 427484
+## 9   3.364527 0.26577618 0   62.38144 223999 203366 427484
+## 10  1.300126 0.06473028 0 1123.91433 222831 202509 427484</code></pre>
+<p>The above table shows the keywords for positive IMDB reviews. The table starts with <strong>token</strong> (word type), followed by <strong>type</strong>, which indicates whether the token is a keyword in the target data (<em>type</em>) or a keyword in the reference data (<em>antitype</em>). Next is the Bonferroni corrected significance (<strong>Sig_corrected</strong>), which accounts for repeated testing. This is followed by <strong>O11</strong>, representing the observed frequency of the token, and <strong>Exp</strong> which represents the expected frequency of the token if it were distributed evenly across the target and reference data. After this, the table provides different keyness statistics (for information about these different keyness statistics see <a href="https://ladal.edu.au/key.html">here</a>).</p>
+</div>
+<div id="visualising-keywords" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Visualising keywords<a href="keyword-detection.html#visualising-keywords" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We can now visualize the keyness strengths in a <em>dot plot</em> as shown in the code chunk below.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="keyword-detection.html#cb32-1" tabindex="-1"></a><span class="co"># sort the keys data frame in descending order based on the &#39;G2&#39; column</span></span>
+<span id="cb32-2"><a href="keyword-detection.html#cb32-2" tabindex="-1"></a>keys <span class="sc">%&gt;%</span></span>
+<span id="cb32-3"><a href="keyword-detection.html#cb32-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="sc">-</span>G2) <span class="sc">%&gt;%</span></span>
+<span id="cb32-4"><a href="keyword-detection.html#cb32-4" tabindex="-1"></a>  <span class="co"># select the top 20 rows after sorting</span></span>
+<span id="cb32-5"><a href="keyword-detection.html#cb32-5" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">20</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-6"><a href="keyword-detection.html#cb32-6" tabindex="-1"></a>  <span class="co"># create a ggplot with &#39;token&#39; on the x-axis (reordered by &#39;G2&#39;) and &#39;G2&#39; on the y-axis</span></span>
+<span id="cb32-7"><a href="keyword-detection.html#cb32-7" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(token, G2, mean), <span class="at">y =</span> G2)) <span class="sc">+</span></span>
+<span id="cb32-8"><a href="keyword-detection.html#cb32-8" tabindex="-1"></a>  <span class="co"># add a scatter plot with points representing the &#39;G2&#39; values</span></span>
+<span id="cb32-9"><a href="keyword-detection.html#cb32-9" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb32-10"><a href="keyword-detection.html#cb32-10" tabindex="-1"></a>  <span class="co"># flip the coordinates to have horizontal points</span></span>
+<span id="cb32-11"><a href="keyword-detection.html#cb32-11" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb32-12"><a href="keyword-detection.html#cb32-12" tabindex="-1"></a>  <span class="co"># set the theme to a basic white and black theme</span></span>
+<span id="cb32-13"><a href="keyword-detection.html#cb32-13" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb32-14"><a href="keyword-detection.html#cb32-14" tabindex="-1"></a>  <span class="co"># set the x-axis label to &quot;Token&quot; and y-axis label to &quot;Keyness (G2)&quot;</span></span>
+<span id="cb32-15"><a href="keyword-detection.html#cb32-15" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Token&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Keyness (G2)&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Another option to visualize keyness is a <em>bar plot</em> as shown below.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="keyword-detection.html#cb33-1" tabindex="-1"></a><span class="co"># get top 10 keywords for text 1</span></span>
+<span id="cb33-2"><a href="keyword-detection.html#cb33-2" tabindex="-1"></a>top <span class="ot">&lt;-</span> keys <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">12</span>)</span>
+<span id="cb33-3"><a href="keyword-detection.html#cb33-3" tabindex="-1"></a><span class="co"># get top 10 keywords for text 2</span></span>
+<span id="cb33-4"><a href="keyword-detection.html#cb33-4" tabindex="-1"></a>bot <span class="ot">&lt;-</span> keys <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">slice_tail</span>(<span class="at">n =</span> <span class="dv">12</span>)</span>
+<span id="cb33-5"><a href="keyword-detection.html#cb33-5" tabindex="-1"></a><span class="co"># combine into table</span></span>
+<span id="cb33-6"><a href="keyword-detection.html#cb33-6" tabindex="-1"></a><span class="fu">rbind</span>(top, bot) <span class="sc">%&gt;%</span></span>
+<span id="cb33-7"><a href="keyword-detection.html#cb33-7" tabindex="-1"></a>  <span class="co"># create a ggplot</span></span>
+<span id="cb33-8"><a href="keyword-detection.html#cb33-8" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(token, G2, mean), <span class="at">y =</span> G2, <span class="at">label =</span> G2, <span class="at">fill =</span> type)) <span class="sc">+</span></span>
+<span id="cb33-9"><a href="keyword-detection.html#cb33-9" tabindex="-1"></a>  <span class="co"># add a bar plot using the &#39;phi&#39; values</span></span>
+<span id="cb33-10"><a href="keyword-detection.html#cb33-10" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="sc">+</span></span>
+<span id="cb33-11"><a href="keyword-detection.html#cb33-11" tabindex="-1"></a>  <span class="co"># add text labels above the bars with rounded &#39;phi&#39; values</span></span>
+<span id="cb33-12"><a href="keyword-detection.html#cb33-12" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">ifelse</span>(G2<span class="sc">&gt;</span> <span class="dv">0</span>, G2 <span class="sc">-</span> <span class="dv">20</span>, G2 <span class="sc">+</span> <span class="dv">20</span>), </span>
+<span id="cb33-13"><a href="keyword-detection.html#cb33-13" tabindex="-1"></a>                <span class="at">label =</span> <span class="fu">round</span>(G2, <span class="dv">1</span>)), <span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb33-14"><a href="keyword-detection.html#cb33-14" tabindex="-1"></a>  <span class="co"># flip the coordinates to have horizontal bars</span></span>
+<span id="cb33-15"><a href="keyword-detection.html#cb33-15" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb33-16"><a href="keyword-detection.html#cb33-16" tabindex="-1"></a>  <span class="co"># set the theme to a basic white and black theme</span></span>
+<span id="cb33-17"><a href="keyword-detection.html#cb33-17" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb33-18"><a href="keyword-detection.html#cb33-18" tabindex="-1"></a>  <span class="co"># remove legend</span></span>
+<span id="cb33-19"><a href="keyword-detection.html#cb33-19" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
+<span id="cb33-20"><a href="keyword-detection.html#cb33-20" tabindex="-1"></a>    <span class="co"># define colors</span></span>
+<span id="cb33-21"><a href="keyword-detection.html#cb33-21" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;orange&quot;</span>,<span class="st">&quot;darkgray&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb33-22"><a href="keyword-detection.html#cb33-22" tabindex="-1"></a>  <span class="co"># set the x-axis label to &quot;Token&quot; and y-axis label to &quot;Keyness (G2)&quot;</span></span>
+<span id="cb33-23"><a href="keyword-detection.html#cb33-23" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Top 10 keywords for positive and negative IMDB reviews&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Keyword&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Keyness (G2)&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="sentiment-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="network-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/MartinSchweinberger/IntroR_WS/edit/main/03-ta.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/MartinSchweinberger/IntroR_WS/blob/main/03-ta.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

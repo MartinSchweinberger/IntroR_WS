@@ -1,0 +1,356 @@
+
+### Data-driven Topic Modelling 
+
+In this part of the tutorial, we show an alternative approaches for performing data-driven topic modelling using LDA. 
+
+### Loading and preparing data 
+
+When readying the data for analysis, we follow consistent pre-processing steps, employing the `tm` package [@tm2024package; @tm2008pub] for efficient data preparation and cleaning. First, we load the data and convert it into a corpus object. Next, we convert the text to lowercase, eliminating superfluous white spaces, and removing stop words. Subsequently, we proceed to strip the data of punctuation, symbols, and numerical characters. Finally, we apply stemming to standardize words to their base form, ensuring uniformity throughout the data set.
+
+
+```{r tm2, message=FALSE, warning=FALSE}
+# load data
+textdata <- base::readRDS(url("https://slcladal.github.io/data/sotu_paragraphs.rda", "rb"))
+# create corpus object
+tm::Corpus(DataframeSource(textdata)) %>%
+  # convert to lower case
+  tm::tm_map(content_transformer(tolower))  %>%
+  # remove superfluous white spaces
+  tm::tm_map(stripWhitespace)  %>%
+  # remove stop words
+  tm::tm_map(removeWords, quanteda::stopwords()) %>% 
+  # remove punctuation
+  tm::tm_map(removePunctuation, preserve_intra_word_dashes = TRUE) %>%
+  # remove numbers
+  tm::tm_map(removeNumbers) %>% 
+  # stemming
+  tm::tm_map(stemDocument, language = "en") -> textcorpus
+# inspect data
+str(textcorpus)
+```
+
+### Model calculation{-}
+
+Here's the improved and expanded version of the paragraph:
+
+After preprocessing, we have a clean corpus object called `textcorpus`, which we use to calculate the unsupervised Latent Dirichlet Allocation (LDA) topic model [@blei2003lda]. To perform this calculation, we first create a Document-Term Matrix (DTM) from the `textcorpus`. In this step, we ensure that only terms with a certain minimum frequency in the corpus are included (we set the minimum frequency to 5). This selection process not only speeds up the model calculation but also helps improve the model's accuracy by focusing on more relevant and frequently occurring terms. By filtering out less common terms, we reduce noise and enhance the coherence of the topics identified by the LDA model.
+
+```{r tm3a}
+# compute document term matrix with terms >= minimumFrequency
+minimumFrequency <- 5
+DTM <- tm::DocumentTermMatrix(textcorpus, 
+                              control = list(bounds = list(global = c(minimumFrequency, Inf))))
+# inspect the number of documents and terms in the DTM
+dim(DTM)
+```
+
+Due to vocabulary pruning, some rows in our Document-Term Matrix (DTM) may end up being empty. Latent Dirichlet Allocation (LDA) cannot handle empty rows, so we must remove these documents from both the DTM and the corresponding metadata. This step ensures that the topic modeling process runs smoothly without encountering errors caused by empty documents. Additionally, removing these empty rows helps maintain the integrity of our analysis by focusing only on documents that contain meaningful content.
+
+```{r tm3a2}
+sel_idx <- slam::row_sums(DTM) > 0
+DTM <- DTM[sel_idx, ]
+textdata <- textdata[sel_idx, ]
+# inspect the number of documents and terms in the DTM
+dim(DTM)
+``` 
+
+The output shows that we have removed 22 documents (8833 - 8811) from the DTM.
+
+As an unsupervised machine learning method, topic models are well-suited for exploring data. The primary goal of calculating topic models is to determine the proportionate composition of a fixed number of topics within the documents of a collection. Experimenting with different parameters is essential to identify the most suitable settings for your analysis needs.
+
+For parameterized models such as Latent Dirichlet Allocation (LDA), the number of topics `K` is the most critical parameter to define in advance. Selecting the optimal `K` depends on various factors. If `K` is too small, the collection is divided into a few very general semantic contexts. Conversely, if `K` is too large, the collection is divided into too many topics, leading to overlaps and some topics being barely interpretable. Finding the right balance is key to achieving meaningful and coherent topics in your analysis.
+
+An alternative to deciding on a set number of topics is to extract parameters form a models using a rage of number of topics. This approach can be useful when the number of topics is not theoretically motivated or based on closer, qualitative inspection of the data. In the example below, the determination of the optimal number of topics follows @murzintcev2020idealtopics, but we only use two metrics (`CaoJuan2009` and `Deveaud2014`) - it is highly recommendable to inspect the results of the four metrics available for the `FindTopicsNumber` function  which are `Griffiths2004` [see @griffiths2004integrating], `CaoJuan2009` [see @cao2009density], `Arun2010` [see @arun2010finding], and `Deveaud2014` [see @deveaud2014accurate]. 
+
+```{r tm3b, message=FALSE, warning=FALSE}
+# create models with different number of topics
+result <- ldatuning::FindTopicsNumber(
+  DTM,
+  topics = seq(from = 2, to = 20, by = 1),
+  metrics = c("CaoJuan2009",  "Deveaud2014"),
+  method = "Gibbs",
+  control = list(seed = 77),
+  verbose = TRUE
+)
+```
+
+
+We can now plot the results. In this case, we have only use two methods `CaoJuan2009` and `Griffith2004`. The best number of topics shows low values for `CaoJuan2009` and high values for `Griffith2004` (optimally, several methods should converge and show peaks and dips respectively for a certain number of topics).
+
+```{r tm3c, message=FALSE, warning=FALSE}
+FindTopicsNumber_plot(result)
+```
+
+
+For our first analysis, however, we choose a thematic "resolution" of `K = 20` topics. In contrast to a resolution of 100 or more, this number of topics can be evaluated qualitatively very easy.
+
+```{r tm4}
+# number of topics
+K <- 20
+# set random number generator seed
+set.seed(9161)
+# compute the LDA model, inference via 1000 iterations of Gibbs sampling
+topicModel <- topicmodels::LDA(DTM, K, method="Gibbs", control=list(iter = 500, verbose = 25))
+# save results
+tmResult <- posterior(topicModel)
+# save theta values
+theta <- tmResult$topics
+# save beta values
+beta <- tmResult$terms
+# reset topic names
+topicNames <- apply(terms(topicModel, 5), 2, paste, collapse = " ")
+```
+
+Depending on the size of the vocabulary, the collection size and the number K, the inference of topic models can take a very long time. This calculation may take several minutes. If it takes too long, reduce the vocabulary in the DTM by increasing the minimum frequency in the previous step.
+
+
+Let's take a look at the 10 most likely terms within the term probabilities `beta` of the inferred topics.
+
+```{r tm6}
+# create a data frame from the topic model data
+tidytext::tidy(topicModel, matrix = "beta") %>% 
+  # ensure topics are factors with specific levels
+  dplyr::mutate(topic = paste0("topic", as.character(topic)),
+                topic = factor(topic, levels = paste0("topic", 1:20))) %>%
+  # group the data by topic
+  dplyr::group_by(topic) %>%
+  # arrange terms within each topic by beta value (ascending)
+  dplyr::arrange(topic, -beta) %>% 
+  # select the top 10 terms with the highest beta values for each topic
+  dplyr::top_n(10) %>%
+  # add beta to term
+  dplyr::mutate(term = paste0(term, " (", round(beta, 3), ")")) %>%
+  # remove the beta column as it is now part of the term string
+  dplyr::select(-beta) %>%  
+  # ungroup the data frame
+  dplyr::ungroup() %>%
+  # create an id column for each term's position within the topic
+  dplyr::mutate(id = rep(1:10, 20)) %>%  
+  # pivot the data to a wider format with topics as columns
+  tidyr::pivot_wider(names_from = topic, values_from = term) -> topterms  
+# inspect
+topterms
+```
+
+For the next steps, we want to give the topics more descriptive names than just numbers. Therefore, we simply concatenate the five most likely terms of each topic to a string that represents a pseudo-name for each topic. 
+
+```{r tm8}
+topicNames <- apply(terms(topicModel, 5), 2, paste, collapse = " ")
+# inspect first 3 topic names
+topicNames[1:3]
+```
+
+### Visualization of Words and Topics{-}
+
+Although wordclouds may not be optimal for scientific purposes they can provide a quick visual overview of a set of terms. Let's look at some topics as wordcloud.
+
+In the following code, you can change the variable **topicToViz** with values between 1 and 20 to display other topics.
+
+``` {r wordcloud, fig.width=4, fig.height=4, fig.align='center', message=FALSE, warning=F}
+# visualize topics as word cloud
+# choose topic of interest by a term contained in its name
+topicToViz <- grep('mexico', topicNames)[1] 
+# select to 50 most probable terms from the topic by sorting the term-topic-probability vector in decreasing order
+top50terms <- sort(tmResult$terms[topicToViz,], decreasing=TRUE)[1:50]
+words <- names(top50terms)
+# extract the probabilities of each of the 50 terms
+probabilities <- sort(tmResult$terms[topicToViz,], decreasing=TRUE)[1:50]
+# visualize the terms as wordcloud
+mycolors <- brewer.pal(8, "Dark2")
+wordcloud(words, probabilities, random.order = FALSE, color = mycolors)
+```
+
+Let us now look more closely at the distribution of topics within individual documents. To this end, we visualize the distribution in 3 sample documents.
+
+Let us first take a look at the contents of three sample documents:
+
+```{r tm9}
+exampleIds <- c(2, 100, 200)
+# first 400 characters of file 2
+stringr::str_sub(txts$text[2], 1, 400)
+# first 400 characters of file 100
+stringr::str_sub(txts$text[100], 1, 400)
+# first 400 characters of file 200
+stringr::str_sub(txts$text[200], 1, 400)
+```
+
+After looking into the documents, we visualize the topic distributions within the documents.
+
+``` {r vis2, results="hide", warning=FALSE, message=FALSE, fig.width=10, fig.height=6, fig.align='center'}
+N <- length(exampleIds)  # Number of example documents
+
+# Get topic proportions from example documents
+topicProportionExamples <- theta[exampleIds,]
+colnames(topicProportionExamples) <- topicNames
+
+# Reshape data for visualization
+reshape2::melt(cbind(data.frame(topicProportionExamples), 
+                                     document = factor(1:N)),
+                               variable.name = "topic", 
+                               id.vars = "document") %>%  
+  # create bar plot using ggplot2
+  ggplot(aes(topic, value, fill = document), ylab = "Proportion") +
+  # plot bars
+  geom_bar(stat="identity") +  
+  # rotate x-axis labels
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
+  # flip coordinates to create horizontal bar plot
+  coord_flip() +  
+  # facet by document
+  facet_wrap(~ document, ncol = N)  
+
+```
+
+### Topic distributions{-}
+
+The figure above illustrates how topics are distributed within a document according to the model. In the current model, all three documents exhibit at least a small percentage of each topic.
+
+The topic distribution within a document can be controlled using the *alpha* parameter of the model. Higher alpha priors result in an even distribution of topics within a document, while lower alpha priors ensure that the inference process concentrates the probability mass on a few topics for each document.
+
+In the previous model calculation, the alpha prior was automatically estimated to fit the data, achieving the highest overall probability for the model. However, this automatic estimate may not align with the results that an analyst desires. Depending on our analysis goals, we might prefer a more concentrated (peaky) or more evenly distributed set of topics in the model.
+
+Next, let us change the alpha prior to a lower value to observe how this adjustment affects the topic distributions in the model. To do this, we first extarct the alpha value of teh previous model.
+
+```{r tm11}
+# see alpha from previous model
+attr(topicModel, "alpha") 
+```
+The alpha value of the previous model was `attr(topicModel, "alpha")`. So now, we set a much lower value (0.2) when we generate a new model. 
+
+```{r tm12}
+# generate new LDA model with low alpha
+topicModel2 <- LDA(DTM, K, method="Gibbs", 
+                   control=list(iter = 500, verbose = 25, alpha = 0.2))
+# save results
+tmResult <- posterior(topicModel2)
+# save theta values
+theta <- tmResult$topics
+# save beta values
+beta <- tmResult$terms
+# reset topic names
+topicNames <- apply(terms(topicModel, 5), 2, paste, collapse = " ")
+```
+
+```{r}
+topicNames <- apply(terms(topicModel, 5), 2, paste, collapse = " ")
+topicNames
+```
+
+
+
+Now visualize the topic distributions in the three documents again. What are the differences in the distribution structure?
+
+``` {r vis3, results="hide", echo=T, warning=FALSE, message=FALSE, fig.width=10, fig.height=6, fig.align='center'}
+# get topic proportions form example documents
+topicProportionExamples <- theta[exampleIds,]
+colnames(topicProportionExamples) <- topicNames
+vizDataFrame <- reshape2::melt(cbind(data.frame(topicProportionExamples),
+                                     document = factor(1:N)), 
+                               variable.name = "topic", 
+                               id.vars = "document") 
+# plot alpha distribution 
+ggplot(data = vizDataFrame, aes(topic, value, fill = document), ylab = "proportion") + 
+  geom_bar(stat="identity") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +  
+  coord_flip() +
+  facet_wrap(~ document, ncol = N)
+```
+
+The figure above now shows that the documents are more clearly assigned to specific topics. The difference in the probability of a document belonging to a particular topic is much more distinct, indicating a stronger association between documents and their respective dominant topics.
+
+By adjusting the alpha parameter to a lower value, we have concentrated the probability mass on fewer topics for each document. This change makes the topic distribution within documents less even and more peaked, resulting in documents being more distinctly associated with specific topics.
+
+This adjustment can be particularly useful when analyzing data sets where we expect documents to focus on a few key themes rather than covering a broad range of topics. It allows for a clearer interpretation of the primary topics discussed in each document, enhancing the overall clarity and interpretability of the topic model.
+
+
+### Topic ranking{-}
+
+Determining the defining topics within a collection is a crucial step in topic modeling, as it helps to organize and interpret the underlying themes effectively. There are several approaches to uncover these topics and arrange them in a meaningful order. Here, we present two different methods: **Ordering Topics by Probability** and **Counting Primary Topic Appearances**. These two approaches complement each other and, when used together, can provide a comprehensive understanding of the defining topics within a collection. By combining the probabilistic ranking with the frequency count of primary topics, we can achieve a more nuanced and accurate interpretation of the underlying themes in the data.
+
+#### Approach 1: Ordering Topics by Probability{-}
+
+This approach involves ranking topics based on their overall probability within the given collection. By examining the distribution of words across topics and documents, we can identify which topics are more dominant and relevant. This method helps to highlight the most significant themes within the data.
+
+```{r tm14}
+# mean probabilities over all paragraphs
+topicProportions <- colSums(theta) / nDocs(DTM)  
+# assign the topic names we created before
+names(topicProportions) <- topicNames     
+# show summed proportions in decreased order
+soP <- sort(topicProportions, decreasing = TRUE)
+# inspect ordering
+paste(round(soP, 5), ":", names(soP))
+```
+
+We recognize some topics that are way more likely to occur in the corpus than others. These describe rather general thematic coherence. Other topics correspond more to specific contents. 
+
+#### Approach 2: Counting Primary Topic Appearances{-}
+
+Another method is to count how often a topic appears as the primary topic within individual paragraphs or documents. This approach focuses on the frequency with which each topic takes precedence in the text, providing insight into which topics are most commonly addressed and therefore, potentially more important.
+
+```{r tm16}
+countsOfPrimaryTopics <- rep(0, K)
+names(countsOfPrimaryTopics) <- topicNames
+for (i in 1:nDocs(DTM)) {
+  topicsPerDoc <- theta[i, ] # select topic distribution for document i
+  # get first element position from ordered list
+  primaryTopic <- order(topicsPerDoc, decreasing = TRUE)[1] 
+  countsOfPrimaryTopics[primaryTopic] <- countsOfPrimaryTopics[primaryTopic] + 1
+}
+# sort by primary topic
+so <- sort(countsOfPrimaryTopics, decreasing = TRUE)
+# show ordering
+paste(so, ":", names(so))
+```
+
+Sorting topics by the Rank-1 method highlights topics with specific thematic coherences, placing them at the upper ranks of the list. This sorting approach is valuable for several subsequent analysis steps:
+
+* *Semantic Interpretation of Topics*: By examining topics ranked higher in the list, researchers can gain insights into the most salient and distinctive themes present in the collection. Understanding these topics facilitates their semantic interpretation and allows for deeper exploration of the underlying content.
+
+* *Analysis of Time Series*: Examining the temporal evolution of the most important topics over time can reveal trends, patterns, and shifts in discourse. Researchers can track how the prominence of certain topics fluctuates over different time periods, providing valuable context for understanding changes in the subject matter.
+
+* *Filtering Based on Sub-Topics*: The sorted list of topics can serve as a basis for filtering the original collection to focus on specific sub-topics of interest. Researchers can selectively extract documents or passages related to particular themes, enabling targeted analysis and investigation of niche areas within the broader context.
+
+By leveraging the Rank-1 method to sort topics, researchers can enhance their understanding of the thematic landscape within the collection and facilitate subsequent analytical tasks aimed at extracting meaningful insights and knowledge.
+
+### Filtering documents{-}
+
+The inclusion of topic probabilities for each document or paragraph in a topic model enables its application for thematic filtering of a collection. This filtering process involves selecting only those documents that surpass a predetermined threshold of probability for specific topics. For instance, we may choose to retain documents containing a particular topic, such as topic 'X', with a probability exceeding 20 percent.
+
+In the subsequent steps, we will implement this filtering approach to select documents based on their topical content and visualize the resulting document distribution over time. This analysis will provide insights into the prevalence and distribution of specific themes within the collection, allowing for a more targeted exploration of relevant topics across different temporal intervals.
+
+```{r tm18}
+# selected by a term in the topic name (e.g. 'militari')
+topicToFilter <- grep('militari', topicNames)[1] 
+topicThreshold <- 0.2
+selectedDocumentIndexes <- which(theta[, topicToFilter] >= topicThreshold)
+filteredCorpus <- txts$text[selectedDocumentIndexes]
+# show length of filtered corpus
+length(filteredCorpus)
+# show first 5 paragraphs
+head(filteredCorpus, 5)
+``` 
+
+Our filtered corpus contains `r length(filteredCorpus)` documents related to the topic `r topicToFilter` to at least 20 %.
+
+### Topic proportions over time{-}
+
+In the final step, we offer a comprehensive overview of the topics present in the data across different time periods. To achieve this, we aggregate the mean topic proportions per decade for all State of the Union (SOTU) speeches. These aggregated topic proportions provide a distilled representation of the prevalent themes over time and can be effectively visualized, such as through a bar plot. This visualization offers valuable insights into the evolving discourse captured within the SOTU speeches, highlighting overarching trends and shifts in thematic emphasis across decades. 
+
+```{r vis4, fig.width=9, fig.height=6, fig.align='center', warning=F, message=F}
+# append decade information for aggregation
+textdata$decade <- paste0(substr(textdata$date, 0, 3), "0")
+# get mean topic proportions per decade
+topic_proportion_per_decade <- aggregate(theta, by = list(decade = textdata$decade), mean)
+# set topic names to aggregated columns
+colnames(topic_proportion_per_decade)[2:(K+1)] <- topicNames
+# reshape data frame and generate plot
+reshape2::melt(topic_proportion_per_decade, id.vars = "decade") %>%
+  ggplot(aes(x=decade, y=value, fill=variable)) +
+  geom_bar(stat = "identity") + 
+  labs(y = "Proportion", x = "Decade")  +
+  scale_fill_manual(values = rev(colorRampPalette(brewer.pal(8, "RdBu"))(20))) + 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+The visualization shows that topics around the relation between the federal government and the states as well as inner conflicts clearly dominate the first decades. Security issues and the economy are the most important topics of recent SOTU addresses.

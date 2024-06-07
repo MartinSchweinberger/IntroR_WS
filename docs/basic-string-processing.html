@@ -23,7 +23,7 @@
 <meta name="author" content="Martin Schweinberger" />
 
 
-<meta name="date" content="2024-06-07" />
+<meta name="date" content="2024-06-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -127,6 +127,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 </style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -159,6 +182,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#preparation"><i class="fa fa-check"></i><b>2.2</b> Preparation</a>
 <ul>
 <li class="chapter" data-level="2.2.1" data-path="introduction-to-r.html"><a href="introduction-to-r.html#before-you-start-working-with-rrstudio-folder-structure-and-r-projects"><i class="fa fa-check"></i><b>2.2.1</b> Before you start working with R/RStudio (Folder Structure and R projects)</a></li>
+<li class="chapter" data-level="2.2.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#create-a-folder-for-your-project"><i class="fa fa-check"></i><b>2.2.2</b> Create a folder for your project</a></li>
+<li class="chapter" data-level="2.2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#open-rstudio"><i class="fa fa-check"></i><b>2.2.3</b> Open RStudio</a></li>
+<li class="chapter" data-level="2.2.4" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-projects"><i class="fa fa-check"></i><b>2.2.4</b> R Projects</a></li>
+<li class="chapter" data-level="2.2.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-notebooks"><i class="fa fa-check"></i><b>2.2.5</b> R Notebooks</a></li>
+<li class="chapter" data-level="2.2.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#updating-r"><i class="fa fa-check"></i><b>2.2.6</b> Updating R</a></li>
+<li class="chapter" data-level="2.2.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#optimizing-r-project-options"><i class="fa fa-check"></i><b>2.2.7</b> Optimizing R project options</a></li>
+<li class="chapter" data-level="2.2.8" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-started-with-r-notebooks"><i class="fa fa-check"></i><b>2.2.8</b> Getting started with R Notebooks</a></li>
+<li class="chapter" data-level="2.2.9" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-markdown"><i class="fa fa-check"></i><b>2.2.9</b> R Markdown</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#r-and-rstudio-basics"><i class="fa fa-check"></i><b>2.3</b> R and RStudio Basics</a>
 <ul>
@@ -200,27 +231,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.4" data-path="basics-of-data-visualization.html"><a href="basics-of-data-visualization.html#combining-plots"><i class="fa fa-check"></i><b>6.4</b> Combining plots</a></li>
 <li class="chapter" data-level="6.5" data-path="basics-of-data-visualization.html"><a href="basics-of-data-visualization.html#boxplots"><i class="fa fa-check"></i><b>6.5</b> Boxplots</a></li>
 <li class="chapter" data-level="6.6" data-path="basics-of-data-visualization.html"><a href="basics-of-data-visualization.html#barplots"><i class="fa fa-check"></i><b>6.6</b> Barplots</a></li>
-<li class="chapter" data-level="6.7" data-path="basics-of-data-visualization.html"><a href="basics-of-data-visualization.html#going-further"><i class="fa fa-check"></i><b>6.7</b> Going further</a></li>
-<li class="chapter" data-level="6.8" data-path="basics-of-data-visualization.html"><a href="basics-of-data-visualization.html#ending-r-sessions"><i class="fa fa-check"></i><b>6.8</b> Ending R sessions</a></li>
+<li class="chapter" data-level="6.7" data-path="basics-of-data-visualization.html"><a href="basics-of-data-visualization.html#wordclouds"><i class="fa fa-check"></i><b>6.7</b> Wordclouds</a></li>
+<li class="chapter" data-level="6.8" data-path="basics-of-data-visualization.html"><a href="basics-of-data-visualization.html#going-further"><i class="fa fa-check"></i><b>6.8</b> Going further</a></li>
+<li class="chapter" data-level="6.9" data-path="basics-of-data-visualization.html"><a href="basics-of-data-visualization.html#ending-r-sessions"><i class="fa fa-check"></i><b>6.9</b> Ending R sessions</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html"><i class="fa fa-check"></i><b>7</b> Introduction to Text Analysis with R</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#concordancing"><i class="fa fa-check"></i><b>7.1</b> Concordancing</a></li>
-<li class="chapter" data-level="7.2" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#word-frequency"><i class="fa fa-check"></i><b>7.2</b> Word Frequency</a>
-<ul>
-<li class="chapter" data-level="7.2.1" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#wordclouds"><i class="fa fa-check"></i><b>7.2.1</b> Wordclouds</a></li>
-<li class="chapter" data-level="7.2.2" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#frequency-changes"><i class="fa fa-check"></i><b>7.2.2</b> Frequency changes</a></li>
-<li class="chapter" data-level="7.2.3" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#dispersion-plots"><i class="fa fa-check"></i><b>7.2.3</b> Dispersion plots</a></li>
-<li class="chapter" data-level="7.2.4" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#over--and-underuse"><i class="fa fa-check"></i><b>7.2.4</b> Over- and underuse</a></li>
-</ul></li>
-<li class="chapter" data-level="7.3" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#collocations"><i class="fa fa-check"></i><b>7.3</b> Collocations</a></li>
-<li class="chapter" data-level="7.4" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#keywords"><i class="fa fa-check"></i><b>7.4</b> Keywords</a></li>
-<li class="chapter" data-level="7.5" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#text-classification"><i class="fa fa-check"></i><b>7.5</b> Text Classification</a></li>
-<li class="chapter" data-level="7.6" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#part-of-speech-tagging"><i class="fa fa-check"></i><b>7.6</b> Part-of-Speech tagging</a></li>
-<li class="chapter" data-level="7.7" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#names-entity-recognition"><i class="fa fa-check"></i><b>7.7</b> Names Entity Recognition</a></li>
-<li class="chapter" data-level="7.8" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#dependency-parsing-using-udpipe"><i class="fa fa-check"></i><b>7.8</b> Dependency Parsing Using UDPipe</a></li>
-<li class="chapter" data-level="7.9" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#citation-session-info"><i class="fa fa-check"></i><b>7.9</b> Citation &amp; Session Info</a></li>
-<li class="chapter" data-level="7.10" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#references"><i class="fa fa-check"></i><b>7.10</b> References</a></li>
+<li class="chapter" data-level="7.0.1" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#frequency-changes"><i class="fa fa-check"></i><b>7.0.1</b> Frequency changes</a></li>
+<li class="chapter" data-level="7.0.2" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#dispersion-plots"><i class="fa fa-check"></i><b>7.0.2</b> Dispersion plots</a></li>
+<li class="chapter" data-level="7.0.3" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#over--and-underuse"><i class="fa fa-check"></i><b>7.0.3</b> Over- and underuse</a></li>
+<li class="chapter" data-level="7.1" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#collocations"><i class="fa fa-check"></i><b>7.1</b> Collocations</a></li>
+<li class="chapter" data-level="7.2" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#keywords"><i class="fa fa-check"></i><b>7.2</b> Keywords</a></li>
+<li class="chapter" data-level="7.3" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#text-classification"><i class="fa fa-check"></i><b>7.3</b> Text Classification</a></li>
+<li class="chapter" data-level="7.4" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#part-of-speech-tagging"><i class="fa fa-check"></i><b>7.4</b> Part-of-Speech tagging</a></li>
+<li class="chapter" data-level="7.5" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#names-entity-recognition"><i class="fa fa-check"></i><b>7.5</b> Names Entity Recognition</a></li>
+<li class="chapter" data-level="7.6" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#dependency-parsing-using-udpipe"><i class="fa fa-check"></i><b>7.6</b> Dependency Parsing Using UDPipe</a></li>
+<li class="chapter" data-level="7.7" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#citation-session-info"><i class="fa fa-check"></i><b>7.7</b> Citation &amp; Session Info</a></li>
+<li class="chapter" data-level="7.8" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#references"><i class="fa fa-check"></i><b>7.8</b> References</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -312,39 +339,23 @@ To add something to the beginning of the pattern that we want to split the text 
 ##      start end
 ## [1,]    63  65
 ## [2,]   263 265</code></pre>
-<p>The function <code>str_match</code> extracts the first occurrence of the pattern in a text.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="basic-string-processing.html#cb42-1" tabindex="-1"></a><span class="fu">str_match</span>(review, <span class="st">&quot;and&quot;</span>) </span></code></pre></div>
-<pre><code>##      [,1] 
-## [1,] &quot;and&quot;</code></pre>
-<p>The function <code>str_match_all</code> extracts the all occurrences of the pattern from a text.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="basic-string-processing.html#cb44-1" tabindex="-1"></a><span class="fu">str_match_all</span>(review, <span class="st">&quot;and&quot;</span>)</span></code></pre></div>
-<pre><code>## [[1]]
-##      [,1] 
-## [1,] &quot;and&quot;
-## [2,] &quot;and&quot;</code></pre>
 <p>The function <code>str_remove</code> removes the first occurrence of a pattern in a text.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="basic-string-processing.html#cb46-1" tabindex="-1"></a><span class="fu">str_remove</span>(review, <span class="st">&quot;and&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="basic-string-processing.html#cb42-1" tabindex="-1"></a><span class="fu">str_remove</span>(review, <span class="st">&quot;and&quot;</span>) </span></code></pre></div>
 <pre><code>## [1] &quot;Gary Busey is superb in this musical biography. Great singing  excellent soundtrack. The Buddy Holly Story is a much better movie than La Bamba. From reading other comments, there may be some historical inaccuracies. Regardless, it is a fun toe-tapping film, and a good introduction to Buddy Holly&#39;s music.\r\n&quot;</code></pre>
 <p>The function <code>str_remove_all</code> removes all occurrences of a pattern from a text.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="basic-string-processing.html#cb48-1" tabindex="-1"></a><span class="fu">str_remove_all</span>(review, <span class="st">&quot;and&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="basic-string-processing.html#cb44-1" tabindex="-1"></a><span class="fu">str_remove_all</span>(review, <span class="st">&quot;and&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;Gary Busey is superb in this musical biography. Great singing  excellent soundtrack. The Buddy Holly Story is a much better movie than La Bamba. From reading other comments, there may be some historical inaccuracies. Regardless, it is a fun toe-tapping film,  a good introduction to Buddy Holly&#39;s music.\r\n&quot;</code></pre>
 <p>The function <code>str_replace_all</code> replaces all occurrences of a pattern with something else in a text.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="basic-string-processing.html#cb50-1" tabindex="-1"></a><span class="fu">str_replace_all</span>(review, <span class="st">&quot;and&quot;</span>, <span class="st">&quot;AND&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="basic-string-processing.html#cb46-1" tabindex="-1"></a><span class="fu">str_replace_all</span>(review, <span class="st">&quot;and&quot;</span>, <span class="st">&quot;AND&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;Gary Busey is superb in this musical biography. Great singing AND excellent soundtrack. The Buddy Holly Story is a much better movie than La Bamba. From reading other comments, there may be some historical inaccuracies. Regardless, it is a fun toe-tapping film, AND a good introduction to Buddy Holly&#39;s music.\r\n&quot;</code></pre>
-<p>The function <code>str_starts</code> tests whether a given text begins with a certain pattern and outputs a logical vector.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="basic-string-processing.html#cb52-1" tabindex="-1"></a><span class="fu">str_starts</span>(review, <span class="st">&quot;and&quot;</span>) </span></code></pre></div>
-<pre><code>## [1] FALSE</code></pre>
-<p>The function <code>str_ends</code> tests whether a text ends with a certain pattern and outputs a logical vector.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="basic-string-processing.html#cb54-1" tabindex="-1"></a><span class="fu">str_ends</span>(review, <span class="st">&quot;and&quot;</span>)</span></code></pre></div>
-<pre><code>## [1] FALSE</code></pre>
 <p>Like <code>strsplit</code>, the function <code>str_split</code> splits a text when a given pattern occurs. If no pattern is provided, then the text is split into individual symbols.</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="basic-string-processing.html#cb56-1" tabindex="-1"></a><span class="fu">str_split</span>(review, <span class="st">&quot;and&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="basic-string-processing.html#cb48-1" tabindex="-1"></a><span class="fu">str_split</span>(review, <span class="st">&quot;and&quot;</span>) </span></code></pre></div>
 <pre><code>## [[1]]
 ## [1] &quot;Gary Busey is superb in this musical biography. Great singing &quot;                                                                                                                                       
 ## [2] &quot; excellent soundtrack. The Buddy Holly Story is a much better movie than La Bamba. From reading other comments, there may be some historical inaccuracies. Regardless, it is a fun toe-tapping film, &quot;
 ## [3] &quot; a good introduction to Buddy Holly&#39;s music.\r\n&quot;</code></pre>
 <p>The function <code>str_split_fixed</code> splits a text when a given pattern occurs but only so often as is indicated by the argument <code>n</code>. So, even if the patter occur more often than <code>n</code>, <code>str_split_fixed</code> will only split the text <code>n</code> times.</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="basic-string-processing.html#cb58-1" tabindex="-1"></a><span class="fu">str_split_fixed</span>(review, <span class="st">&quot;and&quot;</span>, <span class="at">n =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="basic-string-processing.html#cb50-1" tabindex="-1"></a><span class="fu">str_split_fixed</span>(review, <span class="st">&quot;and&quot;</span>, <span class="at">n =</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>##      [,1]                                                            
 ## [1,] &quot;Gary Busey is superb in this musical biography. Great singing &quot;
 ##      [,2]                                                                                                                                                                                                   
@@ -352,31 +363,28 @@ To add something to the beginning of the pattern that we want to split the text 
 ##      [,3]                                              
 ## [1,] &quot; a good introduction to Buddy Holly&#39;s music.\r\n&quot;</code></pre>
 <p>The function <code>str_subset</code> extracts those subsets of a text that contain a certain pattern.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="basic-string-processing.html#cb60-1" tabindex="-1"></a><span class="fu">str_subset</span>(review_tok, <span class="st">&quot;and&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="basic-string-processing.html#cb52-1" tabindex="-1"></a><span class="fu">str_subset</span>(review_tok, <span class="st">&quot;and&quot;</span>) </span></code></pre></div>
 <pre><code>## [1] &quot;and&quot; &quot;and&quot;</code></pre>
 <p>The function <code>str_which</code> provides a vector with the indices of the texts that contain a certain pattern.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="basic-string-processing.html#cb62-1" tabindex="-1"></a><span class="fu">str_which</span>(review_tok, <span class="st">&quot;and&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="basic-string-processing.html#cb54-1" tabindex="-1"></a><span class="fu">str_which</span>(review_tok, <span class="st">&quot;and&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] 12 50</code></pre>
 <p>The function <code>str_view_all</code> shows the locations of all instances of a pattern in a text or vector of texts.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="basic-string-processing.html#cb64-1" tabindex="-1"></a><span class="fu">str_view_all</span>(review, <span class="st">&quot;and&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="basic-string-processing.html#cb56-1" tabindex="-1"></a><span class="fu">str_view_all</span>(review, <span class="st">&quot;and&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] │ Gary Busey is superb in this musical biography. Great singing &lt;and&gt; excellent soundtrack. The Buddy Holly Story is a much better movie than La Bamba. From reading other comments, there may be some historical inaccuracies. Regardless, it is a fun toe-tapping film, &lt;and&gt; a good introduction to Buddy Holly&#39;s music.{\r}
 ##     │</code></pre>
 <p>The function <code>str_pad</code> adds white spaces to a text or vector of texts so that they reach a given number of symbols.</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="basic-string-processing.html#cb66-1" tabindex="-1"></a><span class="co"># create text with white spaces</span></span>
-<span id="cb66-2"><a href="basic-string-processing.html#cb66-2" tabindex="-1"></a>text <span class="ot">&lt;-</span> <span class="st">&quot; this    is a    text   &quot;</span></span>
-<span id="cb66-3"><a href="basic-string-processing.html#cb66-3" tabindex="-1"></a><span class="fu">str_pad</span>(text, <span class="at">width =</span> <span class="dv">30</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="basic-string-processing.html#cb58-1" tabindex="-1"></a><span class="co"># create text with white spaces</span></span>
+<span id="cb58-2"><a href="basic-string-processing.html#cb58-2" tabindex="-1"></a>text <span class="ot">&lt;-</span> <span class="st">&quot; this    is a    text   &quot;</span></span>
+<span id="cb58-3"><a href="basic-string-processing.html#cb58-3" tabindex="-1"></a><span class="fu">str_pad</span>(text, <span class="at">width =</span> <span class="dv">30</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;       this    is a    text   &quot;</code></pre>
 <p>The function <code>str_trim</code> removes white spaces from the beginning(s) and end(s) of a text or vector of texts.</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="basic-string-processing.html#cb68-1" tabindex="-1"></a><span class="fu">str_trim</span>(text) </span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="basic-string-processing.html#cb60-1" tabindex="-1"></a><span class="fu">str_trim</span>(text) </span></code></pre></div>
 <pre><code>## [1] &quot;this    is a    text&quot;</code></pre>
 <p>The function <code>str_squish</code> removes white spaces that occur within a text or vector of texts.</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="basic-string-processing.html#cb70-1" tabindex="-1"></a><span class="fu">str_squish</span>(text)</span></code></pre></div>
-<pre><code>## [1] &quot;this is a text&quot;</code></pre>
-<p>The function <code>str_wrap</code> removes white spaces from the beginning(s) and end(s) of a text or vector of texts and also those white spaces that occur within a text or vector of texts.</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="basic-string-processing.html#cb72-1" tabindex="-1"></a><span class="fu">str_wrap</span>(text)</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="basic-string-processing.html#cb62-1" tabindex="-1"></a><span class="fu">str_squish</span>(text)</span></code></pre></div>
 <pre><code>## [1] &quot;this is a text&quot;</code></pre>
 <p>The function <code>str_order</code> provides a vector that represents the order of a vector of texts according to the lengths of texts in that vector.</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="basic-string-processing.html#cb74-1" tabindex="-1"></a><span class="fu">str_order</span>(reviews_pos_split)</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="basic-string-processing.html#cb64-1" tabindex="-1"></a><span class="fu">str_order</span>(reviews_pos_split)</span></code></pre></div>
 <pre><code>##   [1] 1522 2196  170 2011 1320 2161  231 1771 2525 1876  272  936 1413  287 1988
 ##  [16] 1276   40 1630  530 1727  168  127 2676 1826 2457 1420  438 2332 2696  528
 ##  [31]  910 2808 2279  828 2162 1580 2282  942 2081 2029 1811 2440 1036 2178  258
@@ -386,8 +394,8 @@ To add something to the beginning of the pattern that we want to split the text 
 ##  [91] 1175   25 2408 1663 2359 2576 1238  364  882  177
 ##  [ reached getOption(&quot;max.print&quot;) -- omitted 2747 entries ]</code></pre>
 <p>The function <code>str_sort</code> orders of a vector of texts according to the lengths of texts in that vector.</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="basic-string-processing.html#cb76-1" tabindex="-1"></a><span class="fu">str_sort</span>(reviews_pos_split) <span class="sc">%&gt;%</span></span>
-<span id="cb76-2"><a href="basic-string-processing.html#cb76-2" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="basic-string-processing.html#cb66-1" tabindex="-1"></a><span class="fu">str_sort</span>(reviews_pos_split) <span class="sc">%&gt;%</span></span>
+<span id="cb66-2"><a href="basic-string-processing.html#cb66-2" tabindex="-1"></a>  <span class="fu">head</span>()</span></code></pre></div>
 <pre><code>## [1] &quot;...And there were quite a few of these. &lt;br /&gt;&lt;br /&gt;I do not like this cartoon as much as many others, partly because it was made in its period. I much prefer cartoons with Daffy and Bugs which are fifteen or so years before-hand. Many people will like this, particularly people who always find violence funny, cartoon or not.&lt;br /&gt;&lt;br /&gt;The basic plot is a pretty well known one for Looney Tunes: Elmer goes out hunting, Daffy leads him to Bugs and Daffy ends up being shot instead. Also inserted are quite clever and highly entertaining jokes (some do not enhance the episode), ugly shooting and animation which is slightly mediocre. The plot is mainly geared by jokes - each joke keeps the episode going. This way of plot-going is not all that unusual in Looney Tunes (of course if you are pretty much a Looney Tunes boffin - or an eager one - like me, then you&#39;ll know this already).&lt;br /&gt;&lt;br /&gt;For people who love everything about Looney Tunes and Daffy Duck and like the sound of what I have said about it, enjoy \&quot;Rabbit Seasoning\&quot;!&lt;br /&gt;&lt;br /&gt;7 and a half out of ten.\r\n&quot;                                                                                                               
 ## [2] &quot;&#39;Had Ned Kelly been born later he probably would have won a Victoria Cross at Gallipolli&#39;. such was Ned&#39;s Bravery.&lt;br /&gt;&lt;br /&gt;In Australia and especially country Victoria the name Ned Kelly can be said and immediately recognised. In Greta he is still a Hero, the life Blood of the Town of Jerilderie depends on the tourism he created, but in Mansfield they still haven&#39;t forgotten that the three policeman that he &#39;murdered&#39; were from there.&lt;br /&gt;&lt;br /&gt;Many of the buildings he visited in his life are still standing. From the Old Melbourne Gaol where he was hanged, to the Post office he held up in Jerilderie. A cell he was once held in in Greta is on display in Benella and the site of Ann Jones&#39; Hotel, the station and even the logs where he was captured in Glenrowan can be visited.&lt;br /&gt;&lt;br /&gt;Evidence of all the events in the &quot;                                                                                                                                                                                                                                                                                                                                                                      
 ## [3] &quot;&#39;War &quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
@@ -395,60 +403,47 @@ To add something to the beginning of the pattern that we want to split the text 
 ## [5] &quot;\&quot; Så som i himmelen \&quot; .. as above so below.. that very special point where Divine and Human meet. I ADORE this film ! A gem. YES amazing grace !&lt;br /&gt;&lt;br /&gt;I was so deeply moved by its very HUMAN quality. I laughed and cried through a whole register , indeed several octaves of emotions.&lt;br /&gt;&lt;br /&gt;Mikael Nyqvist ís BRILLIANT as Daniel , a first rate passionate performance, charismatic and powerful. His inner light and exceptional talent shines through in every scene, every interaction ,in every meeting. I was totally mesmerised, enchanted and caught up the story, which is our collective story, the story of life itself.&lt;br /&gt;&lt;br /&gt;The film was also so inclusive of many archetypes, messiah, wounded child ,magical child, artist, teacher, priest, abuser, abused, victim, bully, divine fool - ALL the characters so real and true to life - all awakened great fondness and compassion in me. &lt;br /&gt;&lt;br /&gt;It is a real treat to see such a thought provoking yet thoroughly enjoyable, entertaining film. Oh ..mustn&#39;t forget the heavenly choir of angels and breathtakingly beautiful sound. &lt;br /&gt;&lt;br /&gt;THANK YOU ALL - This Swedish film will surely captivate people world-wide. BRILLIANT !\r\n&quot;
 ## [6] &quot;\&quot;Ah Ritchie&#39;s made another gangster film with Statham\&quot; thought the average fan, expecting another Snatch/Lock Stock; expecting perhaps a couple of temporal shifts, but none too hard for \&quot;me and the lads\&quot; to swallow after a few beers.&lt;br /&gt;&lt;br /&gt;Ah, pay attention, you do need to watch this film. No cups of tea, no extra diet cokes from the counter, no \&quot;keep it running\&quot; shouts as you nip to the fridge - watch the film! No laughs other than those you may make yourself from the considerable violence (and if that floats your boat, so be it) but sharp solid direction, excellent dialogue, and great performances.&lt;br /&gt;&lt;br /&gt;My favourite - Big Pussy from The Sopranos, always a reliable hood.\r\n&quot;</code></pre>
 <p>The function <code>str_c</code> combines texts into one text</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="basic-string-processing.html#cb78-1" tabindex="-1"></a><span class="fu">str_c</span>(review, reviews_pos[<span class="dv">7</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="basic-string-processing.html#cb68-1" tabindex="-1"></a><span class="fu">str_c</span>(review, reviews_pos[<span class="dv">7</span>])</span></code></pre></div>
 <pre><code>## [1] &quot;Gary Busey is superb in this musical biography. Great singing and excellent soundtrack. The Buddy Holly Story is a much better movie than La Bamba. From reading other comments, there may be some historical inaccuracies. Regardless, it is a fun toe-tapping film, and a good introduction to Buddy Holly&#39;s music.\r\nI think this is one hell of a movie...........We can see Steven fighting around with his martial art stuff again and like in all Segal movies there&#39;s a message in it, without the message it would be one of many action/fighting movies but the message is what makes segal movies great and special.\r\n&quot;</code></pre>
 <p>The function <code>str_conv</code> converts a text into a certain type of encoding, e.g. into <code>UTF-8</code> or <code>Latin1</code>.</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="basic-string-processing.html#cb80-1" tabindex="-1"></a><span class="fu">str_conv</span>(review, <span class="at">encoding =</span> <span class="st">&quot;UTF-8&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="basic-string-processing.html#cb70-1" tabindex="-1"></a><span class="fu">str_conv</span>(review, <span class="at">encoding =</span> <span class="st">&quot;UTF-8&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;Gary Busey is superb in this musical biography. Great singing and excellent soundtrack. The Buddy Holly Story is a much better movie than La Bamba. From reading other comments, there may be some historical inaccuracies. Regardless, it is a fun toe-tapping film, and a good introduction to Buddy Holly&#39;s music.\r\n&quot;</code></pre>
-<p>The function <code>str_dup</code> reduplicates a text or a vector of texts n times.</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="basic-string-processing.html#cb82-1" tabindex="-1"></a><span class="fu">str_dup</span>(review, <span class="at">times=</span><span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## [1] &quot;Gary Busey is superb in this musical biography. Great singing and excellent soundtrack. The Buddy Holly Story is a much better movie than La Bamba. From reading other comments, there may be some historical inaccuracies. Regardless, it is a fun toe-tapping film, and a good introduction to Buddy Holly&#39;s music.\r\nGary Busey is superb in this musical biography. Great singing and excellent soundtrack. The Buddy Holly Story is a much better movie than La Bamba. From reading other comments, there may be some historical inaccuracies. Regardless, it is a fun toe-tapping film, and a good introduction to Buddy Holly&#39;s music.\r\n&quot;</code></pre>
 <p>The function <code>str_flatten</code> combines a vector of texts into one text. The argument <code>collapse</code> defines the symbol that occurs between the combined texts. If the argument <code>collapse</code> is left out, the texts will be combined without any symbol between the combined texts.</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="basic-string-processing.html#cb84-1" tabindex="-1"></a><span class="fu">str_flatten</span>(<span class="fu">c</span>(review, reviews_pos[<span class="dv">7</span>]), <span class="at">collapse =</span> <span class="st">&quot; &quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="basic-string-processing.html#cb72-1" tabindex="-1"></a><span class="fu">str_flatten</span>(<span class="fu">c</span>(review, reviews_pos[<span class="dv">7</span>]), <span class="at">collapse =</span> <span class="st">&quot; &quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;Gary Busey is superb in this musical biography. Great singing and excellent soundtrack. The Buddy Holly Story is a much better movie than La Bamba. From reading other comments, there may be some historical inaccuracies. Regardless, it is a fun toe-tapping film, and a good introduction to Buddy Holly&#39;s music.\r\n I think this is one hell of a movie...........We can see Steven fighting around with his martial art stuff again and like in all Segal movies there&#39;s a message in it, without the message it would be one of many action/fighting movies but the message is what makes segal movies great and special.\r\n&quot;</code></pre>
 <p>The function <code>str_length</code> provides the length of texts in characters.</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="basic-string-processing.html#cb86-1" tabindex="-1"></a><span class="fu">str_length</span>(review)</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="basic-string-processing.html#cb74-1" tabindex="-1"></a><span class="fu">str_length</span>(review)</span></code></pre></div>
 <pre><code>## [1] 311</code></pre>
-<p>The function <code>str_replace_na</code> replaces NA in texts. It is important to note that NA, if it occurs within a string, is considered to be the literal string <code>NA</code>.</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="basic-string-processing.html#cb88-1" tabindex="-1"></a><span class="co"># create sentences with NA</span></span>
-<span id="cb88-2"><a href="basic-string-processing.html#cb88-2" tabindex="-1"></a>sentencesna <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Some text&quot;</span>, <span class="cn">NA</span>, <span class="st">&quot;Some more text&quot;</span>, <span class="st">&quot;Some NA text&quot;</span>)</span>
-<span id="cb88-3"><a href="basic-string-processing.html#cb88-3" tabindex="-1"></a><span class="co"># apply str_replace_na function</span></span>
-<span id="cb88-4"><a href="basic-string-processing.html#cb88-4" tabindex="-1"></a><span class="fu">str_replace_na</span>(sentencesna, <span class="at">replacement =</span> <span class="st">&quot;Something new&quot;</span>)</span></code></pre></div>
-<pre><code>## [1] &quot;Some text&quot;      &quot;Something new&quot;  &quot;Some more text&quot; &quot;Some NA text&quot;</code></pre>
-<p>The function <code>str_trunc</code> ends strings with … after a certain number of characters.</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="basic-string-processing.html#cb90-1" tabindex="-1"></a><span class="fu">str_trunc</span>(review, <span class="at">width =</span> <span class="dv">20</span>)</span></code></pre></div>
-<pre><code>##            textpos1000 
-## &quot;Gary Busey is sup...&quot;</code></pre>
 <p>The function <code>str_sub</code> extracts a string from a text from a start location to an end position (expressed as character positions).</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="basic-string-processing.html#cb92-1" tabindex="-1"></a><span class="fu">str_sub</span>(review, <span class="dv">5</span>, <span class="dv">25</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="basic-string-processing.html#cb76-1" tabindex="-1"></a><span class="fu">str_sub</span>(review, <span class="dv">5</span>, <span class="dv">25</span>)</span></code></pre></div>
 <pre><code>## [1] &quot; Busey is superb in t&quot;</code></pre>
 <p>The function <code>word</code> extracts words from a text (expressed as word positions).</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="basic-string-processing.html#cb94-1" tabindex="-1"></a><span class="fu">word</span>(review, <span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="basic-string-processing.html#cb78-1" tabindex="-1"></a><span class="fu">word</span>(review, <span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;Busey&quot;   &quot;is&quot;      &quot;superb&quot;  &quot;in&quot;      &quot;this&quot;    &quot;musical&quot;</code></pre>
 <p>The function <code>str_glue</code> combines strings and allows to input variables.</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="basic-string-processing.html#cb96-1" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="st">&quot;Fred&quot;</span></span>
-<span id="cb96-2"><a href="basic-string-processing.html#cb96-2" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="dv">50</span></span>
-<span id="cb96-3"><a href="basic-string-processing.html#cb96-3" tabindex="-1"></a>anniversary <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">&quot;1991-10-12&quot;</span>)</span>
-<span id="cb96-4"><a href="basic-string-processing.html#cb96-4" tabindex="-1"></a><span class="fu">str_glue</span>(</span>
-<span id="cb96-5"><a href="basic-string-processing.html#cb96-5" tabindex="-1"></a>  <span class="st">&quot;My name is {name}, &quot;</span>,</span>
-<span id="cb96-6"><a href="basic-string-processing.html#cb96-6" tabindex="-1"></a>  <span class="st">&quot;my age next year is {age + 1}, &quot;</span>,</span>
-<span id="cb96-7"><a href="basic-string-processing.html#cb96-7" tabindex="-1"></a>  <span class="st">&quot;and my anniversary is {format(anniversary, &#39;%A, %B %d, %Y&#39;)}.&quot;</span></span>
-<span id="cb96-8"><a href="basic-string-processing.html#cb96-8" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="basic-string-processing.html#cb80-1" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="st">&quot;Fred&quot;</span></span>
+<span id="cb80-2"><a href="basic-string-processing.html#cb80-2" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb80-3"><a href="basic-string-processing.html#cb80-3" tabindex="-1"></a>anniversary <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">&quot;1991-10-12&quot;</span>)</span>
+<span id="cb80-4"><a href="basic-string-processing.html#cb80-4" tabindex="-1"></a><span class="fu">str_glue</span>(</span>
+<span id="cb80-5"><a href="basic-string-processing.html#cb80-5" tabindex="-1"></a>  <span class="st">&quot;My name is {name}, &quot;</span>,</span>
+<span id="cb80-6"><a href="basic-string-processing.html#cb80-6" tabindex="-1"></a>  <span class="st">&quot;my age next year is {age + 1}, &quot;</span>,</span>
+<span id="cb80-7"><a href="basic-string-processing.html#cb80-7" tabindex="-1"></a>  <span class="st">&quot;and my anniversary is {format(anniversary, &#39;%A, %B %d, %Y&#39;)}.&quot;</span></span>
+<span id="cb80-8"><a href="basic-string-processing.html#cb80-8" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## My name is Fred, my age next year is 51, and my anniversary is Saturday, October 12, 1991.</code></pre>
 <div id="extracting-frequency-information-from-text" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Extracting frequency information from text<a href="basic-string-processing.html#extracting-frequency-information-from-text" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Frequency lists are very basic but also important when analysing text. Fortunately, it is very easy to extract frequency information and to create frequency lists with R. We can do this by first using the <code>unnest_tokens</code> function which splits texts into individual words, an then use the <code>count</code> function to get the raw frequencies of all word types in a text.</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="basic-string-processing.html#cb98-1" tabindex="-1"></a>reviews_pos <span class="sc">%&gt;%</span></span>
-<span id="cb98-2"><a href="basic-string-processing.html#cb98-2" tabindex="-1"></a>  <span class="co"># convert to data frame</span></span>
-<span id="cb98-3"><a href="basic-string-processing.html#cb98-3" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()<span class="sc">%&gt;%</span></span>
-<span id="cb98-4"><a href="basic-string-processing.html#cb98-4" tabindex="-1"></a>  <span class="co"># give name column with text</span></span>
-<span id="cb98-5"><a href="basic-string-processing.html#cb98-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">text =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb98-6"><a href="basic-string-processing.html#cb98-6" tabindex="-1"></a>  <span class="co"># tokenise</span></span>
-<span id="cb98-7"><a href="basic-string-processing.html#cb98-7" tabindex="-1"></a>  tidytext<span class="sc">::</span><span class="fu">unnest_tokens</span>(word, text) <span class="sc">%&gt;%</span></span>
-<span id="cb98-8"><a href="basic-string-processing.html#cb98-8" tabindex="-1"></a>  <span class="co"># count tokens</span></span>
-<span id="cb98-9"><a href="basic-string-processing.html#cb98-9" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(word, <span class="at">sort=</span>T) <span class="sc">%&gt;%</span></span>
-<span id="cb98-10"><a href="basic-string-processing.html#cb98-10" tabindex="-1"></a>  <span class="co"># inspect 20 most frequent tokens</span></span>
-<span id="cb98-11"><a href="basic-string-processing.html#cb98-11" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="basic-string-processing.html#cb82-1" tabindex="-1"></a>reviews_pos <span class="sc">%&gt;%</span></span>
+<span id="cb82-2"><a href="basic-string-processing.html#cb82-2" tabindex="-1"></a>  <span class="co"># convert to data frame</span></span>
+<span id="cb82-3"><a href="basic-string-processing.html#cb82-3" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb82-4"><a href="basic-string-processing.html#cb82-4" tabindex="-1"></a>  <span class="co"># give name column with text</span></span>
+<span id="cb82-5"><a href="basic-string-processing.html#cb82-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">text =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb82-6"><a href="basic-string-processing.html#cb82-6" tabindex="-1"></a>  <span class="co"># tokenise</span></span>
+<span id="cb82-7"><a href="basic-string-processing.html#cb82-7" tabindex="-1"></a>  tidytext<span class="sc">::</span><span class="fu">unnest_tokens</span>(word, text) <span class="sc">%&gt;%</span></span>
+<span id="cb82-8"><a href="basic-string-processing.html#cb82-8" tabindex="-1"></a>  <span class="co"># count tokens</span></span>
+<span id="cb82-9"><a href="basic-string-processing.html#cb82-9" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(word, <span class="at">sort=</span>T) <span class="sc">%&gt;%</span></span>
+<span id="cb82-10"><a href="basic-string-processing.html#cb82-10" tabindex="-1"></a>  <span class="co"># inspect 20 most frequent tokens</span></span>
+<span id="cb82-11"><a href="basic-string-processing.html#cb82-11" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">20</span>)</span></code></pre></div>
 <pre><code>##     word     n
 ## 1    the 13395
 ## 2    and  6869
@@ -471,19 +466,19 @@ To add something to the beginning of the pattern that we want to split the text 
 ## 19 movie  1527
 ## 20    on  1436</code></pre>
 <p>Extracting N-grams is also very easy as the <code>unnest_tokens</code> function can an argument called <code>token</code> in which we can specify that we want to extract n-grams, If we do this, then we need to specify the <code>n</code> as a separate argument. Below we specify that we want the frequencies of all 4-grams.</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="basic-string-processing.html#cb100-1" tabindex="-1"></a>reviews_pos <span class="sc">%&gt;%</span></span>
-<span id="cb100-2"><a href="basic-string-processing.html#cb100-2" tabindex="-1"></a>    <span class="co"># convert to data frame</span></span>
-<span id="cb100-3"><a href="basic-string-processing.html#cb100-3" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()<span class="sc">%&gt;%</span></span>
-<span id="cb100-4"><a href="basic-string-processing.html#cb100-4" tabindex="-1"></a>  <span class="co"># give name column with text</span></span>
-<span id="cb100-5"><a href="basic-string-processing.html#cb100-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">text =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb100-6"><a href="basic-string-processing.html#cb100-6" tabindex="-1"></a>  <span class="co"># clean data</span></span>
-<span id="cb100-7"><a href="basic-string-processing.html#cb100-7" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">text =</span> <span class="fu">str_remove_all</span>(text, <span class="st">&quot;&lt;.*?&gt;&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb100-8"><a href="basic-string-processing.html#cb100-8" tabindex="-1"></a>  <span class="co"># tokenise and extract trigrams</span></span>
-<span id="cb100-9"><a href="basic-string-processing.html#cb100-9" tabindex="-1"></a>  tidytext<span class="sc">::</span> <span class="fu">unnest_tokens</span>(word, text, <span class="at">token=</span><span class="st">&quot;ngrams&quot;</span>, <span class="at">n=</span><span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb100-10"><a href="basic-string-processing.html#cb100-10" tabindex="-1"></a>  <span class="co"># count tokens</span></span>
-<span id="cb100-11"><a href="basic-string-processing.html#cb100-11" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(word, <span class="at">sort=</span>T) <span class="sc">%&gt;%</span></span>
-<span id="cb100-12"><a href="basic-string-processing.html#cb100-12" tabindex="-1"></a>  <span class="co"># inspect ten most frequent tri-grams</span></span>
-<span id="cb100-13"><a href="basic-string-processing.html#cb100-13" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="basic-string-processing.html#cb84-1" tabindex="-1"></a>reviews_pos <span class="sc">%&gt;%</span></span>
+<span id="cb84-2"><a href="basic-string-processing.html#cb84-2" tabindex="-1"></a>    <span class="co"># convert to data frame</span></span>
+<span id="cb84-3"><a href="basic-string-processing.html#cb84-3" tabindex="-1"></a>  <span class="fu">as.data.frame</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb84-4"><a href="basic-string-processing.html#cb84-4" tabindex="-1"></a>  <span class="co"># give name column with text</span></span>
+<span id="cb84-5"><a href="basic-string-processing.html#cb84-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">text =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb84-6"><a href="basic-string-processing.html#cb84-6" tabindex="-1"></a>  <span class="co"># clean data</span></span>
+<span id="cb84-7"><a href="basic-string-processing.html#cb84-7" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">text =</span> <span class="fu">str_remove_all</span>(text, <span class="st">&quot;&lt;.*?&gt;&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb84-8"><a href="basic-string-processing.html#cb84-8" tabindex="-1"></a>  <span class="co"># tokenise and extract trigrams</span></span>
+<span id="cb84-9"><a href="basic-string-processing.html#cb84-9" tabindex="-1"></a>  tidytext<span class="sc">::</span> <span class="fu">unnest_tokens</span>(word, text, <span class="at">token=</span><span class="st">&quot;ngrams&quot;</span>, <span class="at">n=</span><span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb84-10"><a href="basic-string-processing.html#cb84-10" tabindex="-1"></a>  <span class="co"># count tokens</span></span>
+<span id="cb84-11"><a href="basic-string-processing.html#cb84-11" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(word, <span class="at">sort=</span>T) <span class="sc">%&gt;%</span></span>
+<span id="cb84-12"><a href="basic-string-processing.html#cb84-12" tabindex="-1"></a>  <span class="co"># inspect ten most frequent tri-grams</span></span>
+<span id="cb84-13"><a href="basic-string-processing.html#cb84-13" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
 <pre><code>##             word   n
 ## 1     one of the 219
 ## 2      this is a 127
@@ -514,35 +509,35 @@ To add something to the beginning of the pattern that we want to split the text 
 <div id="practice-regular-expressions" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Practice: regular expressions<a href="basic-string-processing.html#practice-regular-expressions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We now want to show all words in the tokenized review that contain <code>y</code>.</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="basic-string-processing.html#cb102-1" tabindex="-1"></a>review_tok[<span class="fu">str_detect</span>(review_tok, <span class="st">&quot;[y]&quot;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="basic-string-processing.html#cb86-1" tabindex="-1"></a>review_tok[<span class="fu">str_detect</span>(review_tok, <span class="st">&quot;[y]&quot;</span>)]</span></code></pre></div>
 <pre><code>## [1] &quot;Gary&quot;      &quot;Busey&quot;     &quot;biography&quot; &quot;Buddy&quot;     &quot;Holly&quot;     &quot;Story&quot;    
 ## [7] &quot;may&quot;       &quot;Buddy&quot;     &quot;Holly&#39;s&quot;</code></pre>
 <p>Show all words in the split tokenized review that begin with a lower case <code>a</code>.</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="basic-string-processing.html#cb104-1" tabindex="-1"></a>review_tok[<span class="fu">str_detect</span>(review_tok, <span class="st">&quot;^a&quot;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="basic-string-processing.html#cb88-1" tabindex="-1"></a>review_tok[<span class="fu">str_detect</span>(review_tok, <span class="st">&quot;^a&quot;</span>)]</span></code></pre></div>
 <pre><code>## [1] &quot;and&quot; &quot;a&quot;   &quot;a&quot;   &quot;and&quot; &quot;a&quot;</code></pre>
 <p>Show all words in the split tokenized review that end in a lower case <code>s</code>.</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="basic-string-processing.html#cb106-1" tabindex="-1"></a>review_tok[<span class="fu">str_detect</span>(review_tok, <span class="st">&quot;s$&quot;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="basic-string-processing.html#cb90-1" tabindex="-1"></a>review_tok[<span class="fu">str_detect</span>(review_tok, <span class="st">&quot;s$&quot;</span>)]</span></code></pre></div>
 <pre><code>## [1] &quot;is&quot;           &quot;this&quot;         &quot;is&quot;           &quot;comments&quot;     &quot;inaccuracies&quot;
 ## [6] &quot;Regardless&quot;   &quot;is&quot;           &quot;Holly&#39;s&quot;</code></pre>
 <p>Show all words in the split tokenized review in which there is an <code>e</code>, then any other character, and than another <code>n</code>.</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="basic-string-processing.html#cb108-1" tabindex="-1"></a>review_tok[<span class="fu">str_detect</span>(review_tok, <span class="st">&quot;o..y&quot;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="basic-string-processing.html#cb92-1" tabindex="-1"></a>review_tok[<span class="fu">str_detect</span>(review_tok, <span class="st">&quot;o..y&quot;</span>)]</span></code></pre></div>
 <pre><code>## [1] &quot;Holly&quot;   &quot;Holly&#39;s&quot;</code></pre>
 <p>Show all words in the tokenized review text in which there is an <code>e</code>, then two other characters, and than another <code>n</code>.</p>
-<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="basic-string-processing.html#cb110-1" tabindex="-1"></a>review_tok[<span class="fu">str_detect</span>(review_tok, <span class="st">&quot;o.{2,2}y&quot;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="basic-string-processing.html#cb94-1" tabindex="-1"></a>review_tok[<span class="fu">str_detect</span>(review_tok, <span class="st">&quot;o.{2,2}y&quot;</span>)]</span></code></pre></div>
 <pre><code>## [1] &quot;Holly&quot;   &quot;Holly&#39;s&quot;</code></pre>
 <p>Show all words that consist of exactly three alphabetical characters in the tokenized review .</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="basic-string-processing.html#cb112-1" tabindex="-1"></a>review_tok[<span class="fu">str_detect</span>(review_tok, <span class="st">&quot;^[:alpha:]{3,3}$&quot;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="basic-string-processing.html#cb96-1" tabindex="-1"></a>review_tok[<span class="fu">str_detect</span>(review_tok, <span class="st">&quot;^[:alpha:]{3,3}$&quot;</span>)]</span></code></pre></div>
 <pre><code>## [1] &quot;and&quot; &quot;The&quot; &quot;may&quot; &quot;fun&quot; &quot;and&quot;</code></pre>
 <p>Show all words that consist of six or more alphabetical characters in the tokenized review.</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="basic-string-processing.html#cb114-1" tabindex="-1"></a>review_tok[<span class="fu">str_detect</span>(review_tok, <span class="st">&quot;^[:alpha:]{6,}$&quot;</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="basic-string-processing.html#cb98-1" tabindex="-1"></a>review_tok[<span class="fu">str_detect</span>(review_tok, <span class="st">&quot;^[:alpha:]{6,}$&quot;</span>)]</span></code></pre></div>
 <pre><code>##  [1] &quot;superb&quot;       &quot;musical&quot;      &quot;biography&quot;    &quot;singing&quot;      &quot;excellent&quot;   
 ##  [6] &quot;soundtrack&quot;   &quot;better&quot;       &quot;reading&quot;      &quot;comments&quot;     &quot;historical&quot;  
 ## [11] &quot;inaccuracies&quot; &quot;Regardless&quot;   &quot;introduction&quot;</code></pre>
 <p>Replace all lower case <code>a</code>s with upper case <code>E</code>s in the review.</p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="basic-string-processing.html#cb116-1" tabindex="-1"></a><span class="fu">str_replace_all</span>(review, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;E&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="basic-string-processing.html#cb100-1" tabindex="-1"></a><span class="fu">str_replace_all</span>(review, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;E&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;GEry Busey is superb in this musicEl biogrEphy. GreEt singing End excellent soundtrEck. The Buddy Holly Story is E much better movie thEn LE BEmbE. From reEding other comments, there mEy be some historicEl inEccurEcies. RegErdless, it is E fun toe-tEpping film, End E good introduction to Buddy Holly&#39;s music.\r\n&quot;</code></pre>
 <p>Remove all non-alphabetical characters in the tokenized review.</p>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="basic-string-processing.html#cb118-1" tabindex="-1"></a><span class="fu">str_remove_all</span>(review_tok, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">W&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="basic-string-processing.html#cb102-1" tabindex="-1"></a><span class="fu">str_remove_all</span>(review_tok, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">W&quot;</span>)</span></code></pre></div>
 <pre><code>##  [1] &quot;Gary&quot;         &quot;Busey&quot;        &quot;is&quot;           &quot;superb&quot;       &quot;in&quot;          
 ##  [6] &quot;this&quot;         &quot;musical&quot;      &quot;biography&quot;    &quot;&quot;             &quot;Great&quot;       
 ## [11] &quot;singing&quot;      &quot;and&quot;          &quot;excellent&quot;    &quot;soundtrack&quot;   &quot;&quot;            
@@ -556,7 +551,7 @@ To add something to the beginning of the pattern that we want to split the text 
 ## [51] &quot;a&quot;            &quot;good&quot;         &quot;introduction&quot; &quot;to&quot;           &quot;Buddy&quot;       
 ## [56] &quot;Hollys&quot;       &quot;music&quot;        &quot;&quot;</code></pre>
 <p>Remove all white spaces in the review.</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="basic-string-processing.html#cb120-1" tabindex="-1"></a><span class="fu">str_remove_all</span>(review, <span class="st">&quot; &quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="basic-string-processing.html#cb104-1" tabindex="-1"></a><span class="fu">str_remove_all</span>(review, <span class="st">&quot; &quot;</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;GaryBuseyissuperbinthismusicalbiography.Greatsingingandexcellentsoundtrack.TheBuddyHollyStoryisamuchbettermoviethanLaBamba.Fromreadingothercomments,theremaybesomehistoricalinaccuracies.Regardless,itisafuntoe-tappingfilm,andagoodintroductiontoBuddyHolly&#39;smusic.\r\n&quot;</code></pre>
 </div>
 </div>

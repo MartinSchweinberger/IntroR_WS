@@ -108,7 +108,7 @@ You can follow this workshop in different ways - you can sit back and watch it l
 
 ## Getting started
 
-For everything to work, please do the following either before the workshop or at the beginning of the workshop (I will guide you if you want to do this at the begiining of the workshop):
+For everything to work, please do the following either before the workshop or at the beginning of the workshop (I will guide you if you want to do this at the begining of the workshop):
 
 **GitHub**
 
@@ -126,6 +126,6 @@ This will then create an R Project in the project folder.
 
 **Data and files**
 
-* I will send round some data sets - please store/save them in the subfolder called *data*.
+* The data is ready for download in the data folder of the [GitHub repository for this workshop](https://github.com/MartinSchweinberger/IntroR_WS) but I will bring a USB stick with the required  data sets - please store/save them in the folder called *data* in the folder called *IntroR_WS*.
 
 

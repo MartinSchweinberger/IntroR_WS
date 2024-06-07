@@ -2,519 +2,332 @@
 
 > **UNFINISHED! WORK IN PROGRESS! I'M STILL WORKING ON THE CONTENT**
 
-This tutorial introduces basic methods of Text Analysis [see @bernard1998text; @kabanoff1997introduction; @popping2000computer], i.e. computer-based analysis of language data or the (semi-)automated extraction of information from text. In the following, we will explore selected methods. 
+This tutorial introduces basic methods of Text Analysis [see @bernard1998text; @kabanoff1997introduction; @popping2000computer], i.e. computer-based analysis of language data or the (semi-)automated extraction of information from text. In the following, we will explore selected methods. The methods we will focus on are:
+
+* Sentiment Analysis
+
+* Keyword Detection
+
+* Topic Modelling
+
+* Network Analysis
 
 
-**Preparation and session set up**
+## What is Text Analysis?
 
 
-This tutorial is based on R. If you're new to R or haven't installed it yet, you can find an introduction and installation instructions [here](https://ladal.edu.au/intror.html). To ensure the scripts below run smoothly, we need to install specific R packages from a library. If you've already installed these packages, you can skip this section. To install them, run the code below (which may take 1 to 5 minutes).
-
-```{r prep1, echo=T, eval = F, message=FALSE, warning=FALSE}
-# install packages
-install.packages("quanteda")
-install.packages("dplyr")
-install.packages("stringr")
-install.packages("ggplot2")
-install.packages("tm")
-install.packages("udpipe")
-install.packages("tidytext")
-install.packages("wordcloud2")
-install.packages("quanteda.textstats")
-install.packages("quanteda.textplots")
-install.packages("ggraph")
-install.packages("flextable")
-# install klippy for copy-to-clipboard button in code chunks
-install.packages("remotes")
-remotes::install_github("rlesur/klippy")
+```{r ta, echo=FALSE, out.width= "35%", out.extra='style="float:right; padding:10px"'}
+knitr::include_graphics("https://slcladal.github.io/images/ta.png")
 ```
 
-Once all packages are installed, you can activate them bu executing (running) the code chunk below.
+Text Analysis (TA) refers to the process of examining, processing, and interpreting unstructured data  (texts) to uncover actionable knowledge using computational methods. Unstructured data (text) can, for example, include emails, literary texts, letters, articles, advertisements, official documents, social media content, transcripts, and product reviews. Actionable knowledge refers to insights and patterns used to classify, sort, extract information, determine relationships, identify trends, and make informed decisions.
+
+Sometimes, Text *Analysis* is distinguished from Text *Analytics*. In this context, Text Analysis refers to manual, close-reading, and qualitative interpretative approaches, while Text Analytics refers to quantitative, computational analysis of text. However, in this tutorial, we consider Text Analysis and Text Analytics to be synonymous, encompassing any computer-based qualitative or quantitative method for analyzing text. 
+
+## Preparation and session set up
+
+
+To ensure the scripts below run smoothly, we need to install specific R packages from a library. If you've already installed these packages, you can skip this section. To install them, run the code below (which may take 1 to 5 minutes).
+
+```{r prep1, echo=T, eval = F, message=FALSE, warning=FALSE}
+install.packages("flextable")
+install.packages("GGally")
+install.packages("ggraph")
+install.packages("gutenbergr")
+install.packages("igraph")
+install.packages("lda")
+install.packages("ldatuning")
+install.packages("Matrix")
+install.packages("network")
+install.packages("quanteda")
+install.packages("quanteda.textplots")
+install.packages("quanteda.textstats")
+install.packages("RColorBrewer")
+install.packages("reshape2")
+install.packages("slam")
+install.packages("sna")
+install.packages("textdata")
+install.packages("tidygraph")
+install.packages("tidytext")
+install.packages("tm")
+install.packages("topicmodels")
+install.packages("udpipe")
+install.packages("wordcloud")
+install.packages("wordcloud2")
+```
+
+Once all packages are installed, you can activate them by executing (running) the code chunk below.
 
 ```{r prep2, message=FALSE, warning=FALSE} 
 # load packages
-library(dplyr)
-library(stringr)
-library(ggplot2)
 library(flextable)
-library(quanteda)
-library(tm)
-library(udpipe)
-library(tidytext)
-library(wordcloud2)
-library(flextable)
-library(quanteda.textstats)
-library(quanteda.textplots)
+library(GGally)
 library(ggraph)
-library(tidyr)
+library(gutenbergr)
+library(igraph)
+library(lda)
+library(ldatuning)
+library(Matrix)
+library(network)
+library(quanteda)
+library(quanteda.textplots)
+library(quanteda.textstats)
+library(RColorBrewer)
+library(reshape2)
+library(slam)
+library(sna)
+library(textdata)
+library(tidygraph)
+library(tidytext)
+library(tidyverse)
+library(tm)
+library(topicmodels)
+library(udpipe)
+library(wordcloud)
+library(wordcloud2)
 # activate klippy for copy-to-clipboard button
 klippy::klippy()
 ```
 
-Once you have  initiated the session by executing the code shown above, you are good to go.
 
-### Frequency changes
+Next, we need to load our data. For the first part which focuses on sentiment analysis, we will use the IMDB data consisting of positive and negative reviews which we load by executing the code chunk below.
 
-We can also explore how the term *alice* is used throughout the chapters of our example text. To begin, let's extract the word count for each chapter.
-
-```{r wf13, message=FALSE, warning=FALSE}
-# extract the number of words per chapter
-Words <- text_chapters %>%
-  # split each chapter into words based on spaces
-  stringr::str_split(" ")  %>%
-  # measure the length (number of words) in each chapter
-  lengths()
-# display the resulting data, which contains the word counts per chapter
-Words
+```{r load_texts_wc,  message=F, warning=F}
+# load reviews
+posreviews <- list.files(here::here("data/reviews_pos"), full.names = T, pattern = ".*txt") %>%
+  purrr::map_chr(~ readr::read_file(.)) %>% str_c(collapse = " ") %>% str_remove_all("<.*?>")
+negreviews <- list.files(here::here("data/reviews_neg"), full.names = T, pattern = ".*txt") %>%
+  purrr::map_chr(~ readr::read_file(.))%>% str_c(collapse = " ") %>% str_remove_all("<.*?>")
+# inspect
+str(posreviews); str(negreviews)
 ```
 
-Next, we extract the number of matches in each chapter.
 
-```{r wf14, message=FALSE, warning=FALSE}
-# extract the number of matches of "alice" per chapter
-Matches <- text_chapters %>%
-  # count the number of times "alice" appears in each chapter
-  stringr::str_count("alice")
-# display the resulting data, which shows the number of matches of "alice" per chapter
-Matches
+
+# Sentiment Analysis
+
+This part of the workshop  showcases how to perform SA on textual data  using R. The analysis shown here is in parts based on the 2^nd^ chapter of *Text Mining with R* - the e-version of this chapter on [sentiment analysis can be found here](https://www.tidytextmining.com/sentiment.html).
+
+## What is Sentiment Analysis?
+
+
+Sentiment Analysis (SA) extracts information on emotion or opinion from natural language [@silge2017text]. Most forms of SA provides information about positive or negative polarity, e.g. whether a tweet is *positive* or *negative*. As such, SA represents a type of classifier that assigns values to texts. As most SA only provide information about polarity, SA is often regarded as rather coarse-grained and, thus, rather irrelevant for the types of research questions in linguistics. 
+
+In the language sciences, SA can also be a very helpful tool if the type of SA provides more fine-grained information. In the following, we will perform such a information-rich SA. The SA used here does not only provide information about polarity but it will also provide association values for eight core emotions. 
+
+The more fine-grained output is made possible by relying on the *Word-Emotion Association Lexicon* [@mohammad2013crowdsourcing], which comprises 10,170 terms, and in which lexical elements are assigned scores based on ratings gathered through the crowd-sourced Amazon Mechanical Turk service. For the Word-Emotion Association Lexicon raters were asked whether a given word was associated with one of eight emotions. The resulting associations between terms and emotions are based on 38,726 ratings from 2,216 raters who answered a sequence of questions for each word which were then fed into the emotion association rating [cf. @mohammad2013crowdsourcing]. Each term was rated 5 times. For 85 percent of words, at least 4 raters provided identical ratings. For instance, the word *cry* or *tragedy* are more readily associated with SADNESS while words such as *happy* or *beautiful* are indicative of JOY and words like *fit* or *burst* may indicate ANGER. This means that the SA here allows us to investigate the expression of certain core emotions rather than merely classifying statements along the lines of a crude positive-negative distinction. 
+
+We start by writing a function that clean the data. This allows us to feed our texts into the function and avoids duplicating code. Also, this showcases how you can write functions.  
+
+
+```{r sa5, cmessage=FALSE, warning=FALSE}
+txtclean <- function(x, title){
+  require(dplyr)
+  require(stringr)
+  require(tibble)
+  x <- x %>%
+    iconv(to = "UTF-8") %>%
+    base::tolower() %>%
+    paste0(collapse = " ") %>%
+    stringr::str_squish()%>%
+    stringr::str_split(" ") %>%
+    unlist() %>%
+    tibble::tibble() %>%
+    dplyr::select(word = 1, everything()) %>%
+    dplyr::mutate(type = title) %>%
+    dplyr::anti_join(stop_words) %>%
+    dplyr::mutate(word = str_remove_all(word, "\\W")) %>%
+    dplyr::filter(word != "")
+}
 ```
 
-Now, we extract the names of the chapters and create a table with the chapter names and the relative frequency of matches per 1,000 words.
+Process and clean texts.
 
-```{r wf15, message=FALSE, warning=FALSE}
-# extract chapters
-Chapters <- paste0("chapter", 0:(length(text_chapters)-1))
-Chapters
+```{r sa7, message=FALSE, warning=FALSE}
+# process text data
+posreviews_clean <- txtclean(posreviews, "Positive Review")
+negreviews_clean <- txtclean(negreviews, "Negative Review")
+# inspect
+str(posreviews_clean); str(negreviews_clean)
 ```
+Now, we combine the data with the *Word-Emotion Association Lexicon* [@mohammad2013crowdsourcing]. 
 
-Next, we combine the information in a single data frame and add a column containing the relative frequency of *alice* in each chapter.
-
-```{r wf16, message=FALSE, warning=FALSE}
-# create table of results
-tb <- data.frame(Chapters, Matches, Words) %>%
-  # create new variable with the relative frequency
-  dplyr::mutate(Frequency = round(Matches/Words*1000, 2)) %>%
-  # reorder chapters
-  dplyr::mutate(Chapters = factor(Chapters, levels =c(paste0("chapter", 0:12))))
-```
-
-```{r wf17b, echo = F, message=FALSE, warning=FALSE}
+```{r bsa1b, message=FALSE, warning=FALSE}
+reviews_annotated <- rbind(posreviews_clean, negreviews_clean) %>%
+  dplyr::group_by(type) %>%
+  dplyr::mutate(words = n()) %>%
+  dplyr::left_join(tidytext::get_sentiments("nrc")) %>%
+  dplyr::mutate(type = factor(type),
+                sentiment = factor(sentiment))
 # inspect data
-tb %>%
+reviews_annotated %>%
   as.data.frame() %>%
-  head(15) %>%
-  flextable() %>%
-  flextable::set_table_properties(width = .5, layout = "autofit") %>%
-  flextable::theme_zebra() %>%
-  flextable::fontsize(size = 12) %>%
-  flextable::fontsize(size = 12, part = "header") %>%
-  flextable::align_text_col(align = "center") %>%
-  flextable::set_caption(caption = "Words and their (relative) freqeuncy across in the example text by frequency.")  %>%
-  flextable::border_outer()
+  head(10)
 ```
 
+The resulting table shows each word token by the type of review in which it occurred, the overall number of tokens in the type of review, and the sentiment with which a token is associated.
 
-Now, let's visualize the relative frequencies of our search term in each chapter.
+## Exporting the results
 
-```{r wf18, echo=T, eval = T, message=FALSE, warning=FALSE}
-# create a plot using ggplot
-ggplot(tb, aes(x = Chapters, y = Frequency, group = 1)) + 
-  # add a smoothed line (trendline) in purple color
-  geom_smooth(color = "purple") +
-  # add a line plot in dark gray color
-  geom_line(color = "darkgray") +         
-  # remove fill from the legend
-  guides(color = guide_legend(override.aes = list(fill = NA))) +
-  # set a white and black theme
+To export the table with the results as an MS Excel spreadsheet, we use `write_xlsx`. Be aware that we use the `here` function to  save the file in the current working directory.
+
+```{r eval = F, warning=F, message=F}
+# save data
+write_xlsx(reviews_annotated, here::here("data/reviews_annotated.xlsx"))
+```
+
+## Summarizing results
+
+After preforming the sentiment analysis, we can now display and summarize the results of the SA visually and add information to the table produced by the sentiment analysis (such as calculating the percentages of the prevalence of emotions across the review type and the rate of emotions across review types).
+
+```{r bsa3, message=FALSE, warning=FALSE}
+reviews_summarised <- reviews_annotated %>%
+  dplyr::group_by(type) %>%
+  dplyr::group_by(type, sentiment) %>%
+  dplyr::summarise(sentiment = unique(sentiment),
+                   sentiment_freq = n(),
+                   words = unique(words)) %>%
+  dplyr::filter(is.na(sentiment) == F) %>%
+  dplyr::mutate(percentage = round(sentiment_freq/words*100, 1),
+                sentiment = factor(sentiment, 
+                                   levels = c("anger", "fear", "disgust", "sadness", "anticipation", "surprise", "trust", "joy", "negative", "positive"))) %>%
+  dplyr::group_by(sentiment) %>%
+  dplyr::mutate(total = sum(percentage)) %>%
+  dplyr::group_by(sentiment, type) %>%
+  dplyr::mutate(ratio = round(percentage/total*100, 1))
+# inspect data
+reviews_summarised %>%
+  as.data.frame() %>%
+  head(10)
+```
+
+To export the table with the results as an MS Excel spreadsheet, we use `write_xlsx`. Be aware that we use the `here` function to  save the file in the current working directory.
+
+```{r eval = F, warning=F, message=F}
+# save data
+write_xlsx(reviews_summarised, here::here("data/reviews_summarised.xlsx"))
+```
+
+## Visualizing results
+
+After performing the SA, we can  display the emotions by review type ordered from more negative (*red*) to more positive (*blue*).
+
+```{r bsa7, message=FALSE, warning=FALSE}
+reviews_summarised %>%
+  dplyr::filter(sentiment != "positive",
+         sentiment != "negative") %>%
+  ggplot(aes(type, percentage, fill = sentiment, label = percentage)) +    
+  geom_bar(stat="identity", position=position_dodge()) + 
+  geom_text(hjust=1.5, position = position_dodge(0.9)) +
+  scale_fill_brewer(palette = "RdBu") +
   theme_bw() +
-  # rotate x-axis text by 45 degrees and adjust alignment
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
-  # customize the y-axis label
-  scale_y_continuous(name = "Relative Frequency (per 1,000 words)")
-
+  theme(legend.position = "right") +
+  coord_flip()
 ```
 
-### Dispersion plots
 
-To show when in a text or in a collection of texts certain terms occur, we can use *dispersion plots*. The `quanteda` package offers a very easy-to-use function `textplot_xray` to generate dispersion plots.
+We can also visualize the results and show the rate to identify what type is more "positive" and what type is more "negative".
 
-```{r dp, warning=F, message=F}
-# add chapter names
-names(text_chapters) <- Chapters
-# generate corpus from chapters
-text_corpus <- quanteda::corpus(text_chapters)
-# generate dispersion plots
-quanteda.textplots::textplot_xray(kwic(text_corpus, pattern = "alice"),
-                                  kwic(text_corpus, pattern = "hatter"),
-                                  sort = T)
+```{r bsa5, message=FALSE, warning=FALSE}
+reviews_summarised %>%
+  dplyr::filter(sentiment != "positive",
+         sentiment != "negative") %>%
+  ggplot(aes(sentiment, ratio, fill = type, label = ratio)) +    
+  geom_bar(stat="identity",   
+           position=position_fill()) + 
+  geom_text(position = position_fill(vjust = 0.5)) +
+  scale_fill_manual(name = "", values=c("orange", "gray70")) +
+  scale_y_continuous(name ="Percent", breaks = seq(0, 1, .2), labels = seq(0, 100, 20)) +
+  theme_bw() +
+  theme(legend.position = "top")
 ```
 
-We can modify the plot by saving it into an object and then use `ggplot` to modify it appearance.
+## Identifying important emotives
 
-```{r dp2, warning=F, message=F}
-# generate and save dispersion plots
-dp <- quanteda.textplots::textplot_xray(kwic(text_corpus, pattern = "alice"),
-                                        kwic(text_corpus, pattern = "cat"))
-# modify plot
-dp + aes(color = keyword) + 
-  scale_color_manual(values = c('red', 'blue')) +
-  theme(legend.position = "none")
-```
+We now check, which words have contributed to the emotionality scores. In other words, we investigate, which words are most important for the emotion scores within each review type. For the sake of interpretability, we will remove several core emotion categories and also the polarity.
 
-### Over- and underuse
-
-Frequency data serves as a valuable lens through which we can explore the essence of a text. For instance, when we examine private dialogues, we often encounter higher occurrences of second-person pronouns compared to more formal text types like scripted monologues or speeches. This insight holds the potential to aid in text classification and assessing text formality.
-
-To illustrate, consider the following statistics: the counts of second-person pronouns, *you* and *your*, as well as the total word count excluding these pronouns in private dialogues versus scripted monologues within the Irish segment of the International Corpus of English (ICE). Additionally, the tables provide the percentage of second-person pronouns in both text types, enabling us to discern whether private dialogues indeed contain more of these pronouns compared to scripted monologues, such as speeches.
-
-```{r ou1, eval=T, echo=F, message=FALSE, warning=FALSE, paged.print=FALSE}
-# create a matrix 'numbers' with rows and columns
-numbers <- matrix(c("you, your", "6761", "659", 
-                    "Other words", "259625", "105295", 
-                    "Percent", "2.60", "0.63"), 
-                  byrow = TRUE, nrow = 3)
-# assign column names to the matrix
-colnames(numbers) <- c("", "Private dialogues", "Scripted monologues")
-```
-
-```{r ou1b, echo = F, message=FALSE, warning=FALSE}
+```{r contribsa1, message=FALSE, warning=FALSE}
+reviews_importance <- reviews_annotated %>%
+  dplyr::filter(!is.na(sentiment),
+         sentiment != "anticipation",
+         sentiment != "surprise",
+         sentiment != "disgust",
+         sentiment != "negative",
+         sentiment != "sadness",
+         sentiment != "positive") %>%
+  dplyr::mutate(sentiment = factor(sentiment, levels = c("anger", "fear",  "trust", "joy"))) %>%
+  dplyr::group_by(type) %>%
+  dplyr::count(word, sentiment, sort = TRUE) %>%
+  dplyr::group_by(type, sentiment) %>%
+  dplyr::top_n(5) %>%
+  dplyr::mutate(score = n/sum(n))
 # inspect data
-ndf <- numbers %>%
-  as.data.frame()
-colnames(ndf)[1] <- "."
-ndf %>%
-  flextable() %>%
-  flextable::set_table_properties(width = .5, layout = "autofit") %>%
-  flextable::theme_zebra() %>%
-  flextable::fontsize(size = 12) %>%
-  flextable::fontsize(size = 12, part = "header") %>%
-  flextable::align_text_col(align = "center") %>%
-  flextable::set_caption(caption = "Use of 2nd person pronouns (and all other words) in ICE Ireland.")  %>%
-  flextable::border_outer()
-```
-
-
-This straightforward example highlights that second-person pronouns constitute 2.6 percent of all words in private dialogues, yet they represent only 0.63 percent in scripted speeches. To vividly illustrate such variations, we can employ association and mosaic plots, which offer effective visual presentations.
-
-```{r ou2, message=FALSE, warning=FALSE, paged.print=FALSE}
-# create a matrix 'd' with the specified values and dimensions
-d <- matrix(c(6761, 659, 259625, 105295), nrow = 2, byrow = TRUE)
-# assign column names to the matrix
-colnames(d) <- c("D", "M")
-# assign row names to the matrix
-rownames(d) <- c("you, your", "Other words")
-# generate an association plot using 'assocplot' function
-assocplot(d)
-```
-
-In an association plot, bars above the dashed line signify relative overuse, while bars below indicate relative underuse. Accordingly, the plot reveals that in monologues, there's an underuse of *you* and *your* and an overuse of *other words*. Conversely, in dialogues, the opposite patterns emerge: an overuse of *you* and *your* and an underuse of *other words*. This visual representation helps us grasp the distinctive word usage patterns between these text types.
-
-
-## Collocations
-
-Collocations are like linguistic buddies. They're those word pairs that just seem to go hand in hand, like *Merry Christmas*. You see, these words have a special relationship – they occur together way more often than if words were just randomly strung together in a sentence.
-
-Before we start tough, it is important to understand that identifying words pairs (w1 and w2) that collocate (i.e. collocations) and determining their association strength (a measure of how strongly attracted words are to each other) is based on the co-occurrence frequencies of word pairs in a contingency table (see below, *O* is short for *observed frequency*).
-
-|                   | w~2~ present  |     w~2~ absent |      |
-| :---              | :-----:       |   --------:     | ---  |
-| **w~1~ present**  | O~11~         | O~12~           |  = R~1~
-| **w~1~ absent**   | O~21~         | O~22~           |  = R~2~
-|                   |  = C~1~       |   = C~2~        |  = N |
-
-In the following, we will extract collocations from the sentences in our example text. In a first step, we split our example text into sentences and clean the data (removing punctuation, converting to lower case, etc.).
-
-```{r}
-text %>% 
-  # concatenate the elements in the 'text' object
-  paste0(collapse = " ") %>%
-  # split text into sentences
-  tokenizers::tokenize_sentences() %>%
-  # unlist sentences
-  unlist() %>%
-  # remove non-word characters
-  stringr::str_replace_all("\\W", " ") %>%
-  stringr::str_replace_all("[^[:alnum:] ]", " ") %>%
-  # remove superfluous white spaces
-  stringr::str_squish() %>%
-  # convert to lower case and save in 'sentences' object
-  tolower() -> sentences
-```
-
-```{r echo = F, message=FALSE, warning=FALSE}
-sentences %>%
+reviews_importance %>%
   as.data.frame() %>%
-  head(10) %>%
-  flextable() %>%
-  flextable::set_table_properties(width = .95, layout = "autofit") %>%
-  flextable::theme_zebra() %>%
-  flextable::fontsize(size = 12) %>%
-  flextable::fontsize(size = 12, part = "header") %>%
-  flextable::align_text_col(align = "center") %>%
-  flextable::set_caption(caption = "First 10 sentences in the example text")  %>%
-  flextable::border_outer()
+  head(10)
 ```
 
 
-Next, we tabulate the data and reformat it so that we have the relevant information to calculate the association statistics (word 1 and word 2 as well as O11, O12, O21, and O22).
 
-```{r}
-# tokenize the 'sentences' data using quanteda package
-sentences %>%
-  quanteda::tokens() %>%
+We can now visualize the top three words for the remaining core emotion categories. 
 
-  # create a document-feature matrix (dfm) using quanteda
-  quanteda::dfm() %>%
-
-  # create a feature co-occurrence matrix (fcm) without considering trigrams
-  quanteda::fcm(tri = FALSE) %>%
-
-  # tidy the data using tidytext package
-  tidytext::tidy() %>%
-
-  # rearrange columns for better readability
-  dplyr::relocate(term, document, count) %>%
-
-  # rename columns for better interpretation
-  dplyr::rename(w1 = 1,
-                w2 = 2,
-                O11 = 3) -> coll_basic
+```{r contribsa2, message=FALSE, warning=FALSE}
+reviews_importance %>%
+  dplyr::group_by(type) %>%
+  slice_max(score, n = 20) %>%
+  dplyr::arrange(desc(score)) %>%
+  dplyr::ungroup() %>%
+  ggplot(aes(x = reorder(word, score), y = score, fill = word)) +
+  facet_wrap(type~sentiment, ncol = 4, scales = "free_y") +
+  geom_col(show.legend = FALSE) +
+  coord_flip() +
+  labs(x = "Words")
 ```
 
-```{r echo = F, message=FALSE, warning=FALSE}
-coll_basic %>%
+If you are interested in learning more about SA in R, @silge2017text is highly recommended as it goes more into detail and offers additional information.
+
+# Keyword Detection
+
+Keywords play a crucial role in text analysis, serving as distinctive terms that hold particular significance within a given text, context, or collection. These words stand out due to their heightened frequency in a specific text or context, setting them apart from their occurrence in another. In essence, keywords are linguistic markers that encapsulate the essence or topical focus of a document or data set. The process of identifying keywords involves a methodology akin to the one employed for detecting collocations using kwics. This entails comparing the use of a particular word in corpus A, against its use in corpus B. By discerning the frequency disparities, we gain valuable insights into the salient terms that contribute significantly to the unique character and thematic emphasis of a given text or context.
+
+## Dimensions of keyness 
+
+Before we start with the practical part of this tutorial, it is important to talk about the different dimensions of keyness [see @soenning2023key]. 
+
+Keyness analysis identifies typical items in a discourse domain, where typicalness traditionally relates to frequency of occurrence. The emphasis is on items used more frequently in the target corpus compared to a reference corpus. @egbert2019incorporating expanded this notion, highlighting two criteria for typicalness: *content-distinctiveness* and *content-generalizability*.  
+
+  + Content-distinctiveness refers to an item's association with the domain and its topical relevance.   
+  
+  + Content-generalizability pertains to an item's widespread usage across various texts within the domain.  
+  
+These criteria bridge traditional keyness approaches with broader linguistic perspectives, emphasizing both the distinctiveness and generalizability of key items within a corpus.
+
+Following @soenning2023key, we adopt @egbert2019incorporating keyness criteria, distinguishing between frequency-oriented and dispersion-oriented approaches to assess keyness. These perspectives capture distinct, linguistically meaningful attributes of typicalness. We also differentiate between keyness features inherent to the target variety and those that emerge from comparing it to a reference variety. This four-way classification, detailed in the table below, links methodological choices to the linguistic meaning conveyed by quantitative measures. Typical items exhibit a sufficiently high occurrence rate to be discernible in the target variety, with discernibility measured solely within the target corpus. Key items are also distinct, being used more frequently than in reference domains of language use. While discernibility and distinctiveness both rely on frequency, they measure different aspects of typicalness.
+
+```{r ds17, echo=F, message=FALSE, warning=FALSE}
+Analysis <- c("Target variety in isolation", "Comparison to reference variety")
+`Frequency-oriented` <- c("Discernibility of item in the target variety", "Distinctiveness relative to the reference variety")
+`Dispersion-oriented` <- c("Generality across texts in the target variety", "Comparative generality relative to the reference variety")
+df <- data.frame(Analysis, `Frequency-oriented`, `Dispersion-oriented`)
+df %>%
   as.data.frame() %>%
-  head(10) %>%
-  flextable() %>%
-  flextable::set_table_properties(width = .95, layout = "autofit") %>%
+  flextable::flextable() %>%
+  flextable::set_table_properties(width = .75, layout = "autofit") %>%
   flextable::theme_zebra() %>%
   flextable::fontsize(size = 12) %>%
   flextable::fontsize(size = 12, part = "header") %>%
   flextable::align_text_col(align = "center") %>%
-  flextable::set_caption(caption = "First 10 rows of basic collocation table")  %>%
+  flextable::set_caption(caption = "Dimensions of keyness (see Soenning, 2023: 3)")  %>%
   flextable::border_outer()
 ```
 
 
 
-We now enhance our table by calculating all observed frequencies (O11, O12, O21, O22) as well as row totals (R1, R2), column totals (C1, C2), and the overall total (N).
+The second aspect of keyness involves an item's dispersion across texts in the target domain, indicating its widespread use. A typical item should appear evenly across various texts within the target domain, reflecting its generality. This breadth of usage can be compared to its occurrence in the reference domain, termed as comparative generality. Therefore, a key item should exhibit greater prevalence across target texts compared to those in the reference domain.
 
-```{r}
-  # calculate the total number of observations (N)
-coll_basic %>%  dplyr::mutate(N = sum(O11)) %>%
+## Identifying keywords
 
-  # calculate R1, O12, and R2
-  dplyr::group_by(w1) %>%
-  dplyr::mutate(R1 = sum(O11),
-                O12 = R1 - O11,
-                R2 = N - R1) %>%
-  dplyr::ungroup(w1) %>%
-
-  # calculate C1, O21, C2, and O22
-  dplyr::group_by(w2) %>%
-  dplyr::mutate(C1 = sum(O11),
-                O21 = C1 - O11,
-                C2 = N - C1,
-                O22 = R2 - O21) -> colldf
-```
-
-```{r echo = F, message=FALSE, warning=FALSE}
-colldf %>%
-  as.data.frame() %>%
-  head(10) %>%
-  flextable() %>%
-  flextable::set_table_properties(width = .95, layout = "autofit") %>%
-  flextable::theme_zebra() %>%
-  flextable::fontsize(size = 12) %>%
-  flextable::fontsize(size = 12, part = "header") %>%
-  flextable::align_text_col(align = "center") %>%
-  flextable::set_caption(caption = "First 10 rows of collocation table")  %>%
-  flextable::border_outer()
-```
-
-We could calculate all collocations in the corpus (based on co-occurrence within the same sentence) or we can find collocations of a specific term - here, we will find collocations fo the term *alice*.
-
-Now that we have all the relevant information, we will reduce the data and add additional information to the data so that the computing of the association measures runs smoothly.
-
-
-```{r eval=T, echo=T, message=FALSE, warning=FALSE, paged.print=FALSE}
-# reduce and complement data
-colldf %>%
-# determine Term
-  dplyr::filter(w1 == "alice",
-                # set minimum number of occurrences of w2
-                (O11+O21) > 10,
-                # set minimum number of co-occurrences of w1 and w2
-                O11 > 5)  %>%
-  dplyr::rowwise() %>%
-  dplyr::mutate(E11 = R1 * C1 / N, 
-                E12 = R1 * C2 / N,
-                E21 = R2 * C1 / N, 
-                E22 = R2 * C2 / N)  -> colldf_redux
-```
-
-
-```{r echo = F, message=FALSE, warning=FALSE}
-colldf_redux %>%
-  as.data.frame() %>%
-  head(10) %>%
-  flextable() %>%
-  flextable::set_table_properties(width = .95, layout = "autofit") %>%
-  flextable::theme_zebra() %>%
-  flextable::fontsize(size = 12) %>%
-  flextable::fontsize(size = 12, part = "header") %>%
-  flextable::align_text_col(align = "center") %>%
-  flextable::set_caption(caption = "First 10 rows of reduced collocation data frame")  %>%
-  flextable::border_outer()
-```
-
-Now we can calculate the collocation statistics (the association strength).
-
-```{r message=FALSE, warning=FALSE, paged.print=FALSE}
-colldf_redux %>%
-    # determine number of rows
-  dplyr::mutate(Rws = nrow(.)) %>%  
-    # work row-wise
-    dplyr::rowwise() %>%
-    # calculate fishers' exact test
-    dplyr::mutate(p = as.vector(unlist(fisher.test(matrix(c(O11, O12, O21, O22), 
-                                                        ncol = 2, byrow = T))[1]))) %>%
-    # extract AM
-    # 1. bias towards top left
-    dplyr::mutate(btl_O12 = ifelse(C1 > R1, 0, R1-C1),
-                  btl_O11 = ifelse(C1 > R1, R1, R1-btl_O12),
-                  btl_O21 = ifelse(C1 > R1, C1-R1, C1-btl_O11),
-                  btl_O22 = ifelse(C1 > R1, C2, C2-btl_O12),
-                  
-    # 2. bias towards top right
-                  btr_O11 = 0, 
-                  btr_O21 = R1,
-                  btr_O12 = C1,
-                  btr_O22 = C2-R1) %>%
-    
-    # 3. calculate AM
-    dplyr::mutate(upp = btl_O11/R1,
-                  low = btr_O11/R1,
-                  op = O11/R1) %>%
-    dplyr::mutate(AM = op / upp) %>%
-    
-    # remove superfluous columns
-    dplyr::select(-btr_O21, -btr_O12, -btr_O22, -btl_O12, -btl_O11, -btl_O21, -btl_O22, -btr_O11)  %>%
-
-    # extract x2 statistics
-    dplyr::mutate(X2 = (O11-E11)^2/E11 + (O12-E12)^2/E12 + (O21-E21)^2/E21 + (O22-E22)^2/E22) %>%
-
-    # extract association measures
-    dplyr::mutate(phi = sqrt((X2 / N)),
-                MI = log2(O11 / E11),
-                DeltaP12 = (O11 / (O11 + O12)) - (O21 / (O21 + O22)),
-                DeltaP21 =  (O11 / (O11 + O21)) - (O21 / (O12 + O22)),
-                LogOddsRatio = log(((O11 + 0.5) * (O22 + 0.5))  / ( (O12 + 0.5) * (O21 + 0.5) ))) %>%
-
-    # determine Bonferroni corrected significance
-  dplyr::mutate(Sig_corrected = dplyr::case_when(p / Rws > .05 ~ "n.s.",
-                                                 p / Rws > .01 ~ "p < .05*",
-                                                 p / Rws > .001 ~ "p < .01**",
-                                                 p / Rws <= .001 ~ "p < .001***",
-                                                 T ~ "N.A.")) %>%  
-    # round p-value
-    dplyr::mutate(p = round(p, 5)) %>%
-    # filter out non significant results
-    dplyr::filter(Sig_corrected != "n.s.",
-                # filter out instances where the w1 and w2 repel each other
-                E11 < O11) %>%
-    # arrange by phi (association measure)
-    dplyr::arrange(-AM) %>%
-    # remove superfluous columns
-    dplyr::select(-any_of(c("TermCoocFreq", "AllFreq", "NRows", "E12", "E21", 
-                            "E22", "O12", "O21", "O22", "R1", "R2", "C1", "C2"))) -> assoc_tb
-```
-
-
-
-```{r echo = F, message=FALSE, warning=FALSE}
-assoc_tb %>%
-  as.data.frame() %>%
-  head(10) %>%
-  flextable() %>%
-  flextable::set_table_properties(width = .95, layout = "autofit") %>%
-  flextable::theme_zebra() %>%
-  flextable::fontsize(size = 12) %>%
-  flextable::fontsize(size = 12, part = "header") %>%
-  flextable::align_text_col(align = "center") %>%
-  flextable::set_caption(caption = "First 10 rows of association statistics table")  %>%
-  flextable::border_outer()
-```
-
-The resulting table shows collocations in the example text descending by collocation strength.
-
-We now use a [network graph](https://ladal.edu.au/net.html), or network for short, to visualise the collocations of our keyword (*alice*). Networks are a powerful and versatile visual representation used to depict relationships or connections among various elements. Network graphs typically consist of nodes, representing individual entities, and edges, indicating the connections or interactions between these entities. 
-
-We start by extracting the tokens that we want to show (the top 20 collocates of *alice*).
-
-```{r}
-# sort the coocStatz data frame in descending order based on the 'phi' column
-top20colls <- assoc_tb %>%
-  dplyr::arrange(-phi) %>%
-  # select the top 20 rows after sorting
-  head(20) %>%
-  # extract the 'token' column 
-  dplyr::pull(w2) %>%
-  # add keyword
-  c("alice")
-# inspect the top 20 tokens with the highest 'phi' values
-top20colls
-```
-
-We then need to generate a feature co-occurrence matrix from a document-feature matrix based on the cleaned, lower case sentences of our text.
-
-```{r}
-# tokenize the 'sentences' data using quanteda package
-keyword_fcm <- sentences %>%
-  quanteda::tokens() %>%
-  # create a document-feature matrix (dfm) from the tokens
-  quanteda::dfm() %>%
-  # select features based on 'top20colls' and the term "selection" pattern
-  quanteda::dfm_select(pattern = c(top20colls, "selection")) %>%
-  # Create a symmetric feature co-occurrence matrix (fcm) 
-  quanteda::fcm(tri = FALSE)
-# inspect the first 6 rows and 6 columns of the resulting fcm
-keyword_fcm[1:6, 1:6]
-```
-
-```{r}
-# create a network plot using the fcm
-quanteda.textplots::textplot_network(keyword_fcm,
-                                     # set the transparency of edges to 0.8 for visibility
-                                     edge_alpha = 0.8,
-                                     # set the color of edges to gray
-                                     edge_color = "gray",
-                                     # set the size of edges to 2 for better visibility
-                                     edge_size = 2,
-                                     # adjust the size of vertex labels 
-                                     # based on the logarithm of row sums of the fcm
-                                     vertex_labelsize = log(rowSums(keyword_fcm)))
-```
-
-
-
-## Keywords 
-
-Keywords play a pivotal role in text analysis, serving as distinctive terms that hold particular significance within a given text, context, or collection. This approach revolves around pinpointing words closely associated with a specific text. In simpler terms, keyness analysis strives to identify words that distinctly represent the content of a given text.
-
-<br>
-
-<div class="warning" style='padding:0.5em; background-color:rgba(215,209,204,.3); color:#51247a'>
-<span>
-<p style='margin-top:1em; text-align:center'>
-<b>Keyness is a statistical measure that helps identify significant terms in text by assessing how prominently a term stands out in a specific context by comparing its frequency to what’s expected based on background data.</b><br>
-</p>
-<p style='margin-left:1em;'>
-</p></span>
-</div>
-
-<br> 
-
+Here, we focus on a frequency-based approach that assesses distinctiveness relative to the reference variety. To identify these keywords, we can follow the procedure we have used to identify collocations using kwics - the idea is essentially identical: we compare the use of a word in a *target* corpus A to its use in a *reference* corpus.
 
 To determine if a token is a keyword and if it occurs significantly more frequently in a target corpus compared to a reference corpus, we use the following information (that is provided by the table above):
 
@@ -535,54 +348,12 @@ Example:
 |              |  = C~1~    |   = C~2~     |  = N |
 
 
-First, we’ll load two texts.
+We begin with loading two texts (posreviews is our *target* and negreviews is our *reference*).
+
+As a first step, we create a frequency table of first text.
 
 ```{r}
-# load data
-text1 <- base::readRDS(url("https://slcladal.github.io/data/orwell.rda", "rb")) %>%
-  paste0(collapse = " ")
-text2 <- base::readRDS(url("https://slcladal.github.io/data/melville.rda", "rb"))  %>%
-  paste0(collapse = " ")
-```
-
-```{r echo = F, message=FALSE, warning=FALSE}
-text1 %>%
-  substr(start=1, stop=200) %>%
-  as.data.frame() %>%
-  flextable() %>%
-  flextable::set_table_properties(width = .95, layout = "autofit") %>%
-  flextable::theme_zebra() %>%
-  flextable::fontsize(size = 12) %>%
-  flextable::fontsize(size = 12, part = "header") %>%
-  flextable::align_text_col(align = "center") %>%
-  flextable::set_caption(caption = "First 200 characters of text 1")  %>%
-  flextable::border_outer()
-```
-
-
-As you can see, text1 is George Orwell's *1984*. 
-
-```{r echo = F, message=FALSE, warning=FALSE}
-text2 %>%
-  substr(start=1, stop=200) %>%
-  as.data.frame() %>%
-  flextable() %>%
-  flextable::set_table_properties(width = .95, layout = "autofit") %>%
-  flextable::theme_zebra() %>%
-  flextable::fontsize(size = 12) %>%
-  flextable::fontsize(size = 12, part = "header") %>%
-  flextable::align_text_col(align = "center") %>%
-  flextable::set_caption(caption = "First 200 characters of text 2")  %>%
-  flextable::border_outer()
-```
-
-
-The table shows that text2 is Herman Melville's *Moby Dick*.
-
-After loading the two texts, we create a frequency table of first text.
-
-```{r}
-text1_words <- text1 %>%
+positive_words <- posreviews %>%
   # remove non-word characters
   stringr::str_remove_all("[^[:alpha:] ]") %>%
   # convert to lower
@@ -600,13 +371,15 @@ text1_words <- text1 %>%
   dplyr::group_by(token) %>%
   dplyr::summarise(n = n()) %>%
   # add column stating where the frequency list is 'from'
-  dplyr::mutate(type = "text1")
+  dplyr::mutate(type = "positive")
+# inspect
+head(positive_words)
 ```
 
 Now, we create a frequency table of second text.
 
 ```{r}
-text2_words <- text2 %>%
+negative_words <- negreviews %>%
   # remove non-word characters
   stringr::str_remove_all("[^[:alpha:] ]") %>%
   # convert to lower
@@ -624,52 +397,41 @@ text2_words <- text2 %>%
   dplyr::group_by(token) %>%
   dplyr::summarise(n = n()) %>%
   # add column stating where the frequency list is 'from'
-  dplyr::mutate(type = "text2")
+  dplyr::mutate(type = "negative")
+# inspect
+head(negative_words)
 ```
 
 In a next step, we combine the tables.
 
 ```{r}
-texts_df <- dplyr::left_join(text1_words, text2_words, by = c("token")) %>%
+texts_df <- dplyr::left_join(positive_words, negative_words, by = c("token")) %>%
   # rename columns and select relevant columns
-  dplyr::rename(text1 = n.x,
-                text2 = n.y) %>%
+  dplyr::rename(positive = n.x,
+                negative = n.y) %>%
   dplyr::select(-type.x, -type.y) %>%
   # replace NA values with 0 in 'corpus' and 'kwic' columns
-  tidyr::replace_na(list(text1 = 0, text2 = 0))
-```
-
-
-
-```{r echo = F, message=FALSE, warning=FALSE}
+  tidyr::replace_na(list(positive = 0, negative = 0))
+# inspect
 texts_df %>%
   as.data.frame() %>%
-  head(10) %>%
-  flextable() %>%
-  flextable::set_table_properties(width = .95, layout = "autofit") %>%
-  flextable::theme_zebra() %>%
-  flextable::fontsize(size = 12) %>%
-  flextable::fontsize(size = 12, part = "header") %>%
-  flextable::align_text_col(align = "center") %>%
-  flextable::set_caption(caption = "Frequency table of tokens in text1 and text2")  %>%
-  flextable::border_outer()
+  head(10)
 ```
-
 
 We now calculate the frequencies of the observed and expected frequencies as well as the row and column totals.
 
 
 ```{r}
 texts_df %>%
-  dplyr::mutate(text1 = as.numeric(text1),
-                text2 = as.numeric(text2)) %>%
-  dplyr::mutate(C1 = sum(text1),
-                C2 = sum(text2),
+  dplyr::mutate(positive = as.numeric(positive),
+                negative = as.numeric(negative)) %>%
+  dplyr::mutate(C1 = sum(positive),
+                C2 = sum(negative),
                 N = C1 + C2) %>%
   dplyr::rowwise() %>%
-  dplyr::mutate(R1 = text1+text2,
+  dplyr::mutate(R1 = positive+negative,
                 R2 = N - R1,
-                O11 = text1,
+                O11 = positive,
                 O12 = R1-O11,
                 O21 = C1-O11,
                 O22 = C2-O12) %>%
@@ -677,119 +439,130 @@ texts_df %>%
                 E12 = (R1 * C2) / N,
                 E21 = (R2 * C1) / N,
                 E22 = (R2 * C2) / N) %>%
-  dplyr::select(-text1, -text2) -> stats_tb2
-```
-
-```{r echo = F, message=FALSE, warning=FALSE}
-stats_tb2 %>%
+  dplyr::select(-positive, -negative) -> stats_raw
+# inspect
+stats_raw %>%
   as.data.frame() %>%
-  head(10) %>%
-  flextable() %>%
-  flextable::set_table_properties(width = .95, layout = "autofit") %>%
-  flextable::theme_zebra() %>%
-  flextable::fontsize(size = 12) %>%
-  flextable::fontsize(size = 12, part = "header") %>%
-  flextable::align_text_col(align = "center") %>%
-  flextable::set_caption(caption = "First 10 rows of the processed frequency table")  %>%
-  flextable::border_outer()
+  head(10) 
 ```
 
-We can now calculate the association strength which, in this case serves as a keyness measure.
+We could now calculate the keyness statistics for ll words in the reviews. However, this takes a few minutes an do we will exclude tokens that occur less than 10 times.
 
 ```{r}
-stats_tb2 %>%
-    # determine number of rows
-  dplyr::mutate(Rws = nrow(.)) %>%  
-    # work row-wise
+stats_redux <- stats_raw %>%
+  dplyr::filter(R1 > 10)
+```
+
+We can now calculate the keyness measures.
+
+```{r}
+stats_redux %>%
+  # determine number of rows
+  dplyr::mutate(Rws = nrow(.)) %>%   
+  # work row-wise
     dplyr::rowwise() %>%
     # calculate fishers' exact test
     dplyr::mutate(p = as.vector(unlist(fisher.test(matrix(c(O11, O12, O21, O22), 
                                                         ncol = 2, byrow = T))[1]))) %>%
 
-      # extract AM
-    # 1. bias towards top left
-    dplyr::mutate(btl_O12 = ifelse(C1 > R1, 0, R1-C1),
-                  btl_O11 = ifelse(C1 > R1, R1, R1-btl_O12),
-                  btl_O21 = ifelse(C1 > R1, C1-R1, C1-btl_O11),
-                  btl_O22 = ifelse(C1 > R1, C2, C2-btl_O12),
-                  
-    # 2. bias towards top right
-                  btr_O11 = 0, 
-                  btr_O21 = R1,
-                  btr_O12 = C1,
-                  btr_O22 = C2-R1) %>%
+# extract descriptives
+    dplyr::mutate(ptw_target = O11/C1*1000,
+                  ptw_ref = O12/C2*1000) %>%
     
-    # 3. calculate AM
-    dplyr::mutate(upp = btl_O11/R1,
-                  low = btr_O11/R1,
-                  op = O11/R1) %>%
-    dplyr::mutate(AM = op / upp) %>%
-    
-    # remove superfluous columns
-    dplyr::select(-btr_O21, -btr_O12, -btr_O22, -btl_O12, -btl_O11, -btl_O21, -btl_O22, -btr_O11) %>% 
-
     # extract x2 statistics
     dplyr::mutate(X2 = (O11-E11)^2/E11 + (O12-E12)^2/E12 + (O21-E21)^2/E21 + (O22-E22)^2/E22) %>%
-    # extract expected frequency
-    dplyr::mutate(Exp = E11) %>%
-
-    # extract association measures
+    
+    # extract keyness measures
     dplyr::mutate(phi = sqrt((X2 / N)),
-                
-                MI = log2(O11 / E11),
-            
-                DeltaP12 = (O11 / (O11 + O12)) - (O21 / (O21 + O22)),
-                DeltaP21 =  (O11 / (O11 + O21)) - (O21 / (O12 + O22)),
-                LogOddsRatio = log(((O11 + 0.5) * (O22 + 0.5))  / ( (O12 + 0.5) * (O21 + 0.5) ))) %>%
-
+                  MI = log2(O11 / E11),
+                  t.score = (O11 - E11) / sqrt(O11),
+                  PMI = log2( (O11 / N) / ((O11+O12) / N) * 
+                                ((O11+O21) / N) ),
+                  DeltaP = (O11 / R1) - (O21 / R2),
+                  LogOddsRatio = log(((O11 + 0.5) * (O22 + 0.5))  / ( (O12 + 0.5) * (O21 + 0.5) )),
+                  G2 = 2 * ((O11+ 0.001) * log((O11+ 0.001) / E11) + (O12+ 0.001) * log((O12+ 0.001) / E12) + O21 * log(O21 / E21) + O22 * log(O22 / E22)),
+                  
+                  # traditional keyness measures
+                  RateRatio = ((O11+ 0.001)/(C1*1000)) / ((O12+ 0.001)/(C2*1000)),
+                  RateDifference = (O11/(C1*1000)) - (O12/(C2*1000)),
+                  DifferenceCoefficient = RateDifference / sum((O11/(C1*1000)), (O12/(C2*1000))),
+                  OddsRatio = ((O11 + 0.5) * (O22 + 0.5))  / ( (O12 + 0.5) * (O21 + 0.5) ),
+                  LLR = 2 * (O11 * (log((O11 / E11)))),
+                  RDF = abs((O11 / C1) - (O12 / C2)),
+                  PDiff = abs(ptw_target - ptw_ref) / ((ptw_target + ptw_ref) / 2) * 100,
+                  SignedDKL = sum(ifelse(O11 > 0, O11 * log(O11 / ((O11 + O12) / 2)), 0) - ifelse(O12 > 0, O12 * log(O12 / ((O11 + O12) / 2)), 0))) %>%
+    
     # determine Bonferroni corrected significance
-  dplyr::mutate(Sig_corrected = dplyr::case_when(p / Rws > .05 ~ "n.s.",
-                                                 p / Rws > .01 ~ "p < .05*",
-                                                 p / Rws > .001 ~ "p < .01**",
-                                                 p / Rws <= .001 ~ "p < .001***",
-                                                 T ~ "N.A.")) %>%  
+    dplyr::mutate(Sig_corrected = dplyr::case_when(p / Rws > .05 ~ "n.s.",
+                                                   p / Rws > .01 ~ "p < .05*",
+                                                   p / Rws > .001 ~ "p < .01**",
+                                                   p / Rws <= .001 ~ "p < .001***",
+                                                   T ~ "N.A.")) %>% 
     # round p-value
     dplyr::mutate(p = round(p, 5),
-                  type = ifelse(E11 > O11, "antitype", "type")) %>%
+                  type = ifelse(E11 > O11, "antitype", "type"),
+                  phi = ifelse(E11 > O11, -phi, phi),
+                  G2 = ifelse(E11 > O11, -G2, G2)) %>%
     # filter out non significant results
     dplyr::filter(Sig_corrected != "n.s.") %>%
-    # arrange by phi (association measure)
-    dplyr::arrange(-DeltaP12) %>%
+    # arrange by G2
+    dplyr::arrange(-G2) %>%
     # remove superfluous columns
-    dplyr::select(-any_of(c("TermCoocFreq", "AllFreq", "NRows", "E12", "E21", 
-                            "E22", "O12", "O21", "O22", "R1", "R2", "C1", "C2", "Exp"))) -> assoc_tb3
-```
-
-```{r echo = F, message=FALSE, warning=FALSE}
-assoc_tb3 %>%
+    dplyr::select(-any_of(c("TermCoocFreq", "AllFreq", "NRows", 
+                            "R1", "R2", "C1", "C2", "E12", "E21",
+                            "E22", "upp", "low", "op", "t.score", "z.score", "Rws"))) %>%
+    dplyr::relocate(any_of(c("token", "type", "Sig_corrected", "O11", "O12",
+                             "ptw_target", "ptw_ref", "G2",  "RDF", "RateRatio", 
+                             "RateDifference", "DifferenceCoefficient", "LLR", "SignedDKL",
+                             "PDiff", "LogOddsRatio", "MI", "PMI", "phi", "X2",  
+                             "OddsRatio", "DeltaP", "p", "E11", "O21", "O22"))) -> keys
+keys %>%
   as.data.frame() %>%
-  head(10) %>%
-  flextable() %>%
-  flextable::set_table_properties(width = .95, layout = "autofit") %>%
-  flextable::theme_zebra() %>%
-  flextable::fontsize(size = 12) %>%
-  flextable::fontsize(size = 12, part = "header") %>%
-  flextable::align_text_col(align = "center") %>%
-  flextable::set_caption(caption = "First 10 rows of the association statistic table")  %>%
-  flextable::border_outer()
+  head(10)
 ```
 
-We can use a barplot to visualize the association strength (keyness) of words with a text.
+
+The above table shows the keywords for positive IMDB reviews. The table starts with  **token** (word type), followed by **type**, which indicates whether the token is a keyword in the target data (*type*) or a keyword in the reference data (*antitype*). Next is the Bonferroni corrected significance (**Sig_corrected**), which accounts for repeated testing. This is followed by **O11**, representing the observed frequency of the token, and **Exp** which represents the expected frequency of the token if it were distributed evenly across the target and reference data. After this, the table provides different keyness statistics (for information about these different keyness statistics see [here](https://ladal.edu.au/key.html)).
+
+## Visualising keywords 
+
+
+We can now visualize the keyness strengths in a *dot plot* as shown in the code chunk below.
+
+```{r message=F, warning=F}
+# sort the keys data frame in descending order based on the 'G2' column
+keys %>%
+  dplyr::arrange(-G2) %>%
+  # select the top 20 rows after sorting
+  head(20) %>%
+  # create a ggplot with 'token' on the x-axis (reordered by 'G2') and 'G2' on the y-axis
+  ggplot(aes(x = reorder(token, G2, mean), y = G2)) +
+  # add a scatter plot with points representing the 'G2' values
+  geom_point() +
+  # flip the coordinates to have horizontal points
+  coord_flip() +
+  # set the theme to a basic white and black theme
+  theme_bw() +
+  # set the x-axis label to "Token" and y-axis label to "Keyness (G2)"
+  labs(x = "Token", y = "Keyness (G2)")
+```
+
+Another option to visualize keyness is a *bar plot* as shown  below.
 
 ```{r message=F, warning=F}
 # get top 10 keywords for text 1
-top <- assoc_tb3 %>% dplyr::ungroup() %>% dplyr::slice_head(n = 10)
+top <- keys %>% dplyr::ungroup() %>% dplyr::slice_head(n = 12)
 # get top 10 keywords for text 2
-bot <- assoc_tb3 %>% dplyr::ungroup() %>% dplyr::slice_tail(n = 10)
+bot <- keys %>% dplyr::ungroup() %>% dplyr::slice_tail(n = 12)
 # combine into table
 rbind(top, bot) %>%
   # create a ggplot
-  ggplot(aes(x = reorder(token, DeltaP12, mean), y = DeltaP12, label = DeltaP12, fill = type)) +
+  ggplot(aes(x = reorder(token, G2, mean), y = G2, label = G2, fill = type)) +
   # add a bar plot using the 'phi' values
   geom_bar(stat = "identity") +
   # add text labels above the bars with rounded 'phi' values
-  geom_text(aes(y = ifelse(DeltaP12> 0, DeltaP12 - 0.05, DeltaP12 + 0.05), 
-                label = round(DeltaP12, 3)), color = "white", size = 3) + 
+  geom_text(aes(y = ifelse(G2> 0, G2 - 20, G2 + 20), 
+                label = round(G2, 1)), color = "white", size = 3) + 
   # flip the coordinates to have horizontal bars
   coord_flip() +
   # set the theme to a basic white and black theme
@@ -797,361 +570,529 @@ rbind(top, bot) %>%
   # remove legend
   theme(legend.position = "none") +
     # define colors
-  scale_fill_manual(values = c("orange", "darkgray")) +
-  # set the x-axis label to "Token" and y-axis label to "Association strength (phi)"
-  labs(title = "Top 10 keywords for text1 and text 2", x = "Keyword", y = "Association strength (DeltaP12)")
+  scale_fill_manual(values = c("orange","darkgray")) +
+  # set the x-axis label to "Token" and y-axis label to "Keyness (G2)"
+  labs(title = "Top 10 keywords for positive and negative IMDB reviews", x = "Keyword", y = "Keyness (G2)")
 ```
 
-## Text Classification
-
-Text classification involves methods for categorizing text into predefined groups, like languages, genres, or authors. These categorizations usually rely on the frequency of word types, important terms, phonetic elements, and other linguistic characteristics such as sentence length and words per line.
-
-Like many other text analysis methods, text classification often starts with a training dataset already marked with the necessary labels. You can create these training datasets and their associated features manually or opt for pre-built training sets offered by specific software or tools.
 
 
-<br>
-
-<div class="warning" style='padding:0.5em; background-color:rgba(215,209,204,.3); color:#51247a'>
-<span>
-<p style='margin-top:1em; text-align:center'>
-<b>Text classification is a machine learning task where text documents are categorized into predefined classes or labels based on their content.</b> It involves training a model on labeled data to learn patterns and then using that model to classify new, unlabeled documents. Text classification has numerous applications, such as spam detection, sentiment analysis, and topic categorization.<br>
-</p>
-<p style='margin-left:1em;'>
-</p></span>
-</div>
-
-<br>
+# Network Analysis
 
 
-In the upcoming example, we'll use phoneme frequency to classify a text. To get started, we'll load a German text and break it down into its constituent phonetic elements.
+Networks are a powerful method for visualizing relationships among various elements, such as authors, characters, or words [@silge2017text, 131-137]. Network analysis goes beyond mere visualization; it's a technique for uncovering patterns and structures within complex systems. In essence, network analysis represents relationships as nodes (elements) connected by edges (relationships) which provides a unique perspective for understanding the connections and interactions within your data.
 
-```{r tc1, message=FALSE, warning=FALSE}
-# read in German text
-German <- readLines("https://slcladal.github.io/data/phonemictext1.txt") %>%
-  stringr::str_remove_all(" ") %>%
-  stringr::str_split("") %>%
-  unlist()
+Networks, also known as graphs, are powerful tools that represent relationships among entities. They consist of **nodes** (often depicted as dots) and **edges** (typically represented as lines) and can be categorized as directed or undirected networks.
+
++ In *directed networks*, the direction of edges is captured, signifying the flow or relationship from one node to another. An example of a directed network is the trade relationships between countries, where arrows on the edges indicate the direction of exports. The thickness of these arrows can also encode additional information, such as the frequency or strength of the relationship.  
++ *Undirected networks*, on the other hand, represent symmetric relationships where the connection between two nodes is mutual. For example, in a social network, the connections between individuals are often undirected, as the relationship between friends is reciprocal.  
+
+Network analysis involves exploring the structure and properties of these networks. One key concept is centrality, which identifies the most important nodes in a network. Centrality metrics, such as *degree centrality* (number of connections) and *betweenness centrality* (importance in connecting other nodes), help unveil the significance of specific nodes.
+
+In R, there are several packages that provide essential tools for constructing, analyzing, and visualizing networks but here, we will focus on the  `quanteda.textplots`, `igraph`, `tidygraph`, and `ggraph` packages. To showcase how to prepare and generate network graphs, we will visualize the network that the characters in William Shakespeare's *Romeo and Juliet* form.
+
+## Data preparation
+
+In network analysis, it's crucial to have at least one table indicating the start and end points of edges (lines connecting nodes). Additionally, two additional tables providing information on node size/type and edge size/type are valuable. In the upcoming sections, we'll create these tables from raw data. Alternatively, you can generate network graphs by uploading tables containing the necessary information.
+
+We'll generate a network showing the frequency of characters in William Shakespeare's *Romeo and Juliet* appearing in the same scene. Our focus is on investigating the networks of personas in Shakespeare's *Romeo and Juliet*, and thus, we'll load this renowned work of fiction.
+
+
+## Creating a matrix
+
+We start by loading the data which represents a table that contains the personas that are present during a sub-scene as well as how many contributions they make and how often they occur.
+
+
+```{r na1, echo=T, eval = T, message=FALSE, warning=FALSE}
+# load data
+net_dat <- read.delim("https://slcladal.github.io/data/romeo_tidy.txt", sep = "\t")
 # inspect data
-head(German, 20)
-```
-
-We now do the same for three other texts - an English and a Spanish text as well as one text in a language that we will determine using classification.
-
-```{r tc2, message=FALSE, warning=FALSE}
-# read in texts
-English <- readLines("https://slcladal.github.io/data/phonemictext2.txt")
-Spanish <- readLines("https://slcladal.github.io/data/phonemictext3.txt")
-Unknown <- readLines("https://slcladal.github.io/data/phonemictext4.txt")
-# clean, split texts into phonemes, unlist and convert them into vectors
-English <- as.vector(unlist(strsplit(gsub(" ", "", English), "")))
-Spanish <- as.vector(unlist(strsplit(gsub(" ", "", Spanish), "")))
-Unknown <- as.vector(unlist(strsplit(gsub(" ", "", Unknown), "")))
-# inspect data
-head(English, 20)
-```
-We will now create a table that represents the phonemes and their frequencies in each of the 4 texts. In addition, we will add the language and simply the column names.
-
-```{r tc3, echo=T, eval = T, message=FALSE, warning=FALSE}
-# create data tables
-German <- data.frame(names(table(German)), as.vector(table(German)))
-English <- data.frame(names(table(English)), as.vector(table(English)))
-Spanish <- data.frame(names(table(Spanish)), as.vector(table(Spanish)))
-Unknown <- data.frame(names(table(Unknown)), as.vector(table(Unknown)))
-# add column with language
-German$Language <- "German"
-English$Language <- "English"
-Spanish$Language <- "Spanish"
-Unknown$Language <- "Unknown"
-# simplify column names
-colnames(German)[1:2] <- c("Phoneme", "Frequency")
-colnames(English)[1:2] <- c("Phoneme", "Frequency")
-colnames(Spanish)[1:2] <- c("Phoneme", "Frequency")
-colnames(Unknown)[1:2] <- c("Phoneme", "Frequency")
-# combine all tables into a single table
-classdata <- rbind(German, English, Spanish, Unknown) 
-```
-
-
-```{r tc3b, echo = F, message=FALSE, warning=FALSE}
-# inspect data
-classdata %>%
+net_dat %>%
   as.data.frame() %>%
-  head(10) %>%
-  flextable() %>%
-  flextable::set_table_properties(width = .5, layout = "autofit") %>%
-  flextable::theme_zebra() %>%
-  flextable::fontsize(size = 12) %>%
-  flextable::fontsize(size = 12, part = "header") %>%
-  flextable::align_text_col(align = "center") %>%
-  flextable::set_caption(caption = "First 10 lines of the class data.")  %>%
-  flextable::border_outer()
+  head(15)
 ```
 
+We now transform that table into a co-occurrence matrix.
 
-Now, we group the data so that we see, how often each phoneme is used in each language.
-
-```{r tc5, echo=T, eval = T, message=FALSE, warning=FALSE}
-# convert into wide format
-classdw <- classdata %>%
-  tidyr::spread(Phoneme, Frequency) %>%
-  replace(is.na(.), 0)
-```
-
-```{r tc6b, echo = F, message=FALSE, warning=FALSE}
+```{r na2, echo = T, message=FALSE, warning=FALSE}
+net_cmx <- crossprod(table(net_dat[1:2]))
+diag(net_cmx) <- 0
+net_df <- as.data.frame(net_cmx)
 # inspect data
-classdw[, 1:6] %>%
+net_df[1:5, 1:5]%>%
   as.data.frame() %>%
-  head(10) %>%
-  flextable() %>%
-  flextable::set_table_properties(width = .5, layout = "autofit") %>%
-  flextable::theme_zebra() %>%
-  flextable::fontsize(size = 12) %>%
-  flextable::fontsize(size = 12, part = "header") %>%
-  flextable::align_text_col(align = "center") %>%
-  flextable::set_caption(caption = "Overview of the class data in wide format.")  %>%
-  flextable::border_outer()
+  tibble::rownames_to_column("Persona")
 ```
 
+The data shows how often a character has appeared with each other character in the play - only Friar Lawrence and Friar John were excluded because they only appear in one scene where they talk to each other. 
+
+##  Visualizing Networks
+
+There are various different ways to visualize a network structure. We will focus on two packages for network visualization here and exemplify how you can visualize networks in R. 
+
+### Quanteda Networks 
+
+The `quanteda` package contains many very useful functions for analyzing texts. Among these functions is the `textplot_network` function which provides a very handy way to display networks. The advantage of the network plots provided by or generated with the `quanteda` package is that you can create them with very little code. However, this comes at a cost as  these visualizations cannot be modified easily (which means that their design is not very flexible compared to other methods for generating network visualizations).    
+
+In a first step, we transform the text vectors of the `romeo` data into a document-feature matrix using the `dfm ` function. 
 
 
-Next, we must reshape our data to reflect the frequency of each phoneme categorized by language. This transformation aligns with our classifier's design, which will employ *Language* as the dependent variable and utilize phoneme frequencies as predictors.
-
-```{r tc8, echo=T, eval = T, message=FALSE, warning=FALSE}
-numvar <- colnames(classdw)[2:length(colnames(classdw))]
-classdw[numvar] <- lapply(classdw[numvar], as.numeric)
-# function for normalizing numeric variables
-normalize <- function(x) { (x-min(x))/(max(x)-min(x))   }
-# apply normalization
- classdw[numvar] <- as.data.frame(lapply(classdw[numvar], normalize))
-```
-
-
-
-```{r tc9b, echo = F, message=FALSE, warning=FALSE}
+```{r qtda01, warning=F, message=F}
+# create a document feature matrix
+net_dfm <- quanteda::as.dfm(net_df)
+# create feature co-occurrence matrix
+net_fcm <- quanteda::fcm(net_dfm, tri = F)
 # inspect data
-classdw[, 1:6] %>%
+head(net_fcm)
+```
+
+This feature-co-occurrence matrix can then serve as the input for the `textplot_network` function which already generates a nice network graph. 
+
+
+
+Now we generate a network graph using the `textplot_network` function from the `quanteda.textplots` package. This function has the following arguments: 
+
++ `x`: a fcm or dfm object  
++ `min_freq`: a frequency count threshold or proportion for co-occurrence frequencies of features to be included (default = 0.5),  
++ `omit_isolated`: if TRUE, features do not occur more frequent than min_freq will be omitted (default = TRUE),  
++ `edge_color`: color of edges that connect vertices (default = "#1F78B4"),
++ `edge_alpha`: opacity of edges ranging from 0 to 1.0 (default = 0.5),
++ `edge_size`: size of edges for most frequent co-occurrence (default = 2),
++ `vertex_color`: color of vertices (default = "#4D4D4D"),
++ `vertex_size`: size of vertices (default = 2),
++ `vertex_labelcolor`: color of texts. Defaults to the same as vertex_color,
++ `vertex_labelfont`: font-family of texts,
++ `vertex_labelsize`: size of vertex labels in mm. Defaults to size 5. Supports both integer values and vector values (default = 5),
++ `offset`: if NULL (default), the distance between vertices and texts are determined automatically,
+
+
+```{r qtda04}
+quanteda.textplots::textplot_network(
+  x = net_fcm,                    # a fcm or dfm object
+  min_freq = 0.5,                   # frequency count threshold or proportion for co-occurrence frequencies (default = 0.5)
+  edge_alpha = 0.5,                 # opacity of edges ranging from 0 to 1.0 (default = 0.5)
+  edge_color = "gray",            # color of edges that connect vertices (default = "#1F78B4")
+  edge_size = 2,                    # size of edges for most frequent co-occurrence (default = 2)
+  # calculate the size of vertex labels for the network plot
+  vertex_labelsize = net_dfm %>%
+    # convert the dfm object to a data frame
+    quanteda::convert(to = "data.frame") %>% 
+    # exclude the 'doc_id' column
+    dplyr::select(-doc_id) %>%
+    # calculate the sum of row values for each row
+    rowSums() %>%
+    # apply the natural logarithm to the resulting sums
+    log(),
+  vertex_color = "#4D4D4D",         # color of vertices (default = "#4D4D4D")
+  vertex_size = 2                   # size of vertices (default = 2)
+)
+```
+
+
+We now turn to generating *tidy networks* with is more complex but also offers more flexibility and options for customization. 
+
+### Tidy Networks 
+
+We now turn to a different method for generating networks that is extremely flexible.
+
+First, we define the *nodes* and we can also add information about the nodes that we can use later on (such as frequency information).
+
+```{r tidy4, message=F, warning=F}
+# create a new data frame 'va' using the 'net_dat' data
+net_dat %>%
+  # rename the 'person' column to 'node' and 'occurrences' column to 'n'
+  dplyr::rename(node = person,
+                n = occurrences) %>%
+  # group the data by the 'node' column
+  dplyr::group_by(node) %>%
+  # summarize the data, calculating the total occurrences ('n') for each 'node'
+  dplyr::summarise(n = sum(n)) -> va
+# inspect
+va %>%
   as.data.frame() %>%
-  head(10) %>%
-  flextable() %>%
-  flextable::set_table_properties(width = .5, layout = "autofit") %>%
-  flextable::theme_zebra() %>%
-  flextable::fontsize(size = 12) %>%
-  flextable::fontsize(size = 12, part = "header") %>%
-  flextable::align_text_col(align = "center") %>%
-  flextable::set_caption(caption = "Overview of the probabilities.")  %>%
-  flextable::border_outer()
+  head(10)
 ```
 
 
-Before turning to the actual classification, we will use a cluster analysis to see which texts the unknown text is most similar with.
+The next part is optional but it can help highlight important information. We add a column with additional information to our nodes table.
 
-```{r tc10, echo=T, eval = T, message=FALSE, warning=FALSE}
-# remove language column
-textm <- classdw[,2:ncol(classdw)]
-# add languages as row names
-rownames(textm) <- classdw[,1]
-# create distance matrix
-distmtx <- dist(textm)
-# perform clustering
-clustertexts <- hclust(distmtx, method="ward.D")  
-# visualize cluster result
-plot(clustertexts, hang = .25,main = "")           
+```{r}
+# define family
+mon <- c("ABRAM", "BALTHASAR", "BENVOLIO", "LADY MONTAGUE", "MONTAGUE", "ROMEO")
+cap <- c("CAPULET", "CAPULET’S COUSIN", "FIRST SERVANT", "GREGORY", "JULIET", "LADY CAPULET", "NURSE", "PETER", "SAMPSON", "TYBALT")
+oth <- c("APOTHECARY", "CHORUS", "FIRST CITIZEN", "FIRST MUSICIAN", "FIRST WATCH", "FRIAR JOHN" , "FRIAR LAWRENCE", "MERCUTIO", "PAGE", "PARIS", "PRINCE", "SECOND MUSICIAN", "SECOND SERVANT", "SECOND WATCH", "SERVANT", "THIRD MUSICIAN")
+# create color vectors
+va <- va %>%
+  dplyr::mutate(type = dplyr::case_when(node %in% mon ~ "MONTAGUE",
+                                          node %in% cap ~ "CAPULET",
+                                          TRUE ~ "Other"))
+# inspect updates nodes table
+head(va, 10)
 ```
 
-As indicated by the cluster analysis, the unidentified text forms a cluster alongside the English texts, strongly suggesting that the unknown text is likely in English.
-
-Before we dive into the actual classification process, we'll partition the data into two distinct sets: one excluding *Unknown* (our training set) and the other containing only *Unknown* (our test set). This segmentation allows us to train our model effectively and subsequently test its accuracy.
-
-```{r tc11, echo=T, eval = T, message=FALSE, warning=FALSE}
-# create training set
-train <- classdw %>%
-  filter(Language != "Unknown")
-# create test set
-test <- classdw %>%
-  filter(Language == "Unknown")
-```
+Now, we define the *edges*, i.e., the connections between nodes and, again, we can add information in separate variables that we can use later on. 
 
 
-
-```{r tc12b, echo = F, message=FALSE, warning=FALSE}
-# inspect data
-classdw[, 1:6] %>%
+```{r tidy5, message=F, warning=F}
+# create a new data frame 'ed' using the 'dat' data
+ed <- net_df %>%
+  # add a new column 'from' with row names
+  dplyr::mutate(from = rownames(.)) %>%
+  # reshape the data from wide to long format using 'gather'
+  tidyr::gather(to, n, BALTHASAR:TYBALT) %>%
+  # remove zero frequencies 
+  dplyr::filter(n != 0)
+# inspect
+ed %>%
   as.data.frame() %>%
-  head(10) %>%
-  flextable() %>%
-  flextable::set_table_properties(width = .5, layout = "autofit") %>%
-  flextable::theme_zebra() %>%
-  flextable::fontsize(size = 12) %>%
-  flextable::fontsize(size = 12, part = "header") %>%
-  flextable::align_text_col(align = "center") %>%
-  flextable::set_caption(caption = "Overview of the training set probabilities.")  %>%
-  flextable::border_outer()
+  head(10) 
 ```
 
 
-In the final stage, we can put our classifier into action. Our chosen classifier is a k-nearest neighbor classifier, which operates on the principle of classifying an unknown element based on its proximity to the clusters within the training set.
+Now that we have generated tables for the edges and the nodes, we can generate a *graph object*.
 
-```{r message=FALSE, warning=FALSE}
-# set seed for reproducibility
+```{r tidy6, message=F, warning=F}
+ig <- igraph::graph_from_data_frame(d=ed, vertices=va, directed = FALSE)
+```
+
+We will also add labels to the nodes as follows:
+
+```{r tidy7, message=F, warning=F}
+tg <- tidygraph::as_tbl_graph(ig) %>% 
+  tidygraph::activate(nodes) %>% 
+  dplyr::mutate(label=name)
+```
+
+When we now plot our network, it looks as shown below.
+
+```{r tidy11, message=F, warning=F}
+# set seed (so that the exact same network graph is created every time)
 set.seed(12345)
-# apply k-nearest-neighbor (knn) classifier
-prediction <- class::knn(train[,2:ncol(train)], 
-                         test[,2:ncol(test)], 
-                         cl = train[, 1], 
-                         k = 3)
-# inspect the result
-prediction
+
+# create a graph using the 'tg' data frame with the Fruchterman-Reingold layout
+tg %>%
+  ggraph::ggraph(layout = "fr") +
+  
+  # add arcs for edges with various aesthetics
+  geom_edge_arc(colour = "gray50",
+                lineend = "round",
+                strength = .1,
+                aes(edge_width = ed$n,
+                    alpha = ed$n)) +
+  
+  # add points for nodes with size based on log-transformed 'v.size' and color based on 'va$Family'
+  geom_node_point(size = log(va$n) * 2, 
+                  aes(color = va$type)) +
+  
+  # add text labels for nodes with various aesthetics
+  geom_node_text(aes(label = name), 
+                 repel = TRUE, 
+                 point.padding = unit(0.2, "lines"), 
+                 size = sqrt(va$n), 
+                 colour = "gray10") +
+  
+  # adjust edge width and alpha scales
+  scale_edge_width(range = c(0, 2.5)) +
+  scale_edge_alpha(range = c(0, .3)) +
+  
+  # set graph background color to white
+  theme_graph(background = "white") +
+  
+  # adjust legend position to the top
+  theme(legend.position = "top", 
+        # suppress legend title
+        legend.title = element_blank()) +
+  
+  # remove edge width and alpha guides from the legend
+  guides(edge_width = FALSE,
+         edge_alpha = FALSE)
+
 ```
 
-Using the phoneme frequencies present in the unknown text, our knn-classifier confidently predicts that the text is in English. This prediction aligns with reality, as the text is, indeed, a section of the Wikipedia article for Aldous Huxley's *Brave New World*. It's worth noting that the training texts encompassed German, English, and Spanish translations of a subsection from Wikipedia's article on Hermann Hesse's *Steppenwolf*.
 
+## Network Statistics
 
-## Part-of-Speech tagging
+In addition to visualizing networks, we will analyze the network and extract certain statistics about the network that tell us about structural properties of networks. 
 
-One widely used method for enhancing text data is part-of-speech tagging, which involves identifying the word type to which each word belongs. In the following section, we will apply part-of-speech tags to a brief English text.
+To extract the statistics, we use the edge object generated above (called `ed`) and then repeat each combination as often as it occurred based on the value in the `Frequency` column.
 
-Part-of-speech tagging is the process of assigning grammatical categories (such as noun, verb, adjective, etc.) to individual words in a text. It provides valuable insights into the syntactic and grammatical structure of a text, making it easier to analyze and extract meaningful information.
-
-
-<br>
-
-<div class="warning" style='padding:0.5em; background-color:rgba(215,209,204,.3); color:#51247a'>
-<span>
-<p style='margin-top:1em; text-align:center'>
-<b>Part-of-speech tagging (POS tagging) is a natural language processing task where each word in a text is assigned a grammatical category, such as noun, verb, adjective, etc.</b> It involves using linguistic patterns and context to determine the appropriate part of speech for each word. POS tagging is crucial for various language analysis tasks, including information retrieval, text summarization, and grammar analysis.<br>
-</p>
-<p style='margin-left:1em;'>
-</p></span>
-</div>
-
-<br>
-
-
-
-We start by selecting a portion of our example text.
-
-```{r udi1a, message=FALSE, warning=FALSE}
-# load text
-sample  <- base::readRDS(url("https://slcladal.github.io/data/alice.rda", "rb")) %>%
-  .[1:10] %>%
-  paste0(collapse = " ")
-# inspect
-substr(sample, 1, 200)
-```
-
-With our text ready for analysis, our next step is to download a pre-trained language model.
-
-```{r udi1b, eval = T, message=FALSE, warning=FALSE}
-# download language model
-m_eng	<- udpipe::udpipe_download_model(language = "english-ewt")
-```
-
-Once you've downloaded a model previously, you also have the option to load it directly from the location where you've stored it on your computer (in this case our project folder). 
-
-```{r udi1c, message=FALSE, warning=FALSE}
-# load language model from your computer after you have downloaded it once
-m_eng <- udpipe_load_model(here::here("english-ewt-ud-2.5-191206.udpipe"))
-```
-
-We can now use the model to annotate out text.
-
-```{r udi1d, message=FALSE, warning=FALSE}
-# tokenise, tag, dependency parsing
-text_anndf <- udpipe::udpipe_annotate(m_eng, x = sample) %>%
+```{r nstat1, message=F, warning=F}
+dg <- ed[rep(seq_along(ed$n), ed$n), 1:2]
+rownames(dg) <- NULL
+# inspect data
+dg %>%
   as.data.frame() %>%
-  dplyr::select(-sentence)
+  head(10)
+```
+
+### Degree centrality
+
+We now generate an edge list from the `dg` object and then extract the *degree centrality*. The *degree centrality* reflects how many edges each node has with the most central node having the highest value.
+
+```{r nstat2, message=F, warning=F}
+dgg <- graph.edgelist(as.matrix(dg), directed = T)
+# extract degree centrality
+igraph::degree(dgg) %>%
+  as.data.frame() %>%
+  tibble::rownames_to_column("node") %>%
+  dplyr::rename(`degree centrality` = 2) %>%
+  dplyr::arrange(-`degree centrality`) -> dc_tbl
+# inspect data
+dc_tbl %>%
+  as.data.frame() %>%
+  head(10) 
+```
+
+### Central node
+
+Next, we extract the most *central node*.
+
+```{r nstat3b, message=F, warning=F}
+names(igraph::degree(dgg))[which(igraph::degree(dgg) == max(igraph::degree(dgg)))]
+```
+
+### Betweenness centrality
+
+We now  extract the *betweenness centrality*. *Betweenness centrality* provides a measure of how important nodes are for information flow between nodes in a  network. The node with the highest betweenness centrality creates the shortest  paths in the network.  The higher a node’s *betweenness centrality*, the more important it is for the efficient flow of goods in a network.
+
+
+```{r nstat4, message=F, warning=F}
+igraph::betweenness(dgg) %>%
+  as.data.frame() %>%
+  tibble::rownames_to_column("node") %>%
+  dplyr::rename(`betweenness centrality` = 2) %>%
+  dplyr::arrange(-`betweenness centrality`) -> bc_tbl
+# inspect data
+bc_tbl %>%
+  as.data.frame() %>%
+  head(10)
+```
+
+
+### Closeness
+
+In addition, we extract the closeness statistic of all edges in the `dg` object by using the `closeness` function from the `igraph` package. Closeness centrality refers to the shortest paths between nodes. The distance between two nodes represents the length of the shortest path between them. The closeness of a node is the average distance from that node to all other nodes. 
+
+```{r nstat5, message=F, warning=F}
+igraph::closeness(dgg) %>%
+  as.data.frame() %>%
+  tibble::rownames_to_column("node") %>%
+  dplyr::rename(closeness = 2) %>%
+  dplyr::arrange(-closeness) -> c_tbl
+# inspect data
+c_tbl %>%
+  as.data.frame() %>%
+  head(10)
+```
+
+# Topic Modelling
+
+
+Topic models refers to a suit of methods employed to uncover latent structures within a corpus of text. These models operate on the premise of identifying abstract *topics* that recur across documents. In essence, topic models sift through the textual data to discern recurring patterns of word co-occurrence, revealing underlying semantic themes [@busso2022operation; @blei2003latent]. This technique is particularly prevalent in text mining, where it serves to unveil hidden semantic structures in large volumes of textual data.
+
+Conceptually, topics can be understood as clusters of co-occurring terms, indicative of shared semantic domains within the text. The underlying assumption is that if a document pertains to a specific topic, words related to that topic will exhibit higher frequency compared to documents addressing other subjects. For example, in documents discussing dogs, terms like *dog* and *bone* are likely to feature prominently, while in documents focusing on cats, *cat* and *meow* would be more prevalent. Meanwhile, ubiquitous terms such as *the* and *is* are expected to occur with similar frequency across diverse topics, serving as noise rather than indicative signals of topic specificity.
+
+Various methods exist for determining topics within topic models. For instance, @gerlach2018network and @hyland2021multilayer advocate for an approach grounded in stochastic block models. However, most applications of topic models use Latent Dirichlet Allocation (LDA) [@blei2003latent] or Structural Topic Modeling  [@roberts2016navigating].
+
+LDA, in particular, emerges as a widely embraced technique for fitting topic models. It operates by treating each document as a blend of topics and each topic as a blend of words. Consequently, documents can exhibit content overlaps, akin to the fluidity observed in natural language usage, rather than being strictly segregated into distinct groups.
+
+@gillings2022interpretation state that topic modelling is based on the following key assumptions:
+
+* The corpus comprises a substantial number of documents.  
+* A topic is delineated as a set of words with varying probabilities of occurrence across the documents.  
+* Each document exhibits diverse degrees of association with multiple topics.  
+* The collection is structured by underlying topics, which are finite in number, organizing the corpus.  
+
+Given the availability of vast amounts of textual data, topic models can help to organize and offer insights and assist in understanding large collections of unstructured text and they are widely used in natural language processing and computational text analytics. However, the use of topic modelling in discourse studies has received criticism [@brookes2019utility] due to the following issues: 
+
+1. **Thematic Coherence**: While topic modeling can group texts into *topics*, the degree of thematic coherence varies. Some topics may be thematically coherent, but others may lack cohesion or accuracy in capturing the underlying themes present in the texts.
+
+2. **Nuanced Perspective**: Compared to more traditional approaches to discourse analysis, topic modeling often provides a less nuanced perspective on the data. The automatically generated topics may overlook subtle nuances and intricacies present in the texts, leading to a less accurate representation of the discourse.
+
+3. **Distance from Reality**: @brookes2019utility suggest that the insights derived from topic modeling may not fully capture the "reality" of the texts. The topics generated by the model may not accurately reflect the complex nature of the discourse, leading to potential misinterpretations or oversimplifications of the data.
+
+4. **Utility for Discourse Analysts**: While topic modeling may offer a method for organizing and studying sizable data sets, @brookes2019utility questions the utility for discourse analysts and suggests that traditional discourse analysis methods consistently provide a more nuanced and accurate perspective on the data compared to topic modeling approaches.
+
+This criticism is certainly valid if topic modeling is solely reliant on a purely data-driven approach without human intervention. In this tutorial, we will demonstrate how to combine data-driven topic modeling with human-supervised seeded methods to arrive at more reliable and accurate topics.
+
+## Getting started with Topic Modelling
+
+In this tutorial, we'll explore a two-step approach to topic modeling. Initially, we'll employ an unsupervised method to generate a preliminary topic model, uncovering inherent topics within the data. Subsequently, we'll introduce a human-supervised, seeded model, informed by the outcomes of the initial data-driven approach. Following this (recommended) procedure, we'll then delve into an alternative purely data-driven approach.
+
+Our tutorial begins by gathering the necessary corpus data. We'll be focusing on analyzing the *State of the Union Addresses* (SOTU) delivered by US presidents, with the aim of understanding how the addressed topics have evolved over time. Given the length of these addresses (amounting to 231 in total), it's important to acknowledge that document length can influence topic modeling outcomes. In cases where texts are exceptionally short (like Twitter posts) or long (such as books), adjusting the document units for modeling purposes can be beneficial—either by combining or splitting them accordingly.
+
+To tailor our approach to the SOTU speeches, we've chosen to model at the paragraph level instead of analyzing entire speeches at once. This allows for a more detailed analysis, potentially leading to clearer and more interpretable topics. We've provided a data set named `sotu_paragraphs.rda`, which contains the speeches segmented into paragraphs for easier analysis.
+
+
+## Human-in-the-loop Topic Modelling 
+
+In this human-in-the-loop approach to topic modelling which mainly uses and combines the `quanteda` package [@benoit2018quanteda], the `topicmodels` package [@topicmodels2024package; @topicmodels2011pub], and the `seededlda` package [@seededlda2024]. Now that we have cleaned the data, we can perform the topic modelling. This consists of two steps:
+
+1. First, we perform an unsupervised LDA. We do this to check what topics are in our corpus. 
+
+2. Then, we perform a supervised LDA (based on the results of the unsupervised LDA) to identify meaningful topics in our data. For the supervised LDA, we define so-called *seed terms* that help in generating coherent topics.
+
+## Loading and preparing data
+
+When preparing the data for analysis, we employ several preprocessing steps to ensure its cleanliness and readiness for analysis. Initially, we load the data and then remove punctuation, symbols, and numerical characters. Additionally, we eliminate common stop words, such as *the* and *and*, which can introduce noise and hinder the topic modeling process. To standardize the text, we convert it to lowercase and, lastly, we apply stemming to reduce words to their base form.
+
+```{r}
+txts <- base::readRDS(url("https://slcladal.github.io/data/sotu_paragraphs.rda", "rb")) 
 # inspect
-head(text_anndf, 10)
+str(txts)
 ```
 
-It can be useful to extract only the words and their pos-tags and convert them back into a text format (rather than a tabular format). 
 
-```{r udi2, message=FALSE, warning=FALSE}
-tagged_text <- paste(text_anndf$token, "/", text_anndf$xpos, collapse = " ", sep = "")
-# inspect tagged text
-substr(tagged_text, 1, 200)
+
+```{r loadsotu}
+# load data
+txts <- base::readRDS(url("https://slcladal.github.io/data/sotu_paragraphs.rda", "rb")) 
+txts$text %>%
+  # tokenize
+  quanteda::tokens(remove_punct = TRUE,       # remove punctuation 
+                   remove_symbols = TRUE,     # remove symbols 
+                   remove_number = TRUE) %>%  # remove numbers
+  # remove stop words
+  quanteda::tokens_select(pattern = stopwords("en"), selection = "remove") %>%
+  # stemming
+  quanteda::tokens_wordstem() %>%
+  # convert to document-frequency matrix
+  quanteda::dfm(tolower = T) -> ctxts
+# add docvars
+docvars(ctxts, "president") <- txts$president
+docvars(ctxts, "date") <- txts$date
+docvars(ctxts, "speechid") <- txts$speech_doc_id
+docvars(ctxts, "docid") <- txts$doc_id
+# clean data
+ctxts <- dfm_subset(ctxts, ntoken(ctxts) > 0)
+# inspect data
+ctxts[1:5, 1:5]
 ```
 
-We could use the pos-tagged data to study differences in the distribution of word classes across different registers. or to find certain syntactic patterns in a collection of texts. 
+## Initial unsupervised topic model
 
-## Names Entity Recognition 
+Now that we have loaded and prepared the data for analysis, we will follow a two-step approach. 
 
-Named Entity Recognition (NER), also known as named entity extraction or entity extraction, is a text analysis technique that automatically identifies and extracts named entities from text, such as people, locations, brands, and more.
+1. First, we perform an unsupervised topic model using Latent Dirichlet Allocation (LDA) to identify the topics present in our data. This initial step helps us understand the broad themes and structure within the data set. 
 
-NER involves the process of extracting textual elements with characteristics commonly associated with proper nouns (e.g., locations, individuals, organizations) rather than other parts of speech. These characteristics may include non-sentence initial capitalization. Named entities are frequently retrieved in automated summarization and topic modeling.
+2. Then, based on the results of the unsupervised topic model, we conduct a supervised topic model using LDA to refine and identify more meaningful topics in our data.
 
-NER can be accomplished through straightforward feature extraction, like extracting all non-sentence-initial capitalized words, or with the aid of training sets. Utilizing training sets—texts annotated to identify entities and non-entities—proves more effective when dealing with unknown or inconsistently capitalized data.
+This combined approach allows us to leverage both data-driven insights and expert supervision to enhance the accuracy and interpretability of the topics.
+
+In the initial  step that implements a unsupervised, data-driven topic model, we vary the number of topics the LDA algorithm looks for until we identify coherent topics in the data. We use the `LDA` function from the `topicmodels` package instead of the `textmodel_lda` function from the `seededlda` package because the former allows us to include a seed. Including a seed ensures that the results of this unsupervised topic model are reproducible, which is not the case if we do not seed the model, as each model will produce different results without setting a seed.
+
+```{r datadrivenlda}
+# generate model: change k to different numbers, e.g. 10 or 20 and look for consistencies in the keywords for the topics below.
+topicmodels::LDA(ctxts, k = 15, control = list(seed = 1234)) -> ddlda
+```
+
+Now that we have generated an initial data-driven model, the next step is to inspect it to evaluate its performance and understand the topics it has identified. To do this, we need to examine the terms associated with each detected topic. By analyzing these terms, we can gain insights into the themes represented by each topic and assess the coherence and relevance of the model's output.
+
+```{r cleanbetatopics}
+# define number of topics
+ntopics = 15
+# define number of terms
+nterms = 10
+# generate table
+tidytext::tidy(ddlda, matrix = "beta") %>%
+  dplyr::group_by(topic) %>%
+  dplyr::slice_max(beta, n = nterms) %>% 
+  dplyr::ungroup() %>%
+  dplyr::arrange(topic, -beta) %>%
+  dplyr::mutate(term = paste(term, " (", round(beta, 3), ")", sep = ""),
+                topic = paste("topic", topic),
+                topic = factor(topic, levels = c(paste("topic", 1:ntopics))),
+                top = rep(paste("top", 1:nterms), nrow(.)/nterms),
+                top = factor(top, levels = c(paste("top", 1:nterms)))) %>%
+  dplyr::select(-beta) %>%
+  tidyr::spread(topic, term) -> ddlda_top_terms
+ddlda_top_terms
+```
+
+In a real analysis, we would re-run the unsupervised model multiple times, adjusting the number of topics that the Latent Dirichlet Allocation (LDA) algorithm "looks for." For each iteration, we would inspect the key terms associated with the identified topics to check their thematic consistency. This evaluation helps us determine whether the results of the topic model make sense and accurately reflect the themes present in the data. By varying the number of topics and examining the corresponding key terms, we can identify the optimal number of topics that best represent the underlying themes in our data set. However, we will skip re-running the model here, as this is just a tutorial intended to showcase the process rather than a comprehensive analysis.
+
+To obtain a comprehensive table of terms and their association strengths with topics (the beta values), follow the steps outlined below. This table can help verify if the data contains thematically distinct topics. Additionally, visualizations and statistical modeling can be employed to compare the distinctness of topics and determine the ideal number of topics. However, I strongly recommend not solely relying on statistical measures when identifying the optimal number of topics. In my experience, human intuition is still essential for evaluating topic coherence and consistency.
 
 
-<br>
-
-<div class="warning" style='padding:0.5em; background-color:rgba(215,209,204,.3); color:#51247a'>
-<span>
-<p style='margin-top:1em; text-align:center'>
-<b>Named Entity Recognition (NER) is a natural language processing task that identifies and classifies words or phrases within text into predefined categories, such as persons, locations, organizations, and more.</b> It employs contextual clues and language patterns to recognize these named entities. NER is essential for various applications, including information extraction, text summarization, and knowledge graph construction.<br>
-</p>
-<p style='margin-left:1em;'>
-</p></span>
-</div>
-
-<br>
-
-
-In this context, we will leverage the results obtained from part-of-speech tagging to extract terms tagged as named entities (the label `PROPN` in the `upos` column).
-
-```{r ner1, message=FALSE, warning=FALSE}
-# tokenise, tag, dependency parsing
-ner_df <- text_anndf %>%
-  dplyr::filter(upos == "PROPN") %>%
-  dplyr::select(token_id, token, lemma, upos, feats)
+```{r extractbeta}
+# extract topics
+ddlda_topics <- tidy(ddlda, matrix = "beta")
 # inspect
-head(ner_df)
+head(ddlda_topics, 20)
 ```
 
-The obtained results can be further processed and categorized into various types such as persons, locations, dates, and other entities. This initial insight should provide you with a starting point for your analysis and exploration.
+The purpose of this initial step, in which we generate data-driven unsupervised topic models, is to identify the number of coherent topics present in the data and to determine the key terms associated with these topics. These key terms will then be used as seed terms in the next step: the supervised, seeded topic model. This approach ensures that the supervised model is grounded in the actual thematic structure of the data set, enhancing the accuracy and relevance of the identified topics.
 
-## Dependency Parsing Using UDPipe
+## Supervised, seeded topic model
 
-In addition to part-of-speech tagging, we can create visual representations illustrating the syntactic relationships between the various components of a sentence. 
+To implement the supervised, seeded topic model, we start by creating a dictionary containing the seed terms we have identified in the first step.
 
-
-<br>
-
-<div class="warning" style='padding:0.5em; background-color:rgba(215,209,204,.3); color:#51247a'>
-<span>
-<p style='margin-top:1em; text-align:center'>
-<b>Dependency parsing is a linguistic analysis technique that reveals the grammatical structure of sentences by identifying how words relate to one another.</b> It establishes hierarchical relationships, such as subject-verb, modifier-noun, or object-verb connections, within a sentence. Dependency parsing is fundamental for understanding sentence syntax, semantic roles, and linguistic relationships, playing a critical role in various natural language processing tasks like sentiment analysis, information extraction, and machine translation.<br>
-</p>
-<p style='margin-left:1em;'>
-</p></span>
-</div>
-
-<br>
+To check terms (to see if ), you can use the following code chunk:
+```{r checkterms}
+ddlda_topics %>%  select(term) %>% unique() %>% filter(str_detect(term, "agri"))
+```
 
 
-To achieve this, we first construct an object containing a sentence (in this instance, the sentence *John gave Mary a kiss*), and subsequently, we utilize the `textplot_dependencyparser` function to plot or visualize the dependencies.
 
-```{r udi3, message=FALSE, warning=FALSE}
-# parse text
-sent <- udpipe::udpipe_annotate(m_eng, x = "John gave Mary a kiss.") %>%
-  as.data.frame()
+```{r seededlda}
+# semisupervised LDA
+dict <- dictionary(list(military = c("armi", "war", "militari", "conflict"),
+                        liberty = c("freedom", "liberti", "free"),
+                        nation = c("nation", "countri", "citizen"),
+                        law = c("law", "court", "prison"),
+                        treaty = c("claim", "treati", "negoti"),
+                        indian = c("indian", "tribe", "territori"),
+                        labor = c("labor", "work", "condit"),
+                        money = c("bank", "silver", "gold", "currenc", "money"),
+                        finance = c("debt", "invest", "financ"),
+                        wealth = c("prosper", "peac", "wealth"),
+                        industry = c("produc", "industri", "manufactur"),
+                        navy = c("navi", "ship", "vessel", "naval"),
+                        consitution = c("constitut", "power", "state"),
+                        agriculture = c("agricultur", "grow", "land"),
+                        office = c("office", "serv", "duti")))
+tmod_slda <- seededlda::textmodel_seededlda(ctxts, 
+                                            dict, 
+                                            residual = TRUE, 
+                                            min_termfreq = 2)
 # inspect
-head(sent)
+seededlda::terms(tmod_slda)
 ```
 
-We now generate the plot.
+Now, we extract files and create a data frame of topics and documents. This shows what topic is dominant in which file in tabular form.  
 
-```{r udi5, message=FALSE, warning=FALSE}
-# generate dependency plot
-dplot <- textplot::textplot_dependencyparser(sent, size = 3) 
-# show plot
-dplot
+```{r dataframe}
+# generate data frame
+data.frame(tmod_slda$data$date, tmod_slda$data$president, seededlda::topics(tmod_slda)) %>%
+  dplyr::rename(Date = 1,
+                President = 2,
+                Topic = 3) %>%
+  dplyr::mutate(Date = stringr::str_remove_all(Date, "-.*"),
+                Date = stringr::str_replace_all(Date, ".$", "0")) %>%
+  dplyr::mutate_if(is.character, factor) -> topic_df
+# inspect
+head(topic_df)
 ```
 
-Dependency parsing proves invaluable for a range of applications, including analyzing the relationships within sentences and shedding light on the roles of different elements. For instance, it helps distinguish between the agent and the patient in actions like crimes or other activities. This parsing technique enables a deeper understanding of the underlying grammatical and semantic structure of sentences, making it a valuable tool for linguistic analysis, information extraction, and natural language understanding.
+Using the table (or data frame) we have just created, we can visualize the use of topics over time.
 
 
-## Citation & Session Info 
+
+```{r vis}
+topic_df %>%
+  dplyr::group_by(Date, Topic) %>%
+  dplyr::summarise(freq = n()) %>%
+  ggplot(aes(x = Date, y = freq, fill = Topic)) +
+  geom_bar(stat="identity", position="fill", color = "black") + 
+  theme_bw() +
+  labs(x = "Decade") +
+  scale_fill_manual(values = rev(colorRampPalette(brewer.pal(8, "RdBu"))(ntopics+1))) +
+  scale_y_continuous(name ="Percent of paragraphs", labels = seq(0, 100, 25))
+```
+
+The figure illustrates the relative frequency of topics over time in the State of the Union (SOTU) texts. Notably, paragraphs discussing the topic of "office," characterized by key terms such as *office*, *serv*, and *duti*, have become less prominent over time. This trend suggests a decreasing emphasis on this particular theme, as evidenced by the diminishing number of paragraphs dedicated to it.
+
+# Citation & Session Info 
 
 Schweinberger, Martin. 2024. *Introduction to R for Social Science*. University of Eastern Finland, Joensuu. url: https://martinschweinberger.github.io/IntroR_WS (Version 2024.06.11).
 
@@ -1174,6 +1115,6 @@ sessionInfo()
 ```
 
 
-## References
+# References
 
 
