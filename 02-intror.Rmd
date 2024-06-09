@@ -1,7 +1,5 @@
 # Introduction to R
 
-> **UNFINISHED! WORK IN PROGRESS! I'M STILL WORKING ON THE CONTENT**
-
 Here I want to show you how to get started with R. As such, this section is aimed at fresh users or beginners with the aim of showcasing how to set up a R session in RStudio, how to set up R projects, and how to do basic operations using R such as loading and manipulation tabular data and generating basic visualization using R. 
 
 
@@ -349,6 +347,7 @@ One great thing about R is that you can very often find an answer to your questi
 
 * Google your error! See <http://r4ds.had.co.nz/introduction.html#getting-help-and-learning-more> for excellent suggestions on how to find help for a specific question online.
 
+
 # Working with Text
 
 In this section, we will learn how to work with textual data in R and we use positive IMDB reviews as our example texts. Before we start, it is important to understand the general logic of R code which is why we start with a very brief explanation of functions and objects.
@@ -452,6 +451,27 @@ text %>%
 # inspect data
 text2
 ```
+
+
+
+# Exercise 1: Introducing Text Processing
+
+<div class="warning" style='padding:0.1em; background-color:#f2f2f2; color:#51247a'>
+<span>
+<p style='margin-top:1em; text-align:center'>
+<b>EXERCISE TIME</b><br>
+</p>
+<br>
+<p style='margin-top:1em; text-align:center'>
+Form small groups or pairs and check out the transcripts called <it>ex1_transcript.pdf</it> (you can find it in the <it>exercise</it> folder in the <it>data</it> folder).
+<br>
+The aim is to find out how many words (types and tokens) the transcript contains. Write down how you would instruct someone to remove everything that is not a word and how you would then instruct them to count the words in the clean document. 
+</p>
+<br>
+</span>
+</div>
+
+<br>
 
 
 # Basic String Processing
@@ -569,13 +589,6 @@ Like `strsplit`, the function `str_split` splits a text when a given pattern occ
 str_split(review, "and") 
 ```
 
-The function `str_split_fixed` splits a text when a given pattern occurs but only so often as is indicated by the argument `n`. So, even if the patter occur more often than `n`, `str_split_fixed` will only split the text `n` times.
-
-```{r stringr17, message=FALSE, warning=FALSE}
-str_split_fixed(review, "and", n = 3)
-```
-
-
 
 The function `str_subset` extracts those subsets of a text that contain a certain pattern.  
 
@@ -669,20 +682,6 @@ The function `word` extracts words from a text (expressed as word positions).
 
 ```{r stringr39, message=FALSE, warning=FALSE}
 word(review, 2:7)
-```
-
-
-The function `str_glue` combines strings and allows to input variables.
-
-```{r stringr40, message=FALSE, warning=FALSE}
-name <- "Fred"
-age <- 50
-anniversary <- as.Date("1991-10-12")
-str_glue(
-  "My name is {name}, ",
-  "my age next year is {age + 1}, ",
-  "and my anniversary is {format(anniversary, '%A, %B %d, %Y')}."
-)
 ```
 
 
@@ -951,9 +950,9 @@ dplot
 
 
 
-## Example: Data processing chain
+## Data processing chains
 
-When working with texts, we usually need to clean the data. Below, we do some  basic cleaning using a pipeline or data processing chain. In a data processing chain, we combine commands to achieve an end result (in our case, a clean text).
+When working with texts, we usually need to clean the data which involves several steps. Below, we do some  basic data processing and cleaning using a so-called pipeline or data processing chain. In a data processing chain, we combine commands to achieve an end result (in our case, a clean text).
 
 ```{r, message=FALSE, warning=FALSE}
 reviews_pos_split_clean <- reviews_pos_split %>%
@@ -984,10 +983,10 @@ reviews_pos_split_clean[1]
 Creating concordances or key-word-in-context displays is one of the most common practices when dealing with text data. Fortunately, there exist ready-made functions that make this a very easy task in R. We will use the `kwic` function from the `quanteda` package to create kwics here. 
 
 ```{r, message=FALSE, warning=FALSE}
-kwic_multiple <- quanteda::kwic(reviews_pos_split_clean, 
-       pattern = phrase("audience"),
-       window = 3, 
-       valuetype = "regex") %>%
+kwic_multiple <- quanteda::tokens(reviews_pos_split_clean) %>%
+  quanteda::kwic(pattern = phrase("audience"),
+                 window = 3, 
+                 valuetype = "regex") %>%
   as.data.frame()
 # inspect data
 head(kwic_multiple)

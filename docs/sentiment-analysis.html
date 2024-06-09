@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Section 4 Sentiment Analysis | Introduction to R for Social Science</title>
-  <meta name="description" content="Section 4 Sentiment Analysis | Introduction to R for Social Science" />
+  <title>Section 5 Sentiment Analysis | Introduction to R for Social Science</title>
+  <meta name="description" content="Section 5 Sentiment Analysis | Introduction to R for Social Science" />
   <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Section 4 Sentiment Analysis | Introduction to R for Social Science" />
+  <meta property="og:title" content="Section 5 Sentiment Analysis | Introduction to R for Social Science" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Section 4 Sentiment Analysis | Introduction to R for Social Science" />
+  <meta name="twitter:title" content="Section 5 Sentiment Analysis | Introduction to R for Social Science" />
   
   
   
@@ -23,14 +23,14 @@
 <meta name="author" content="Martin Schweinberger" />
 
 
-<meta name="date" content="2024-06-08" />
+<meta name="date" content="2024-06-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="introduction-to-text-analysis-with-r.html"/>
+<link rel="prev" href="exercise-2-identifying-keywords-and-sentiments.html"/>
 <link rel="next" href="keyword-detection.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -213,7 +213,7 @@ div.csl-indent {
 <li class="chapter" data-level="2.12" data-path="introduction-to-r.html"><a href="introduction-to-r.html#practice-regular-expressions"><i class="fa fa-check"></i><b>2.12</b> Practice: regular expressions</a></li>
 <li class="chapter" data-level="2.13" data-path="introduction-to-r.html"><a href="introduction-to-r.html#stemming"><i class="fa fa-check"></i><b>2.13</b> Stemming</a></li>
 <li class="chapter" data-level="2.14" data-path="introduction-to-r.html"><a href="introduction-to-r.html#part-of-speech-tagging-and-dependency-parsing"><i class="fa fa-check"></i><b>2.14</b> Part-of-speech tagging and dependency parsing</a></li>
-<li class="chapter" data-level="2.15" data-path="introduction-to-r.html"><a href="introduction-to-r.html#example-data-processing-chain"><i class="fa fa-check"></i><b>2.15</b> Example: Data processing chain</a></li>
+<li class="chapter" data-level="2.15" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-processing-chains"><i class="fa fa-check"></i><b>2.15</b> Data processing chains</a></li>
 <li class="chapter" data-level="2.16" data-path="introduction-to-r.html"><a href="introduction-to-r.html#concordancing-and-kwics"><i class="fa fa-check"></i><b>2.16</b> Concordancing and KWICs</a></li>
 <li class="chapter" data-level="2.17" data-path="introduction-to-r.html"><a href="introduction-to-r.html#basics-of-ggplot2-syntax"><i class="fa fa-check"></i><b>2.17</b> Basics of ggplot2 syntax</a></li>
 <li class="chapter" data-level="2.18" data-path="introduction-to-r.html"><a href="introduction-to-r.html#line-plot"><i class="fa fa-check"></i><b>2.18</b> Line plot</a></li>
@@ -230,47 +230,50 @@ div.csl-indent {
 <li class="chapter" data-level="3.1" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#what-is-text-analysis"><i class="fa fa-check"></i><b>3.1</b> What is Text Analysis?</a></li>
 <li class="chapter" data-level="3.2" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#preparation-and-session-set-up"><i class="fa fa-check"></i><b>3.2</b> Preparation and session set up</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html"><i class="fa fa-check"></i><b>4</b> Sentiment Analysis</a>
+<li class="chapter" data-level="4" data-path="exercise-2-identifying-keywords-and-sentiments.html"><a href="exercise-2-identifying-keywords-and-sentiments.html"><i class="fa fa-check"></i><b>4</b> Exercise 2: Identifying Keywords and Sentiments</a></li>
+<li class="chapter" data-level="5" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html"><i class="fa fa-check"></i><b>5</b> Sentiment Analysis</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#what-is-sentiment-analysis"><i class="fa fa-check"></i><b>4.1</b> What is Sentiment Analysis?</a></li>
-<li class="chapter" data-level="4.2" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#exporting-the-results"><i class="fa fa-check"></i><b>4.2</b> Exporting the results</a></li>
-<li class="chapter" data-level="4.3" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#summarizing-results"><i class="fa fa-check"></i><b>4.3</b> Summarizing results</a></li>
-<li class="chapter" data-level="4.4" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#visualizing-results"><i class="fa fa-check"></i><b>4.4</b> Visualizing results</a></li>
-<li class="chapter" data-level="4.5" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#identifying-important-emotives"><i class="fa fa-check"></i><b>4.5</b> Identifying important emotives</a></li>
+<li class="chapter" data-level="5.1" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#what-is-sentiment-analysis"><i class="fa fa-check"></i><b>5.1</b> What is Sentiment Analysis?</a></li>
+<li class="chapter" data-level="5.2" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#exporting-the-results"><i class="fa fa-check"></i><b>5.2</b> Exporting the results</a></li>
+<li class="chapter" data-level="5.3" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#summarizing-results"><i class="fa fa-check"></i><b>5.3</b> Summarizing results</a></li>
+<li class="chapter" data-level="5.4" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#visualizing-results"><i class="fa fa-check"></i><b>5.4</b> Visualizing results</a></li>
+<li class="chapter" data-level="5.5" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#identifying-important-emotives"><i class="fa fa-check"></i><b>5.5</b> Identifying important emotives</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="keyword-detection.html"><a href="keyword-detection.html"><i class="fa fa-check"></i><b>5</b> Keyword Detection</a>
+<li class="chapter" data-level="6" data-path="keyword-detection.html"><a href="keyword-detection.html"><i class="fa fa-check"></i><b>6</b> Keyword Detection</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="keyword-detection.html"><a href="keyword-detection.html#dimensions-of-keyness"><i class="fa fa-check"></i><b>5.1</b> Dimensions of keyness</a></li>
-<li class="chapter" data-level="5.2" data-path="keyword-detection.html"><a href="keyword-detection.html#identifying-keywords"><i class="fa fa-check"></i><b>5.2</b> Identifying keywords</a></li>
-<li class="chapter" data-level="5.3" data-path="keyword-detection.html"><a href="keyword-detection.html#visualising-keywords"><i class="fa fa-check"></i><b>5.3</b> Visualising keywords</a></li>
+<li class="chapter" data-level="6.1" data-path="keyword-detection.html"><a href="keyword-detection.html#dimensions-of-keyness"><i class="fa fa-check"></i><b>6.1</b> Dimensions of keyness</a></li>
+<li class="chapter" data-level="6.2" data-path="keyword-detection.html"><a href="keyword-detection.html#identifying-keywords"><i class="fa fa-check"></i><b>6.2</b> Identifying keywords</a></li>
+<li class="chapter" data-level="6.3" data-path="keyword-detection.html"><a href="keyword-detection.html#visualising-keywords"><i class="fa fa-check"></i><b>6.3</b> Visualising keywords</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="network-analysis.html"><a href="network-analysis.html"><i class="fa fa-check"></i><b>6</b> Network Analysis</a>
+<li class="chapter" data-level="7" data-path="networks-and-collocation-analysis.html"><a href="networks-and-collocation-analysis.html"><i class="fa fa-check"></i><b>7</b> Networks and Collocation Analysis</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="network-analysis.html"><a href="network-analysis.html#data-preparation"><i class="fa fa-check"></i><b>6.1</b> Data preparation</a></li>
-<li class="chapter" data-level="6.2" data-path="network-analysis.html"><a href="network-analysis.html#creating-a-matrix"><i class="fa fa-check"></i><b>6.2</b> Creating a matrix</a></li>
-<li class="chapter" data-level="6.3" data-path="network-analysis.html"><a href="network-analysis.html#visualizing-networks"><i class="fa fa-check"></i><b>6.3</b> Visualizing Networks</a>
+<li class="chapter" data-level="7.1" data-path="networks-and-collocation-analysis.html"><a href="networks-and-collocation-analysis.html#networks"><i class="fa fa-check"></i><b>7.1</b> Networks</a></li>
+<li class="chapter" data-level="7.2" data-path="networks-and-collocation-analysis.html"><a href="networks-and-collocation-analysis.html#collocations"><i class="fa fa-check"></i><b>7.2</b> Collocations</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="exercise-3-manual-topic-modelling.html"><a href="exercise-3-manual-topic-modelling.html"><i class="fa fa-check"></i><b>8</b> Exercise 3: Manual Topic Modelling</a></li>
+<li class="chapter" data-level="9" data-path="topic-modelling.html"><a href="topic-modelling.html"><i class="fa fa-check"></i><b>9</b> Topic Modelling</a>
 <ul>
-<li class="chapter" data-level="6.3.1" data-path="network-analysis.html"><a href="network-analysis.html#quanteda-networks"><i class="fa fa-check"></i><b>6.3.1</b> Quanteda Networks</a></li>
-<li class="chapter" data-level="6.3.2" data-path="network-analysis.html"><a href="network-analysis.html#tidy-networks"><i class="fa fa-check"></i><b>6.3.2</b> Tidy Networks</a></li>
+<li class="chapter" data-level="9.1" data-path="topic-modelling.html"><a href="topic-modelling.html#getting-started-with-topic-modelling"><i class="fa fa-check"></i><b>9.1</b> Getting started with Topic Modelling</a></li>
+<li class="chapter" data-level="9.2" data-path="topic-modelling.html"><a href="topic-modelling.html#human-in-the-loop-topic-modelling"><i class="fa fa-check"></i><b>9.2</b> Human-in-the-loop Topic Modelling</a></li>
+<li class="chapter" data-level="9.3" data-path="topic-modelling.html"><a href="topic-modelling.html#loading-and-preparing-data"><i class="fa fa-check"></i><b>9.3</b> Loading and preparing data</a></li>
+<li class="chapter" data-level="9.4" data-path="topic-modelling.html"><a href="topic-modelling.html#initial-unsupervised-topic-model"><i class="fa fa-check"></i><b>9.4</b> Initial unsupervised topic model</a></li>
+<li class="chapter" data-level="9.5" data-path="topic-modelling.html"><a href="topic-modelling.html#supervised-seeded-topic-model"><i class="fa fa-check"></i><b>9.5</b> Supervised, seeded topic model</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="network-analysis.html"><a href="network-analysis.html#network-statistics"><i class="fa fa-check"></i><b>6.4</b> Network Statistics</a>
+<li class="chapter" data-level="10" data-path="network-analysis.html"><a href="network-analysis.html"><i class="fa fa-check"></i><b>10</b> Network Analysis</a>
 <ul>
-<li class="chapter" data-level="6.4.1" data-path="network-analysis.html"><a href="network-analysis.html#degree-centrality"><i class="fa fa-check"></i><b>6.4.1</b> Degree centrality</a></li>
-<li class="chapter" data-level="6.4.2" data-path="network-analysis.html"><a href="network-analysis.html#central-node"><i class="fa fa-check"></i><b>6.4.2</b> Central node</a></li>
-<li class="chapter" data-level="6.4.3" data-path="network-analysis.html"><a href="network-analysis.html#betweenness-centrality"><i class="fa fa-check"></i><b>6.4.3</b> Betweenness centrality</a></li>
-<li class="chapter" data-level="6.4.4" data-path="network-analysis.html"><a href="network-analysis.html#closeness"><i class="fa fa-check"></i><b>6.4.4</b> Closeness</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="topic-modelling.html"><a href="topic-modelling.html"><i class="fa fa-check"></i><b>7</b> Topic Modelling</a>
+<li class="chapter" data-level="10.1" data-path="network-analysis.html"><a href="network-analysis.html#data-preparation"><i class="fa fa-check"></i><b>10.1</b> Data preparation</a></li>
+<li class="chapter" data-level="10.2" data-path="network-analysis.html"><a href="network-analysis.html#creating-a-matrix"><i class="fa fa-check"></i><b>10.2</b> Creating a matrix</a></li>
+<li class="chapter" data-level="10.3" data-path="network-analysis.html"><a href="network-analysis.html#visualizing-networks"><i class="fa fa-check"></i><b>10.3</b> Visualizing Networks</a></li>
+<li class="chapter" data-level="10.4" data-path="network-analysis.html"><a href="network-analysis.html#network-statistics"><i class="fa fa-check"></i><b>10.4</b> Network Statistics</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="topic-modelling.html"><a href="topic-modelling.html#getting-started-with-topic-modelling"><i class="fa fa-check"></i><b>7.1</b> Getting started with Topic Modelling</a></li>
-<li class="chapter" data-level="7.2" data-path="topic-modelling.html"><a href="topic-modelling.html#human-in-the-loop-topic-modelling"><i class="fa fa-check"></i><b>7.2</b> Human-in-the-loop Topic Modelling</a></li>
-<li class="chapter" data-level="7.3" data-path="topic-modelling.html"><a href="topic-modelling.html#loading-and-preparing-data"><i class="fa fa-check"></i><b>7.3</b> Loading and preparing data</a></li>
-<li class="chapter" data-level="7.4" data-path="topic-modelling.html"><a href="topic-modelling.html#initial-unsupervised-topic-model"><i class="fa fa-check"></i><b>7.4</b> Initial unsupervised topic model</a></li>
-<li class="chapter" data-level="7.5" data-path="topic-modelling.html"><a href="topic-modelling.html#supervised-seeded-topic-model"><i class="fa fa-check"></i><b>7.5</b> Supervised, seeded topic model</a></li>
+<li class="chapter" data-level="10.4.1" data-path="network-analysis.html"><a href="network-analysis.html#degree-centrality"><i class="fa fa-check"></i><b>10.4.1</b> Degree centrality</a></li>
+<li class="chapter" data-level="10.4.2" data-path="network-analysis.html"><a href="network-analysis.html#central-node"><i class="fa fa-check"></i><b>10.4.2</b> Central node</a></li>
+<li class="chapter" data-level="10.4.3" data-path="network-analysis.html"><a href="network-analysis.html#betweenness-centrality"><i class="fa fa-check"></i><b>10.4.3</b> Betweenness centrality</a></li>
+<li class="chapter" data-level="10.4.4" data-path="network-analysis.html"><a href="network-analysis.html#closeness"><i class="fa fa-check"></i><b>10.4.4</b> Closeness</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="citation-session-info.html"><a href="citation-session-info.html"><i class="fa fa-check"></i><b>8</b> Citation &amp; Session Info</a></li>
-<li class="chapter" data-level="9" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>9</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="citation-session-info.html"><a href="citation-session-info.html"><i class="fa fa-check"></i><b>11</b> Citation &amp; Session Info</a></li>
+<li class="chapter" data-level="12" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>12</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -290,182 +293,231 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="sentiment-analysis" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">Section 4</span> Sentiment Analysis<a href="sentiment-analysis.html#sentiment-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="sentiment-analysis" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Section 5</span> Sentiment Analysis<a href="sentiment-analysis.html#sentiment-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>This part of the workshop showcases how to perform SA on textual data using R. The analysis shown here is in parts based on the 2<sup>nd</sup> chapter of <em>Text Mining with R</em> - the e-version of this chapter on <a href="https://www.tidytextmining.com/sentiment.html">sentiment analysis can be found here</a>.</p>
-<div id="what-is-sentiment-analysis" class="section level2 hasAnchor" number="4.1">
-<h2><span class="header-section-number">4.1</span> What is Sentiment Analysis?<a href="sentiment-analysis.html#what-is-sentiment-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="what-is-sentiment-analysis" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> What is Sentiment Analysis?<a href="sentiment-analysis.html#what-is-sentiment-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Sentiment Analysis (SA) extracts information on emotion or opinion from natural language <span class="citation">(Silge and Robinson 2017)</span>. Most forms of SA provides information about positive or negative polarity, e.g. whether a tweet is <em>positive</em> or <em>negative</em>. As such, SA represents a type of classifier that assigns values to texts. As most SA only provide information about polarity, SA is often regarded as rather coarse-grained and, thus, rather irrelevant for the types of research questions in linguistics.</p>
 <p>In the language sciences, SA can also be a very helpful tool if the type of SA provides more fine-grained information. In the following, we will perform such a information-rich SA. The SA used here does not only provide information about polarity but it will also provide association values for eight core emotions.</p>
 <p>The more fine-grained output is made possible by relying on the <em>Word-Emotion Association Lexicon</em> <span class="citation">(Mohammad and Turney 2013)</span>, which comprises 10,170 terms, and in which lexical elements are assigned scores based on ratings gathered through the crowd-sourced Amazon Mechanical Turk service. For the Word-Emotion Association Lexicon raters were asked whether a given word was associated with one of eight emotions. The resulting associations between terms and emotions are based on 38,726 ratings from 2,216 raters who answered a sequence of questions for each word which were then fed into the emotion association rating <span class="citation">(cf. Mohammad and Turney 2013)</span>. Each term was rated 5 times. For 85 percent of words, at least 4 raters provided identical ratings. For instance, the word <em>cry</em> or <em>tragedy</em> are more readily associated with SADNESS while words such as <em>happy</em> or <em>beautiful</em> are indicative of JOY and words like <em>fit</em> or <em>burst</em> may indicate ANGER. This means that the SA here allows us to investigate the expression of certain core emotions rather than merely classifying statements along the lines of a crude positive-negative distinction.</p>
 <p>We start by writing a function that clean the data. This allows us to feed our texts into the function and avoids duplicating code. Also, this showcases how you can write functions.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="sentiment-analysis.html#cb6-1" tabindex="-1"></a>txtclean <span class="ot">&lt;-</span> <span class="cf">function</span>(x, title){</span>
-<span id="cb6-2"><a href="sentiment-analysis.html#cb6-2" tabindex="-1"></a>  <span class="fu">require</span>(dplyr)</span>
-<span id="cb6-3"><a href="sentiment-analysis.html#cb6-3" tabindex="-1"></a>  <span class="fu">require</span>(stringr)</span>
-<span id="cb6-4"><a href="sentiment-analysis.html#cb6-4" tabindex="-1"></a>  <span class="fu">require</span>(tibble)</span>
-<span id="cb6-5"><a href="sentiment-analysis.html#cb6-5" tabindex="-1"></a>  x <span class="ot">&lt;-</span> x <span class="sc">%&gt;%</span></span>
-<span id="cb6-6"><a href="sentiment-analysis.html#cb6-6" tabindex="-1"></a>    <span class="fu">iconv</span>(<span class="at">to =</span> <span class="st">&quot;UTF-8&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb6-7"><a href="sentiment-analysis.html#cb6-7" tabindex="-1"></a>    base<span class="sc">::</span><span class="fu">tolower</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb6-8"><a href="sentiment-analysis.html#cb6-8" tabindex="-1"></a>    <span class="fu">paste0</span>(<span class="at">collapse =</span> <span class="st">&quot; &quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb6-9"><a href="sentiment-analysis.html#cb6-9" tabindex="-1"></a>    stringr<span class="sc">::</span><span class="fu">str_squish</span>()<span class="sc">%&gt;%</span></span>
-<span id="cb6-10"><a href="sentiment-analysis.html#cb6-10" tabindex="-1"></a>    stringr<span class="sc">::</span><span class="fu">str_split</span>(<span class="st">&quot; &quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb6-11"><a href="sentiment-analysis.html#cb6-11" tabindex="-1"></a>    <span class="fu">unlist</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb6-12"><a href="sentiment-analysis.html#cb6-12" tabindex="-1"></a>    tibble<span class="sc">::</span><span class="fu">tibble</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb6-13"><a href="sentiment-analysis.html#cb6-13" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="at">word =</span> <span class="dv">1</span>, <span class="fu">everything</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb6-14"><a href="sentiment-analysis.html#cb6-14" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">type =</span> title) <span class="sc">%&gt;%</span></span>
-<span id="cb6-15"><a href="sentiment-analysis.html#cb6-15" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">anti_join</span>(stop_words) <span class="sc">%&gt;%</span></span>
-<span id="cb6-16"><a href="sentiment-analysis.html#cb6-16" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">str_remove_all</span>(word, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">W&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb6-17"><a href="sentiment-analysis.html#cb6-17" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(word <span class="sc">!=</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb6-18"><a href="sentiment-analysis.html#cb6-18" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="sentiment-analysis.html#cb6-1" tabindex="-1"></a><span class="co"># Define a function &#39;txtclean&#39; that takes an input &#39;x&#39; and a &#39;title&#39;</span></span>
+<span id="cb6-2"><a href="sentiment-analysis.html#cb6-2" tabindex="-1"></a>txtclean <span class="ot">&lt;-</span> <span class="cf">function</span>(x, title) {</span>
+<span id="cb6-3"><a href="sentiment-analysis.html#cb6-3" tabindex="-1"></a>  <span class="co"># Load required libraries</span></span>
+<span id="cb6-4"><a href="sentiment-analysis.html#cb6-4" tabindex="-1"></a>  <span class="fu">require</span>(dplyr)</span>
+<span id="cb6-5"><a href="sentiment-analysis.html#cb6-5" tabindex="-1"></a>  <span class="fu">require</span>(stringr)</span>
+<span id="cb6-6"><a href="sentiment-analysis.html#cb6-6" tabindex="-1"></a>  <span class="fu">require</span>(tibble)</span>
+<span id="cb6-7"><a href="sentiment-analysis.html#cb6-7" tabindex="-1"></a>  <span class="co"># Convert encoding to UTF-8</span></span>
+<span id="cb6-8"><a href="sentiment-analysis.html#cb6-8" tabindex="-1"></a>  x <span class="ot">&lt;-</span> x <span class="sc">%&gt;%</span></span>
+<span id="cb6-9"><a href="sentiment-analysis.html#cb6-9" tabindex="-1"></a>    <span class="fu">iconv</span>(<span class="at">to =</span> <span class="st">&quot;UTF-8&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-10"><a href="sentiment-analysis.html#cb6-10" tabindex="-1"></a>    <span class="co"># Convert text to lowercase</span></span>
+<span id="cb6-11"><a href="sentiment-analysis.html#cb6-11" tabindex="-1"></a>    base<span class="sc">::</span><span class="fu">tolower</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb6-12"><a href="sentiment-analysis.html#cb6-12" tabindex="-1"></a>    <span class="co"># Collapse text into a single string</span></span>
+<span id="cb6-13"><a href="sentiment-analysis.html#cb6-13" tabindex="-1"></a>    <span class="fu">paste0</span>(<span class="at">collapse =</span> <span class="st">&quot; &quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-14"><a href="sentiment-analysis.html#cb6-14" tabindex="-1"></a>    <span class="co"># Remove extra whitespace</span></span>
+<span id="cb6-15"><a href="sentiment-analysis.html#cb6-15" tabindex="-1"></a>    stringr<span class="sc">::</span><span class="fu">str_squish</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb6-16"><a href="sentiment-analysis.html#cb6-16" tabindex="-1"></a>    <span class="co"># Split text into individual words</span></span>
+<span id="cb6-17"><a href="sentiment-analysis.html#cb6-17" tabindex="-1"></a>    stringr<span class="sc">::</span><span class="fu">str_split</span>(<span class="st">&quot; &quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-18"><a href="sentiment-analysis.html#cb6-18" tabindex="-1"></a>    <span class="co"># Unlist the words into a vector</span></span>
+<span id="cb6-19"><a href="sentiment-analysis.html#cb6-19" tabindex="-1"></a>    <span class="fu">unlist</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb6-20"><a href="sentiment-analysis.html#cb6-20" tabindex="-1"></a>    <span class="co"># Convert the vector to a tibble</span></span>
+<span id="cb6-21"><a href="sentiment-analysis.html#cb6-21" tabindex="-1"></a>    tibble<span class="sc">::</span><span class="fu">tibble</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb6-22"><a href="sentiment-analysis.html#cb6-22" tabindex="-1"></a>    <span class="co"># Select the first column and name it &#39;word&#39;</span></span>
+<span id="cb6-23"><a href="sentiment-analysis.html#cb6-23" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="at">word =</span> <span class="dv">1</span>, <span class="fu">everything</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb6-24"><a href="sentiment-analysis.html#cb6-24" tabindex="-1"></a>    <span class="co"># Add a new column &#39;type&#39; with the given title</span></span>
+<span id="cb6-25"><a href="sentiment-analysis.html#cb6-25" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">type =</span> title) <span class="sc">%&gt;%</span></span>
+<span id="cb6-26"><a href="sentiment-analysis.html#cb6-26" tabindex="-1"></a>    <span class="co"># Remove stop words</span></span>
+<span id="cb6-27"><a href="sentiment-analysis.html#cb6-27" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">anti_join</span>(stop_words) <span class="sc">%&gt;%</span></span>
+<span id="cb6-28"><a href="sentiment-analysis.html#cb6-28" tabindex="-1"></a>    <span class="co"># Remove non-word characters from the &#39;word&#39; column</span></span>
+<span id="cb6-29"><a href="sentiment-analysis.html#cb6-29" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">str_remove_all</span>(word, <span class="st">&quot;</span><span class="sc">\\</span><span class="st">W&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-30"><a href="sentiment-analysis.html#cb6-30" tabindex="-1"></a>    <span class="co"># Filter out empty words</span></span>
+<span id="cb6-31"><a href="sentiment-analysis.html#cb6-31" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(word <span class="sc">!=</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb6-32"><a href="sentiment-analysis.html#cb6-32" tabindex="-1"></a>}</span></code></pre></div>
 <p>Process and clean texts.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="sentiment-analysis.html#cb7-1" tabindex="-1"></a><span class="co"># process text data</span></span>
 <span id="cb7-2"><a href="sentiment-analysis.html#cb7-2" tabindex="-1"></a>posreviews_clean <span class="ot">&lt;-</span> <span class="fu">txtclean</span>(posreviews, <span class="st">&quot;Positive Review&quot;</span>)</span>
 <span id="cb7-3"><a href="sentiment-analysis.html#cb7-3" tabindex="-1"></a>negreviews_clean <span class="ot">&lt;-</span> <span class="fu">txtclean</span>(negreviews, <span class="st">&quot;Negative Review&quot;</span>)</span>
 <span id="cb7-4"><a href="sentiment-analysis.html#cb7-4" tabindex="-1"></a><span class="co"># inspect</span></span>
 <span id="cb7-5"><a href="sentiment-analysis.html#cb7-5" tabindex="-1"></a><span class="fu">str</span>(posreviews_clean); <span class="fu">str</span>(negreviews_clean)</span></code></pre></div>
-<pre><code>## tibble [95,046 × 2] (S3: tbl_df/tbl/data.frame)
-##  $ word: chr [1:95046] &quot;reviewers&quot; &quot;mentioned&quot; &quot;watching&quot; &quot;1&quot; ...
-##  $ type: chr [1:95046] &quot;Positive Review&quot; &quot;Positive Review&quot; &quot;Positive Review&quot; &quot;Positive Review&quot; ...</code></pre>
-<pre><code>## tibble [90,190 × 2] (S3: tbl_df/tbl/data.frame)
-##  $ word: chr [1:90190] &quot;basically&quot; &quot;family&quot; &quot;boy&quot; &quot;jake&quot; ...
-##  $ type: chr [1:90190] &quot;Negative Review&quot; &quot;Negative Review&quot; &quot;Negative Review&quot; &quot;Negative Review&quot; ...</code></pre>
+<pre><code>## tibble [95,527 × 2] (S3: tbl_df/tbl/data.frame)
+##  $ word: chr [1:95527] &quot;reviewers&quot; &quot;mentioned&quot; &quot;watching&quot; &quot;1&quot; ...
+##  $ type: chr [1:95527] &quot;Positive Review&quot; &quot;Positive Review&quot; &quot;Positive Review&quot; &quot;Positive Review&quot; ...</code></pre>
+<pre><code>## tibble [90,656 × 2] (S3: tbl_df/tbl/data.frame)
+##  $ word: chr [1:90656] &quot;basically&quot; &quot;family&quot; &quot;boy&quot; &quot;jake&quot; ...
+##  $ type: chr [1:90656] &quot;Negative Review&quot; &quot;Negative Review&quot; &quot;Negative Review&quot; &quot;Negative Review&quot; ...</code></pre>
 <p>Now, we combine the data with the <em>Word-Emotion Association Lexicon</em> <span class="citation">(Mohammad and Turney 2013)</span>.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="sentiment-analysis.html#cb10-1" tabindex="-1"></a>reviews_annotated <span class="ot">&lt;-</span> <span class="fu">rbind</span>(posreviews_clean, negreviews_clean) <span class="sc">%&gt;%</span></span>
-<span id="cb10-2"><a href="sentiment-analysis.html#cb10-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(type) <span class="sc">%&gt;%</span></span>
-<span id="cb10-3"><a href="sentiment-analysis.html#cb10-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">words =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb10-4"><a href="sentiment-analysis.html#cb10-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(tidytext<span class="sc">::</span><span class="fu">get_sentiments</span>(<span class="st">&quot;nrc&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb10-5"><a href="sentiment-analysis.html#cb10-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">type =</span> <span class="fu">factor</span>(type),</span>
-<span id="cb10-6"><a href="sentiment-analysis.html#cb10-6" tabindex="-1"></a>                <span class="at">sentiment =</span> <span class="fu">factor</span>(sentiment))</span>
-<span id="cb10-7"><a href="sentiment-analysis.html#cb10-7" tabindex="-1"></a><span class="co"># inspect data</span></span>
-<span id="cb10-8"><a href="sentiment-analysis.html#cb10-8" tabindex="-1"></a>reviews_annotated <span class="sc">%&gt;%</span></span>
-<span id="cb10-9"><a href="sentiment-analysis.html#cb10-9" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb10-10"><a href="sentiment-analysis.html#cb10-10" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="sentiment-analysis.html#cb10-1" tabindex="-1"></a><span class="co"># Combine positive and negative reviews into one dataframe</span></span>
+<span id="cb10-2"><a href="sentiment-analysis.html#cb10-2" tabindex="-1"></a>reviews_annotated <span class="ot">&lt;-</span> <span class="fu">rbind</span>(posreviews_clean, negreviews_clean) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="sentiment-analysis.html#cb10-3" tabindex="-1"></a>  <span class="co"># Group the combined dataframe by the &#39;type&#39; column</span></span>
+<span id="cb10-4"><a href="sentiment-analysis.html#cb10-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(type) <span class="sc">%&gt;%</span></span>
+<span id="cb10-5"><a href="sentiment-analysis.html#cb10-5" tabindex="-1"></a>  <span class="co"># Add a new column &#39;words&#39; with the count of words for each group</span></span>
+<span id="cb10-6"><a href="sentiment-analysis.html#cb10-6" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">words =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb10-7"><a href="sentiment-analysis.html#cb10-7" tabindex="-1"></a>  <span class="co"># Join the sentiment data from the &#39;nrc&#39; sentiment lexicon</span></span>
+<span id="cb10-8"><a href="sentiment-analysis.html#cb10-8" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(tidytext<span class="sc">::</span><span class="fu">get_sentiments</span>(<span class="st">&quot;nrc&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-9"><a href="sentiment-analysis.html#cb10-9" tabindex="-1"></a>  <span class="co"># Convert &#39;type&#39; and &#39;sentiment&#39; columns to factors</span></span>
+<span id="cb10-10"><a href="sentiment-analysis.html#cb10-10" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">type =</span> <span class="fu">factor</span>(type),</span>
+<span id="cb10-11"><a href="sentiment-analysis.html#cb10-11" tabindex="-1"></a>                <span class="at">sentiment =</span> <span class="fu">factor</span>(sentiment))</span>
+<span id="cb10-12"><a href="sentiment-analysis.html#cb10-12" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="sentiment-analysis.html#cb10-13" tabindex="-1"></a><span class="co"># inspect data</span></span>
+<span id="cb10-14"><a href="sentiment-analysis.html#cb10-14" tabindex="-1"></a>reviews_annotated <span class="sc">%&gt;%</span></span>
+<span id="cb10-15"><a href="sentiment-analysis.html#cb10-15" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb10-16"><a href="sentiment-analysis.html#cb10-16" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
 <pre><code>##         word            type words sentiment
-## 1  reviewers Positive Review 95046      &lt;NA&gt;
-## 2  mentioned Positive Review 95046      &lt;NA&gt;
-## 3   watching Positive Review 95046      &lt;NA&gt;
-## 4          1 Positive Review 95046      &lt;NA&gt;
-## 5         oz Positive Review 95046      &lt;NA&gt;
-## 6    episode Positive Review 95046      &lt;NA&gt;
-## 7     hooked Positive Review 95046  negative
-## 8      right Positive Review 95046      &lt;NA&gt;
-## 9   happened Positive Review 95046      &lt;NA&gt;
-## 10     methe Positive Review 95046      &lt;NA&gt;</code></pre>
+## 1  reviewers Positive Review 95527      &lt;NA&gt;
+## 2  mentioned Positive Review 95527      &lt;NA&gt;
+## 3   watching Positive Review 95527      &lt;NA&gt;
+## 4          1 Positive Review 95527      &lt;NA&gt;
+## 5         oz Positive Review 95527      &lt;NA&gt;
+## 6    episode Positive Review 95527      &lt;NA&gt;
+## 7     hooked Positive Review 95527  negative
+## 8      right Positive Review 95527      &lt;NA&gt;
+## 9   happened Positive Review 95527      &lt;NA&gt;
+## 10        me Positive Review 95527      &lt;NA&gt;</code></pre>
 <p>The resulting table shows each word token by the type of review in which it occurred, the overall number of tokens in the type of review, and the sentiment with which a token is associated.</p>
 </div>
-<div id="exporting-the-results" class="section level2 hasAnchor" number="4.2">
-<h2><span class="header-section-number">4.2</span> Exporting the results<a href="sentiment-analysis.html#exporting-the-results" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="exporting-the-results" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Exporting the results<a href="sentiment-analysis.html#exporting-the-results" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>To export the table with the results as an MS Excel spreadsheet, we use <code>write_xlsx</code>. Be aware that we use the <code>here</code> function to save the file in the current working directory.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="sentiment-analysis.html#cb12-1" tabindex="-1"></a><span class="co"># save data</span></span>
 <span id="cb12-2"><a href="sentiment-analysis.html#cb12-2" tabindex="-1"></a><span class="fu">write_xlsx</span>(reviews_annotated, here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;data/reviews_annotated.xlsx&quot;</span>))</span></code></pre></div>
 </div>
-<div id="summarizing-results" class="section level2 hasAnchor" number="4.3">
-<h2><span class="header-section-number">4.3</span> Summarizing results<a href="sentiment-analysis.html#summarizing-results" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="summarizing-results" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Summarizing results<a href="sentiment-analysis.html#summarizing-results" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>After preforming the sentiment analysis, we can now display and summarize the results of the SA visually and add information to the table produced by the sentiment analysis (such as calculating the percentages of the prevalence of emotions across the review type and the rate of emotions across review types).</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="sentiment-analysis.html#cb13-1" tabindex="-1"></a>reviews_summarised <span class="ot">&lt;-</span> reviews_annotated <span class="sc">%&gt;%</span></span>
-<span id="cb13-2"><a href="sentiment-analysis.html#cb13-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(type) <span class="sc">%&gt;%</span></span>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="sentiment-analysis.html#cb13-1" tabindex="-1"></a><span class="co"># Group the annotated reviews by type and sentiment</span></span>
+<span id="cb13-2"><a href="sentiment-analysis.html#cb13-2" tabindex="-1"></a>reviews_summarised <span class="ot">&lt;-</span> reviews_annotated <span class="sc">%&gt;%</span></span>
 <span id="cb13-3"><a href="sentiment-analysis.html#cb13-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(type, sentiment) <span class="sc">%&gt;%</span></span>
-<span id="cb13-4"><a href="sentiment-analysis.html#cb13-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">sentiment =</span> <span class="fu">unique</span>(sentiment),</span>
-<span id="cb13-5"><a href="sentiment-analysis.html#cb13-5" tabindex="-1"></a>                   <span class="at">sentiment_freq =</span> <span class="fu">n</span>(),</span>
-<span id="cb13-6"><a href="sentiment-analysis.html#cb13-6" tabindex="-1"></a>                   <span class="at">words =</span> <span class="fu">unique</span>(words)) <span class="sc">%&gt;%</span></span>
-<span id="cb13-7"><a href="sentiment-analysis.html#cb13-7" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="fu">is.na</span>(sentiment) <span class="sc">==</span> F) <span class="sc">%&gt;%</span></span>
-<span id="cb13-8"><a href="sentiment-analysis.html#cb13-8" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">percentage =</span> <span class="fu">round</span>(sentiment_freq<span class="sc">/</span>words<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>),</span>
-<span id="cb13-9"><a href="sentiment-analysis.html#cb13-9" tabindex="-1"></a>                <span class="at">sentiment =</span> <span class="fu">factor</span>(sentiment, </span>
-<span id="cb13-10"><a href="sentiment-analysis.html#cb13-10" tabindex="-1"></a>                                   <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;anger&quot;</span>, <span class="st">&quot;fear&quot;</span>, <span class="st">&quot;disgust&quot;</span>, <span class="st">&quot;sadness&quot;</span>, <span class="st">&quot;anticipation&quot;</span>, <span class="st">&quot;surprise&quot;</span>, <span class="st">&quot;trust&quot;</span>, <span class="st">&quot;joy&quot;</span>, <span class="st">&quot;negative&quot;</span>, <span class="st">&quot;positive&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb13-11"><a href="sentiment-analysis.html#cb13-11" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(sentiment) <span class="sc">%&gt;%</span></span>
-<span id="cb13-12"><a href="sentiment-analysis.html#cb13-12" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">total =</span> <span class="fu">sum</span>(percentage)) <span class="sc">%&gt;%</span></span>
-<span id="cb13-13"><a href="sentiment-analysis.html#cb13-13" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(sentiment, type) <span class="sc">%&gt;%</span></span>
-<span id="cb13-14"><a href="sentiment-analysis.html#cb13-14" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">ratio =</span> <span class="fu">round</span>(percentage<span class="sc">/</span>total<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>))</span>
-<span id="cb13-15"><a href="sentiment-analysis.html#cb13-15" tabindex="-1"></a><span class="co"># inspect data</span></span>
-<span id="cb13-16"><a href="sentiment-analysis.html#cb13-16" tabindex="-1"></a>reviews_summarised <span class="sc">%&gt;%</span></span>
-<span id="cb13-17"><a href="sentiment-analysis.html#cb13-17" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb13-18"><a href="sentiment-analysis.html#cb13-18" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
+<span id="cb13-4"><a href="sentiment-analysis.html#cb13-4" tabindex="-1"></a>  <span class="co"># Summarise the data: get unique sentiments, count frequency, and unique word counts</span></span>
+<span id="cb13-5"><a href="sentiment-analysis.html#cb13-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarise</span>(<span class="at">sentiment =</span> <span class="fu">unique</span>(sentiment),</span>
+<span id="cb13-6"><a href="sentiment-analysis.html#cb13-6" tabindex="-1"></a>                   <span class="at">sentiment_freq =</span> <span class="fu">n</span>(),</span>
+<span id="cb13-7"><a href="sentiment-analysis.html#cb13-7" tabindex="-1"></a>                   <span class="at">words =</span> <span class="fu">unique</span>(words)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-8"><a href="sentiment-analysis.html#cb13-8" tabindex="-1"></a>  <span class="co"># Filter out any rows where sentiment is NA</span></span>
+<span id="cb13-9"><a href="sentiment-analysis.html#cb13-9" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="fu">is.na</span>(sentiment) <span class="sc">==</span> F) <span class="sc">%&gt;%</span></span>
+<span id="cb13-10"><a href="sentiment-analysis.html#cb13-10" tabindex="-1"></a>  <span class="co"># Add a percentage column and set the order of sentiment factor levels</span></span>
+<span id="cb13-11"><a href="sentiment-analysis.html#cb13-11" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">percentage =</span> <span class="fu">round</span>(sentiment_freq<span class="sc">/</span>words<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>),</span>
+<span id="cb13-12"><a href="sentiment-analysis.html#cb13-12" tabindex="-1"></a>                <span class="at">sentiment =</span> <span class="fu">factor</span>(sentiment, </span>
+<span id="cb13-13"><a href="sentiment-analysis.html#cb13-13" tabindex="-1"></a>                                   <span class="at">levels =</span> <span class="fu">c</span>(</span>
+<span id="cb13-14"><a href="sentiment-analysis.html#cb13-14" tabindex="-1"></a>                                     <span class="co">#negative</span></span>
+<span id="cb13-15"><a href="sentiment-analysis.html#cb13-15" tabindex="-1"></a>                                     <span class="st">&quot;anger&quot;</span>, <span class="st">&quot;fear&quot;</span>, <span class="st">&quot;disgust&quot;</span>, <span class="st">&quot;sadness&quot;</span>, </span>
+<span id="cb13-16"><a href="sentiment-analysis.html#cb13-16" tabindex="-1"></a>                                     <span class="co">#positive</span></span>
+<span id="cb13-17"><a href="sentiment-analysis.html#cb13-17" tabindex="-1"></a>                                     <span class="st">&quot;anticipation&quot;</span>, <span class="st">&quot;surprise&quot;</span>, <span class="st">&quot;trust&quot;</span>, <span class="st">&quot;joy&quot;</span>, </span>
+<span id="cb13-18"><a href="sentiment-analysis.html#cb13-18" tabindex="-1"></a>                                     <span class="co"># stance</span></span>
+<span id="cb13-19"><a href="sentiment-analysis.html#cb13-19" tabindex="-1"></a>                                     <span class="st">&quot;negative&quot;</span>, <span class="st">&quot;positive&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb13-20"><a href="sentiment-analysis.html#cb13-20" tabindex="-1"></a>  <span class="co"># Group by sentiment to prepare for total percentage calculation</span></span>
+<span id="cb13-21"><a href="sentiment-analysis.html#cb13-21" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(sentiment) <span class="sc">%&gt;%</span></span>
+<span id="cb13-22"><a href="sentiment-analysis.html#cb13-22" tabindex="-1"></a>  <span class="co"># Calculate the total percentage for each sentiment</span></span>
+<span id="cb13-23"><a href="sentiment-analysis.html#cb13-23" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">total =</span> <span class="fu">sum</span>(percentage)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-24"><a href="sentiment-analysis.html#cb13-24" tabindex="-1"></a>  <span class="co"># Group by both sentiment and type for the ratio calculation</span></span>
+<span id="cb13-25"><a href="sentiment-analysis.html#cb13-25" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(sentiment, type) <span class="sc">%&gt;%</span></span>
+<span id="cb13-26"><a href="sentiment-analysis.html#cb13-26" tabindex="-1"></a>  <span class="co"># Calculate the ratio of percentage to total percentage for each sentiment-type pair</span></span>
+<span id="cb13-27"><a href="sentiment-analysis.html#cb13-27" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">ratio =</span> <span class="fu">round</span>(percentage<span class="sc">/</span>total<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>))</span>
+<span id="cb13-28"><a href="sentiment-analysis.html#cb13-28" tabindex="-1"></a></span>
+<span id="cb13-29"><a href="sentiment-analysis.html#cb13-29" tabindex="-1"></a><span class="co"># inspect data</span></span>
+<span id="cb13-30"><a href="sentiment-analysis.html#cb13-30" tabindex="-1"></a>reviews_summarised <span class="sc">%&gt;%</span></span>
+<span id="cb13-31"><a href="sentiment-analysis.html#cb13-31" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb13-32"><a href="sentiment-analysis.html#cb13-32" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
 <pre><code>##               type    sentiment sentiment_freq words percentage total ratio
-## 1  Negative Review        anger           4537 90190        5.0   8.4  59.5
-## 2  Negative Review anticipation           4491 90190        5.0  10.5  47.6
-## 3  Negative Review      disgust           3992 90190        4.4   6.8  64.7
-## 4  Negative Review         fear           5512 90190        6.1  10.8  56.5
-## 5  Negative Review          joy           3657 90190        4.1   9.8  41.8
-## 6  Negative Review     negative           9245 90190       10.3  17.3  59.5
-## 7  Negative Review     positive           9153 90190       10.1  22.4  45.1
-## 8  Negative Review      sadness           4811 90190        5.3   9.0  58.9
-## 9  Negative Review     surprise           2546 90190        2.8   5.8  48.3
-## 10 Negative Review        trust           5255 90190        5.8  12.7  45.7</code></pre>
+## 1  Negative Review        anger           4628 90656        5.1   8.5  60.0
+## 2  Negative Review anticipation           4617 90656        5.1  10.7  47.7
+## 3  Negative Review      disgust           4093 90656        4.5   6.9  65.2
+## 4  Negative Review         fear           5624 90656        6.2  10.9  56.9
+## 5  Negative Review          joy           3743 90656        4.1   9.9  41.4
+## 6  Negative Review     negative           9460 90656       10.4  17.5  59.4
+## 7  Negative Review     positive           9335 90656       10.3  22.8  45.2
+## 8  Negative Review      sadness           4914 90656        5.4   9.2  58.7
+## 9  Negative Review     surprise           2605 90656        2.9   5.9  49.2
+## 10 Negative Review        trust           5361 90656        5.9  12.9  45.7</code></pre>
 <p>To export the table with the results as an MS Excel spreadsheet, we use <code>write_xlsx</code>. Be aware that we use the <code>here</code> function to save the file in the current working directory.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="sentiment-analysis.html#cb15-1" tabindex="-1"></a><span class="co"># save data</span></span>
 <span id="cb15-2"><a href="sentiment-analysis.html#cb15-2" tabindex="-1"></a><span class="fu">write_xlsx</span>(reviews_summarised, here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;data/reviews_summarised.xlsx&quot;</span>))</span></code></pre></div>
 </div>
-<div id="visualizing-results" class="section level2 hasAnchor" number="4.4">
-<h2><span class="header-section-number">4.4</span> Visualizing results<a href="sentiment-analysis.html#visualizing-results" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="visualizing-results" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> Visualizing results<a href="sentiment-analysis.html#visualizing-results" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>After performing the SA, we can display the emotions by review type ordered from more negative (<em>red</em>) to more positive (<em>blue</em>).</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="sentiment-analysis.html#cb16-1" tabindex="-1"></a>reviews_summarised <span class="sc">%&gt;%</span></span>
 <span id="cb16-2"><a href="sentiment-analysis.html#cb16-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(sentiment <span class="sc">!=</span> <span class="st">&quot;positive&quot;</span>,</span>
 <span id="cb16-3"><a href="sentiment-analysis.html#cb16-3" tabindex="-1"></a>         sentiment <span class="sc">!=</span> <span class="st">&quot;negative&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb16-4"><a href="sentiment-analysis.html#cb16-4" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(type, percentage, <span class="at">fill =</span> sentiment, <span class="at">label =</span> percentage)) <span class="sc">+</span>    </span>
-<span id="cb16-5"><a href="sentiment-analysis.html#cb16-5" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="at">position=</span><span class="fu">position_dodge</span>()) <span class="sc">+</span> </span>
-<span id="cb16-6"><a href="sentiment-analysis.html#cb16-6" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">hjust=</span><span class="fl">1.5</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.9</span>)) <span class="sc">+</span></span>
-<span id="cb16-7"><a href="sentiment-analysis.html#cb16-7" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;RdBu&quot;</span>) <span class="sc">+</span></span>
-<span id="cb16-8"><a href="sentiment-analysis.html#cb16-8" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb16-9"><a href="sentiment-analysis.html#cb16-9" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>) <span class="sc">+</span></span>
-<span id="cb16-10"><a href="sentiment-analysis.html#cb16-10" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
+<span id="cb16-4"><a href="sentiment-analysis.html#cb16-4" tabindex="-1"></a>  <span class="co"># plot</span></span>
+<span id="cb16-5"><a href="sentiment-analysis.html#cb16-5" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(type, percentage, <span class="at">fill =</span> sentiment, <span class="at">label =</span> percentage)) <span class="sc">+</span>    </span>
+<span id="cb16-6"><a href="sentiment-analysis.html#cb16-6" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="at">position=</span><span class="fu">position_dodge</span>()) <span class="sc">+</span> </span>
+<span id="cb16-7"><a href="sentiment-analysis.html#cb16-7" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">hjust=</span><span class="fl">1.5</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.9</span>)) <span class="sc">+</span></span>
+<span id="cb16-8"><a href="sentiment-analysis.html#cb16-8" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;RdBu&quot;</span>) <span class="sc">+</span></span>
+<span id="cb16-9"><a href="sentiment-analysis.html#cb16-9" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb16-10"><a href="sentiment-analysis.html#cb16-10" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;right&quot;</span>) <span class="sc">+</span></span>
+<span id="cb16-11"><a href="sentiment-analysis.html#cb16-11" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb16-12"><a href="sentiment-analysis.html#cb16-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Percent (%)&quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/bsa7-1.png" width="672" /></p>
 <p>We can also visualize the results and show the rate to identify what type is more “positive” and what type is more “negative”.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="sentiment-analysis.html#cb17-1" tabindex="-1"></a>reviews_summarised <span class="sc">%&gt;%</span></span>
 <span id="cb17-2"><a href="sentiment-analysis.html#cb17-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(sentiment <span class="sc">!=</span> <span class="st">&quot;positive&quot;</span>,</span>
 <span id="cb17-3"><a href="sentiment-analysis.html#cb17-3" tabindex="-1"></a>         sentiment <span class="sc">!=</span> <span class="st">&quot;negative&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb17-4"><a href="sentiment-analysis.html#cb17-4" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(sentiment, ratio, <span class="at">fill =</span> type, <span class="at">label =</span> ratio)) <span class="sc">+</span>    </span>
-<span id="cb17-5"><a href="sentiment-analysis.html#cb17-5" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>,   </span>
-<span id="cb17-6"><a href="sentiment-analysis.html#cb17-6" tabindex="-1"></a>           <span class="at">position=</span><span class="fu">position_fill</span>()) <span class="sc">+</span> </span>
-<span id="cb17-7"><a href="sentiment-analysis.html#cb17-7" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">position =</span> <span class="fu">position_fill</span>(<span class="at">vjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
-<span id="cb17-8"><a href="sentiment-analysis.html#cb17-8" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">name =</span> <span class="st">&quot;&quot;</span>, <span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;orange&quot;</span>, <span class="st">&quot;gray70&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb17-9"><a href="sentiment-analysis.html#cb17-9" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span><span class="st">&quot;Percent&quot;</span>, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, .<span class="dv">2</span>), <span class="at">labels =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">20</span>)) <span class="sc">+</span></span>
-<span id="cb17-10"><a href="sentiment-analysis.html#cb17-10" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb17-11"><a href="sentiment-analysis.html#cb17-11" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;top&quot;</span>)</span></code></pre></div>
+<span id="cb17-4"><a href="sentiment-analysis.html#cb17-4" tabindex="-1"></a>  <span class="co"># plot</span></span>
+<span id="cb17-5"><a href="sentiment-analysis.html#cb17-5" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(sentiment, ratio, <span class="at">fill =</span> type, <span class="at">label =</span> ratio)) <span class="sc">+</span>    </span>
+<span id="cb17-6"><a href="sentiment-analysis.html#cb17-6" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>,   </span>
+<span id="cb17-7"><a href="sentiment-analysis.html#cb17-7" tabindex="-1"></a>           <span class="at">position=</span><span class="fu">position_fill</span>()) <span class="sc">+</span> </span>
+<span id="cb17-8"><a href="sentiment-analysis.html#cb17-8" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">position =</span> <span class="fu">position_fill</span>(<span class="at">vjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb17-9"><a href="sentiment-analysis.html#cb17-9" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">name =</span> <span class="st">&quot;&quot;</span>, <span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;orange&quot;</span>, <span class="st">&quot;gray70&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb17-10"><a href="sentiment-analysis.html#cb17-10" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span><span class="st">&quot;Percent&quot;</span>, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, .<span class="dv">2</span>), <span class="at">labels =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">20</span>)) <span class="sc">+</span></span>
+<span id="cb17-11"><a href="sentiment-analysis.html#cb17-11" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb17-12"><a href="sentiment-analysis.html#cb17-12" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;top&quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/bsa5-1.png" width="672" /></p>
 </div>
-<div id="identifying-important-emotives" class="section level2 hasAnchor" number="4.5">
-<h2><span class="header-section-number">4.5</span> Identifying important emotives<a href="sentiment-analysis.html#identifying-important-emotives" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="identifying-important-emotives" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> Identifying important emotives<a href="sentiment-analysis.html#identifying-important-emotives" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We now check, which words have contributed to the emotionality scores. In other words, we investigate, which words are most important for the emotion scores within each review type. For the sake of interpretability, we will remove several core emotion categories and also the polarity.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="sentiment-analysis.html#cb18-1" tabindex="-1"></a>reviews_importance <span class="ot">&lt;-</span> reviews_annotated <span class="sc">%&gt;%</span></span>
-<span id="cb18-2"><a href="sentiment-analysis.html#cb18-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(sentiment),</span>
-<span id="cb18-3"><a href="sentiment-analysis.html#cb18-3" tabindex="-1"></a>         sentiment <span class="sc">!=</span> <span class="st">&quot;anticipation&quot;</span>,</span>
-<span id="cb18-4"><a href="sentiment-analysis.html#cb18-4" tabindex="-1"></a>         sentiment <span class="sc">!=</span> <span class="st">&quot;surprise&quot;</span>,</span>
-<span id="cb18-5"><a href="sentiment-analysis.html#cb18-5" tabindex="-1"></a>         sentiment <span class="sc">!=</span> <span class="st">&quot;disgust&quot;</span>,</span>
-<span id="cb18-6"><a href="sentiment-analysis.html#cb18-6" tabindex="-1"></a>         sentiment <span class="sc">!=</span> <span class="st">&quot;negative&quot;</span>,</span>
-<span id="cb18-7"><a href="sentiment-analysis.html#cb18-7" tabindex="-1"></a>         sentiment <span class="sc">!=</span> <span class="st">&quot;sadness&quot;</span>,</span>
-<span id="cb18-8"><a href="sentiment-analysis.html#cb18-8" tabindex="-1"></a>         sentiment <span class="sc">!=</span> <span class="st">&quot;positive&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb18-9"><a href="sentiment-analysis.html#cb18-9" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">sentiment =</span> <span class="fu">factor</span>(sentiment, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;anger&quot;</span>, <span class="st">&quot;fear&quot;</span>,  <span class="st">&quot;trust&quot;</span>, <span class="st">&quot;joy&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb18-10"><a href="sentiment-analysis.html#cb18-10" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(type) <span class="sc">%&gt;%</span></span>
-<span id="cb18-11"><a href="sentiment-analysis.html#cb18-11" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(word, sentiment, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb18-12"><a href="sentiment-analysis.html#cb18-12" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(type, sentiment) <span class="sc">%&gt;%</span></span>
-<span id="cb18-13"><a href="sentiment-analysis.html#cb18-13" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">top_n</span>(<span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb18-14"><a href="sentiment-analysis.html#cb18-14" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">score =</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span>
-<span id="cb18-15"><a href="sentiment-analysis.html#cb18-15" tabindex="-1"></a><span class="co"># inspect data</span></span>
-<span id="cb18-16"><a href="sentiment-analysis.html#cb18-16" tabindex="-1"></a>reviews_importance <span class="sc">%&gt;%</span></span>
-<span id="cb18-17"><a href="sentiment-analysis.html#cb18-17" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb18-18"><a href="sentiment-analysis.html#cb18-18" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="sentiment-analysis.html#cb18-1" tabindex="-1"></a><span class="co"># Filter the annotated reviews to exclude certain sentiments and remove NA sentiments</span></span>
+<span id="cb18-2"><a href="sentiment-analysis.html#cb18-2" tabindex="-1"></a>reviews_importance <span class="ot">&lt;-</span> reviews_annotated <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="sentiment-analysis.html#cb18-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(sentiment),        <span class="co"># Keep only rows with non-NA sentiments</span></span>
+<span id="cb18-4"><a href="sentiment-analysis.html#cb18-4" tabindex="-1"></a>                sentiment <span class="sc">!=</span> <span class="st">&quot;anticipation&quot;</span>, <span class="co"># Exclude &#39;anticipation&#39; sentiment</span></span>
+<span id="cb18-5"><a href="sentiment-analysis.html#cb18-5" tabindex="-1"></a>                sentiment <span class="sc">!=</span> <span class="st">&quot;surprise&quot;</span>,    <span class="co"># Exclude &#39;surprise&#39; sentiment</span></span>
+<span id="cb18-6"><a href="sentiment-analysis.html#cb18-6" tabindex="-1"></a>                sentiment <span class="sc">!=</span> <span class="st">&quot;disgust&quot;</span>,     <span class="co"># Exclude &#39;disgust&#39; sentiment</span></span>
+<span id="cb18-7"><a href="sentiment-analysis.html#cb18-7" tabindex="-1"></a>                sentiment <span class="sc">!=</span> <span class="st">&quot;negative&quot;</span>,    <span class="co"># Exclude &#39;negative&#39; sentiment</span></span>
+<span id="cb18-8"><a href="sentiment-analysis.html#cb18-8" tabindex="-1"></a>                sentiment <span class="sc">!=</span> <span class="st">&quot;sadness&quot;</span>,     <span class="co"># Exclude &#39;sadness&#39; sentiment</span></span>
+<span id="cb18-9"><a href="sentiment-analysis.html#cb18-9" tabindex="-1"></a>                sentiment <span class="sc">!=</span> <span class="st">&quot;positive&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-10"><a href="sentiment-analysis.html#cb18-10" tabindex="-1"></a>  <span class="co"># Convert &#39;sentiment&#39; to a factor with specified levels</span></span>
+<span id="cb18-11"><a href="sentiment-analysis.html#cb18-11" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">sentiment =</span> <span class="fu">factor</span>(sentiment, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;anger&quot;</span>, <span class="st">&quot;fear&quot;</span>, <span class="st">&quot;trust&quot;</span>, <span class="st">&quot;joy&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb18-12"><a href="sentiment-analysis.html#cb18-12" tabindex="-1"></a>  <span class="co"># Group the data by &#39;type&#39;</span></span>
+<span id="cb18-13"><a href="sentiment-analysis.html#cb18-13" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(type) <span class="sc">%&gt;%</span></span>
+<span id="cb18-14"><a href="sentiment-analysis.html#cb18-14" tabindex="-1"></a>  <span class="co"># Count the occurrences of each word within each sentiment and type, sorting the counts in descending order</span></span>
+<span id="cb18-15"><a href="sentiment-analysis.html#cb18-15" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">count</span>(word, sentiment, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-16"><a href="sentiment-analysis.html#cb18-16" tabindex="-1"></a>  <span class="co"># Further group the data by &#39;type&#39; and &#39;sentiment&#39;</span></span>
+<span id="cb18-17"><a href="sentiment-analysis.html#cb18-17" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(type, sentiment) <span class="sc">%&gt;%</span></span>
+<span id="cb18-18"><a href="sentiment-analysis.html#cb18-18" tabindex="-1"></a>  <span class="co"># Select the top 5 words within each &#39;type&#39; and &#39;sentiment&#39;</span></span>
+<span id="cb18-19"><a href="sentiment-analysis.html#cb18-19" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">top_n</span>(<span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-20"><a href="sentiment-analysis.html#cb18-20" tabindex="-1"></a>  <span class="co"># Calculate the score for each word as the proportion of the total count within each group</span></span>
+<span id="cb18-21"><a href="sentiment-analysis.html#cb18-21" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">score =</span> n<span class="sc">/</span><span class="fu">sum</span>(n))</span>
+<span id="cb18-22"><a href="sentiment-analysis.html#cb18-22" tabindex="-1"></a><span class="co"># inspect data</span></span>
+<span id="cb18-23"><a href="sentiment-analysis.html#cb18-23" tabindex="-1"></a>reviews_importance <span class="sc">%&gt;%</span></span>
+<span id="cb18-24"><a href="sentiment-analysis.html#cb18-24" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb18-25"><a href="sentiment-analysis.html#cb18-25" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
 <pre><code>##               type     word sentiment   n     score
-## 1  Negative Review      bad     anger 563 0.5198523
-## 2  Negative Review      bad      fear 563 0.4622332
-## 3  Positive Review     love       joy 323 0.3886883
-## 4  Positive Review    watch      fear 286 0.4056738
-## 5  Negative Review    watch      fear 278 0.2282430
-## 6  Positive Review     real     trust 224 0.3072702
-## 7  Negative Review   pretty     trust 174 0.2360923
-## 8  Negative Review   pretty       joy 174 0.2668712
-## 9  Negative Review director     trust 154 0.2089552
-## 10 Negative Review     real     trust 148 0.2008141</code></pre>
+## 1  Negative Review      bad     anger 575 0.5203620
+## 2  Negative Review      bad      fear 575 0.4622186
+## 3  Positive Review     love       joy 329 0.3884298
+## 4  Positive Review    watch      fear 296 0.4111111
+## 5  Negative Review    watch      fear 284 0.2282958
+## 6  Positive Review     real     trust 225 0.3040541
+## 7  Negative Review   pretty     trust 177 0.2338177
+## 8  Negative Review   pretty       joy 177 0.2637854
+## 9  Negative Review director     trust 160 0.2113606
+## 10 Negative Review     real     trust 149 0.1968296</code></pre>
 <p>We can now visualize the top three words for the remaining core emotion categories.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="sentiment-analysis.html#cb20-1" tabindex="-1"></a>reviews_importance <span class="sc">%&gt;%</span></span>
-<span id="cb20-2"><a href="sentiment-analysis.html#cb20-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(type) <span class="sc">%&gt;%</span></span>
-<span id="cb20-3"><a href="sentiment-analysis.html#cb20-3" tabindex="-1"></a>  <span class="fu">slice_max</span>(score, <span class="at">n =</span> <span class="dv">20</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb20-4"><a href="sentiment-analysis.html#cb20-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(score)) <span class="sc">%&gt;%</span></span>
-<span id="cb20-5"><a href="sentiment-analysis.html#cb20-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb20-6"><a href="sentiment-analysis.html#cb20-6" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(word, score), <span class="at">y =</span> score, <span class="at">fill =</span> word)) <span class="sc">+</span></span>
-<span id="cb20-7"><a href="sentiment-analysis.html#cb20-7" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(type<span class="sc">~</span>sentiment, <span class="at">ncol =</span> <span class="dv">4</span>, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>) <span class="sc">+</span></span>
-<span id="cb20-8"><a href="sentiment-analysis.html#cb20-8" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb20-9"><a href="sentiment-analysis.html#cb20-9" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb20-10"><a href="sentiment-analysis.html#cb20-10" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Words&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="sentiment-analysis.html#cb20-1" tabindex="-1"></a><span class="co"># Group the reviews importance data by &#39;type&#39;</span></span>
+<span id="cb20-2"><a href="sentiment-analysis.html#cb20-2" tabindex="-1"></a>reviews_importance <span class="sc">%&gt;%</span></span>
+<span id="cb20-3"><a href="sentiment-analysis.html#cb20-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(type) <span class="sc">%&gt;%</span></span>
+<span id="cb20-4"><a href="sentiment-analysis.html#cb20-4" tabindex="-1"></a>  <span class="co"># Select the top 20 rows within each group based on the &#39;score&#39; column</span></span>
+<span id="cb20-5"><a href="sentiment-analysis.html#cb20-5" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">slice_max</span>(score, <span class="at">n =</span> <span class="dv">20</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-6"><a href="sentiment-analysis.html#cb20-6" tabindex="-1"></a>  <span class="co"># Arrange the rows in descending order of &#39;score&#39;</span></span>
+<span id="cb20-7"><a href="sentiment-analysis.html#cb20-7" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(score)) <span class="sc">%&gt;%</span></span>
+<span id="cb20-8"><a href="sentiment-analysis.html#cb20-8" tabindex="-1"></a>  <span class="co"># Ungroup the data to remove the grouping structure</span></span>
+<span id="cb20-9"><a href="sentiment-analysis.html#cb20-9" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb20-10"><a href="sentiment-analysis.html#cb20-10" tabindex="-1"></a>  <span class="co"># plot</span></span>
+<span id="cb20-11"><a href="sentiment-analysis.html#cb20-11" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(word, score), <span class="at">y =</span> score, <span class="at">fill =</span> word)) <span class="sc">+</span></span>
+<span id="cb20-12"><a href="sentiment-analysis.html#cb20-12" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(type<span class="sc">~</span>sentiment, <span class="at">ncol =</span> <span class="dv">4</span>, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>) <span class="sc">+</span></span>
+<span id="cb20-13"><a href="sentiment-analysis.html#cb20-13" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb20-14"><a href="sentiment-analysis.html#cb20-14" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb20-15"><a href="sentiment-analysis.html#cb20-15" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Words&quot;</span>)</span></code></pre></div>
 <p><img src="bookdownproj_files/figure-html/contribsa2-1.png" width="672" /></p>
 <p>If you are interested in learning more about SA in R, <span class="citation">Silge and Robinson (2017)</span> is highly recommended as it goes more into detail and offers additional information.</p>
 </div>
@@ -475,7 +527,7 @@ div.csl-indent {
           </div>
         </div>
       </div>
-<a href="introduction-to-text-analysis-with-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="exercise-2-identifying-keywords-and-sentiments.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="keyword-detection.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

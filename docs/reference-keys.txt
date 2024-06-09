@@ -157,3 +157,9 @@ initial-unsupervised-topic-model
 supervised-seeded-topic-model
 what-is-sentiment-analysis
 what-is-text-analysis
+exercise-2-identifying-keywords-and-sentiments
+exercise-3-manual-topic-modelling
+exercise-1-introducing-text-processing
+data-processing-chains
+networks-and-collocation-analysis
+networks

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Section 5 Keyword Detection | Introduction to R for Social Science</title>
-  <meta name="description" content="Section 5 Keyword Detection | Introduction to R for Social Science" />
+  <title>Section 6 Keyword Detection | Introduction to R for Social Science</title>
+  <meta name="description" content="Section 6 Keyword Detection | Introduction to R for Social Science" />
   <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Section 5 Keyword Detection | Introduction to R for Social Science" />
+  <meta property="og:title" content="Section 6 Keyword Detection | Introduction to R for Social Science" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Section 5 Keyword Detection | Introduction to R for Social Science" />
+  <meta name="twitter:title" content="Section 6 Keyword Detection | Introduction to R for Social Science" />
   
   
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Martin Schweinberger" />
 
 
-<meta name="date" content="2024-06-08" />
+<meta name="date" content="2024-06-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="sentiment-analysis.html"/>
-<link rel="next" href="network-analysis.html"/>
+<link rel="next" href="networks-and-collocation-analysis.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -213,7 +213,7 @@ div.csl-indent {
 <li class="chapter" data-level="2.12" data-path="introduction-to-r.html"><a href="introduction-to-r.html#practice-regular-expressions"><i class="fa fa-check"></i><b>2.12</b> Practice: regular expressions</a></li>
 <li class="chapter" data-level="2.13" data-path="introduction-to-r.html"><a href="introduction-to-r.html#stemming"><i class="fa fa-check"></i><b>2.13</b> Stemming</a></li>
 <li class="chapter" data-level="2.14" data-path="introduction-to-r.html"><a href="introduction-to-r.html#part-of-speech-tagging-and-dependency-parsing"><i class="fa fa-check"></i><b>2.14</b> Part-of-speech tagging and dependency parsing</a></li>
-<li class="chapter" data-level="2.15" data-path="introduction-to-r.html"><a href="introduction-to-r.html#example-data-processing-chain"><i class="fa fa-check"></i><b>2.15</b> Example: Data processing chain</a></li>
+<li class="chapter" data-level="2.15" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-processing-chains"><i class="fa fa-check"></i><b>2.15</b> Data processing chains</a></li>
 <li class="chapter" data-level="2.16" data-path="introduction-to-r.html"><a href="introduction-to-r.html#concordancing-and-kwics"><i class="fa fa-check"></i><b>2.16</b> Concordancing and KWICs</a></li>
 <li class="chapter" data-level="2.17" data-path="introduction-to-r.html"><a href="introduction-to-r.html#basics-of-ggplot2-syntax"><i class="fa fa-check"></i><b>2.17</b> Basics of ggplot2 syntax</a></li>
 <li class="chapter" data-level="2.18" data-path="introduction-to-r.html"><a href="introduction-to-r.html#line-plot"><i class="fa fa-check"></i><b>2.18</b> Line plot</a></li>
@@ -230,47 +230,50 @@ div.csl-indent {
 <li class="chapter" data-level="3.1" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#what-is-text-analysis"><i class="fa fa-check"></i><b>3.1</b> What is Text Analysis?</a></li>
 <li class="chapter" data-level="3.2" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#preparation-and-session-set-up"><i class="fa fa-check"></i><b>3.2</b> Preparation and session set up</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html"><i class="fa fa-check"></i><b>4</b> Sentiment Analysis</a>
+<li class="chapter" data-level="4" data-path="exercise-2-identifying-keywords-and-sentiments.html"><a href="exercise-2-identifying-keywords-and-sentiments.html"><i class="fa fa-check"></i><b>4</b> Exercise 2: Identifying Keywords and Sentiments</a></li>
+<li class="chapter" data-level="5" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html"><i class="fa fa-check"></i><b>5</b> Sentiment Analysis</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#what-is-sentiment-analysis"><i class="fa fa-check"></i><b>4.1</b> What is Sentiment Analysis?</a></li>
-<li class="chapter" data-level="4.2" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#exporting-the-results"><i class="fa fa-check"></i><b>4.2</b> Exporting the results</a></li>
-<li class="chapter" data-level="4.3" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#summarizing-results"><i class="fa fa-check"></i><b>4.3</b> Summarizing results</a></li>
-<li class="chapter" data-level="4.4" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#visualizing-results"><i class="fa fa-check"></i><b>4.4</b> Visualizing results</a></li>
-<li class="chapter" data-level="4.5" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#identifying-important-emotives"><i class="fa fa-check"></i><b>4.5</b> Identifying important emotives</a></li>
+<li class="chapter" data-level="5.1" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#what-is-sentiment-analysis"><i class="fa fa-check"></i><b>5.1</b> What is Sentiment Analysis?</a></li>
+<li class="chapter" data-level="5.2" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#exporting-the-results"><i class="fa fa-check"></i><b>5.2</b> Exporting the results</a></li>
+<li class="chapter" data-level="5.3" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#summarizing-results"><i class="fa fa-check"></i><b>5.3</b> Summarizing results</a></li>
+<li class="chapter" data-level="5.4" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#visualizing-results"><i class="fa fa-check"></i><b>5.4</b> Visualizing results</a></li>
+<li class="chapter" data-level="5.5" data-path="sentiment-analysis.html"><a href="sentiment-analysis.html#identifying-important-emotives"><i class="fa fa-check"></i><b>5.5</b> Identifying important emotives</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="keyword-detection.html"><a href="keyword-detection.html"><i class="fa fa-check"></i><b>5</b> Keyword Detection</a>
+<li class="chapter" data-level="6" data-path="keyword-detection.html"><a href="keyword-detection.html"><i class="fa fa-check"></i><b>6</b> Keyword Detection</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="keyword-detection.html"><a href="keyword-detection.html#dimensions-of-keyness"><i class="fa fa-check"></i><b>5.1</b> Dimensions of keyness</a></li>
-<li class="chapter" data-level="5.2" data-path="keyword-detection.html"><a href="keyword-detection.html#identifying-keywords"><i class="fa fa-check"></i><b>5.2</b> Identifying keywords</a></li>
-<li class="chapter" data-level="5.3" data-path="keyword-detection.html"><a href="keyword-detection.html#visualising-keywords"><i class="fa fa-check"></i><b>5.3</b> Visualising keywords</a></li>
+<li class="chapter" data-level="6.1" data-path="keyword-detection.html"><a href="keyword-detection.html#dimensions-of-keyness"><i class="fa fa-check"></i><b>6.1</b> Dimensions of keyness</a></li>
+<li class="chapter" data-level="6.2" data-path="keyword-detection.html"><a href="keyword-detection.html#identifying-keywords"><i class="fa fa-check"></i><b>6.2</b> Identifying keywords</a></li>
+<li class="chapter" data-level="6.3" data-path="keyword-detection.html"><a href="keyword-detection.html#visualising-keywords"><i class="fa fa-check"></i><b>6.3</b> Visualising keywords</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="network-analysis.html"><a href="network-analysis.html"><i class="fa fa-check"></i><b>6</b> Network Analysis</a>
+<li class="chapter" data-level="7" data-path="networks-and-collocation-analysis.html"><a href="networks-and-collocation-analysis.html"><i class="fa fa-check"></i><b>7</b> Networks and Collocation Analysis</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="network-analysis.html"><a href="network-analysis.html#data-preparation"><i class="fa fa-check"></i><b>6.1</b> Data preparation</a></li>
-<li class="chapter" data-level="6.2" data-path="network-analysis.html"><a href="network-analysis.html#creating-a-matrix"><i class="fa fa-check"></i><b>6.2</b> Creating a matrix</a></li>
-<li class="chapter" data-level="6.3" data-path="network-analysis.html"><a href="network-analysis.html#visualizing-networks"><i class="fa fa-check"></i><b>6.3</b> Visualizing Networks</a>
+<li class="chapter" data-level="7.1" data-path="networks-and-collocation-analysis.html"><a href="networks-and-collocation-analysis.html#networks"><i class="fa fa-check"></i><b>7.1</b> Networks</a></li>
+<li class="chapter" data-level="7.2" data-path="networks-and-collocation-analysis.html"><a href="networks-and-collocation-analysis.html#collocations"><i class="fa fa-check"></i><b>7.2</b> Collocations</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="exercise-3-manual-topic-modelling.html"><a href="exercise-3-manual-topic-modelling.html"><i class="fa fa-check"></i><b>8</b> Exercise 3: Manual Topic Modelling</a></li>
+<li class="chapter" data-level="9" data-path="topic-modelling.html"><a href="topic-modelling.html"><i class="fa fa-check"></i><b>9</b> Topic Modelling</a>
 <ul>
-<li class="chapter" data-level="6.3.1" data-path="network-analysis.html"><a href="network-analysis.html#quanteda-networks"><i class="fa fa-check"></i><b>6.3.1</b> Quanteda Networks</a></li>
-<li class="chapter" data-level="6.3.2" data-path="network-analysis.html"><a href="network-analysis.html#tidy-networks"><i class="fa fa-check"></i><b>6.3.2</b> Tidy Networks</a></li>
+<li class="chapter" data-level="9.1" data-path="topic-modelling.html"><a href="topic-modelling.html#getting-started-with-topic-modelling"><i class="fa fa-check"></i><b>9.1</b> Getting started with Topic Modelling</a></li>
+<li class="chapter" data-level="9.2" data-path="topic-modelling.html"><a href="topic-modelling.html#human-in-the-loop-topic-modelling"><i class="fa fa-check"></i><b>9.2</b> Human-in-the-loop Topic Modelling</a></li>
+<li class="chapter" data-level="9.3" data-path="topic-modelling.html"><a href="topic-modelling.html#loading-and-preparing-data"><i class="fa fa-check"></i><b>9.3</b> Loading and preparing data</a></li>
+<li class="chapter" data-level="9.4" data-path="topic-modelling.html"><a href="topic-modelling.html#initial-unsupervised-topic-model"><i class="fa fa-check"></i><b>9.4</b> Initial unsupervised topic model</a></li>
+<li class="chapter" data-level="9.5" data-path="topic-modelling.html"><a href="topic-modelling.html#supervised-seeded-topic-model"><i class="fa fa-check"></i><b>9.5</b> Supervised, seeded topic model</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="network-analysis.html"><a href="network-analysis.html#network-statistics"><i class="fa fa-check"></i><b>6.4</b> Network Statistics</a>
+<li class="chapter" data-level="10" data-path="network-analysis.html"><a href="network-analysis.html"><i class="fa fa-check"></i><b>10</b> Network Analysis</a>
 <ul>
-<li class="chapter" data-level="6.4.1" data-path="network-analysis.html"><a href="network-analysis.html#degree-centrality"><i class="fa fa-check"></i><b>6.4.1</b> Degree centrality</a></li>
-<li class="chapter" data-level="6.4.2" data-path="network-analysis.html"><a href="network-analysis.html#central-node"><i class="fa fa-check"></i><b>6.4.2</b> Central node</a></li>
-<li class="chapter" data-level="6.4.3" data-path="network-analysis.html"><a href="network-analysis.html#betweenness-centrality"><i class="fa fa-check"></i><b>6.4.3</b> Betweenness centrality</a></li>
-<li class="chapter" data-level="6.4.4" data-path="network-analysis.html"><a href="network-analysis.html#closeness"><i class="fa fa-check"></i><b>6.4.4</b> Closeness</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="topic-modelling.html"><a href="topic-modelling.html"><i class="fa fa-check"></i><b>7</b> Topic Modelling</a>
+<li class="chapter" data-level="10.1" data-path="network-analysis.html"><a href="network-analysis.html#data-preparation"><i class="fa fa-check"></i><b>10.1</b> Data preparation</a></li>
+<li class="chapter" data-level="10.2" data-path="network-analysis.html"><a href="network-analysis.html#creating-a-matrix"><i class="fa fa-check"></i><b>10.2</b> Creating a matrix</a></li>
+<li class="chapter" data-level="10.3" data-path="network-analysis.html"><a href="network-analysis.html#visualizing-networks"><i class="fa fa-check"></i><b>10.3</b> Visualizing Networks</a></li>
+<li class="chapter" data-level="10.4" data-path="network-analysis.html"><a href="network-analysis.html#network-statistics"><i class="fa fa-check"></i><b>10.4</b> Network Statistics</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="topic-modelling.html"><a href="topic-modelling.html#getting-started-with-topic-modelling"><i class="fa fa-check"></i><b>7.1</b> Getting started with Topic Modelling</a></li>
-<li class="chapter" data-level="7.2" data-path="topic-modelling.html"><a href="topic-modelling.html#human-in-the-loop-topic-modelling"><i class="fa fa-check"></i><b>7.2</b> Human-in-the-loop Topic Modelling</a></li>
-<li class="chapter" data-level="7.3" data-path="topic-modelling.html"><a href="topic-modelling.html#loading-and-preparing-data"><i class="fa fa-check"></i><b>7.3</b> Loading and preparing data</a></li>
-<li class="chapter" data-level="7.4" data-path="topic-modelling.html"><a href="topic-modelling.html#initial-unsupervised-topic-model"><i class="fa fa-check"></i><b>7.4</b> Initial unsupervised topic model</a></li>
-<li class="chapter" data-level="7.5" data-path="topic-modelling.html"><a href="topic-modelling.html#supervised-seeded-topic-model"><i class="fa fa-check"></i><b>7.5</b> Supervised, seeded topic model</a></li>
+<li class="chapter" data-level="10.4.1" data-path="network-analysis.html"><a href="network-analysis.html#degree-centrality"><i class="fa fa-check"></i><b>10.4.1</b> Degree centrality</a></li>
+<li class="chapter" data-level="10.4.2" data-path="network-analysis.html"><a href="network-analysis.html#central-node"><i class="fa fa-check"></i><b>10.4.2</b> Central node</a></li>
+<li class="chapter" data-level="10.4.3" data-path="network-analysis.html"><a href="network-analysis.html#betweenness-centrality"><i class="fa fa-check"></i><b>10.4.3</b> Betweenness centrality</a></li>
+<li class="chapter" data-level="10.4.4" data-path="network-analysis.html"><a href="network-analysis.html#closeness"><i class="fa fa-check"></i><b>10.4.4</b> Closeness</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="citation-session-info.html"><a href="citation-session-info.html"><i class="fa fa-check"></i><b>8</b> Citation &amp; Session Info</a></li>
-<li class="chapter" data-level="9" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>9</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="citation-session-info.html"><a href="citation-session-info.html"><i class="fa fa-check"></i><b>11</b> Citation &amp; Session Info</a></li>
+<li class="chapter" data-level="12" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>12</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -290,11 +293,11 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="keyword-detection" class="section level1 hasAnchor" number="5">
-<h1><span class="header-section-number">Section 5</span> Keyword Detection<a href="keyword-detection.html#keyword-detection" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="keyword-detection" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Section 6</span> Keyword Detection<a href="keyword-detection.html#keyword-detection" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Keywords play a crucial role in text analysis, serving as distinctive terms that hold particular significance within a given text, context, or collection. These words stand out due to their heightened frequency in a specific text or context, setting them apart from their occurrence in another. In essence, keywords are linguistic markers that encapsulate the essence or topical focus of a document or data set. The process of identifying keywords involves a methodology akin to the one employed for detecting collocations using kwics. This entails comparing the use of a particular word in corpus A, against its use in corpus B. By discerning the frequency disparities, we gain valuable insights into the salient terms that contribute significantly to the unique character and thematic emphasis of a given text or context.</p>
-<div id="dimensions-of-keyness" class="section level2 hasAnchor" number="5.1">
-<h2><span class="header-section-number">5.1</span> Dimensions of keyness<a href="keyword-detection.html#dimensions-of-keyness" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="dimensions-of-keyness" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Dimensions of keyness<a href="keyword-detection.html#dimensions-of-keyness" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Before we start with the practical part of this tutorial, it is important to talk about the different dimensions of keyness <span class="citation">(see Sönning 2023)</span>.</p>
 <p>Keyness analysis identifies typical items in a discourse domain, where typicalness traditionally relates to frequency of occurrence. The emphasis is on items used more frequently in the target corpus compared to a reference corpus. <span class="citation">Egbert and Biber (2019)</span> expanded this notion, highlighting two criteria for typicalness: <em>content-distinctiveness</em> and <em>content-generalizability</em>.</p>
 <ul>
@@ -303,17 +306,17 @@ div.csl-indent {
 </ul>
 <p>These criteria bridge traditional keyness approaches with broader linguistic perspectives, emphasizing both the distinctiveness and generalizability of key items within a corpus.</p>
 <p>Following <span class="citation">Sönning (2023)</span>, we adopt <span class="citation">Egbert and Biber (2019)</span> keyness criteria, distinguishing between frequency-oriented and dispersion-oriented approaches to assess keyness. These perspectives capture distinct, linguistically meaningful attributes of typicalness. We also differentiate between keyness features inherent to the target variety and those that emerge from comparing it to a reference variety. This four-way classification, detailed in the table below, links methodological choices to the linguistic meaning conveyed by quantitative measures. Typical items exhibit a sufficiently high occurrence rate to be discernible in the target variety, with discernibility measured solely within the target corpus. Key items are also distinct, being used more frequently than in reference domains of language use. While discernibility and distinctiveness both rely on frequency, they measure different aspects of typicalness.</p>
-<div class="tabwid"><style>.cl-efd7d1d0{table-layout:auto;width:75%;}.cl-efbf03e4{font-family:'Arial';font-size:12pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-efbf040c{font-family:'Arial';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-efc7b28c{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-efc7e932{background-color:rgba(207, 207, 207, 1.00);vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 1pt solid rgba(102, 102, 102, 1.00);border-left: 1pt solid rgba(102, 102, 102, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-efc7e93c{background-color:rgba(207, 207, 207, 1.00);vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 1pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-efc7e946{background-color:rgba(207, 207, 207, 1.00);vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 1pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 1pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-efc7e950{background-color:rgba(239, 239, 239, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 1pt solid rgba(102, 102, 102, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-efc7e951{background-color:rgba(239, 239, 239, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-efc7e95a{background-color:rgba(239, 239, 239, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 1pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-efc7e95b{background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 1pt solid rgba(102, 102, 102, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-efc7e964{background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-efc7e96e{background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 1pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-efd7d1d0'>
+<div class="tabwid"><style>.cl-038737b4{table-layout:auto;width:75%;}.cl-037e93e8{font-family:'Arial';font-size:12pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-037e93f2{font-family:'Arial';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-0381e2f0{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-0381fd1c{background-color:rgba(207, 207, 207, 1.00);vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 1pt solid rgba(102, 102, 102, 1.00);border-left: 1pt solid rgba(102, 102, 102, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-0381fd30{background-color:rgba(207, 207, 207, 1.00);vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 1pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-0381fd31{background-color:rgba(207, 207, 207, 1.00);vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 1pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 1pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-0381fd32{background-color:rgba(239, 239, 239, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 1pt solid rgba(102, 102, 102, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-0381fd3a{background-color:rgba(239, 239, 239, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-0381fd3b{background-color:rgba(239, 239, 239, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 1pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-0381fd44{background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 1pt solid rgba(102, 102, 102, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-0381fd4e{background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-0381fd4f{background-color:transparent;vertical-align: middle;border-bottom: 1pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 1pt solid rgba(102, 102, 102, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-038737b4'>
 
 <caption style="display:table-caption;margin:0pt;text-align:center;border-bottom: 0.00pt solid transparent;border-top: 0.00pt solid transparent;border-left: 0.00pt solid transparent;border-right: 0.00pt solid transparent;padding-top:3pt;padding-bottom:3pt;padding-left:3pt;padding-right:3pt;line-height: 1;background-color:transparent;">
-<span id="tab:ds17">Table 5.1: </span><span>Dimensions of keyness (see Soenning, 2023: 3)</span>
+<span id="tab:ds17">Table 6.1: </span><span>Dimensions of keyness (see Soenning, 2023: 3)</span>
 </caption>
 
-<thead><tr style="overflow-wrap:break-word;"><th class="cl-efc7e932"><p class="cl-efc7b28c"><span class="cl-efbf03e4">Analysis</span></p></th><th class="cl-efc7e93c"><p class="cl-efc7b28c"><span class="cl-efbf03e4">Frequency.oriented</span></p></th><th class="cl-efc7e946"><p class="cl-efc7b28c"><span class="cl-efbf03e4">Dispersion.oriented</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-efc7e950"><p class="cl-efc7b28c"><span class="cl-efbf040c">Target variety in isolation</span></p></td><td class="cl-efc7e951"><p class="cl-efc7b28c"><span class="cl-efbf040c">Discernibility of item in the target variety</span></p></td><td class="cl-efc7e95a"><p class="cl-efc7b28c"><span class="cl-efbf040c">Generality across texts in the target variety</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-efc7e95b"><p class="cl-efc7b28c"><span class="cl-efbf040c">Comparison to reference variety</span></p></td><td class="cl-efc7e964"><p class="cl-efc7b28c"><span class="cl-efbf040c">Distinctiveness relative to the reference variety</span></p></td><td class="cl-efc7e96e"><p class="cl-efc7b28c"><span class="cl-efbf040c">Comparative generality relative to the reference variety</span></p></td></tr></tbody></table></div>
+<thead><tr style="overflow-wrap:break-word;"><th class="cl-0381fd1c"><p class="cl-0381e2f0"><span class="cl-037e93e8">Analysis</span></p></th><th class="cl-0381fd30"><p class="cl-0381e2f0"><span class="cl-037e93e8">Frequency.oriented</span></p></th><th class="cl-0381fd31"><p class="cl-0381e2f0"><span class="cl-037e93e8">Dispersion.oriented</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-0381fd32"><p class="cl-0381e2f0"><span class="cl-037e93f2">Target variety in isolation</span></p></td><td class="cl-0381fd3a"><p class="cl-0381e2f0"><span class="cl-037e93f2">Discernibility of item in the target variety</span></p></td><td class="cl-0381fd3b"><p class="cl-0381e2f0"><span class="cl-037e93f2">Generality across texts in the target variety</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-0381fd44"><p class="cl-0381e2f0"><span class="cl-037e93f2">Comparison to reference variety</span></p></td><td class="cl-0381fd4e"><p class="cl-0381e2f0"><span class="cl-037e93f2">Distinctiveness relative to the reference variety</span></p></td><td class="cl-0381fd4f"><p class="cl-0381e2f0"><span class="cl-037e93f2">Comparative generality relative to the reference variety</span></p></td></tr></tbody></table></div>
 <p>The second aspect of keyness involves an item’s dispersion across texts in the target domain, indicating its widespread use. A typical item should appear evenly across various texts within the target domain, reflecting its generality. This breadth of usage can be compared to its occurrence in the reference domain, termed as comparative generality. Therefore, a key item should exhibit greater prevalence across target texts compared to those in the reference domain.</p>
 </div>
-<div id="identifying-keywords" class="section level2 hasAnchor" number="5.2">
-<h2><span class="header-section-number">5.2</span> Identifying keywords<a href="keyword-detection.html#identifying-keywords" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="identifying-keywords" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Identifying keywords<a href="keyword-detection.html#identifying-keywords" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Here, we focus on a frequency-based approach that assesses distinctiveness relative to the reference variety. To identify these keywords, we can follow the procedure we have used to identify collocations using kwics - the idea is essentially identical: we compare the use of a word in a <em>target</em> corpus A to its use in a <em>reference</em> corpus.</p>
 <p>To determine if a token is a keyword and if it occurs significantly more frequently in a target corpus compared to a reference corpus, we use the following information (that is provided by the table above):</p>
 <ul>
@@ -379,7 +382,7 @@ div.csl-indent {
 <pre><code>## # A tibble: 6 × 3
 ##   token       n type    
 ##   &lt;chr&gt;   &lt;int&gt; &lt;chr&gt;   
-## 1 a        6434 positive
+## 1 a        6462 positive
 ## 2 aaliyah     1 positive
 ## 3 aames       1 positive
 ## 4 aamir       1 positive
@@ -410,7 +413,7 @@ div.csl-indent {
 <pre><code>## # A tibble: 6 × 3
 ##   token          n type    
 ##   &lt;chr&gt;      &lt;int&gt; &lt;chr&gt;   
-## 1 a           6102 negative
+## 1 a           6134 negative
 ## 2 aaargh         1 negative
 ## 3 aap            1 negative
 ## 4 aaron          2 negative
@@ -429,7 +432,7 @@ div.csl-indent {
 <span id="cb25-10"><a href="keyword-detection.html#cb25-10" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb25-11"><a href="keyword-detection.html#cb25-11" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
 <pre><code>##        token positive negative
-## 1          a     6434     6102
+## 1          a     6462     6134
 ## 2    aaliyah        1        0
 ## 3      aames        1        0
 ## 4      aamir        1        0
@@ -440,51 +443,57 @@ div.csl-indent {
 ## 9    abandon        2        0
 ## 10 abandoned        4        8</code></pre>
 <p>We now calculate the frequencies of the observed and expected frequencies as well as the row and column totals.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="keyword-detection.html#cb27-1" tabindex="-1"></a>texts_df <span class="sc">%&gt;%</span></span>
-<span id="cb27-2"><a href="keyword-detection.html#cb27-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">positive =</span> <span class="fu">as.numeric</span>(positive),</span>
-<span id="cb27-3"><a href="keyword-detection.html#cb27-3" tabindex="-1"></a>                <span class="at">negative =</span> <span class="fu">as.numeric</span>(negative)) <span class="sc">%&gt;%</span></span>
-<span id="cb27-4"><a href="keyword-detection.html#cb27-4" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">C1 =</span> <span class="fu">sum</span>(positive),</span>
-<span id="cb27-5"><a href="keyword-detection.html#cb27-5" tabindex="-1"></a>                <span class="at">C2 =</span> <span class="fu">sum</span>(negative),</span>
-<span id="cb27-6"><a href="keyword-detection.html#cb27-6" tabindex="-1"></a>                <span class="at">N =</span> C1 <span class="sc">+</span> C2) <span class="sc">%&gt;%</span></span>
-<span id="cb27-7"><a href="keyword-detection.html#cb27-7" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb27-8"><a href="keyword-detection.html#cb27-8" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">R1 =</span> positive<span class="sc">+</span>negative,</span>
-<span id="cb27-9"><a href="keyword-detection.html#cb27-9" tabindex="-1"></a>                <span class="at">R2 =</span> N <span class="sc">-</span> R1,</span>
-<span id="cb27-10"><a href="keyword-detection.html#cb27-10" tabindex="-1"></a>                <span class="at">O11 =</span> positive,</span>
-<span id="cb27-11"><a href="keyword-detection.html#cb27-11" tabindex="-1"></a>                <span class="at">O12 =</span> R1<span class="sc">-</span>O11,</span>
-<span id="cb27-12"><a href="keyword-detection.html#cb27-12" tabindex="-1"></a>                <span class="at">O21 =</span> C1<span class="sc">-</span>O11,</span>
-<span id="cb27-13"><a href="keyword-detection.html#cb27-13" tabindex="-1"></a>                <span class="at">O22 =</span> C2<span class="sc">-</span>O12) <span class="sc">%&gt;%</span></span>
-<span id="cb27-14"><a href="keyword-detection.html#cb27-14" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">E11 =</span> (R1 <span class="sc">*</span> C1) <span class="sc">/</span> N,</span>
-<span id="cb27-15"><a href="keyword-detection.html#cb27-15" tabindex="-1"></a>                <span class="at">E12 =</span> (R1 <span class="sc">*</span> C2) <span class="sc">/</span> N,</span>
-<span id="cb27-16"><a href="keyword-detection.html#cb27-16" tabindex="-1"></a>                <span class="at">E21 =</span> (R2 <span class="sc">*</span> C1) <span class="sc">/</span> N,</span>
-<span id="cb27-17"><a href="keyword-detection.html#cb27-17" tabindex="-1"></a>                <span class="at">E22 =</span> (R2 <span class="sc">*</span> C2) <span class="sc">/</span> N) <span class="sc">%&gt;%</span></span>
-<span id="cb27-18"><a href="keyword-detection.html#cb27-18" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>positive, <span class="sc">-</span>negative) <span class="ot">-&gt;</span> stats_raw</span>
-<span id="cb27-19"><a href="keyword-detection.html#cb27-19" tabindex="-1"></a><span class="co"># inspect</span></span>
-<span id="cb27-20"><a href="keyword-detection.html#cb27-20" tabindex="-1"></a>stats_raw <span class="sc">%&gt;%</span></span>
-<span id="cb27-21"><a href="keyword-detection.html#cb27-21" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb27-22"><a href="keyword-detection.html#cb27-22" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="keyword-detection.html#cb27-1" tabindex="-1"></a><span class="co"># Convert &#39;positive&#39; and &#39;negative&#39; columns to numeric</span></span>
+<span id="cb27-2"><a href="keyword-detection.html#cb27-2" tabindex="-1"></a>texts_df <span class="sc">%&gt;%</span></span>
+<span id="cb27-3"><a href="keyword-detection.html#cb27-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">positive =</span> <span class="fu">as.numeric</span>(positive),</span>
+<span id="cb27-4"><a href="keyword-detection.html#cb27-4" tabindex="-1"></a>                <span class="at">negative =</span> <span class="fu">as.numeric</span>(negative)) <span class="sc">%&gt;%</span></span>
+<span id="cb27-5"><a href="keyword-detection.html#cb27-5" tabindex="-1"></a>  <span class="co"># Calculate column sums for &#39;positive&#39;, &#39;negative&#39;, and their total</span></span>
+<span id="cb27-6"><a href="keyword-detection.html#cb27-6" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">C1 =</span> <span class="fu">sum</span>(positive),      <span class="co"># Total count of positive values</span></span>
+<span id="cb27-7"><a href="keyword-detection.html#cb27-7" tabindex="-1"></a>                <span class="at">C2 =</span> <span class="fu">sum</span>(negative),      <span class="co"># Total count of negative values</span></span>
+<span id="cb27-8"><a href="keyword-detection.html#cb27-8" tabindex="-1"></a>                <span class="at">N =</span> C1 <span class="sc">+</span> C2) <span class="sc">%&gt;%</span>         <span class="co"># Total count of all values</span></span>
+<span id="cb27-9"><a href="keyword-detection.html#cb27-9" tabindex="-1"></a>  <span class="co"># Process each row individually</span></span>
+<span id="cb27-10"><a href="keyword-detection.html#cb27-10" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb27-11"><a href="keyword-detection.html#cb27-11" tabindex="-1"></a>  <span class="co"># Calculate row-wise totals and other derived metrics</span></span>
+<span id="cb27-12"><a href="keyword-detection.html#cb27-12" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">R1 =</span> positive <span class="sc">+</span> negative, <span class="co"># Row total for positive and negative</span></span>
+<span id="cb27-13"><a href="keyword-detection.html#cb27-13" tabindex="-1"></a>                <span class="at">R2 =</span> N <span class="sc">-</span> R1,              <span class="co"># Total remaining count</span></span>
+<span id="cb27-14"><a href="keyword-detection.html#cb27-14" tabindex="-1"></a>                <span class="at">O11 =</span> positive,           <span class="co"># Observed positive count</span></span>
+<span id="cb27-15"><a href="keyword-detection.html#cb27-15" tabindex="-1"></a>                <span class="at">O12 =</span> R1 <span class="sc">-</span> O11,           <span class="co"># Observed negative count</span></span>
+<span id="cb27-16"><a href="keyword-detection.html#cb27-16" tabindex="-1"></a>                <span class="at">O21 =</span> C1 <span class="sc">-</span> O11,           <span class="co"># Total positive minus observed positive</span></span>
+<span id="cb27-17"><a href="keyword-detection.html#cb27-17" tabindex="-1"></a>                <span class="at">O22 =</span> C2 <span class="sc">-</span> O12) <span class="sc">%&gt;%</span>       <span class="co"># Total negative minus observed negative</span></span>
+<span id="cb27-18"><a href="keyword-detection.html#cb27-18" tabindex="-1"></a>  <span class="co"># Calculate expected counts for each cell in a contingency table</span></span>
+<span id="cb27-19"><a href="keyword-detection.html#cb27-19" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">E11 =</span> (R1 <span class="sc">*</span> C1) <span class="sc">/</span> N,      <span class="co"># Expected count for O11</span></span>
+<span id="cb27-20"><a href="keyword-detection.html#cb27-20" tabindex="-1"></a>                <span class="at">E12 =</span> (R1 <span class="sc">*</span> C2) <span class="sc">/</span> N,      <span class="co"># Expected count for O12</span></span>
+<span id="cb27-21"><a href="keyword-detection.html#cb27-21" tabindex="-1"></a>                <span class="at">E21 =</span> (R2 <span class="sc">*</span> C1) <span class="sc">/</span> N,      <span class="co"># Expected count for O21</span></span>
+<span id="cb27-22"><a href="keyword-detection.html#cb27-22" tabindex="-1"></a>                <span class="at">E22 =</span> (R2 <span class="sc">*</span> C2) <span class="sc">/</span> N) <span class="sc">%&gt;%</span>  <span class="co"># Expected count for O22</span></span>
+<span id="cb27-23"><a href="keyword-detection.html#cb27-23" tabindex="-1"></a>  <span class="co"># Select all columns except for &#39;positive&#39; and &#39;negative&#39;</span></span>
+<span id="cb27-24"><a href="keyword-detection.html#cb27-24" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>positive, <span class="sc">-</span>negative) <span class="ot">-&gt;</span> stats_raw</span>
+<span id="cb27-25"><a href="keyword-detection.html#cb27-25" tabindex="-1"></a><span class="co"># inspect</span></span>
+<span id="cb27-26"><a href="keyword-detection.html#cb27-26" tabindex="-1"></a>stats_raw <span class="sc">%&gt;%</span></span>
+<span id="cb27-27"><a href="keyword-detection.html#cb27-27" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb27-28"><a href="keyword-detection.html#cb27-28" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>) </span></code></pre></div>
 <pre><code>##        token     C1     C2      N    R1     R2  O11  O12    O21    O22
-## 1          a 224093 203391 427484 12536 414948 6434 6102 217659 197289
-## 2    aaliyah 224093 203391 427484     1 427483    1    0 224092 203391
-## 3      aames 224093 203391 427484     1 427483    1    0 224092 203391
-## 4      aamir 224093 203391 427484     1 427483    1    0 224092 203391
-## 5    aardman 224093 203391 427484     2 427482    2    0 224091 203391
-## 6      aaron 224093 203391 427484     4 427480    2    2 224091 203389
-## 7      aawip 224093 203391 427484     1 427483    1    0 224092 203391
-## 8         ab 224093 203391 427484     2 427482    2    0 224091 203391
-## 9    abandon 224093 203391 427484     2 427482    2    0 224091 203391
-## 10 abandoned 224093 203391 427484    12 427472    4    8 224089 203383
+## 1          a 225776 206392 432168 12596 419572 6462 6134 219314 200258
+## 2    aaliyah 225776 206392 432168     1 432167    1    0 225775 206392
+## 3      aames 225776 206392 432168     1 432167    1    0 225775 206392
+## 4      aamir 225776 206392 432168     1 432167    1    0 225775 206392
+## 5    aardman 225776 206392 432168     2 432166    2    0 225774 206392
+## 6      aaron 225776 206392 432168     4 432164    2    2 225774 206390
+## 7      aawip 225776 206392 432168     1 432167    1    0 225775 206392
+## 8         ab 225776 206392 432168     2 432166    2    0 225774 206392
+## 9    abandon 225776 206392 432168     2 432166    2    0 225774 206392
+## 10 abandoned 225776 206392 432168    12 432156    4    8 225772 206384
 ##             E11          E12      E21      E22
-## 1  6571.5438426 5964.4561574 217521.5 197426.5
-## 2     0.5242138    0.4757862 224092.5 203390.5
-## 3     0.5242138    0.4757862 224092.5 203390.5
-## 4     0.5242138    0.4757862 224092.5 203390.5
-## 5     1.0484275    0.9515725 224092.0 203390.0
-## 6     2.0968551    1.9031449 224090.9 203389.1
-## 7     0.5242138    0.4757862 224092.5 203390.5
-## 8     1.0484275    0.9515725 224092.0 203390.0
-## 9     1.0484275    0.9515725 224092.0 203390.0
-## 10    6.2905653    5.7094347 224086.7 203385.3</code></pre>
-<p>We could now calculate the keyness statistics for ll words in the reviews. However, this takes a few minutes an do we will exclude tokens that occur less than 10 times.</p>
+## 1  6580.4837378 6015.5162622 219195.5 200376.5
+## 2     0.5224265    0.4775735 225775.5 206391.5
+## 3     0.5224265    0.4775735 225775.5 206391.5
+## 4     0.5224265    0.4775735 225775.5 206391.5
+## 5     1.0448529    0.9551471 225775.0 206391.0
+## 6     2.0897059    1.9102941 225773.9 206390.1
+## 7     0.5224265    0.4775735 225775.5 206391.5
+## 8     1.0448529    0.9551471 225775.0 206391.0
+## 9     1.0448529    0.9551471 225775.0 206391.0
+## 10    6.2691176    5.7308824 225769.7 206386.3</code></pre>
+<p>We could now calculate the keyness statistics for all words in the reviews. However, this takes a few minutes an do we will exclude tokens that occur less than 10 times.</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="keyword-detection.html#cb29-1" tabindex="-1"></a>stats_redux <span class="ot">&lt;-</span> stats_raw <span class="sc">%&gt;%</span></span>
 <span id="cb29-2"><a href="keyword-detection.html#cb29-2" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(R1 <span class="sc">&gt;</span> <span class="dv">10</span>)</span></code></pre></div>
 <p>We can now calculate the keyness measures.</p>
@@ -552,53 +561,53 @@ div.csl-indent {
 <span id="cb30-62"><a href="keyword-detection.html#cb30-62" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb30-63"><a href="keyword-detection.html#cb30-63" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
 <pre><code>##        token type Sig_corrected  O11 O12 ptw_target   ptw_ref        G2
-## 1      great type   p &lt; .001***  472 187  2.1062684 0.9194114 101.49317
-## 2  excellent type   p &lt; .001***  145  21  0.6470528 0.1032494  92.47189
-## 3       love type   p &lt; .001***  323 128  1.4413659 0.6293297  69.38975
-## 4  wonderful type   p &lt; .001***  120  27  0.5354920 0.1327492  54.92216
-## 5      loved type   p &lt; .001***  102  21  0.4551682 0.1032494  50.53473
-## 6       best type   p &lt; .001***  326 156  1.4547532 0.7669956  45.97562
-## 7      still type   p &lt; .001***  271 129  1.2093193 0.6342464  38.74014
-## 8      world type   p &lt; .001***  207  88  0.9237236 0.4326642  38.58549
-## 9    perfect type   p &lt; .001***   94  25  0.4194687 0.1229160  36.22459
-## 10       his type   p &lt; .001*** 1262 882  5.6315905 4.3364751  36.09188
+## 1      great type   p &lt; .001***  480 188  2.1260010 0.9108880 107.34903
+## 2  excellent type   p &lt; .001***  149  21  0.6599461 0.1017481  97.43274
+## 3       love type   p &lt; .001***  329 133  1.4571965 0.6444048  69.25605
+## 4  wonderful type   p &lt; .001***  122  27  0.5403586 0.1308190  57.33152
+## 5      loved type   p &lt; .001***  103  21  0.4562044 0.1017481  52.00009
+## 6       best type   p &lt; .001***  333 157  1.4749132 0.7606884  49.89776
+## 7      world type   p &lt; .001***  212  91  0.9389838 0.4409086  39.47303
+## 8        his type   p &lt; .001*** 1264 884  5.5984693 4.2831117  37.98642
+## 9      still type   p &lt; .001***  275 134  1.2180214 0.6492500  37.82586
+## 10   perfect type   p &lt; .001***   95  25  0.4207710 0.1211287  37.50859
 ##             RDF RateRatio RateDifference DifferenceCoefficient       LLR
-## 1  0.0011868570  2.290880   1.186857e-06             0.3922613 294.63294
-## 2  0.0005438034  6.266636   5.438034e-07             0.7247791 148.07448
-## 3  0.0008120361  2.290308   8.120361e-07             0.3921562 201.57829
-## 4  0.0004027427  4.033745   4.027427e-07             0.6026907 106.29957
-## 5  0.0003519188  4.408267   3.519188e-07             0.6302072  93.56341
-## 6  0.0006877576  1.896684   6.877576e-07             0.3095569 166.13546
-## 7  0.0005750730  1.906695   5.750730e-07             0.3119352 139.02841
-## 8  0.0004910595  2.134953   4.910595e-07             0.3620347 120.72205
-## 9  0.0002965527  3.412546   2.965527e-07             0.5467572  77.08508
-## 10 0.0012951154  1.298656   1.295115e-06             0.1299265 292.48172
-##    SignedDKL     PDiff LogOddsRatio        MI       PMI         phi       X2
-## 1  275.56751  78.45225    0.8285169 0.4502812 -1.413264 0.015108132 97.57564
-## 2  109.75519 144.95583    1.8157365 0.7366425 -1.126903 0.013784540 81.22775
-## 3  188.54940  78.43124    0.8271524 0.4501796 -1.413366 0.012492127 66.71026
-## 4   85.86387 120.53813    1.3809359 0.6389911 -1.224555 0.010848353 50.30921
-## 5   74.17024 126.04143    1.4652312 0.6616837 -1.201862 0.010362688 45.90550
-## 6  166.33553  61.91137    0.6391318 0.3676117 -1.495934 0.010234742 44.77893
-## 7  138.89733  62.38704    0.6439262 0.3700657 -1.493480 0.009393260 37.71834
-## 8  115.60160  72.40694    0.7556895 0.4206887 -1.442857 0.009338842 37.28258
-## 9   64.66545 109.35145    1.2132873 0.5915439 -1.272002 0.008877874 33.69286
-## 10 377.99144  25.98529    0.2624613 0.1671798 -1.696366 0.009156046 35.83734
+## 1  0.0012151130  2.333980   1.215113e-06             0.4001177 306.01822
+## 2  0.0005581980  6.485811   5.581980e-07             0.7328374 154.19084
+## 3  0.0008127917  2.261296   8.127917e-07             0.3867488 203.82465
+## 4  0.0004095396  4.130462   4.095396e-07             0.6101806 109.64037
+## 5  0.0003544562  4.483494   3.544562e-07             0.6352803  95.52600
+## 6  0.0007142248  1.938912   7.142248e-07             0.3194777 175.16342
+## 7  0.0004980752  2.129643   4.980752e-07             0.3609522 123.86079
+## 8  0.0013153575  1.307103   1.315358e-06             0.1331121 300.87033
+## 9  0.0005687714  1.876037   5.687714e-07             0.3046003 138.77984
+## 10 0.0002996423  3.473649   2.996423e-07             0.5529478  78.97468
+##    SignedDKL     PDiff LogOddsRatio        MI       PMI         phi        X2
+## 1  282.11307  80.02354    0.8471803 0.4598864 -1.413514 0.015449817 103.15714
+## 2  112.99367 146.56747    1.8500360 0.7464777 -1.126923 0.014060743  85.44156
+## 3  189.77269  77.34975    0.8145226 0.4468948 -1.426505 0.012423660  66.70397
+## 4   87.57706 122.03612    1.4045688 0.6482689 -1.225131 0.011018859  52.47179
+## 5   75.01710 127.05606    1.4821074 0.6690043 -1.204396 0.010453774  47.22792
+## 6  172.05941  63.89553    0.6611666 0.3794405 -1.493960 0.010600888  48.56653
+## 7  117.61721  72.19045    0.7533356 0.4214466 -1.451954 0.009399071  38.17882
+## 8  377.99898  26.62241    0.2689656 0.1717026 -1.701698 0.009342598  37.72141
+## 9  138.10143  60.92006    0.6278269 0.3640309 -1.509369 0.009239335  36.89216
+## 10  65.54229 110.58957    1.2309816 0.5996651 -1.273735 0.008983216  34.87516
 ##    OddsRatio     DeltaP p        E11    O21    O22      N
-## 1   2.289920 0.19231943 0  345.45688 223621 203204 427484
-## 2   6.145601 0.34941589 0   87.01949 223948 203370 427484
-## 3   2.286798 0.19217523 0  236.42041 223770 203263 427484
-## 4   3.978624 0.29221324 0   77.05942 223973 203364 427484
-## 5   4.328544 0.30514232 0   64.47829 223991 203370 427484
-## 6   1.894835 0.15230651 0  252.67104 223767 203235 427484
-## 7   1.903941 0.15342979 0  209.68551 223822 203262 427484
-## 8   2.129079 0.17760371 0  154.64306 223886 203303 427484
-## 9   3.364527 0.26577618 0   62.38144 223999 203366 427484
-## 10  1.300126 0.06473028 0 1123.91433 222831 202509 427484</code></pre>
+## 1   2.333059 0.19644005 0  348.98088 225296 206204 432168
+## 2   6.360048 0.35418345 0   88.81250 225627 206371 432168
+## 3   2.258098 0.18989775 0  241.36103 225447 206259 432168
+## 4   4.073770 0.29646770 0   77.84154 225654 206365 432168
+## 5   4.402213 0.30830716 0   64.78088 225673 206371 432168
+## 6   1.937051 0.15734377 0  255.98897 225443 206235 432168
+## 7   2.124073 0.17736786 0  158.29522 225564 206301 432168
+## 8   1.308610 0.06635773 0 1122.17204 224512 205508 432168
+## 9   1.873535 0.15008722 0  213.67242 225501 206258 432168
+## 10  3.424590 0.26931498 0   62.69118 225681 206367 432168</code></pre>
 <p>The above table shows the keywords for positive IMDB reviews. The table starts with <strong>token</strong> (word type), followed by <strong>type</strong>, which indicates whether the token is a keyword in the target data (<em>type</em>) or a keyword in the reference data (<em>antitype</em>). Next is the Bonferroni corrected significance (<strong>Sig_corrected</strong>), which accounts for repeated testing. This is followed by <strong>O11</strong>, representing the observed frequency of the token, and <strong>Exp</strong> which represents the expected frequency of the token if it were distributed evenly across the target and reference data. After this, the table provides different keyness statistics (for information about these different keyness statistics see <a href="https://ladal.edu.au/key.html">here</a>).</p>
 </div>
-<div id="visualising-keywords" class="section level2 hasAnchor" number="5.3">
-<h2><span class="header-section-number">5.3</span> Visualising keywords<a href="keyword-detection.html#visualising-keywords" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="visualising-keywords" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Visualising keywords<a href="keyword-detection.html#visualising-keywords" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We can now visualize the keyness strengths in a <em>dot plot</em> as shown in the code chunk below.</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="keyword-detection.html#cb32-1" tabindex="-1"></a><span class="co"># sort the keys data frame in descending order based on the &#39;G2&#39; column</span></span>
 <span id="cb32-2"><a href="keyword-detection.html#cb32-2" tabindex="-1"></a>keys <span class="sc">%&gt;%</span></span>
@@ -649,7 +658,7 @@ div.csl-indent {
         </div>
       </div>
 <a href="sentiment-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="network-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="networks-and-collocation-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
