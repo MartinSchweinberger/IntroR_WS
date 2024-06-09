@@ -163,3 +163,6 @@ exercise-1-introducing-text-processing
 data-processing-chains
 networks-and-collocation-analysis
 networks
+sentence-tokenization
+stop-word-removal
+removing-unwanted-sybols

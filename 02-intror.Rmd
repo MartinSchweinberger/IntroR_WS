@@ -1,6 +1,6 @@
 # Introduction to R
 
-Here I want to show you how to get started with R. As such, this section is aimed at fresh users or beginners with the aim of showcasing how to set up a R session in RStudio, how to set up R projects, and how to do basic operations using R such as loading and manipulation tabular data and generating basic visualization using R. 
+We start the content part of the workshop by learning how to get started with R. As such, this part of the workshop will showcase how to set up a R session in RStudio, how to set up R projects, and how to do basic operations using R such as loading and manipulation tabular data and generating basic visualization using R. 
 
 
 [Here](https://www.rstudio.com/resources/cheatsheets/) is an overview of cheat sheets for popular and frequently used packages provided by RStudio (cheat sheets are short overviews with explanations and examples of useful functions). If you already have experience with R, both @wickham2016r (see [here](https://r4ds.had.co.nz/)) and  @gillespie2016efficient (see [here](https://bookdown.org/csgillespie/efficientR/)) are highly recommendable and excellent resources for improving your coding abilities and workflows in R.
@@ -289,6 +289,7 @@ install.packages("tm")
 install.packages("tokenizers")
 install.packages("here")
 install.packages("flextable")
+install.packages("udpipe")
 # install klippy for copy-to-clipboard button in code chunks
 install.packages("remotes")
 remotes::install_github("rlesur/klippy")
@@ -305,6 +306,7 @@ library(tm)
 library(tokenizers)
 library(here)
 library(flextable)
+library(udpipe)
 # activate klippy for copy-to-clipboard button
 klippy::klippy()
 ```
@@ -818,23 +820,9 @@ str_remove_all(review, " ")
 
 # Advanced String Processing
 
-Above, we have used functions and regular expressions to extract and find patters in textual data. Here, we will focus on common methods for cleaning text data that are applied before implementing certain methods.
+Above, we have used functions and regular expressions to extract and find patters in textual data. Here, we will focus on common but advanced methods for cleaning text data using the `quanteda` (see [here](https://raw.githubusercontent.com/rstudio/cheatsheets/main/quanteda.pdf) for a cheat sheet for the `quanteda` package), the `tm` [@tm], and the `udpipe` packages [@udpipe], which are extremely useful when dealing with more advanced text processing.
 
-We start by installing and then loading some additional packages, e.g., the `quanteda` (see [here](https://raw.githubusercontent.com/rstudio/cheatsheets/main/quanteda.pdf) for a cheat sheet for the `quanteda` package), the `tm`, and the `udpipe` package, which are extremely useful when dealing with more advanced text processing.
-
-
-```{r atp0, eval = F, message=F, warning=F}
-install.packages("quanteda")
-install.packages("tm")
-install.packages("udpipe")
-```
-
-
-```{r atp1, message=F, warning=F}
-library(quanteda)
-library(tm)
-library(udpipe) 
-```
+## Sentence tokenization
 
 One common procedure is to split texts into sentences which we can do by using, e.g., the  `tokenize_sentence` function from the `quanteda` package. I also unlist the data to have a vector wot work with (rather than a list).
 
@@ -846,6 +834,8 @@ et_sent <- quanteda::tokenize_sentence(review) %>%
 et_sent
 ```
 
+## Stop word removal
+
 Another common procedure is to remove stop words, i.e., words that do not have semantic or referential meaning (like nouns such as *tree* or *cat*, or verbs like *sit* or *speak* or adjectives such as *green* or *loud*) but that indicate syntactic relations, roles, or features.(e.g., articles and pronouns). We can remove stopwords using, e.g., the  `removeWords` function from the `tm` package
 
 
@@ -854,6 +844,8 @@ et_wostop <-  tm::removeWords(review, tm::stopwords("english"))
 # inspect
 et_wostop
 ```
+
+## Removing unwanted sybols
 
 To remove the superfluous white spaces, we can use, e.g., the  `stripWhitespace` function from the `tm` package.
 
@@ -1014,11 +1006,11 @@ We now turn to data visualization basics.
 
 # Basics of Data Visualization
 
-There are numerous function in R that we can use to visualize data. We will use the `ggplot` function from the `ggplot2` package here to visualize the data. 
+There are numerous function in R that we can use to visualize data. We will use the  `ggplot2` package for data visualization as it is the most flexible and most commonly used package for  for data visualization with R.
 
-The `ggplot2` package was developed by Hadley Wickham in 2005 and it implements the graphics scheme described in the book *The Grammar of Graphics* by Leland Wilkinson.
+[Here](https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf) is a link to a cheat sheets for data visualization using ggplot2  (cheat sheets are short overviews with explanations and examples of useful functions).
 
-The idea behind the  *Grammar of Graphics* can be boiled down to 5 bullet points (see Wickham 2016: 4):
+The `ggplot2` package was developed by Hadley Wickham in 2005 and it implements the graphics scheme described in the book *The Grammar of Graphics* by Leland Wilkinson. The idea behind the  *Grammar of Graphics* can be boiled down to 5 bullet points (see Wickham 2016: 4):
 
 - a statistical graphic is a mapping from data to **aes**thetic attributes (location, color, shape, size) of **geom**etric objects (points, lines, bars). 
 

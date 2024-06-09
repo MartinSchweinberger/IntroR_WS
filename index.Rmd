@@ -67,6 +67,8 @@ Here is what we have planned to cover in this workshop (2 days, 10am to 4pm):
 
 All resources (including the data we will use and analyse, the link to the script for this workshop, and  links to more in-depth resources for further study) are available via this [GitHub repository](https://github.com/MartinSchweinberger/IntroR_WS).
 
+To got beyond or review what are are doing in more detail, check out the R [Basics](https://ladal.edu.au/tutorials.html#2_R_Basics) and [Text Analysis](https://ladal.edu.au/tutorials.html#5_Text_Analytics) tutorials offered by the [*Language Technology and Data Analysis Laboratory* (LADAL).](https://ladal.edu.au)
+
 ## Audience
 
 The intended audience for this workshop is beginner-level, with no previous experience using R. However, the workshop will also be useful for intermediate and advanced users of R if they do not have substantive experience in analyzing text data with R. Thus, no prior knowledge of R is required.

@@ -53,6 +53,7 @@ install.packages("topicmodels")
 install.packages("udpipe")
 install.packages("wordcloud")
 install.packages("wordcloud2")
+install.packages("writexl")
 ```
 
 Once all packages are installed, you can activate them by executing (running) the code chunk below.
@@ -84,6 +85,7 @@ library(topicmodels)
 library(udpipe)
 library(wordcloud)
 library(wordcloud2)
+library(writexl)
 # activate klippy for copy-to-clipboard button
 klippy::klippy()
 ```
@@ -212,7 +214,7 @@ To export the table with the results as an MS Excel spreadsheet, we use `write_x
 
 ```{r eval = F, warning=F, message=F}
 # save data
-write_xlsx(reviews_annotated, here::here("data/reviews_annotated.xlsx"))
+writexl::write_xlsx(reviews_annotated, here::here("data/reviews_annotated.xlsx"))
 ```
 
 ## Summarizing results
