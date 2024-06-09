@@ -1,68 +1,131 @@
-This is a template for creating an [HTML GitBook style](https://bookdown.org/yihui/bookdown/html.html#gitbook-style) **[bookdown](https://github.com/rstudio/bookdown)** book, [hosted on GitHub Pages](https://bookdown.org/yihui/bookdown/github.html). It is based on the one created with *File, New Project..., New Directory, Book Project using bookdown* in RStudio. It assumes you know how to use git/GitHub and R Markdown, and have some familiarity with the **bookdown** package. If you don't, the package author Yihue Xie's RStudio webinar *[Introduction to Bookdown (R Package)](https://www.youtube.com/watch?v=dVqVscgwSpw)* provides an excellent introduction. In addition, check out [*bookdown: Authoring Books and Technical Documents with R Markdown*](https://bookdown.org/yihui/bookdown), also by Yihui Xie, both for the content and the format--it is itself a **bookdown** book.
-If you need help getting git/GitHub to work with RStudio see: [Happy Git and GitHub for the useR](https://happygitwithr.com/) by Jenny Bryan.
+# Introduction to R for Social Science
+
+Martin Schweinberger (University of Eastern Finland, 11-12 May, 2024)
+
+## General Information
+
+### Abstract
 
 
-## ABSOLUTE ESSENTIALS
+This beginner-friendly workshop, *Introduction to R for Social Science*, is designed to equip participants with the foundational skills necessary to use R and RStudio effectively for text-based social science research. Through hands-on exercises and guided instruction, attendees will learn how to navigate the RStudio environment, load, manage, manipulate, and visualize data, and perform basic text analytics. Key topics covered include the use of regular expressions for pattern matching, concordancing for textual analysis, and essential techniques in network analysis, sentiment and keyword analysis, and topic modeling. By the end of this workshop, participants will have a solid understanding of how to use R for text-based social science research, opening up new possibilities for data-driven insights in their field. No prior experience with R or programming is required. 
 
-*If you have any difficulties or have feedback of any kind, please file an issue or communicate through [Discussions](https://github.com/jtr13/bookdown-template/discussions).*
+### Timeline
 
-### Copy this template (GitHub)
+Here is what we have planned to cover in this workshop (2 days, 10am to 4pm):
 
-- [ ] 1. Click the green "Use this template" button above. DO NOT FORK THE REPO. Choose a descriptive name for your repo based on your content. (Unlike when you fork a repo, you get to choose the name. If you change your mind before you do any work, delete your new repo and start over.)
+**Tuesday, 11 June** 
 
-### Set up Pages (GitHub)
+* 10:00 - 10:15 Introduction to the workshop
 
-- [ ] 1. On the home page of your repo, click Settings. Click the "Pages" section on the left. In the **Build and Deployment** section, set **Source** to "Deploy from a branch" (Classic Pages experience) and **Branch** to **main** with **/docs** folder. Click Save. Above the **Build and Deployment** section, a box will appear with your book's URL. Copy the URL. (Note that sometimes there is a delay until your book actually appears at that URL. If it doesn't appear after a few minutes, make a change and commit it to trigger a GitHub Pages build.)	
+* 10:15 - 10:45 Preparation and getting started
 
-- [ ] 2. Click the gear button near "About" on the home page of the repo and paste your book URL into the **Website** field that appears on the right.
+* 10:45 - 11:30 R and RStudio basics 
 
-### Copy the repo link (GitHub)
+* **11:30 - 12:30 Lunch break**
 
-- [ ] 1. Click the green Code button and copy the link under HTTPS. It should have the format: `https://github.com/[USERNAME]/[REPO NAME].git`
+* 12:30 - 12:45 Exercise 1: Text Processing
 
-### Clone the repo (RStudio)
+* 12:45 - 13:15 Working with text
 
-- [ ] 1. Clone your new repo with *File, New Project..., Version Control, Git* in RStudio. You will need to paste the link from the previous step in the Repository URL box.
+* 13:15 - 14:00 Basic string processing 1
 
-### Edit some key files (RStudio)
+* **14:00 - 14:30 Coffee break**
 
-- [ ] 1. In `index.Rmd`, change YOUR TITLE HERE to your title.
+* 14:30 - 15:15 Basic string processing 2
 
-- [ ] 2. In `index.Rmd`, change YOUR NAMES HERE to your names.
+* 15:15 - 16:00 Advanced string processing
 
-- [ ] 3. In `_bookdown.yml`, change YOUR GITHUB USERNAME to your GitHub username in the two places it appears.
+**Wednesday, 12 June** 
 
-- [ ] 4. In `_bookdown.yml`, change YOUR GITHUB REPO to your GitHub repo name in the two places it appears.
+* 10:00 - 10:10 Recap
 
-(Note that 3. and 4. provide links to the `.Rmd` files of your project for editing and viewing. If you move your `.Rmd` files you will need to update these file paths. Once your book is rendered, test that the edit (pen) and view (eye) buttons work.)
+* 10:10 - 10:45 Basics of data visualization
 
-- [ ] 5. In `_output.yml`, change YOUR SHORT TITLE to a shortened version of your title. (Leave the "after:" line indicating that the book was published with bookdown as is.)
+* 10:45 - 11:00  Introduction to Text Analytics
 
-### Render the book (RStudio)
+* 11:00 - 11:30 Exercise 2: Sentiment Analysis and Keyword Analysis
 
-- [ ] 1. Install **bookdown** with `install.packages("bookdown")`. If you already have it, update to the most recent version.
+* **11:30 - 12:30 Lunch break**
 
-- [ ] 2. Render locally with `bookdown::render_book("index.Rmd")` or clicking the *Build book* button which should appear in the Build tab (in the same pane as Environment, History, Connections, ...).
+* 12:30 - 13:15 Sentiment Analysis and Keyword Analysis in R
 
-- [ ] 3. Use `browseURL("docs/index.html")` to view your book locally (or just open `index.html` in a browser).
+* 13:15 - 14:00 Networks and Collocation Analysis
 
-- [ ] 4. If it looks good, commit and push all changed files to GitHub. 
+* **14:00 - 14:30 Coffee break**
 
-(You will need to repeat steps 2 and 4 every time you wish to update the book online.)
+* 14:30 - 15:00 Exercise 3: Topic modelling
 
-### Edit README	(GitHub or RStudio)
+* 15:00 - 15:50 Topic modelling in R
 
-Once you've completed these steps, delete the content of this **README** and add a short description of your project with a link to the book URL. It would be appreciated if you add the following to the end:	
+* 15:50 - 16:00 Going further and wrap-up
 
-*This repo was initially generated from a bookdown template available here: https://github.com/jtr13/bookdown-template.*
+### Resources
 
-(And starring the repo would be nice too!)
+All resources (including the data we will use and analyse, the link to the script for this workshop, and  links to more in-depth resources for further study) are available via this [GitHub repository](https://github.com/MartinSchweinberger/IntroR_WS).
 
-### Demo Video
+To got beyond or review what are are doing in more detail, check out the R [Basics](https://ladal.edu.au/tutorials.html#2_R_Basics) and [Text Analysis](https://ladal.edu.au/tutorials.html#5_Text_Analytics) tutorials offered by the [*Language Technology and Data Analysis Laboratory* (LADAL).](https://ladal.edu.au)
 
-A demo video showing how to create a **bookdown book** following these instructions: http://bit.ly/fiveminutebookdown
+### Audience
 
-### Additional features
+The intended audience for this workshop is beginner-level, with no previous experience using R. However, the workshop will also be useful for intermediate and advanced users of R if they do not have substantive experience in analyzing text data with R. Thus, no prior knowledge of R is required.
 
-Please consult the official guide to **bookdown**: https://bookdown.org/yihui/bookdown
+If you want to know more, would like to get some more practice, or would like to have another approach to R, please feel free to check out on eof the various online resources available to learn R (you can check out a very recommendable introduction [here](https://uvastatlab.github.io/phdplus/intror.html)). 
+
+### What to do before the workshop
+
+In this workshop you will learn  (basic) R skills and (basic) knowledge of how to work with R and RStudio to perform basic text analytics. If you have no or little experience with this, you *can* (but *do not need or have to*) prepare or refresh your R skills by having a look at these tutorials:
+
+* [Getting started with R](https://slcladal.github.io/intror.html)
+
+* [Handling tables in R](https://slcladal.github.io/table.html)
+
+Before attending the workshop, you could also install the following packages in RStudio:
+
+* `here` (for easy pathing)
+* `ggplot2`  (for general data visualization)
+* `dplyr` (for data processing)
+* `tsne` (for t-SNE)
+* `knitr` (for knitting R Notebooks)
+* `markdown` (for rendering Rmd files)
+* `rmarkdown`  (for R Markdown formatting)
+* `installr` (for updating R)
+
+
+You can update R and install these packages by clicking on `packages` on the top of the lower right pane in RStudio or you can execute the following code in the lower left, `Console` pane of RStudio. 
+
+```{r install, eval = F, message=F, warning=F}
+# update R
+#install.packages("installr")
+#library(installr)
+#updateR()
+# install required packages
+install.packages(c("here", "readxl", "dplyr", "stringr", "ggplot2", "knitr", "markdown", "rmarkdown", "devtools"), dependencies = T)
+```
+
+
+You can follow this workshop in different ways - you can sit back and watch it like a lecture or take a more active role - that said, the intention for this workshop is clearly to be practical so that I show something and then you do it on you computer and we have exercises where you can try out what you have just learned. Choose which option suits you best and then go with it. 
+
+
+### Getting started
+
+For everything to work, please do the following either before the workshop or at the beginning of the workshop (I will guide you if you want to do this at the begining of the workshop):
+
+**GitHub**
+
+* Check your GitHub log in details or create a new GitHub account
+
+**Folder set up**
+
+* Create a folder for this workshop somewhere on your computer, e.g. called *IntroR_WS*
+
+* In that folder, create two subfolders called *data* and *images*
+
+* Open RStudio, go to File > New Project > Existing Directory (Browse to project folder) > Create (and hit Enter)
+
+This will then create an R Project in the project folder.
+
+**Data and files**
+
+* The data is ready for download in the data folder of the [GitHub repository for this workshop](https://github.com/MartinSchweinberger/IntroR_WS) but I will bring a USB stick with the required  data sets - please store/save them in the folder called *data* in the folder called *IntroR_WS*.
+
 
