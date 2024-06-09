@@ -75,20 +75,20 @@ The intended audience for this workshop is beginner-level, with no previous expe
 
 If you want to know more, would like to get some more practice, or would like to have another approach to R, please feel free to check out on eof the various online resources available to learn R (you can check out a very recommendable introduction [here](https://uvastatlab.github.io/phdplus/intror.html)). 
 
-## What to do before the workshop
+## What you can do before the workshop
 
 In this workshop you will learn  (basic) R skills and (basic) knowledge of how to work with R and RStudio to perform basic text analytics. If you have no or little experience with this, you *can* (but *do not need or have to*) prepare or refresh your R skills by having a look at these tutorials:
 
-* [Getting started with R](https://slcladal.github.io/intror.html)
+* [Getting started with R](https://ladal.edu.au/intror.html)
 
-* [Handling tables in R](https://slcladal.github.io/table.html)
+* [String processing in R](https://ladal.edu.au/string.html)
 
 Before attending the workshop, you could also install the following packages in RStudio:
 
 * `here` (for easy pathing)
 * `ggplot2`  (for general data visualization)
 * `dplyr` (for data processing)
-* `tsne` (for t-SNE)
+* `stringr` (for string processing)
 * `knitr` (for knitting R Notebooks)
 * `markdown` (for rendering Rmd files)
 * `rmarkdown`  (for R Markdown formatting)
