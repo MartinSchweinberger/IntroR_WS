@@ -1,253 +1,15 @@
-# Introduction to R
-
-We start the content part of the workshop by learning how to get started with R. As such, this part of the workshop will showcase how to set up a R session in RStudio, how to set up R projects, and how to do basic operations using R such as loading and manipulation tabular data and generating basic visualization using R. 
-
-
-[Here](https://www.rstudio.com/resources/cheatsheets/) is an overview of cheat sheets for popular and frequently used packages provided by RStudio (cheat sheets are short overviews with explanations and examples of useful functions). If you already have experience with R, both @wickham2016r (see [here](https://r4ds.had.co.nz/)) and  @gillespie2016efficient (see [here](https://bookdown.org/csgillespie/efficientR/)) are highly recommendable and excellent resources for improving your coding abilities and workflows in R.
-
-
-## Installing R and RStudio
-
-* You have NOT yet installed **R** on your computer? 
-
-  + You have a Windows computer? Then click [here](https://cran.r-project.org/bin/windows/base/R-4.0.2-win.exe) for downloading and installing R
-
-  + You have a Mac? Then click [here](https://cran.r-project.org/bin/macosx/R-4.0.2.pkg) for downloading and installing R
-
-* You have NOT yet installed **RStudio** on your computer?
-
-  + Click [here](https://rstudio.com/products/rstudio/download/#download) for downloading and installing RStudio.
-
-
-You can find a more elaborate explanation of how to download and install R and RStudio [here](https://gitlab.com/stragu/DSH/blob/master/R/Installation.md) that was created by the UQ library.
-
-
-
-## Preparation
-
-Before you actually open R or RStudio, there things to consider that make working in R much easier and give your workflow a better structure. 
-
-Imagine it like this: when you want to write a book, you could simply take pen and paper and start writing *or* you could think about what you want to write about, what different chapters your book would consist of, which chapters to write first, what these chapters will deal with, etc. The same is true for R: you could simply open R and start writing code *or* you can prepare you session and structure what you will be doing.
-
-### Before you start working with R/RStudio (Folder Structure and R projects)
-
-Before actually starting with writing code, you should prepare the session by going through the following steps:
-
-### Create a folder for your project
-
-In that folder, create the following sub-folders (you can, of course, adapt this folder template to match your needs)
-
-  - data (you do not create this folder for the present workshop as you can simply use the data folder that you downloaded for this workshop instead)
-  - images
-  - tables
-  - docs
-
-The folder for your project could look like the the one shown below.
-
-```{r rstudio01, echo=F, fig.cap="", message=FALSE, warning=FALSE, out.width='75%'}
-knitr::include_graphics("https://slcladal.github.io/images/RStudio_newfolder.png")
-```   
-
-Once you have created your project folder, you can go ahead with RStudio.
-
-### Open RStudio
-
-This is what RStudio looks like when you first open it: 
-
-```{r , echo=F, fig.cap="", message=FALSE, warning=FALSE, out.width='100%'}
-knitr::include_graphics("https://slcladal.github.io/images/RStudio_empty.png")
-``` 
-
-In RStudio, click on `File` 
-  
-```{r rstudio02, echo=F, fig.cap="", message=FALSE, warning=FALSE, out.width='50%'}
-knitr::include_graphics("https://slcladal.github.io/images/RStudio_file.png")
-``` 
-
-You can use the drop-down menu to create a `R project`
-
-### R Projects
-
-In RStudio, click on `New Project`
-  
-```{r rstudio05, echo=F, fig.cap="", message=FALSE, warning=FALSE, out.width='50%'}
-knitr::include_graphics("https://slcladal.github.io/images/RStudio_newfile.png")
-``` 
-  
-Next, confirm by clicking `OK` and select `Existing Directory`.
-
-Then, navigate to where you have just created the project folder for this workshop.
-  
-```{r rstudio06, echo=F, fig.cap="", message=FALSE, warning=FALSE, out.width='30%'}
-knitr::include_graphics("https://slcladal.github.io/images/RStudio_existingdirectory.png")
-```  
-  
-Once you click on `Open`, you have created a new `R project` 
-  
-### R Notebooks
-  
-In this project, click on `File`
-  
-```{r rstudio10, echo=F, fig.cap="", message=FALSE, warning=FALSE, out.width='50%'}
-knitr::include_graphics("https://slcladal.github.io/images/RStudio_file.png")
-``` 
-  
-Click on `New File` and then on `R Notebook` as shown below.
-
-```{r rstudio12, echo=F, fig.cap="", message=FALSE, warning=FALSE, out.width='50%'}
-knitr::include_graphics("https://slcladal.github.io/images/RStudio_newnotebook.png")
-```  
-
-This `R Notebook` will be the file in which you do all your work.
-
-
-
-### Updating R
-
-In case you encounter issues when opening the R Notebook (e.g., if you receive an error message saying that you need to update packages which then do not install properly), you may have to *update your R version*.
-
-To update your current R version to the recent release please copy the code chunk shown below into the console pane (the bottom left pane) and click on `Enter` to run the code. The code will automatically update your version of R to the most recent release. During the update, you may be asked to specify some options - in that case, you can simply click on *Accept* and *Next* and accept the default settings.
-
-```{r updater, eval=F, warning=F, message=F}
-# install installr package
-install.packages("installr")
-# load installr package
-library(installr)
-# update r
-updateR()
-```
-
-### Optimizing R project options
-
-When you work with projects, it is recommendable to control the so-called *environment*. This means that you make your R Project self-contained by storing all packages that are used in project in a library *in the R Project* (instead of in the general R library on your computer). Having a library in your R Project means that you can share your project folder wit other people and they will automatically have the same package versions that you have sued which makes your code more robust and reproducible.
-
-So, how to create such an environment? You simply click on `Tools` (at the very top right of RStudio), then click on`Project Options` then click on `Environments` and then check `Use renv with this project`. Now, when you install packages, they will be installed in the package library (rather than the general R library on your computer).
-
-
-### Getting started with R Notebooks
-
-You can now start writing in this R Notebook. For instance, you could start by changing the title of the R Notebook and describe what you are doing (what this Notebook contains).
-
-Below is a picture of what this document looked like when I started writing it.
-
-```{r , echo=F, fig.cap="", message=FALSE, warning=FALSE, out.width='100%'}
-knitr::include_graphics("https://slcladal.github.io/images/RStudio_editMD.png")
-```  
-
-When you write in the R Notebook, you use what is called `R Markdown` which is explained below.
-
-
-### R Markdown
-
-The Notebook is an [R Markdown document](http://rmarkdown.rstudio.com/): a Rmd (R Markdown) file is more than a flat text document: it's a program that you can run in R and which allows you to combine prose and code, so readers can see the technical aspects of your work while reading about their interpretive significance. 
-
-You can get a nice and short overview of the formatting options in R Markdown (Rmd) files [here](https://rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf).
-
-
-R Markdown allows you to make your research fully transparent and reproducible! If a couple of years down the line another researcher or a journal editor asked you how you have done your analysis, you can simply send them the Notebook or even the entire R-project folder. 
-
-As such, Rmd files are a type of document that allows to 
-
-+ include snippets of code (and any outputs such as tables or graphs) in plain text while 
-
-+ encoding the *structure* of your document by using simple typographical symbols to encode formatting (rather than HTML tags or format types such as *Main header* or *Header level 1* in Word).  
-
-Markdown is really quite simple to learn and these resources may help:
-
-+ The [Markdown Wikipedia page](https://en.wikipedia.org/wiki/Markdown) includes a very handy chart of the syntax.
-
-+ John Gruber developed Markdown and his [introduction to the syntax](https://daringfireball.net/projects/markdown/syntax) is worth browsing.
-
-+ This [interactive Markdown tutorial](http://www.markdowntutorial.com/) will teach you the syntax in a few minutes.
-
-## R and RStudio Basics
-
-RStudio is a so-called IDE - Integrated Development Environment. The interface provides easy access to R. The advantage of this application is that R programs and files as well as a project directory can be managed easily. The environment is capable of editing and running program code, viewing outputs and rendering graphics. Furthermore, it is possible to view variables and data objects of an R-script directly in the interface. 
-
-### RStudio: Panes
-
-The GUI - Graphical User Interface - that RStudio provides divides the screen into four areas that are called **panes**:
-
-1. File editor
-2. Environment variables
-3. R console
-4. Management panes (File browser, plots, help display and R packages).
-
-The two most important are the R console (bottom left) and the File editor (or Script in the top left).
-The Environment variables and Management panes are on the right of the screen and they contain: 
-
-* **Environment** (top): Lists all currently defined objects and data sets
-* **History** (top): Lists all commands recently used or associated with a project
-* **Plots** (bottom): Graphical output goes here
-* **Help** (bottom): Find help for R packages and functions.  Don't forget you can type `?` before a function name in the console to get info in the Help section. 
-* **Files** (bottom): Shows the files available to you in your working directory
-
-These RStudio panes are shown below.
-
-```{r intro_01_17, fig.width=10, fig.height=8, echo=FALSE, warning=FALSE}
-knitr::include_graphics("https://slcladal.github.io/images/RStudioscreenshot.png")
-```
-
-#### R Console (bottom left pane)
-
-The console pane allows you to quickly and immediately execute R code. You can experiment with functions here, or quickly print data for viewing. 
-
-Type next to the `>` and press `Enter` to execute. 
-
-***
-
-<div class="warning" style='padding:0.1em; background-color:#51247a; color:#f2f2f2'>
-<span>
-<p style='margin-top:1em; text-align:center'>
-<b>EXERCISE TIME!</b></p>
-<p style='margin-left:1em;'>
-</p></span>
-</div>
-
-<div class="question">` 
-
-1. You can use R like a calculator.  Try typing `2+8` into the **R console**.
-
-<details>
-  <summary>Answer</summary>
-  ```{r calculator}
-  2+8
-  ```
-  
-</details>
-
-</div>`
-
-***
-
-Here, the plus sign is the **operator**.  Operators are symbols that represent some sort of action.  However, R is, of course, much more than a simple calculator.  To use R more fully, we need to understand **objects**, **functions**, and **indexing** - which we will learn about as we go.
-
-For now, think of *objects as nouns* and *functions as verbs*. 
-
-#### Running commands from a script
-
-To run code from a script, insert your cursor on a line with a command, and press `CTRL/CMD+Enter`.
-
-Or highlight some code to only run certain sections of the command, then press `CTRL/CMD+Enter` to run.
-
-Alternatively, use the `Run` button at the top of the pane to execute the current line or selection (see below).
-
-```{r rstudio13, echo=F, fig.cap="", message=FALSE, warning=FALSE, out.width='50%'}
-knitr::include_graphics("https://slcladal.github.io/images/RStudio_run.png")
-```  
-
-#### Script Editor (top left pane)
-
-In contrast to the R console, which quickly runs code, the Script Editor (in the top left) does not automatically execute code. The Script Editor allows you to save the code essential to your analysis.  You can re-use that code in the moment, refer back to it later, or publish it for replication.  
-
-
-Now, that we have explored RStudio, we are ready to get started with R!
-
-## Getting started with R
+---
+title: "Introduction to R for Social Science - Part 1: Getting started with R"
+author: "Martin Schweinberger"
+date: "2024-06-10"
+output: html_document
+---
+
+# Getting started with R
 
 This section introduces some basic concepts and procedures that help optimize your workflow in R. 
 
-### Setting up an R session
+## Setting up an R session
 
 At the beginning of a session, it is common practice to define some basic parameters. This is not required or even necessary, but it may just help further down the line. This session preparation may include specifying options. In the present case, we 
 
@@ -270,7 +32,7 @@ In script editor pane of RStudio, this would look like this:
 knitr::include_graphics("https://slcladal.github.io/images/RStudio_preparation.png")
 ``` 
 
-### Packages
+## Packages
 
 When using R, most of the functions are not loaded or even installing automatically. Instead, most functions are in contained in what are called **packages**. 
 
@@ -319,11 +81,11 @@ In script editor pane of RStudio, the code blocks that install and activate pack
 knitr::include_graphics("https://slcladal.github.io/images/RStudio_packages.png")
 ``` 
 
-### Getting help
+## Getting help
 
 When working with R, you will encounter issues and face challenges. A very good thing about R is that it provides various ways to get help or find information about the issues you face.
 
-#### Finding help within R
+### Finding help within R
 
 To get help regrading what functions a package contains, which arguments a function takes or to get information about how to use a function, you can use the `help` function or the `apropos`. function or you can simply type a `?` before the package or two `??` if this does not give you any answers. 
 
@@ -343,7 +105,7 @@ There are also other "official" help resources from R/RStudio.
 
 * Check out the keyboard shortcuts `Help` under `Tools` in RStudio for some good tips 
 
-#### Finding help online
+### Finding help online
 
 One great thing about R is that you can very often find an answer to your question online.
 
@@ -1001,22 +763,6 @@ write.table(kwic_multiple_select, here::here("data", "kwic_multiple_select.txt")
 ```
 
 As most of the data that we use is on out computers (rather than being somewhere on the web), we now load files with text from your computer. 
-
-
-<div class="warning" style='padding:0.1em; background-color:#f2f2f2; color:#51247a'>
-<span>
-<p style='margin-top:1em; text-align:center'>
-<b>CONCORDANCING TOOL</b>
-</p>
-<p style='margin-top:1em; text-align:center'>
-You can also check out the free, online, notebook-based, R-based [Concordancing Tool](https://binderhub.atap-binder.cloud.edu.au/v2/gh/SLCLADAL/interactive-notebooks-environment/main?urlpath=git-pull%3Frepo%3Dhttps%253A%252F%252Fgithub.com%252FSLCLADAL%252Finteractive-notebooks%26urlpath%3Dlab%252Ftree%252Finteractive-notebooks%252Fnotebooks%252Fkwictool.ipynb%26branch%3Dmain) offered by LADAL.
-</p>
-<br>
-</span>
-</div>
-
-<br>
-
 
 We now turn to data visualization basics.
 

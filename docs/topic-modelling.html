@@ -23,7 +23,7 @@
 <meta name="author" content="Martin Schweinberger" />
 
 
-<meta name="date" content="2024-06-09" />
+<meta name="date" content="2024-06-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -175,7 +175,7 @@ div.csl-indent {
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#timeline"><i class="fa fa-check"></i><b>1.2</b> Timeline</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#resources"><i class="fa fa-check"></i><b>1.3</b> Resources</a></li>
 <li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#audience"><i class="fa fa-check"></i><b>1.4</b> Audience</a></li>
-<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#what-to-do-before-the-workshop"><i class="fa fa-check"></i><b>1.5</b> What to do before the workshop</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#what-you-can-do-before-the-workshop"><i class="fa fa-check"></i><b>1.5</b> What you can do before the workshop</a></li>
 <li class="chapter" data-level="1.6" data-path="index.html"><a href="index.html#getting-started"><i class="fa fa-check"></i><b>1.6</b> Getting started</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="introduction-to-r.html"><a href="introduction-to-r.html"><i class="fa fa-check"></i><b>2</b> Introduction to R</a>
@@ -299,6 +299,19 @@ div.csl-indent {
 <div id="topic-modelling" class="section level1 hasAnchor" number="9">
 <h1><span class="header-section-number">Section 9</span> Topic Modelling<a href="topic-modelling.html#topic-modelling" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Topic models refers to a suit of methods employed to uncover latent structures within a corpus of text. These models operate on the premise of identifying abstract <em>topics</em> that recur across documents. In essence, topic models sift through the textual data to discern recurring patterns of word co-occurrence, revealing underlying semantic themes <span class="citation">(Busso et al. 2022; Blei, Ng, and Jordan 2003)</span>. This technique is particularly prevalent in text mining, where it serves to unveil hidden semantic structures in large volumes of textual data.</p>
+<div class="warning" style="padding:0.1em; background-color:#f2f2f2; color:#51247a">
+<span>
+<p style="margin-top:1em; text-align:center">
+<b>TOPIC-MODEL TOOL</b>
+</p>
+<br>
+<p style="margin-top:1em; text-align:center">
+You can also check out the free, online, notebook-based, R-based <a href="https://binderhub.atap-binder.cloud.edu.au/v2/gh/SLCLADAL/interactive-notebooks-environment/main?urlpath=git-pull%3Frepo%3Dhttps%253A%252F%252Fgithub.com%252FSLCLADAL%252Finteractive-notebooks%26urlpath%3Dlab%252Ftree%252Finteractive-notebooks%252Fnotebooks%252Ftopictool.ipynb%26branch%3Dmain">Topic-Model Tool</a> offered by LADAL.
+</p>
+<p><br>
+</span></p>
+</div>
+<p><br></p>
 <p>Conceptually, topics can be understood as clusters of co-occurring terms, indicative of shared semantic domains within the text. The underlying assumption is that if a document pertains to a specific topic, words related to that topic will exhibit higher frequency compared to documents addressing other subjects. For example, in documents discussing dogs, terms like <em>dog</em> and <em>bone</em> are likely to feature prominently, while in documents focusing on cats, <em>cat</em> and <em>meow</em> would be more prevalent. Meanwhile, ubiquitous terms such as <em>the</em> and <em>is</em> are expected to occur with similar frequency across diverse topics, serving as noise rather than indicative signals of topic specificity.</p>
 <p>Various methods exist for determining topics within topic models. For instance, <span class="citation">Gerlach, Peixoto, and Altmann (2018)</span> and <span class="citation">Hyland et al. (2021)</span> advocate for an approach grounded in stochastic block models. However, most applications of topic models use Latent Dirichlet Allocation (LDA) <span class="citation">(Blei, Ng, and Jordan 2003)</span> or Structural Topic Modeling <span class="citation">(Roberts, Stewart, and Tingley 2016)</span>.</p>
 <p>LDA, in particular, emerges as a widely embraced technique for fitting topic models. It operates by treating each document as a blend of topics and each topic as a blend of words. Consequently, documents can exhibit content overlaps, akin to the fluidity observed in natural language usage, rather than being strictly segregated into distinct groups.</p>
@@ -482,35 +495,35 @@ div.csl-indent {
 ##  [1,] &quot;war&quot;      &quot;free&quot;    &quot;countri&quot;  &quot;law&quot;    &quot;treati&quot;  &quot;territori&quot;
 ##  [2,] &quot;militari&quot; &quot;peopl&quot;   &quot;nation&quot;   &quot;court&quot;  &quot;claim&quot;   &quot;indian&quot;   
 ##  [3,] &quot;armi&quot;     &quot;can&quot;     &quot;citizen&quot;  &quot;case&quot;   &quot;govern&quot;  &quot;tribe&quot;    
-##  [4,] &quot;forc&quot;     &quot;govern&quot;  &quot;govern&quot;   &quot;offic&quot;  &quot;unite&quot;   &quot;mexico&quot;   
-##  [5,] &quot;offic&quot;    &quot;must&quot;    &quot;foreign&quot;  &quot;person&quot; &quot;negoti&quot;  &quot;part&quot;     
-##  [6,] &quot;servic&quot;   &quot;upon&quot;    &quot;american&quot; &quot;may&quot;    &quot;relat&quot;   &quot;will&quot;     
-##  [7,] &quot;men&quot;      &quot;liberti&quot; &quot;right&quot;    &quot;provis&quot; &quot;minist&quot;  &quot;new&quot;      
-##  [8,] &quot;command&quot;  &quot;everi&quot;   &quot;time&quot;     &quot;upon&quot;   &quot;britain&quot; &quot;establish&quot;
-##  [9,] &quot;conflict&quot; &quot;public&quot;  &quot;upon&quot;     &quot;execut&quot; &quot;two&quot;     &quot;line&quot;     
-## [10,] &quot;order&quot;    &quot;one&quot;     &quot;just&quot;     &quot;made&quot;   &quot;great&quot;   &quot;texa&quot;     
-##       labor       money      finance      wealth     industry     navy       
-##  [1,] &quot;condit&quot;    &quot;bank&quot;     &quot;year&quot;       &quot;peac&quot;     &quot;produc&quot;     &quot;vessel&quot;   
-##  [2,] &quot;work&quot;      &quot;money&quot;    &quot;debt&quot;       &quot;prosper&quot;  &quot;industri&quot;   &quot;navi&quot;     
-##  [3,] &quot;labor&quot;     &quot;gold&quot;     &quot;amount&quot;     &quot;will&quot;     &quot;manufactur&quot; &quot;ship&quot;     
-##  [4,] &quot;report&quot;    &quot;currenc&quot;  &quot;expenditur&quot; &quot;us&quot;       &quot;import&quot;     &quot;naval&quot;    
-##  [5,] &quot;depart&quot;    &quot;silver&quot;   &quot;treasuri&quot;   &quot;great&quot;    &quot;product&quot;    &quot;construct&quot;
-##  [6,] &quot;congress&quot;  &quot;govern&quot;   &quot;increas&quot;    &quot;peopl&quot;    &quot;foreign&quot;    &quot;port&quot;     
-##  [7,] &quot;recommend&quot; &quot;treasuri&quot; &quot;last&quot;       &quot;everi&quot;    &quot;trade&quot;      &quot;coast&quot;    
-##  [8,] &quot;secretari&quot; &quot;note&quot;     &quot;fiscal&quot;     &quot;interest&quot; &quot;increas&quot;    &quot;commerc&quot;  
-##  [9,] &quot;servic&quot;    &quot;public&quot;   &quot;estim&quot;      &quot;world&quot;    &quot;articl&quot;     &quot;sea&quot;      
-## [10,] &quot;attent&quot;    &quot;issu&quot;     &quot;revenu&quot;     &quot;happi&quot;    &quot;revenu&quot;     &quot;great&quot;    
+##  [4,] &quot;forc&quot;     &quot;govern&quot;  &quot;govern&quot;   &quot;person&quot; &quot;unite&quot;   &quot;mexico&quot;   
+##  [5,] &quot;offic&quot;    &quot;must&quot;    &quot;foreign&quot;  &quot;upon&quot;   &quot;negoti&quot;  &quot;part&quot;     
+##  [6,] &quot;command&quot;  &quot;liberti&quot; &quot;relat&quot;    &quot;govern&quot; &quot;minist&quot;  &quot;texa&quot;     
+##  [7,] &quot;men&quot;      &quot;everi&quot;   &quot;right&quot;    &quot;act&quot;    &quot;two&quot;     &quot;new&quot;      
+##  [8,] &quot;servic&quot;   &quot;upon&quot;    &quot;american&quot; &quot;provis&quot; &quot;convent&quot; &quot;now&quot;      
+##  [9,] &quot;conflict&quot; &quot;great&quot;   &quot;time&quot;     &quot;author&quot; &quot;britain&quot; &quot;line&quot;     
+## [10,] &quot;order&quot;    &quot;public&quot;  &quot;polici&quot;   &quot;offic&quot;  &quot;british&quot; &quot;establish&quot;
+##       labor       money      finance      wealth    industry     navy       
+##  [1,] &quot;condit&quot;    &quot;bank&quot;     &quot;year&quot;       &quot;peac&quot;    &quot;produc&quot;     &quot;vessel&quot;   
+##  [2,] &quot;work&quot;      &quot;money&quot;    &quot;debt&quot;       &quot;prosper&quot; &quot;industri&quot;   &quot;navi&quot;     
+##  [3,] &quot;labor&quot;     &quot;gold&quot;     &quot;amount&quot;     &quot;will&quot;    &quot;manufactur&quot; &quot;ship&quot;     
+##  [4,] &quot;depart&quot;    &quot;currenc&quot;  &quot;expenditur&quot; &quot;peopl&quot;   &quot;import&quot;     &quot;naval&quot;    
+##  [5,] &quot;report&quot;    &quot;silver&quot;   &quot;treasuri&quot;   &quot;us&quot;      &quot;product&quot;    &quot;construct&quot;
+##  [6,] &quot;congress&quot;  &quot;govern&quot;   &quot;increas&quot;    &quot;great&quot;   &quot;trade&quot;      &quot;coast&quot;    
+##  [7,] &quot;servic&quot;    &quot;treasuri&quot; &quot;will&quot;       &quot;everi&quot;   &quot;foreign&quot;    &quot;new&quot;      
+##  [8,] &quot;secretari&quot; &quot;public&quot;   &quot;fiscal&quot;     &quot;good&quot;    &quot;increas&quot;    &quot;port&quot;     
+##  [9,] &quot;recommend&quot; &quot;issu&quot;     &quot;revenu&quot;     &quot;happi&quot;   &quot;articl&quot;     &quot;sea&quot;      
+## [10,] &quot;attent&quot;    &quot;note&quot;     &quot;estim&quot;      &quot;wealth&quot;  &quot;upon&quot;       &quot;commerc&quot;  
 ##       consitution agriculture  office     other     
 ##  [1,] &quot;state&quot;     &quot;land&quot;       &quot;duti&quot;     &quot;congress&quot;
-##  [2,] &quot;power&quot;     &quot;agricultur&quot; &quot;will&quot;     &quot;last&quot;    
-##  [3,] &quot;constitut&quot; &quot;public&quot;     &quot;may&quot;      &quot;act&quot;     
-##  [4,] &quot;unite&quot;     &quot;grow&quot;       &quot;subject&quot;  &quot;session&quot; 
-##  [5,] &quot;govern&quot;    &quot;larg&quot;       &quot;congress&quot; &quot;day&quot;     
-##  [6,] &quot;repres&quot;    &quot;reserv&quot;     &quot;can&quot;      &quot;made&quot;    
-##  [7,] &quot;union&quot;     &quot;improv&quot;     &quot;measur&quot;   &quot;author&quot;  
-##  [8,] &quot;shall&quot;     &quot;acr&quot;        &quot;object&quot;   &quot;unite&quot;   
-##  [9,] &quot;right&quot;     &quot;grant&quot;      &quot;consider&quot; &quot;upon&quot;    
-## [10,] &quot;peopl&quot;     &quot;new&quot;        &quot;shall&quot;    &quot;march&quot;</code></pre>
+##  [2,] &quot;power&quot;     &quot;agricultur&quot; &quot;will&quot;     &quot;act&quot;     
+##  [3,] &quot;constitut&quot; &quot;public&quot;     &quot;may&quot;      &quot;last&quot;    
+##  [4,] &quot;unite&quot;     &quot;grow&quot;       &quot;can&quot;      &quot;session&quot; 
+##  [5,] &quot;govern&quot;    &quot;will&quot;       &quot;congress&quot; &quot;author&quot;  
+##  [6,] &quot;repres&quot;    &quot;larg&quot;       &quot;subject&quot;  &quot;made&quot;    
+##  [7,] &quot;union&quot;     &quot;year&quot;       &quot;measur&quot;   &quot;day&quot;     
+##  [8,] &quot;right&quot;     &quot;improv&quot;     &quot;consider&quot; &quot;provis&quot;  
+##  [9,] &quot;shall&quot;     &quot;reserv&quot;     &quot;object&quot;   &quot;messag&quot;  
+## [10,] &quot;peopl&quot;     &quot;acr&quot;        &quot;shall&quot;    &quot;upon&quot;</code></pre>
 <p>Now, we extract files and create a data frame of topics and documents. This shows what topic is dominant in which file in tabular form.</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="topic-modelling.html#cb60-1" tabindex="-1"></a><span class="co"># generate data frame</span></span>
 <span id="cb60-2"><a href="topic-modelling.html#cb60-2" tabindex="-1"></a><span class="fu">data.frame</span>(tmod_slda<span class="sc">$</span>data<span class="sc">$</span>date, tmod_slda<span class="sc">$</span>data<span class="sc">$</span>president, seededlda<span class="sc">::</span><span class="fu">topics</span>(tmod_slda)) <span class="sc">%&gt;%</span></span>

@@ -1,3 +1,10 @@
+---
+title: "Introduction to R for Social Science - Part 2: Text Analytics"
+author: "Martin Schweinberger"
+date: "2024-06-10"
+output: html_document
+---
+
 # Introduction to Text Analysis with R
 
 This part of the workshop introduces basic methods of Text Analysis [see @bernard1998text; @kabanoff1997introduction; @popping2000computer], i.e. computer-based analysis of language data or the (semi-)automated extraction of information from text. In the following, we will explore selected methods. The methods we will focus on are:
@@ -127,23 +134,6 @@ The aim is to determine which of the reviews are positive and which are negative
 # Sentiment Analysis
 
 This part of the workshop  showcases how to perform SA on textual data  using R. The analysis shown here is in parts based on the 2^nd^ chapter of *Text Mining with R* - the e-version of this chapter on [sentiment analysis can be found here](https://www.tidytextmining.com/sentiment.html).
-
-
-<div class="warning" style='padding:0.1em; background-color:#f2f2f2; color:#51247a'>
-<span>
-<p style='margin-top:1em; text-align:center'>
-<b>SENTIMENT-ANALYSIS TOOL</b>
-</p>
-<br>
-<p style='margin-top:1em; text-align:center'>
-You can also check out the free, online, notebook-based, R-based [Sentiment-Analysis Tool](https://binderhub.atap-binder.cloud.edu.au/v2/gh/SLCLADAL/interactive-notebooks-environment/main?urlpath=git-pull%3Frepo%3Dhttps%253A%252F%252Fgithub.com%252FSLCLADAL%252Finteractive-notebooks%26urlpath%3Dlab%252Ftree%252Finteractive-notebooks%252Fnotebooks%252Fsentool.ipynb%26branch%3Dmain) offered by LADAL.
-</p>
-<br>
-</span>
-</div>
-
-<br>
-
 
 ## What is Sentiment Analysis?
 
@@ -376,22 +366,6 @@ If you are interested in learning more about SA in R, @silge2017text is highly r
 # Keyword Detection
 
 Keywords play a crucial role in text analysis, serving as distinctive terms that hold particular significance within a given text, context, or collection. These words stand out due to their heightened frequency in a specific text or context, setting them apart from their occurrence in another. In essence, keywords are linguistic markers that encapsulate the essence or topical focus of a document or data set. The process of identifying keywords involves a methodology akin to the one employed for detecting collocations using kwics. This entails comparing the use of a particular word in corpus A, against its use in corpus B. By discerning the frequency disparities, we gain valuable insights into the salient terms that contribute significantly to the unique character and thematic emphasis of a given text or context.
-
-
-<div class="warning" style='padding:0.1em; background-color:#f2f2f2; color:#51247a'>
-<span>
-<p style='margin-top:1em; text-align:center'>
-<b>KEYWORD TOOL</b>
-</p>
-<br>
-<p style='margin-top:1em; text-align:center'>
-You can also check out the free, online, notebook-based, R-based [KEYWORD Tool](https://binderhub.atap-binder.cloud.edu.au/v2/gh/SLCLADAL/interactive-notebooks-environment/main?urlpath=git-pull%3Frepo%3Dhttps%253A%252F%252Fgithub.com%252FSLCLADAL%252Finteractive-notebooks%26urlpath%3Dlab%252Ftree%252Finteractive-notebooks%252Fnotebooks%252Fkeytool.ipynb%26branch%3Dmain) offered by LADAL.
-</p>
-<br>
-</span>
-</div>
-
-<br>
 
 ## Dimensions of keyness 
 
@@ -702,40 +676,9 @@ Networks, also known as graphs, are powerful tools that represent relationships 
 Network analysis involves exploring the structure and properties of these networks. One key concept is centrality, which identifies the most important nodes in a network. Centrality metrics, such as *degree centrality* (number of connections) and *betweenness centrality* (importance in connecting other nodes), help unveil the significance of specific nodes.
 
 
-<div class="warning" style='padding:0.1em; background-color:#f2f2f2; color:#51247a'>
-<span>
-<p style='margin-top:1em; text-align:center'>
-<b>NETWORK-ANALYSIS TOOL</b>
-</p>
-<br>
-<p style='margin-top:1em; text-align:center'>
-You can also check out the free, online, notebook-based, R-based [Network-Analysis Tool](https://binderhub.atap-binder.cloud.edu.au/v2/gh/SLCLADAL/interactive-notebooks-environment/main?urlpath=git-pull%3Frepo%3Dhttps%253A%252F%252Fgithub.com%252FSLCLADAL%252Finteractive-notebooks%26urlpath%3Dlab%252Ftree%252Finteractive-notebooks%252Fnotebooks%252Fnettool.ipynb%26branch%3Dmain) offered by LADAL.
-</p>
-<br>
-</span>
-</div>
-
-<br>
-
 ## Collocations
 
 Collocations are like linguistic buddies. They're those word pairs that just seem to go hand in hand, like *Merry Christmas*. You see, these words have a special relationship – they occur together way more often than if words were just randomly strung together in a sentence.
-
-
-<div class="warning" style='padding:0.1em; background-color:#f2f2f2; color:#51247a'>
-<span>
-<p style='margin-top:1em; text-align:center'>
-<b>COLLOCATION TOOL</b>
-</p>
-<br>
-<p style='margin-top:1em; text-align:center'>
-You can also check out the free, online, notebook-based, R-based [Collocation Tool](https://binderhub.atap-binder.cloud.edu.au/v2/gh/SLCLADAL/interactive-notebooks-environment/main?urlpath=git-pull%3Frepo%3Dhttps%253A%252F%252Fgithub.com%252FSLCLADAL%252Finteractive-notebooks%26urlpath%3Dlab%252Ftree%252Finteractive-notebooks%252Fnotebooks%252Famtool.ipynb%26branch%3Dmain) offered by LADAL.
-</p>
-<br>
-</span>
-</div>
-
-<br>
 
 Before we start tough, it is important to understand that identifying words pairs (w1 and w2) that collocate (i.e. collocations) and determining their association strength (a measure of how strongly attracted words are to each other) is based on the co-occurrence frequencies of word pairs in a contingency table (see below, *O* is short for *observed frequency*).
 
@@ -1011,22 +954,6 @@ The aim is to determine which of the words belong together and to come up with t
 # Topic Modelling
 
 Topic models refers to a suit of methods employed to uncover latent structures within a corpus of text. These models operate on the premise of identifying abstract *topics* that recur across documents. In essence, topic models sift through the textual data to discern recurring patterns of word co-occurrence, revealing underlying semantic themes [@busso2022operation; @blei2003latent]. This technique is particularly prevalent in text mining, where it serves to unveil hidden semantic structures in large volumes of textual data.
-
-
-<div class="warning" style='padding:0.1em; background-color:#f2f2f2; color:#51247a'>
-<span>
-<p style='margin-top:1em; text-align:center'>
-<b>TOPIC-MODEL TOOL</b>
-</p>
-<br>
-<p style='margin-top:1em; text-align:center'>
-You can also check out the free, online, notebook-based, R-based [Topic-Model Tool](https://binderhub.atap-binder.cloud.edu.au/v2/gh/SLCLADAL/interactive-notebooks-environment/main?urlpath=git-pull%3Frepo%3Dhttps%253A%252F%252Fgithub.com%252FSLCLADAL%252Finteractive-notebooks%26urlpath%3Dlab%252Ftree%252Finteractive-notebooks%252Fnotebooks%252Ftopictool.ipynb%26branch%3Dmain) offered by LADAL.
-</p>
-<br>
-</span>
-</div>
-
-<br>
 
 Conceptually, topics can be understood as clusters of co-occurring terms, indicative of shared semantic domains within the text. The underlying assumption is that if a document pertains to a specific topic, words related to that topic will exhibit higher frequency compared to documents addressing other subjects. For example, in documents discussing dogs, terms like *dog* and *bone* are likely to feature prominently, while in documents focusing on cats, *cat* and *meow* would be more prevalent. Meanwhile, ubiquitous terms such as *the* and *is* are expected to occur with similar frequency across diverse topics, serving as noise rather than indicative signals of topic specificity.
 

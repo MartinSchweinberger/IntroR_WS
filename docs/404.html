@@ -23,7 +23,7 @@
 <meta name="author" content="Martin Schweinberger" />
 
 
-<meta name="date" content="2024-06-09" />
+<meta name="date" content="2024-06-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,6 +52,10 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/clipboard-1.7.1/clipboard.min.js"></script>
+<link href="libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+<link href="libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+<script src="libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
 
 
 <style type="text/css">
@@ -123,6 +127,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 </style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -174,59 +201,72 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4.2" data-path="introduction-to-r.html"><a href="introduction-to-r.html#packages"><i class="fa fa-check"></i><b>2.4.2</b> Packages</a></li>
 <li class="chapter" data-level="2.4.3" data-path="introduction-to-r.html"><a href="introduction-to-r.html#getting-help"><i class="fa fa-check"></i><b>2.4.3</b> Getting help</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="introduction-to-r.html"><a href="introduction-to-r.html#functions-and-objects"><i class="fa fa-check"></i><b>2.5</b> Functions and Objects</a></li>
-<li class="chapter" data-level="2.6" data-path="introduction-to-r.html"><a href="introduction-to-r.html#inspecting-data"><i class="fa fa-check"></i><b>2.6</b> Inspecting data</a></li>
-<li class="chapter" data-level="2.7" data-path="introduction-to-r.html"><a href="introduction-to-r.html#loading-text-data"><i class="fa fa-check"></i><b>2.7</b> Loading text data</a></li>
-<li class="chapter" data-level="2.8" data-path="introduction-to-r.html"><a href="introduction-to-r.html#saving-text-data"><i class="fa fa-check"></i><b>2.8</b> Saving text data</a></li>
-<li class="chapter" data-level="2.9" data-path="introduction-to-r.html"><a href="introduction-to-r.html#piping"><i class="fa fa-check"></i><b>2.9</b> Piping</a></li>
-<li class="chapter" data-level="2.10" data-path="introduction-to-r.html"><a href="introduction-to-r.html#extracting-frequency-information-from-text"><i class="fa fa-check"></i><b>2.10</b> Extracting frequency information from text</a></li>
-<li class="chapter" data-level="2.11" data-path="introduction-to-r.html"><a href="introduction-to-r.html#regular-expressions"><i class="fa fa-check"></i><b>2.11</b> Regular Expressions</a></li>
-<li class="chapter" data-level="2.12" data-path="introduction-to-r.html"><a href="introduction-to-r.html#practice-regular-expressions"><i class="fa fa-check"></i><b>2.12</b> Practice: regular expressions</a></li>
-<li class="chapter" data-level="2.13" data-path="introduction-to-r.html"><a href="introduction-to-r.html#sentence-tokenization"><i class="fa fa-check"></i><b>2.13</b> Sentence tokenization</a></li>
-<li class="chapter" data-level="2.14" data-path="introduction-to-r.html"><a href="introduction-to-r.html#stop-word-removal"><i class="fa fa-check"></i><b>2.14</b> Stop word removal</a></li>
-<li class="chapter" data-level="2.15" data-path="introduction-to-r.html"><a href="introduction-to-r.html#removing-unwanted-sybols"><i class="fa fa-check"></i><b>2.15</b> Removing unwanted sybols</a></li>
-<li class="chapter" data-level="2.16" data-path="introduction-to-r.html"><a href="introduction-to-r.html#stemming"><i class="fa fa-check"></i><b>2.16</b> Stemming</a></li>
-<li class="chapter" data-level="2.17" data-path="introduction-to-r.html"><a href="introduction-to-r.html#part-of-speech-tagging-and-dependency-parsing"><i class="fa fa-check"></i><b>2.17</b> Part-of-speech tagging and dependency parsing</a></li>
-<li class="chapter" data-level="2.18" data-path="introduction-to-r.html"><a href="introduction-to-r.html#data-processing-chains"><i class="fa fa-check"></i><b>2.18</b> Data processing chains</a></li>
-<li class="chapter" data-level="2.19" data-path="introduction-to-r.html"><a href="introduction-to-r.html#concordancing-and-kwics"><i class="fa fa-check"></i><b>2.19</b> Concordancing and KWICs</a></li>
-<li class="chapter" data-level="2.20" data-path="introduction-to-r.html"><a href="introduction-to-r.html#basics-of-ggplot2-syntax"><i class="fa fa-check"></i><b>2.20</b> Basics of ggplot2 syntax</a></li>
-<li class="chapter" data-level="2.21" data-path="introduction-to-r.html"><a href="introduction-to-r.html#line-plot"><i class="fa fa-check"></i><b>2.21</b> Line plot</a></li>
-<li class="chapter" data-level="2.22" data-path="introduction-to-r.html"><a href="introduction-to-r.html#prettifying-plots"><i class="fa fa-check"></i><b>2.22</b> Prettifying plots</a></li>
-<li class="chapter" data-level="2.23" data-path="introduction-to-r.html"><a href="introduction-to-r.html#combining-plots"><i class="fa fa-check"></i><b>2.23</b> Combining plots</a></li>
-<li class="chapter" data-level="2.24" data-path="introduction-to-r.html"><a href="introduction-to-r.html#boxplots"><i class="fa fa-check"></i><b>2.24</b> Boxplots</a></li>
-<li class="chapter" data-level="2.25" data-path="introduction-to-r.html"><a href="introduction-to-r.html#barplots"><i class="fa fa-check"></i><b>2.25</b> Barplots</a></li>
-<li class="chapter" data-level="2.26" data-path="introduction-to-r.html"><a href="introduction-to-r.html#wordclouds"><i class="fa fa-check"></i><b>2.26</b> Wordclouds</a></li>
-<li class="chapter" data-level="2.27" data-path="introduction-to-r.html"><a href="introduction-to-r.html#going-further"><i class="fa fa-check"></i><b>2.27</b> Going further</a></li>
-<li class="chapter" data-level="2.28" data-path="introduction-to-r.html"><a href="introduction-to-r.html#ending-r-sessions"><i class="fa fa-check"></i><b>2.28</b> Ending R sessions</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html"><i class="fa fa-check"></i><b>3</b> Introduction to Text Analysis with R</a>
+<li class="chapter" data-level="3" data-path="working-with-text.html"><a href="working-with-text.html"><i class="fa fa-check"></i><b>3</b> Working with Text</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#what-is-text-analysis"><i class="fa fa-check"></i><b>3.1</b> What is Text Analysis?</a></li>
-<li class="chapter" data-level="3.2" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#preparation-and-session-set-up"><i class="fa fa-check"></i><b>3.2</b> Preparation and session set up</a></li>
-<li class="chapter" data-level="3.3" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#what-is-sentiment-analysis"><i class="fa fa-check"></i><b>3.3</b> What is Sentiment Analysis?</a></li>
-<li class="chapter" data-level="3.4" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#exporting-the-results"><i class="fa fa-check"></i><b>3.4</b> Exporting the results</a></li>
-<li class="chapter" data-level="3.5" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#summarizing-results"><i class="fa fa-check"></i><b>3.5</b> Summarizing results</a></li>
-<li class="chapter" data-level="3.6" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#visualizing-results"><i class="fa fa-check"></i><b>3.6</b> Visualizing results</a></li>
-<li class="chapter" data-level="3.7" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#identifying-important-emotives"><i class="fa fa-check"></i><b>3.7</b> Identifying important emotives</a></li>
-<li class="chapter" data-level="3.8" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#dimensions-of-keyness"><i class="fa fa-check"></i><b>3.8</b> Dimensions of keyness</a></li>
-<li class="chapter" data-level="3.9" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#identifying-keywords"><i class="fa fa-check"></i><b>3.9</b> Identifying keywords</a></li>
-<li class="chapter" data-level="3.10" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#visualising-keywords"><i class="fa fa-check"></i><b>3.10</b> Visualising keywords</a></li>
-<li class="chapter" data-level="3.11" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#networks"><i class="fa fa-check"></i><b>3.11</b> Networks</a></li>
-<li class="chapter" data-level="3.12" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#collocations"><i class="fa fa-check"></i><b>3.12</b> Collocations</a></li>
-<li class="chapter" data-level="3.13" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#getting-started-with-topic-modelling"><i class="fa fa-check"></i><b>3.13</b> Getting started with Topic Modelling</a></li>
-<li class="chapter" data-level="3.14" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#human-in-the-loop-topic-modelling"><i class="fa fa-check"></i><b>3.14</b> Human-in-the-loop Topic Modelling</a></li>
-<li class="chapter" data-level="3.15" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#loading-and-preparing-data"><i class="fa fa-check"></i><b>3.15</b> Loading and preparing data</a></li>
-<li class="chapter" data-level="3.16" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#initial-unsupervised-topic-model"><i class="fa fa-check"></i><b>3.16</b> Initial unsupervised topic model</a></li>
-<li class="chapter" data-level="3.17" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#supervised-seeded-topic-model"><i class="fa fa-check"></i><b>3.17</b> Supervised, seeded topic model</a></li>
-<li class="chapter" data-level="3.18" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#data-preparation"><i class="fa fa-check"></i><b>3.18</b> Data preparation</a></li>
-<li class="chapter" data-level="3.19" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#creating-a-matrix"><i class="fa fa-check"></i><b>3.19</b> Creating a matrix</a></li>
-<li class="chapter" data-level="3.20" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#visualizing-networks"><i class="fa fa-check"></i><b>3.20</b> Visualizing Networks</a></li>
-<li class="chapter" data-level="3.21" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#network-statistics"><i class="fa fa-check"></i><b>3.21</b> Network Statistics</a>
+<li class="chapter" data-level="3.1" data-path="working-with-text.html"><a href="working-with-text.html#functions-and-objects"><i class="fa fa-check"></i><b>3.1</b> Functions and Objects</a></li>
+<li class="chapter" data-level="3.2" data-path="working-with-text.html"><a href="working-with-text.html#inspecting-data"><i class="fa fa-check"></i><b>3.2</b> Inspecting data</a></li>
+<li class="chapter" data-level="3.3" data-path="working-with-text.html"><a href="working-with-text.html#loading-text-data"><i class="fa fa-check"></i><b>3.3</b> Loading text data</a></li>
+<li class="chapter" data-level="3.4" data-path="working-with-text.html"><a href="working-with-text.html#saving-text-data"><i class="fa fa-check"></i><b>3.4</b> Saving text data</a></li>
+<li class="chapter" data-level="3.5" data-path="working-with-text.html"><a href="working-with-text.html#piping"><i class="fa fa-check"></i><b>3.5</b> Piping</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="exercise-1-introducing-text-processing.html"><a href="exercise-1-introducing-text-processing.html"><i class="fa fa-check"></i><b>4</b> Exercise 1: Introducing Text Processing</a></li>
+<li class="chapter" data-level="5" data-path="basic-string-processing.html"><a href="basic-string-processing.html"><i class="fa fa-check"></i><b>5</b> Basic String Processing</a>
 <ul>
-<li class="chapter" data-level="3.21.1" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#degree-centrality"><i class="fa fa-check"></i><b>3.21.1</b> Degree centrality</a></li>
-<li class="chapter" data-level="3.21.2" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#central-node"><i class="fa fa-check"></i><b>3.21.2</b> Central node</a></li>
-<li class="chapter" data-level="3.21.3" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#betweenness-centrality"><i class="fa fa-check"></i><b>3.21.3</b> Betweenness centrality</a></li>
-<li class="chapter" data-level="3.21.4" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#closeness"><i class="fa fa-check"></i><b>3.21.4</b> Closeness</a></li>
+<li class="chapter" data-level="5.1" data-path="basic-string-processing.html"><a href="basic-string-processing.html#extracting-frequency-information-from-text"><i class="fa fa-check"></i><b>5.1</b> Extracting frequency information from text</a></li>
+<li class="chapter" data-level="5.2" data-path="basic-string-processing.html"><a href="basic-string-processing.html#regular-expressions"><i class="fa fa-check"></i><b>5.2</b> Regular Expressions</a></li>
+<li class="chapter" data-level="5.3" data-path="basic-string-processing.html"><a href="basic-string-processing.html#practice-regular-expressions"><i class="fa fa-check"></i><b>5.3</b> Practice: regular expressions</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="advanced-string-processing.html"><a href="advanced-string-processing.html"><i class="fa fa-check"></i><b>6</b> Advanced String Processing</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="advanced-string-processing.html"><a href="advanced-string-processing.html#sentence-tokenization"><i class="fa fa-check"></i><b>6.1</b> Sentence tokenization</a></li>
+<li class="chapter" data-level="6.2" data-path="advanced-string-processing.html"><a href="advanced-string-processing.html#stop-word-removal"><i class="fa fa-check"></i><b>6.2</b> Stop word removal</a></li>
+<li class="chapter" data-level="6.3" data-path="advanced-string-processing.html"><a href="advanced-string-processing.html#removing-unwanted-sybols"><i class="fa fa-check"></i><b>6.3</b> Removing unwanted sybols</a></li>
+<li class="chapter" data-level="6.4" data-path="advanced-string-processing.html"><a href="advanced-string-processing.html#stemming"><i class="fa fa-check"></i><b>6.4</b> Stemming</a></li>
+<li class="chapter" data-level="6.5" data-path="advanced-string-processing.html"><a href="advanced-string-processing.html#part-of-speech-tagging-and-dependency-parsing"><i class="fa fa-check"></i><b>6.5</b> Part-of-speech tagging and dependency parsing</a></li>
+<li class="chapter" data-level="6.6" data-path="advanced-string-processing.html"><a href="advanced-string-processing.html#data-processing-chains"><i class="fa fa-check"></i><b>6.6</b> Data processing chains</a></li>
+<li class="chapter" data-level="6.7" data-path="advanced-string-processing.html"><a href="advanced-string-processing.html#concordancing-and-kwics"><i class="fa fa-check"></i><b>6.7</b> Concordancing and KWICs</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="basics-of-data-visualization.html"><a href="basics-of-data-visualization.html"><i class="fa fa-check"></i><b>7</b> Basics of Data Visualization</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="basics-of-data-visualization.html"><a href="basics-of-data-visualization.html#basics-of-ggplot2-syntax"><i class="fa fa-check"></i><b>7.1</b> Basics of ggplot2 syntax</a></li>
+<li class="chapter" data-level="7.2" data-path="basics-of-data-visualization.html"><a href="basics-of-data-visualization.html#line-plot"><i class="fa fa-check"></i><b>7.2</b> Line plot</a></li>
+<li class="chapter" data-level="7.3" data-path="basics-of-data-visualization.html"><a href="basics-of-data-visualization.html#prettifying-plots"><i class="fa fa-check"></i><b>7.3</b> Prettifying plots</a></li>
+<li class="chapter" data-level="7.4" data-path="basics-of-data-visualization.html"><a href="basics-of-data-visualization.html#combining-plots"><i class="fa fa-check"></i><b>7.4</b> Combining plots</a></li>
+<li class="chapter" data-level="7.5" data-path="basics-of-data-visualization.html"><a href="basics-of-data-visualization.html#boxplots"><i class="fa fa-check"></i><b>7.5</b> Boxplots</a></li>
+<li class="chapter" data-level="7.6" data-path="basics-of-data-visualization.html"><a href="basics-of-data-visualization.html#barplots"><i class="fa fa-check"></i><b>7.6</b> Barplots</a></li>
+<li class="chapter" data-level="7.7" data-path="basics-of-data-visualization.html"><a href="basics-of-data-visualization.html#wordclouds"><i class="fa fa-check"></i><b>7.7</b> Wordclouds</a></li>
+<li class="chapter" data-level="7.8" data-path="basics-of-data-visualization.html"><a href="basics-of-data-visualization.html#going-further"><i class="fa fa-check"></i><b>7.8</b> Going further</a></li>
+<li class="chapter" data-level="7.9" data-path="basics-of-data-visualization.html"><a href="basics-of-data-visualization.html#ending-r-sessions"><i class="fa fa-check"></i><b>7.9</b> Ending R sessions</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html"><i class="fa fa-check"></i><b>8</b> Introduction to Text Analysis with R</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#what-is-text-analysis"><i class="fa fa-check"></i><b>8.1</b> What is Text Analysis?</a></li>
+<li class="chapter" data-level="8.2" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#preparation-and-session-set-up"><i class="fa fa-check"></i><b>8.2</b> Preparation and session set up</a></li>
+<li class="chapter" data-level="8.3" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#what-is-sentiment-analysis"><i class="fa fa-check"></i><b>8.3</b> What is Sentiment Analysis?</a></li>
+<li class="chapter" data-level="8.4" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#exporting-the-results"><i class="fa fa-check"></i><b>8.4</b> Exporting the results</a></li>
+<li class="chapter" data-level="8.5" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#summarizing-results"><i class="fa fa-check"></i><b>8.5</b> Summarizing results</a></li>
+<li class="chapter" data-level="8.6" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#visualizing-results"><i class="fa fa-check"></i><b>8.6</b> Visualizing results</a></li>
+<li class="chapter" data-level="8.7" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#identifying-important-emotives"><i class="fa fa-check"></i><b>8.7</b> Identifying important emotives</a></li>
+<li class="chapter" data-level="8.8" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#dimensions-of-keyness"><i class="fa fa-check"></i><b>8.8</b> Dimensions of keyness</a></li>
+<li class="chapter" data-level="8.9" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#identifying-keywords"><i class="fa fa-check"></i><b>8.9</b> Identifying keywords</a></li>
+<li class="chapter" data-level="8.10" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#visualising-keywords"><i class="fa fa-check"></i><b>8.10</b> Visualising keywords</a></li>
+<li class="chapter" data-level="8.11" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#networks"><i class="fa fa-check"></i><b>8.11</b> Networks</a></li>
+<li class="chapter" data-level="8.12" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#collocations"><i class="fa fa-check"></i><b>8.12</b> Collocations</a></li>
+<li class="chapter" data-level="8.13" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#getting-started-with-topic-modelling"><i class="fa fa-check"></i><b>8.13</b> Getting started with Topic Modelling</a></li>
+<li class="chapter" data-level="8.14" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#human-in-the-loop-topic-modelling"><i class="fa fa-check"></i><b>8.14</b> Human-in-the-loop Topic Modelling</a></li>
+<li class="chapter" data-level="8.15" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#loading-and-preparing-data"><i class="fa fa-check"></i><b>8.15</b> Loading and preparing data</a></li>
+<li class="chapter" data-level="8.16" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#initial-unsupervised-topic-model"><i class="fa fa-check"></i><b>8.16</b> Initial unsupervised topic model</a></li>
+<li class="chapter" data-level="8.17" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#supervised-seeded-topic-model"><i class="fa fa-check"></i><b>8.17</b> Supervised, seeded topic model</a></li>
+<li class="chapter" data-level="8.18" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#data-preparation"><i class="fa fa-check"></i><b>8.18</b> Data preparation</a></li>
+<li class="chapter" data-level="8.19" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#creating-a-matrix"><i class="fa fa-check"></i><b>8.19</b> Creating a matrix</a></li>
+<li class="chapter" data-level="8.20" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#visualizing-networks"><i class="fa fa-check"></i><b>8.20</b> Visualizing Networks</a></li>
+<li class="chapter" data-level="8.21" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#network-statistics"><i class="fa fa-check"></i><b>8.21</b> Network Statistics</a>
+<ul>
+<li class="chapter" data-level="8.21.1" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#degree-centrality"><i class="fa fa-check"></i><b>8.21.1</b> Degree centrality</a></li>
+<li class="chapter" data-level="8.21.2" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#central-node"><i class="fa fa-check"></i><b>8.21.2</b> Central node</a></li>
+<li class="chapter" data-level="8.21.3" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#betweenness-centrality"><i class="fa fa-check"></i><b>8.21.3</b> Betweenness centrality</a></li>
+<li class="chapter" data-level="8.21.4" data-path="introduction-to-text-analysis-with-r.html"><a href="introduction-to-text-analysis-with-r.html#closeness"><i class="fa fa-check"></i><b>8.21.4</b> Closeness</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
