@@ -1,10 +1,14 @@
 --- 
 title: "Introduction to R for Social Science"
 author: "Martin Schweinberger"
-date: "`r Sys.Date()`"
+date: "University of Eastern Finland, Joensuu"
 site: bookdown::bookdown_site
 bibliography: bibtex.bib
 ---
+
+```{r uef, echo=FALSE, out.width= "35%", out.extra='style="float:right; padding:10px"'}
+knitr::include_graphics("https://github.com/MartinSchweinberger/IntroR_WS/images/uef.png")
+```
 
 # General Information
 
