@@ -7,10 +7,12 @@ bibliography: bibtex.bib
 ---
 
 ```{r uef, echo=FALSE, out.width= "35%", out.extra='style="float:right; padding:10px"'}
-knitr::include_graphics("https://github.com/MartinSchweinberger/IntroR_WS/images/uef.png")
+knitr::include_graphics("https://slcladal.github.io/images/uef.png")
 ```
 
 # General Information
+
+This workshop was kindly sponsored by the [BOMOCULT Research Community at UEF](https://www.uef.fi/en/research-community/borders-mobilities-and-cultural-encounters-bomocult).
 
 ## Abstract
 
