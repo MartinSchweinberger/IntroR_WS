@@ -13,6 +13,12 @@ bibliography: bibtex.bib
 
 This beginner-friendly workshop, *Introduction to R for Social Science*, is designed to equip participants with the foundational skills necessary to use R and RStudio effectively for text-based social science research. Through hands-on exercises and guided instruction, attendees will learn how to navigate the RStudio environment, load, manage, manipulate, and visualize data, and perform basic text analytics. Key topics covered include the use of regular expressions for pattern matching, concordancing for textual analysis, and essential techniques in network analysis, sentiment and keyword analysis, and topic modeling. By the end of this workshop, participants will have a solid understanding of how to use R for text-based social science research, opening up new possibilities for data-driven insights in their field. No prior experience with R or programming is required. 
 
+### About me
+
+My name is [Martin Schweinberger](www.martinschweinberger.de/) and I am Lecturer in Applied Linguistics at the University of Queensland (UQ) in Australia. At the UQ, I am Director of the [Language Technology and Data Analysis Laboratory (LADAL)](https://ladal.edu.au) (together with Michael Haugh) and I would consider myself a quantitative corpus linguist specialized in computational analyses of text and speech. In my research, I aim to combine and bridge the gap between computational linguistics and corpus linguistics.
+
+Regarding my background, I have a PhD in English linguistics and I studied at the National University of Ireland, Galway, and Universität Kassel where I graduated in 2008 with an MA in English Philology, Philosophy, and Psychology. After my MA, I remained in Kassel for a short while but soon moved to Hamburg where I worked on and later received my PhD. 
+
 ## Timeline
 
 Here is what we have planned to cover in this workshop (2 days, 10am to 4pm):
