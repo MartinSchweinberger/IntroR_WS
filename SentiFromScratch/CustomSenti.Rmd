@@ -1,0 +1,161 @@
+---
+title: "My Sentiment Analysis for UEF showcase"
+author: "Martin Schweinberger"
+date: "2024-06-12"
+output: html_document
+---
+
+# Introduction
+
+Here I want to show people how I would start my own sentiment analysis from scratch.
+
+# Prepare the session
+
+install packages
+
+```{r eval = F}
+install.packages("tidyverse")
+install.packages("tm")
+install.packages("tidytext")
+```
+
+
+activate packages
+
+```{r}
+library(tidyverse)
+library(tm)
+library(tidytext)
+```
+
+# Load Data
+
+```{r}
+# load reviews
+ire <- list.files(here::here("data/ICEIrelandSample"), full.names = T, pattern = ".*txt") %>%
+  purrr::map_chr(~ readr::read_file(.)) %>%  str_replace_all("<.*?>", " ")
+# inspect
+str(ire)
+```
+
+# Preprocess Data
+
+```{r}
+ire_clean <- ire %>%
+  tolower() %>%
+  stringr::str_remove_all("\r") %>%
+  tm::removeWords(stopwords())  %>%
+  stringr::str_squish()
+# inspect
+str(ire_clean)
+```
+
+# Convert to tabular format
+
+```{r sa5, cmessage=FALSE, warning=FALSE}
+# Define a function 'txtclean' that takes an input 'x' and a 'title'
+txtclean <- function(x) {
+  # Load required packages
+  require(dplyr)
+  require(stringr)
+  require(tibble)
+  # Convert encoding to UTF-8
+  x <- x %>%
+    iconv(to = "UTF-8") %>%
+    # Convert text to lowercase
+    base::tolower() %>%
+    # Collapse text into a single string
+    paste0(collapse = " ") %>%
+    # Remove extra whitespace
+    stringr::str_squish() %>%
+    # Split text into individual words
+    stringr::str_split(" ") %>%
+    # Unlist the words into a vector
+    unlist() %>%
+    # Convert the vector to a tibble
+    tibble::tibble() %>%
+    # Select the first column and name it 'word'
+    dplyr::select(word = 1, everything()) %>%
+    # Remove stop words
+    dplyr::anti_join(stop_words) %>%
+    # Remove non-word characters from the 'word' column
+    dplyr::mutate(word = str_remove_all(word, "\\W")) %>%
+    # Filter out empty words
+    dplyr::filter(word != "")
+}
+
+```
+
+Process and clean texts.
+
+```{r sa7, message=FALSE, warning=FALSE}
+# process text data
+ire_table <- txtclean(ire_clean)
+# inspect
+head(ire_table)
+```
+
+# Load dictionary
+
+```{r}
+readxl::read_excel(here::here("data", "annotation.xlsx")) -> anno
+# inspect
+head(anno)
+```
+
+# Join data and dictionary
+
+```{r}
+ire_anno <- dplyr::left_join(ire_table, anno, by = "word")
+# inspect
+head(ire_anno, 10)
+```
+
+```{r warning=F, message=F}
+# save data
+writexl::write_xlsx(ire_anno, here::here("data/ire_anno.xlsx"))
+```
+
+```{r}
+readxl::read_excel(here::here("data", "ire_anno.xlsx")) -> ire_anno
+# inspect
+head(ire_anno)
+```
+
+# Summarise results
+
+```{r bsa3, eval=F, message=FALSE, warning=FALSE}
+# Group the annotated reviews by type and sentiment
+ire_summarised <- ire_anno %>%
+  dplyr::mutate(sentiment = ifelse(is.na(sentiment), "neutral", sentiment)) %>%
+  dplyr::group_by(sentiment) %>%
+  # Summarise the data: get unique sentiments, count frequency, and unique word counts
+  dplyr::summarise(sentiment = unique(sentiment),
+                   sentiment_freq = n()) %>%
+  dplyr::ungroup() %>%
+  dplyr::mutate(total = sum(sentiment_freq)) %>%
+  # Add a percentage column and set the order of sentiment factor levels
+  dplyr::mutate(percentage = round(sentiment_freq/total*100, 1)) 
+# inspect data
+ire_summarised %>%
+  as.data.frame() %>%
+  head(10)
+```
+
+
+```{r}
+ire_summarised %>%
+  ggplot(aes(x = sentiment, y = percentage, group = sentiment)) +
+  geom_bar(stat = "identity", position = position_dodge())
+```
+
+
+# Outro
+
+```{r}
+sessionInfo()
+```
+
+
+
+
